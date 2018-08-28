@@ -50,7 +50,7 @@ public class TransactionController
     public String GoTest(Model model , @ModelAttribute Transaction transaction , final RedirectAttributes redirectAttributes) 
 	{
 
-		model.addAttribute("msg", "Welcom");
+		 
 		model.addAttribute("css" , "complete");
 		populateDefaultModel(model);
 		model.addAttribute("transaction" , new Transaction());
@@ -119,17 +119,13 @@ public class TransactionController
 			    String numberAuthorisatin = transaction.getNauthorisation();
 			    long MinAmount = transaction.getMontantMin();
 			    long MaxAmount = transaction.getMontantMax();
-			    
-			    
 			    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		        java.util.Date parsed = format.parse(dateStart);
 		        java.util.Date parsed2 = format.parse(dateFinish);  
 		        java.sql.Date DebuttransactionDate = new java.sql.Date(parsed.getTime());
 		        java.sql.Date fintransactionDate = new java.sql.Date(parsed2.getTime());
 		        
-		        
-				 
-				model.addAttribute("ListTransactionAfterFiltring" ,transactionService.listTransactionByFilter(DebuttransactionDate ,
+                model.addAttribute("ListTransactionAfterFiltring" ,transactionService.listTransactionByFilter(DebuttransactionDate ,
 						fintransactionDate , startingTimeTransaction , fnisgingTimeTransaction , cardNumber ,  CradState  ,  
 						montant , etatcash  , numberAuthorisatin  , errorTransaction , MinAmount  , MaxAmount ));
 				

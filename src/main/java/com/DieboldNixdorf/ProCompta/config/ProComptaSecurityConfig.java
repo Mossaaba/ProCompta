@@ -35,7 +35,6 @@ public class ProComptaSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 			.antMatchers("/").hasRole("EMPLOYEE")
-			
 		.and()
 			.formLogin()
 				.loginPage("/showMyLoginPage")

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
@@ -13,9 +12,8 @@
 <html>
 <!-- Mirrored from pages.revox.io/dashboard/4.0.0/html/corporate/builder.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Aug 2018 17:22:30 GMT -->
 <head>
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<meta charset="utf-8" />
-<title>Pages - ProCompta - Blank Page</title>
+ 
+<title>ProCompta</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
 
@@ -99,9 +97,21 @@
 <link rel="stylesheet"
 	href="<spring:url value="/resources/assets/plugins/datatables-responsive/css/datatables.responsive.css"/>"
 	type="text/css" />
+	
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/pages/Font-css/all.css"/>"
+	type="text/css" />
+
+ 
 
 
 <script type="text/javascript">
+
+
+
+
+
+
 	window.onload = function() {
 		// fix for windows 8
 		if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
@@ -131,62 +141,27 @@
 			<li class="p-r-10 inline">
 				<div class="dropdown">
 					<a href="javascript:;" id="notification-center"
-						class="header-icon pg pg-world" data-toggle="dropdown"> <span
-						class="bubble"></span>
+						class="header-icon pg pg-world" data-toggle="dropdown">  
 					</a>
-
-					<div class="dropdown-menu notification-toggle" role="menu"
-						aria-labelledby="notification-center">
-
-						<div class="notification-panel">
-
-							<div class="notification-body scrollable">
-
-								<div class="notification-item unread clearfix">
-
-									<div class="heading open">
-										<a href="#" class="text-complete pull-left"> <i
-											class="pg-map fs-16 m-r-10"></i> <span class="bold">English</span>
-											<span class="fs-12 m-l-10">David Nester</span>
-										</a>
-									</div>
-
-								</div>
-
-
-								<div class="notification-item  clearfix">
-									<div class="heading">
-										<a href="#" class="text-danger pull-left"> <i
-											class="fa fa-exclamation-triangle m-r-10"></i> <span
-											class="bold">Français</span> <span class="fs-12 m-l-10">Take
-												Action</span>
-										</a>
-									</div>
-
-
-
-								</div>
-								<div class="notification-item  clearfix">
-									<div class="heading">
-										<a href="#" class="text-danger pull-left"> <i
-											class="fa fa-exclamation-triangle m-r-10"></i> <span
-											class="bold">Arab</span> <span class="fs-12 m-l-10">Take
-												Action</span>
-										</a>
-									</div>
-
-
-
-								</div>
-
-							</div>
-
-
-
-
+					<div class="dropdown pull-right d-lg-block d-none">
+					
+		 
+						<div class="dropdown-menu dropdown-menu-right" role="menu">
+							
+							<a href="?language=en" class="dropdown-item">
+							<i class="pg-settings_small"></i><spring:message code="label.English"></spring:message></a>	
+				            <a href="?language=fr" class="dropdown-item"><i
+				            class="pg-settings_small"></i> <spring:message code="label.Francais"></spring:message></a> 
+				            <a href="?language=ar" class="dropdown-item"><i
+				            class="pg-settings_small"></i><spring:message code="label.arab"></spring:message></a>
+				            
+				              
+									
+							
 						</div>
+		            </div>
 
-					</div>
+					 
 
 				</div>
 			</li>
@@ -224,13 +199,13 @@
 			<div class="dropdown-menu dropdown-menu-right profile-dropdown"
 				role="menu">
 				<a href="#" class="dropdown-item"><i class="pg-settings_small"></i>
-					Settings</a> <a href="#" class="dropdown-item"><i
-					class="pg-signals"></i> Help</a> 
+					<spring:message code="label.Settings"></spring:message></a> <a href="#" class="dropdown-item"><i
+					class="pg-signals"></i> <spring:message code="label.Help"></spring:message></a> 
 					
 					 
 					<form:form action="${pageContext.request.contextPath}/logout" method="POST">
 			       <button  value="Logout" type="submit" class="clearfix bg-master-lighter dropdown-item"> 
-			       <span  class="pull-left">Logout</span> <span class="pull-right"><i class="pg-power"></i></span>
+			       <span  class="pull-left"><spring:message code="label.Logout"></spring:message></span> <span class="pull-right"><i class="pg-power"></i></span>
 			       </button>
 			       </form:form>
 					
@@ -358,4 +333,4 @@
 		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/lodash.min.js"/>"></script>
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
 	<script src="<spring:url value="/resources/assets/js/datatables.js"/>"></script>
-
+	

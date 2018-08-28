@@ -19,7 +19,12 @@ public class HomeController {
 		return "access-denied";
 	}
 	
+	@GetMapping("/dashboard")
+	public String GoDashboard ()
+	{
+		return "Empty";
+	}
 	
-	
+
 
 }

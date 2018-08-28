@@ -68,7 +68,7 @@
 			<a href="<spring:url value="/transaction"/>"  >
 			<span class="title font-montserrat no-margin text-uppercase ">Transactions</span>
 			</a>
-			<span class="icon-thumbnail"><i class="pg-search" style="font-size :25px;"></i></span>
+			<span class="icon-thumbnail"><i class="fa fa-exchange" style="font-size :25px;"></i></span>
 			</li>
 			
  

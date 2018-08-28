@@ -120,9 +120,9 @@ public class TransactionDaoImpl implements TransactionDao {
 	     
 		
 		query=query+subreq+" (1=1 ) ) ORDER BY   j.datejournal , t.heuredebut desc  ";
-		/*
+		
 		System.out.println("requette : "+query);
-	    */
+	 
 		
 		
   
