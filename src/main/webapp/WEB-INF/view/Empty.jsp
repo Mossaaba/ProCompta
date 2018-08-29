@@ -92,7 +92,7 @@
 							<div class="col-lg-12">
 								<div id="card-linear" class="card card-default">
 									<div class="card-header  ">
-										<div class="card-title"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size :15px;" aria-hidden="true"></i> last update</div>
+										<div class="card-title"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size :15px;" aria-hidden="true"></i>Indicents</div>
 										<div class="card-controls">
 											<ul>
 												<li><a href="#" class="card-collapse"
@@ -110,7 +110,7 @@
 
 									   <div class="card-body">
 										<h3>
-											<span class="semi-bold">Lastest </span> Informations
+											<span class="semi-bold">Incidents </span> Informations
 										</h3>
 										<div class="card-body">
 <!-- *************** -->

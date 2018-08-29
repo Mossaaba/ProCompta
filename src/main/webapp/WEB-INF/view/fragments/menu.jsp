@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
       <nav class="page-sidebar" data-pages="sidebar">
 				
@@ -46,27 +47,27 @@
 			
 			<li class="m-t-30 ">
 			<a href="<spring:url value="/dashboard"/>"  >
-			<span class="title font-montserrat no-margin text-uppercase">Dashboard</span>
+			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Dashboard"></spring:message></span>
 			</a>
 			<span class="bg-success icon-thumbnail"><i class="pg-home" style="font-size :27px;"></i></span>
 			</li>
 			<li class="">
 			<a href="<spring:url value="/incident"/>"  >
-			<span class="title font-montserrat no-margin text-uppercase">Uploding File</span>
+			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.UplodingFile"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-cloud-upload" style="font-size :27px;" ></i></span>
 			</li>
 			
 			<li class="">
 			<a href="<spring:url value="/day"/>"  >
-			<span class="title font-montserrat no-margin text-uppercase">Jour</span>
+			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Day"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="pg-calender" style="font-size :27px;" ></i></span>
 			</li>
 			
 			<li class=" ">
 			<a href="<spring:url value="/transaction"/>"  >
-			<span class="title font-montserrat no-margin text-uppercase ">Transactions</span>
+			<span class="title font-montserrat no-margin text-uppercase "><spring:message code="label.Transactions"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-exchange" style="font-size :25px;"></i></span>
 			</li>
@@ -74,35 +75,33 @@
  
 			<li class="">
 			<a href="<spring:url value="/incident"/>"  >
-			<span class="title font-montserrat no-margin text-uppercase">Incidents</span>
+			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Incidents"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-bolt" style="font-size :27px;" ></i></span>
 			</li>
 			
 			<li class="">
 			<a href="<spring:url value="/incident"/>"  >
-			<span class="title font-montserrat no-margin text-uppercase">Chargements d'argent</span>
+			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Replenishment"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-plus-square" style="font-size :27px;" ></i></span>
 			</li>
 			
 			<li>
-			<a href="javascript:;"><span class="title font-montserrat no-margin text-uppercase">Host</span>
+			<a href="javascript:;"><span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Host"></spring:message></span>
 			<span class=" arrow"></span></a>
 			<span class="icon-thumbnail"><i class="pg-layouts2" style="font-size :27px;"></i></span>
 			<ul class="sub-menu">
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="secondary_layout.html">fichier HOST</a>
+			<a href="secondary_layout.html"><spring:message code="label.HostFile"></spring:message> </a>
 			<span class="icon-thumbnail" style="font-size :27px;">FH</span>
 			</li>
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="secondary_layout.html">Pointage</a>
+			<a href="secondary_layout.html"><spring:message code="label.Tally"></spring:message></a>
 			<span class="icon-thumbnail" style="font-size :27px;">PT</span>
+
 			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="secondary_layout.html">Confrontation</a>
-			<span class="icon-thumbnail" style="font-size :27px;">CFT</span>
-			</li>
+			 
            </ul>
             </li>
 
@@ -113,28 +112,28 @@
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="charts.html">
 			
-			<span class="title">Statistiques</span></a>
+			<span class="title"><spring:message code="label.Statistics"></spring:message></span></a>
 			<span class="icon-thumbnail"><i class="pg-charts" style="font-size :27px;"></i></span>
 			</li>
 			
 				<li>
-			<a href="javascript:;"><span class="title font-montserrat no-margin text-uppercase">Rapport</span>
+			<a href="javascript:;"><span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Rapport"></spring:message></span>
 			<span class=" arrow"></span></a>
 			<span class="icon-thumbnail" ><i class="pg-tables" style="font-size :27px;"></i></span>
 			<ul class="sub-menu">
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="tables.html">Basic Tables</a>
-			<span class="icon-thumbnail" style="font-size :27px;">bt</span>
+			<a href="tables.html"><spring:message code="label.GlobalRapport"></spring:message></a>
+			<span class="icon-thumbnail" style="font-size :27px;">GR</span>
 			</li>
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="datatables.html">Data Tables</a>
-			<span class="icon-thumbnail" style="font-size :27px;">dt</span>
+			<a href="datatables.html"><spring:message code="label.DetailsRapport"></spring:message></a>
+			<span class="icon-thumbnail" style="font-size :27px;">DR</span>
 			</li>
 			</ul>
 			</li>
 			
 			<li>
-			<a href="javascript:;"><span class="title font-montserrat  text-uppercase">Administration</span></a>
+			<a href="javascript:;"><span class="title font-montserrat  text-uppercase"><spring:message code="label.Administration"></spring:message></span></a>
 			<span class="icon-thumbnail"><i class="pg-bag" style="font-size :25px;"></i></span>
 			<ul class="sub-menu">
 			<li class="title font-montserrat no-margin text-uppercase">

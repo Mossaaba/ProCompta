@@ -899,7 +899,7 @@ $(function() {
 		 
        function format(value1,value2,value3,value4) 
        {
-            return ' <table class="table  table-hover table-bordre demo-table-search table-responsive-block nowrap " > <tr> '+
+            return ' <table class="table table-hover table-condensed nowrap no-footer" > <tr> '+
                    '<th>Cassette1</th>'+
         	       '<th>Cassette2</th>'+
         	       '<th>Cassette3</th>'+

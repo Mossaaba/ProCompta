@@ -25,6 +25,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.DieboldNixdorf.ProCompta.dao.IncidentDao;
+import com.DieboldNixdorf.ProCompta.dao.IncidentDaoImpl;
 import com.DieboldNixdorf.ProCompta.dao.TransactionDao;
 import com.DieboldNixdorf.ProCompta.dao.TransactionDaoImpl;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -187,6 +189,12 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	@Bean
     public TransactionDao getTransactionDao() {
 		return new TransactionDaoImpl(dataSource);
+        
+    }
+	
+	@Bean
+    public IncidentDao getIncidentDao() {
+		return new IncidentDaoImpl(dataSource);
         
     }
     

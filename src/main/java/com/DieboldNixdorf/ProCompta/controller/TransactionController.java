@@ -47,7 +47,7 @@ public class TransactionController
 	
 	
 	@RequestMapping(value = "/transaction" ,method = RequestMethod.GET)
-    public String GoTest(Model model , @ModelAttribute Transaction transaction , final RedirectAttributes redirectAttributes) 
+    public String GoTransaction(Model model , @ModelAttribute Transaction transaction , final RedirectAttributes redirectAttributes) 
 	{
 
 		 
