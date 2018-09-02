@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+ 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
+ 
 public class ProComptaSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// add a reference to our security data source
@@ -27,7 +29,13 @@ public class ProComptaSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		 auth.jdbcAuthentication().dataSource(securityDataSource);
+		 auth.jdbcAuthentication().dataSource(securityDataSource)
+		 .usersByUsernameQuery(
+		 "select username,password, enabled from account where username=?")
+				  .authoritiesByUsernameQuery(
+		 " select  username , role_name from account_role AR " + 
+		 " inner join role R on R.role_id = AR.role_id "+
+		  " where username=?");
 	}
 
 	@Override

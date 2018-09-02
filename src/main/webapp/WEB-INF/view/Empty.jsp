@@ -92,7 +92,7 @@
 							<div class="col-lg-12">
 								<div id="card-linear" class="card card-default">
 									<div class="card-header  ">
-										<div class="card-title"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size :15px;" aria-hidden="true"></i>Indicents</div>
+										<div class="card-title"><i class="fa fa-bolt " style="font-size :15px;" aria-hidden="true"></i>Indicents</div>
 										<div class="card-controls">
 											<ul>
 												<li><a href="#" class="card-collapse"
@@ -112,45 +112,126 @@
 										<h3>
 											<span class="semi-bold">Incidents </span> Informations
 										</h3>
+										
+										
+										<c:if test="${empty msg }">
+										    <div class="col-lg-3 pull-right">
+												<div class="card card-default bg-${css}" data-pages="card">
+															<div class="card-header ">
+																 <div class="card-title text-white"><i class="pg-italic" style="font-size :15px;"></i> Remarque : </div>
+																	<div class="card-controls">
+																		<ul>
+																			<li><a href="#" class="card-collapse"
+																				data-toggle="collapse"><i
+																					class="card-icon card-icon-collapse"></i></a></li>
+																			<li><a href="#" class="card-refresh"
+																				data-toggle="refresh"><i
+																					class="card-icon card-icon-refresh"></i></a></li>
+																			<li><a href="#" class="card-close" data-toggle="close"><i
+																					class="card-icon card-icon-close"></i></a></li>
+																		</ul>
+																	</div>
+																	<div class="card-body">
+																	  <h3 class="text-white"><span class="semi-bold">${msg}</span></h3>			 
+																	</div>
+																	
+														  </div>
+													</div>
+							                </div>
+										</c:if>
+										
 										<div class="card-body">
-<!-- *************** -->
-<!-- Form            -->
-<!-- *************** -->
-
-											 
-											
-<!-- *************** -->
-<!--   fin Form      -->
-<!-- *************** -->										
+ 									
 										</div>
 									</div>
 
 								</div>
 							</div>
-<!-- *************** -->
-<!--   Notification  -->
-<!-- *************** -->
-							  
-<!-- *************** -->
-<!--  Fin : Notification  -->
-<!-- *************** -->
-
+ 
 
 
 
 						</div>
 					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					 
+					
+					
+					
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div id="card-advance" class="card card-default">
+									<div class="card-header  ">
+										<div class="card-title"><i class="fa fa-bolt " style="font-size :15px;" aria-hidden="true"></i>Indicents</div>
+										                          <div class="card-controls">
+																		<ul>
+																			<li>
+																				<div class="dropdown">
+																					<a id="card-settings" data-target="#" href="#"
+																						data-toggle="dropdown" aria-haspopup="true"
+																						role="button" aria-expanded="false"> <i
+																						class="card-icon card-icon-settings "></i>
+																					</a>
+																					<div class="dropdown-menu dropdown-menu-right"
+																						role="menu" aria-labelledby="card-settings">
+																						<a href="#" class="dropdown-item">API</a> <a
+																							href="#" class="dropdown-item">Preferences</a> <a
+																							href="#" class="dropdown-item">About</a>
+																					</div>
+																				</div>
+																			</li>
+																			<li><a href="#" class="card-collapse"
+																				data-toggle="collapse"><i
+																					class="card-icon card-icon-collapse"></i></a></li>
+																			<li><a href="#" class="card-refresh"
+																				data-toggle="refresh"><i
+																					class="card-icon card-icon-refresh"></i></a></li>
+																			<li><a href="#" class="card-maximize"
+																				data-toggle="maximize"><i
+																					class="card-icon card-icon-maximize"></i></a></li>
+																			<li><a href="#" class="card-close"
+																				data-toggle="close"><i
+																					class="card-icon card-icon-close"></i></a></li>
+																		</ul>
+																		 
+																	</div>
+									</div>
+
+
+									   <div class="card-body">
+										 
+										
+										 
+									 
+									</div>
+
+								</div>
+							</div>
+ 
+
+
+
+						</div>
+					</div>
+					
+					
+					
+					
+ 		
+					
 </div>
 
-<!-- *************** -->
-<!--   Fin  container 1  -->
-<!-- *************** -->
-
-
-<!-- *************** -->
-<!--    container 2 Resultat  -->
-<!-- *************** -->
-
+ 
                      
 					
 
@@ -227,76 +308,131 @@
 <script type="text/javascript">
 $(function() {
 	
-								  $('#dateAndTimeTransaction').daterangepicker({
-								   "showDropdowns": true,
-								    "timePicker": true,
-								    "timePicker24Hour": true,
-								    "timePickerSeconds": true,
-								     
-								    "autoApply": false,
-								    ranges: {
-								         
-								        '<spring:message code="label.yesterday"/>': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-								        '<spring:message code="label.Last7Days"/>': [moment().subtract(6, 'days'), moment()],
-								        '<spring:message code="label.Last30Days"/>': [moment().subtract(29, 'days'), moment()],
-								        '<spring:message code="label.ThisMonth"/>': [moment().startOf('month'), moment().endOf('month')],
-								        '<spring:message code="label.LastMonth"/>': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-								    },
-								    "locale": {
-								    	"format" : 'YYYY-MM-DD HH:MM:SS',
-								        "separator": " - ",
-								        "applyLabel": "Apply",
-								        "cancelLabel": "Cancel",
-								        "fromLabel": "From",
-								        "toLabel": "To",
-								        "cancelLabel": 'Clear',
-								        "customRangeLabel": "<spring:message code="label.Custom"/>",
-								        "weekLabel": "W",
-								        "daysOfWeek": [
-								                  "Sa",
-								            "Su",
-								            "Mo",
-								            "Tu",
-								            "We",
-								            "Th",
-								            "Fr"
-								            
-								        ],
-								        "monthNames": [
-								            "<spring:message code="label.January"/>",
-								            "<spring:message code="label.February"/>",
-								            "<spring:message code="label.March"/>",
-								            "<spring:message code="label.April"/>",
-								            "<spring:message code="label.May"/>",
-								            "<spring:message code="label.June"/>",
-								            "<spring:message code="label.July"/>",
-								            "<spring:message code="label.August"/>",
-								            "<spring:message code="label.September"/>",
-								            "<spring:message code="label.October"/>",
-								            "<spring:message code="label.November"/>",
-								            "<spring:message code="label.December"/>"
-								        ],
-								        "firstDay": 1, 
-								        
-								    },
-								    
-								    "opens": "right"
-								}, function(start, end, label) {
-								  console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm:ss') + ' to ' + end.format('YYYY-MM-DD hh:mm:ss') + ' (predefined range: ' + label + ')');
-								});
-								 
-								  $('#dateAndTimeTransaction').on('apply.daterangepicker', function(ev, picker) {
-								      $(this).val(picker.startDate.format('YYYY-MM-DD HH:MM:SS') + ' - ' + picker.endDate.format('YYYY-MM-DD HH:MM:SS'));
-								      $('#DebuttransactionDate').val(picker.startDate.format('YYYY-MM-DD'));
-								      $('#fintransactionDate').val(picker.endDate.format('YYYY-MM-DD'));
-								      $('#heuredebut').val(picker.startDate.format('HH:MM:SS'));
-								      $('#heurefin').val(picker.endDate.format('HH:MM:SS'));
-								      
-								  });
-								
-								  $('#dateAndTimeTransaction').on('cancel.daterangepicker', function(ev, picker) {
-								      $(this).val('');
-								  });
+	
+	$(document).ready( function () {
+	    $('#tableWithSearch2').DataTable({
+								"sDom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-10'f>>  "+
+								" <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'table-responsive't>  "+
+								"<'row'<'col-sm-12 '<'exportOptions2'T>p><'col-sm-6 '>>",
+	    	 
+	    	"fixedHeader": true,
+            "sPaginationType": "bootstrap",
+            "destroy": true,
+            "bPaginate": true,
+            "lengthMenu": [[5,10, 25, 50, -1], [5, 10, 25, 50, "All"]] ,
+            "oLanguage": 
+		               {   
+            	         
+		                   "sInfo": "Incident resultat "
+		               },
+		              
+		               "oTableTools": {
+		            	   "sSwfPath": '<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/TableTools/swf/copy_csv_xls_pdf.swf"/>',
+		            	   
+              "aButtons": [{
+                  "sExtends": "csv",
+                  "sButtonText": "<i class='pg-grid'></i>",
+              }, {
+                  "sExtends": "xls",
+                  "sButtonText": "<i class='fa fa-file-excel-o'></i>",
+              }, {
+                  "sExtends": "pdf",
+                  "sButtonText": "<i class='fa fa-file-pdf-o'></i>",
+              }, {
+                  "sExtends": "copy",
+                  "sButtonText": "<i class='fa fa-copy'></i>",
+              }] 
+		               },
+		               
+		               fnDrawCallback: function(oSettings) {
+		               	
+		                   $('.export-options-container2').append($('.exportOptions2')); // Append the buttons to container export-options-container2 in the DOM
+
+		                   // In the DOM you'll find something like: <a id="ToolTables_historyDataTable_XXXXX" class="btn btn-white DTTT_button_csv" data-original-title="" title=">
+		                   
+		               }
+          
+	    
+	    
+
+         
+	} );
+    } );
+	
+	
+	
+	
+	
+							  $('#dateAndTimeTransaction').daterangepicker({
+							   "showDropdowns": true,
+							    "timePicker": true,
+							    "timePicker24Hour": true,
+							    "timePickerSeconds": true,
+							     
+							    "autoApply": false,
+							    ranges: {
+							         
+							        '<spring:message code="label.yesterday"/>': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+							        '<spring:message code="label.Last7Days"/>': [moment().subtract(6, 'days'), moment()],
+							        '<spring:message code="label.Last30Days"/>': [moment().subtract(29, 'days'), moment()],
+							        '<spring:message code="label.ThisMonth"/>': [moment().startOf('month'), moment().endOf('month')],
+							        '<spring:message code="label.LastMonth"/>': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+							    },
+							    "locale": {
+							    	"format" : 'YYYY-MM-DD HH:MM:SS',
+							        "separator": " - ",
+							        "applyLabel": "Apply",
+							        "cancelLabel": "Cancel",
+							        "fromLabel": "From",
+							        "toLabel": "To",
+							        "cancelLabel": 'Clear',
+							        "customRangeLabel": "<spring:message code="label.Custom"/>",
+							        "weekLabel": "W",
+							        "daysOfWeek": [
+							                  "Sa",
+							            "Su",
+							            "Mo",
+							            "Tu",
+							            "We",
+							            "Th",
+							            "Fr"
+							            
+							        ],
+							        "monthNames": [
+							            "<spring:message code="label.January"/>",
+							            "<spring:message code="label.February"/>",
+							            "<spring:message code="label.March"/>",
+							            "<spring:message code="label.April"/>",
+							            "<spring:message code="label.May"/>",
+							            "<spring:message code="label.June"/>",
+							            "<spring:message code="label.July"/>",
+							            "<spring:message code="label.August"/>",
+							            "<spring:message code="label.September"/>",
+							            "<spring:message code="label.October"/>",
+							            "<spring:message code="label.November"/>",
+							            "<spring:message code="label.December"/>"
+							        ],
+							        "firstDay": 1, 
+							        
+							    },
+							    
+							    "opens": "right"
+							}, function(start, end, label) {
+							  console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm:ss') + ' to ' + end.format('YYYY-MM-DD hh:mm:ss') + ' (predefined range: ' + label + ')');
+							});
+							 
+							  $('#dateAndTimeTransaction').on('apply.daterangepicker', function(ev, picker) {
+							      $(this).val(picker.startDate.format('YYYY-MM-DD HH:MM:SS') + ' - ' + picker.endDate.format('YYYY-MM-DD HH:MM:SS'));
+							      $('#DebuttransactionDate').val(picker.startDate.format('YYYY-MM-DD'));
+							      $('#fintransactionDate').val(picker.endDate.format('YYYY-MM-DD'));
+							      $('#heuredebut').val(picker.startDate.format('HH:MM:SS'));
+							      $('#heurefin').val(picker.endDate.format('HH:MM:SS'));
+							      
+							  });
+							
+							  $('#dateAndTimeTransaction').on('cancel.daterangepicker', function(ev, picker) {
+							      $(this).val('');
+							  });
 								  
 								  
 								  

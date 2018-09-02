@@ -46,7 +46,6 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	private Environment env ; 
 	
 	
-	
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	
@@ -59,6 +58,8 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	} 
+	
+	//Define a static ressources 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	        registry
@@ -68,7 +69,7 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	
 	
 	
-	//defin a bean for our data source 
+	//defin a bean for our data source + Connecyion to the data base
 	@Bean
 	public DataSource securityDataSource() {
 		

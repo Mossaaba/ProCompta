@@ -19,7 +19,7 @@ import com.DieboldNixdorf.ProCompta.model.Transaction;
 public class TransactionServiceImpl implements TransactionService {
 	
 	
-	TransactionDao transactionDao;
+	private TransactionDao transactionDao;
 	
 	@Autowired
 	public void setTransactionDao(TransactionDao transactionDao) {

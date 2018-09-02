@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.DieboldNixdorf.ProCompta.config.ToolsToUse;
 import com.DieboldNixdorf.ProCompta.model.Incident;
-import com.DieboldNixdorf.ProCompta.model.Transaction;
+ 
  
  
  

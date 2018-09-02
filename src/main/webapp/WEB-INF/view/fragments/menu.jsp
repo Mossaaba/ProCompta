@@ -136,42 +136,19 @@
 			<a href="javascript:;"><span class="title font-montserrat  text-uppercase"><spring:message code="label.Administration"></spring:message></span></a>
 			<span class="icon-thumbnail"><i class="pg-bag" style="font-size :25px;"></i></span>
 			<ul class="sub-menu">
+			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="invoice.html">Invoice</a>
-			<span class="icon-thumbnail">in</span>
+			<a href="<spring:url value="Atm/list"/>">Create ATM</a>
+			<span class="icon-thumbnail">ATM</span>
 			</li>
+			
+			
+			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="404.html">404 Page</a>
-			<span class="icon-thumbnail">pg</span>
+			<a href="<spring:url value="/user/list"/>" >Users</a>
+			<span class="icon-thumbnail">Usr</span>
 			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="500.html">500 Page</a>
-			<span class="icon-thumbnail">pg</span>
-			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="blank_template.html">Blank Page</a>
-			<span class="icon-thumbnail">bp</span>
-			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="login.html">Login</a>
-			<span class="icon-thumbnail">l</span>
-			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="register.html">Register</a>
-			<span class="icon-thumbnail">re</span>
-			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="lock_screen.html">Lockscreen</a>
-			<span class="icon-thumbnail">ls</span>
-			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="gallery.html">Gallery</a>
-			<span class="icon-thumbnail">gl</span>
-			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="timeline.html">Timeline</a>
-			<span class="icon-thumbnail">t</span>
-			</li>
+			 
 			</ul>
 			</li>
 

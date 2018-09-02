@@ -242,29 +242,53 @@
 	src="<spring:url value="/resources/assets/plugins/jquery/jquery-3.2.1.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/assets/plugins/jquery-ui/jquery-ui.min.js"/>"></script>
-<script
-	src="<spring:url value="/resources/assets/plugins/jquery/jquery-easy.js"/>"></script>
-<script
-	src="<spring:url value="/resources/assets/plugins/jquery-unveil/jquery.unveil.min.js"/>"></script>
-<script
-	src="<spring:url value="/resources/assets/plugins/jquery-ios-list/jquery.ioslist.min.js"/>"></script>
-<script
-	src="<spring:url value="/resources/assets/plugins/jquery-actual/jquery.actual.min.js"/>"></script>
-<script
-	src="<spring:url value="/resources/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"/>"></script>
-<script
+	<script
 	src="<spring:url value="/resources/assets/plugins/modernizr.custom.js"/>"></script>
 <script
 	src="<spring:url value="/resources/assets/plugins/popper/umd/popper.min.js"/>"></script>
 <script
-	src="<spring:url value="/resources/assets/plugins/bootstrap/js/bootstrap.min.js"/>"></script>
+	src="<spring:url value="/resources/assets/plugins/bootstrap/js/bootstrap.min.js"/>"></script>	
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery/jquery-easy.js"/>"></script>	
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-unveil/jquery.unveil.min.js"/>"></script>	
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-ios-list/jquery.ioslist.min.js"/>"></script>	
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-actual/jquery.actual.min.js"/>"></script>
+	<script
+	src="<spring:url value="/resources/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/select2/js/select2.full.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/assets/plugins/classie/classie.js"/>"></script>
 <script
 	src="<spring:url value="/resources/assets/plugins/switchery/js/switchery.min.js"/>"></script>
 <script
-	src="<spring:url value="/resources/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"/>">
-</script>
+	src="<spring:url value="/resources/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"/>"></script>		
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-autonumeric/autoNumeric.js"/>"></script>		
+<script
+		src="<spring:url value="/resources/assets/plugins/dropzone/dropzone.min.js"/>"></script>		
+<script
+		src="<spring:url value="/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"/>"></script>			
+<script
+		src="<spring:url value="/resources/assets/plugins/jquery-inputmask/jquery.inputmask.min.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/bootstrap-form-wizard/js/jquery.bootstrap.wizard.min.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/summernote/js/summernote.min.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/moment/moment.min.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"/>"></script>
+<script
+		src="<spring:url value="/resources/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"/>"></script>
+
  
 <script 
     src="<spring:url value="/resources/pages/js/pages.js"/>">
@@ -281,56 +305,36 @@
 <script 
     src="<spring:url value="/resources/assets/js/demo.js"/>">
 </script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-inputmask/jquery.inputmask.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-form-wizard/js/jquery.bootstrap.wizard.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/moment/moment.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-autonumeric/autoNumeric.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/dropzone/dropzone.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/summernote/js/summernote.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-typehead/typeahead.jquery.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/handlebars/handlebars-v4.0.5.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/select2/js/select2.full.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/ion-slider/js/ion.rangeSlider.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.nouislider.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.liblink.js"/>"></script>
-	<script src="<spring:url value="/resources/assets/js/slider.js"/>"></script>
-	<script src="<spring:url value="/resources/assets/js/card.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js"/>"></script>
-    <script
-		src="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/datatables.responsive.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/lodash.min.js"/>"></script>
-	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
-	<script src="<spring:url value="/resources/assets/js/datatables.js"/>"></script>
 	
+	
+	
+<script
+	src="<spring:url value="/resources/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/bootstrap-typehead/typeahead.jquery.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/handlebars/handlebars-v4.0.5.js"/>"></script>
+
+<script
+	src="<spring:url value="/resources/assets/plugins/ion-slider/js/ion.rangeSlider.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.nouislider.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.liblink.js"/>"></script>
+<script src="<spring:url value="/resources/assets/js/slider.js"/>"></script>
+<script src="<spring:url value="/resources/assets/js/card.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js"/>"></script>
+  <script
+src="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/datatables.responsive.js"/>"></script>
+<script
+	src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/lodash.min.js"/>"></script>
+<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
+<script src="<spring:url value="/resources/assets/js/datatables.js"/>"></script>
+

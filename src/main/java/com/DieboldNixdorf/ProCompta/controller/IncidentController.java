@@ -134,7 +134,7 @@ public class IncidentController {
 	{
 
 		
-		List<String> TypeIncident = new LinkedList<>(Arrays.asList(new String[] {""}));
+		List<String> TypeIncident = new LinkedList<>(Arrays.asList(new String[] {" "}));
 		
 		for(int i=0;i<incidentService.listTypeIncident().size();i++)
 		{

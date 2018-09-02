@@ -82,7 +82,7 @@
 					<div class=" container-fluid   container-fixed-lg">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><spring:message code="label.title"></spring:message></a></li>
-							<li class="breadcrumb-item active">Incidents
+							<li class="breadcrumb-item active">Dashbord
 							</li>
 						</ol>
 					
@@ -92,7 +92,7 @@
 							<div class="col-lg-12">
 								<div id="card-linear" class="card card-default">
 									<div class="card-header  ">
-										<div class="card-title"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="font-size :15px;" aria-hidden="true"></i> last update</div>
+										<div class="card-title"><i class="fa fa-bolt " style="font-size :15px;" aria-hidden="true"></i>Indicents</div>
 										<div class="card-controls">
 											<ul>
 												<li><a href="#" class="card-collapse"
@@ -112,48 +112,38 @@
 										<h3>
 											<span class="semi-bold">Incidents </span> Informations
 										</h3>
+										
+										
 										<c:if test="${!empty msg }">
-								<div class="col-lg-3 pull-right">
-									<div class="card card-default bg-${css}" data-pages="card">
-										<div class="card-header ">
-											 <div class="card-title text-white"><i class="pg-italic" style="font-size :15px;"></i> Remarque : </div>
-											<div class="card-controls">
-												<ul>
-													<li><a href="#" class="card-collapse"
-														data-toggle="collapse"><i
-															class="card-icon card-icon-collapse"></i></a></li>
-													<li><a href="#" class="card-refresh"
-														data-toggle="refresh"><i
-															class="card-icon card-icon-refresh"></i></a></li>
-													<li><a href="#" class="card-close" data-toggle="close"><i
-															class="card-icon card-icon-close"></i></a></li>
-												</ul>
-											</div>
-											<div class="card-body">
-											<h3 class="text-white">
-												<span class="semi-bold">${msg}</span>
-											</h3>
-											 
-										</div>
-										
-										</div>
-										
-										
-									</div>
-								</div>
-							</c:if>
+										    <div class="col-lg-3 pull-right">
+												<div class="card card-default bg-${css}" data-pages="card">
+															<div class="card-header ">
+																 <div class="card-title text-white"><i class="pg-italic" style="font-size :15px;"></i> Remarque : </div>
+																	<div class="card-controls">
+																		<ul>
+																			<li><a href="#" class="card-collapse"
+																				data-toggle="collapse"><i
+																					class="card-icon card-icon-collapse"></i></a></li>
+																			<li><a href="#" class="card-refresh"
+																				data-toggle="refresh"><i
+																					class="card-icon card-icon-refresh"></i></a></li>
+																			<li><a href="#" class="card-close" data-toggle="close"><i
+																					class="card-icon card-icon-close"></i></a></li>
+																		</ul>
+																	</div>
+																	<div class="card-body">
+																	  <h3 class="text-white"><span class="semi-bold">${msg}</span></h3>			 
+																	</div>
+																	
+														  </div>
+													</div>
+							                </div>
+										</c:if>
+	
 										<div class="card-body">
-<!-- *************** --> 
-										 
-										 
-<!-- *************** -->
-<!-- Form            -->
-<!-- *************** -->
-
-											<spring:url value="/incident/find" var="formUrlIncident" />
+										<spring:url value="/incident/find" var="formUrlIncident" />
 											<form:form action="${formUrlIncident}" method="POST"
 												modelAttribute="incident">
-
 												<form:input type="text" path="DebutIncidentDate"
 													id="DebutIncidentDate" cssClass="form-control"
 													cssStyle=" display: none;" />
@@ -166,8 +156,6 @@
 												<form:input type="text" path="heurefinIncident"
 													cssClass="form-control pull-right"
 													cssStyle=" display: none;" />
-
-
 												<p>Date and Time information</p>
 												 <form:errors path="DateIncident" cssClass="alert alert-danger" />
 												<div class="form-group-attached">
@@ -202,98 +190,51 @@
 														 
 														</div>
 													</div>
-
-
-
 												</div>
 												<br>
-
-												 
- 
-
 												<div class="pull-left">
 													<br>
 													<form:button class="btn btn-success" type="submit"><i class="pg-search" style="font-size :15px;"></i> Submit</form:button>
 													<form:button class="btn btn-danger">
 														<i class="pg-close"></i> Clear</form:button>
 												</div>
-
-
 											</form:form>
-<!-- *************** -->
-<!--   fin Form      -->
-<!-- *************** -->
-<!-- *************** -->
-<!--   Notification  -->
-<!-- *************** -->
-							
-<!-- *************** -->
-<!--  Fin : Notification  -->
-<!-- *************** -->			 
-									</div>
-<!-- Form            -->
-<!-- *************** -->
-
-											 
-											
-<!-- *************** -->
-<!--   fin Form      -->
-<!-- *************** -->										
 										</div>
 									</div>
 
 								</div>
 							</div>
-<!-- *************** -->
-<!--   Notification  -->
-<!-- *************** -->
-							  
-<!-- *************** -->
-<!--  Fin : Notification  -->
-<!-- *************** -->
-
+ 
 
 
 
 						</div>
 					</div>
-</div>
-
-
-                     <c:if test="${!empty ListIncidentAfterFiltring}">
-                         <div class="content">
-						<div class=" container-fluid   container-fixed-lg">
-							 
-
-									<div class="card card-transparent">
-										<div class="card-header ">
-										<ol class="breadcrumb">
-							            <li class="breadcrumb-item active">Resultat de recherche
-							            </li>
-						                </ol>
-											 
-										</div>
-										</div>
-										<div class="card-body">
-											<div class="row">
-												<div class="col-lg-12">
-
-
-
-													<div class="card card-transparent">
-														<div class="card-body no-padding">
-															<div id="card-advance" class="card card-default">
-																<div class="card-header  ">
-																				<div class="card-title">
-																				<i class="fa fa-exchange" style="font-size :15px;" ></i>
-																				Resultat de recherche par filter
-																				<h3>
-															                   <span class="semi-bold">Incident</span> 
-														                        </h3> 
-																				</div>
-																 
-																	
-																	<div class="card-controls">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<c:if test="${!empty ListIncidentAfterFiltring}">
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#"><spring:message code="label.title"></spring:message></a></li>
+							<li class="breadcrumb-item active">Incident
+							</li>
+						</ol>
+					
+					
+					
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div id="card-advance" class="card card-default">
+									<div class="card-header  ">
+										<div class="card-title"><i class="fa fa-bolt" style="font-size :15px;" aria-hidden="true"></i>Indicents</div>
+										                          <div class="card-controls">
 																		<ul>
 																			<li>
 																				<div class="dropdown">
@@ -325,30 +266,34 @@
 																		</ul>
 																		 
 																	</div>
-																</div>
-																<div class="card-body">
-                                                                    
-																	<table
-																		class="table display table-hover demo-table-search table-responsive-block nowrap "
+									</div>
+
+
+									   <div class="card-body">
+										<h3>
+											<span class="semi-bold">Incidents </span> Informations
+										</h3>
+									 
+										
+				                                 <table class="table display table-hover demo-table-search table-responsive-block nowrap "
 																		  id="tableWithSearch2"   >
 																		<thead>
 																			<tr>
 																			    
 																				<th><i class="pg-calender"></i> Date </th>
-																				<th><i class="pg-credit_card_line"></i> Time </th>
+																				<th><i class="fa fa-bolt"></i> Incident </th>
 																				 
 																			</tr>
 
 																		</thead>
 																		<tbody>
-																 
-                                                                               
+     
 																			<c:forEach items="${ListIncidentAfterFiltring}"
 																				var="incident">
-																				<tr  >
+																				<tr>
 																				    
 																				     
-																					<td class="v-align-middle semi-bold"> ${incident.debutIncidentDate} ${incident.finIncidentDate} <br> ${incident.heuredebutIncident} ${incident.heurefinIncident} </td>
+																					<td class="v-align-middle semi-bold"> ${incident.debutIncidentDate}    ${incident.heuredebutIncident}   </td>
 																					<td class="v-align-middle">${incident.detailsincidents}</td>
 																					 
 
@@ -371,37 +316,32 @@
 
 
 																	</table>
-<!-- *************** -->
-<!--    container 2 Resultat  -->
-<!-- *************** -->																
-																	
-
-																</div>
-															</div>
-														</div>
-
-
-													</div>
-
-												</div>
-
-
-											 
+									 
 									</div>
 
-									<!-- Fin carde  -->
-
-
-								 
+								</div>
 							</div>
+ 
+
+
+
 						</div>
-						</div>
+					</div>
 					</c:if>
 					
-<jsp:include page="../view/fragments/footer.jsp"></jsp:include>
+					
+			
+					
+					
+</div>
+
+ 
+                     
+					
+
 				</div>
 
-				
+				<jsp:include page="../view/fragments/footer.jsp"></jsp:include>
 			</div>
 
 
@@ -415,7 +355,7 @@
 
 
 
-	 
+	</div>
 
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js"/>"></script>
@@ -470,21 +410,23 @@
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
 	
 <script type="text/javascript">
-
-
 $(function() {
 	
+	
 	$(document).ready( function () {
+		
+		
+		
+		 $("#detailsincidents").select2();
+		 
+		 
+		 
 	    $('#tableWithSearch2').DataTable({
-								"sDom": "<'exportOptions2'T><'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>>"+
-								"<'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> "+
-								"<'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> "+
-								"<'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> "+
-								" <'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-10'f>> <'table-responsive't>  "+
-								"<'row'<'col-sm-12 col-md-2'i><'col-sm-12 col-md-10'p>>",
+								"sDom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-10'f>>  "+
+								" <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'table-responsive't>  "+
+								"<'row'<'col-sm-12 '<'exportOptions2'T>p><'col-sm-6 '>>",
 	    	 
-	    	 "fixedHeader": true,
-	    	 
+	    	"fixedHeader": true,
             "sPaginationType": "bootstrap",
             "destroy": true,
             "bPaginate": true,
@@ -527,93 +469,87 @@ $(function() {
          
 	} );
     } );
- 
 	
 	
 	
 	
 	
+	$("#detailsincidents").select2();
 	
-	                              $("#detailsincidents").select2();
+	  $('#DateIncident').daterangepicker({
+	   "showDropdowns": true,
+	    "timePicker": true,
+	    "timePicker24Hour": true,
+	    "timePickerSeconds": true,
+	     
+	    "autoApply": false,
+	    ranges: {
+	         
+	        '<spring:message code="label.yesterday"/>': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+	        '<spring:message code="label.Last7Days"/>': [moment().subtract(6, 'days'), moment()],
+	        '<spring:message code="label.Last30Days"/>': [moment().subtract(29, 'days'), moment()],
+	        '<spring:message code="label.ThisMonth"/>': [moment().startOf('month'), moment().endOf('month')],
+	        '<spring:message code="label.LastMonth"/>': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+	    },
+	    "locale": {
+	    	"format" : 'YYYY-MM-DD HH:MM:SS',
+	        "separator": " - ",
+	        "applyLabel": "Apply",
+	        "cancelLabel": "Cancel",
+	        "fromLabel": "From",
+	        "toLabel": "To",
+	        "cancelLabel": 'Clear',
+	        "customRangeLabel": "<spring:message code="label.Custom"/>",
+	        "weekLabel": "W",
+	        "daysOfWeek": [
+	                  "Sa",
+	            "Su",
+	            "Mo",
+	            "Tu",
+	            "We",
+	            "Th",
+	            "Fr"
+	            
+	        ],
+	        "monthNames": [
+	            "<spring:message code="label.January"/>",
+	            "<spring:message code="label.February"/>",
+	            "<spring:message code="label.March"/>",
+	            "<spring:message code="label.April"/>",
+	            "<spring:message code="label.May"/>",
+	            "<spring:message code="label.June"/>",
+	            "<spring:message code="label.July"/>",
+	            "<spring:message code="label.August"/>",
+	            "<spring:message code="label.September"/>",
+	            "<spring:message code="label.October"/>",
+	            "<spring:message code="label.November"/>",
+	            "<spring:message code="label.December"/>"
+	        ],
+	        "firstDay": 1, 
+	        
+	    },
+	    
+	    "opens": "right"
+	}, function(start, end, label) {
+	  console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm:ss') + ' to ' + end.format('YYYY-MM-DD hh:mm:ss') + ' (predefined range: ' + label + ')');
+	});
+	 
+	  $('#DateIncident').on('apply.daterangepicker', function(ev, picker) {
+	      $(this).val(picker.startDate.format('YYYY-MM-DD HH:MM:SS') + ' - ' + picker.endDate.format('YYYY-MM-DD HH:MM:SS'));
+	      $('#DebutIncidentDate').val(picker.startDate.format('YYYY-MM-DD'));
+	      $('#finIncidentDate').val(picker.endDate.format('YYYY-MM-DD'));
+	      $('#heuredebutIncident').val(picker.startDate.format('HH:MM:SS'));
+	      $('#heurefinIncident').val(picker.endDate.format('HH:MM:SS'));
+	      
+	  });
 	
-								  $('#DateIncident').daterangepicker({
-								   "showDropdowns": true,
-								    "timePicker": true,
-								    "timePicker24Hour": true,
-								    "timePickerSeconds": true,
-								     
-								    "autoApply": false,
-								    ranges: {
-								         
-								        '<spring:message code="label.yesterday"/>': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-								        '<spring:message code="label.Last7Days"/>': [moment().subtract(6, 'days'), moment()],
-								        '<spring:message code="label.Last30Days"/>': [moment().subtract(29, 'days'), moment()],
-								        '<spring:message code="label.ThisMonth"/>': [moment().startOf('month'), moment().endOf('month')],
-								        '<spring:message code="label.LastMonth"/>': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-								    },
-								    "locale": {
-								    	"format" : 'YYYY-MM-DD HH:MM:SS',
-								        "separator": " - ",
-								        "applyLabel": "Apply",
-								        "cancelLabel": "Cancel",
-								        "fromLabel": "From",
-								        "toLabel": "To",
-								        "cancelLabel": 'Clear',
-								        "customRangeLabel": "<spring:message code="label.Custom"/>",
-								        "weekLabel": "W",
-								        "daysOfWeek": [
-								                  "Sa",
-								            "Su",
-								            "Mo",
-								            "Tu",
-								            "We",
-								            "Th",
-								            "Fr"
-								            
-								        ],
-								        "monthNames": [
-								            "<spring:message code="label.January"/>",
-								            "<spring:message code="label.February"/>",
-								            "<spring:message code="label.March"/>",
-								            "<spring:message code="label.April"/>",
-								            "<spring:message code="label.May"/>",
-								            "<spring:message code="label.June"/>",
-								            "<spring:message code="label.July"/>",
-								            "<spring:message code="label.August"/>",
-								            "<spring:message code="label.September"/>",
-								            "<spring:message code="label.October"/>",
-								            "<spring:message code="label.November"/>",
-								            "<spring:message code="label.December"/>"
-								        ],
-								        "firstDay": 1, 
-								        
-								    },
-								    
-								    "opens": "right"
-								}, function(start, end, label) {
-								  console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm:ss') + ' to ' + end.format('YYYY-MM-DD hh:mm:ss') + ' (predefined range: ' + label + ')');
-								});
-								 
-								  $('#DateIncident').on('apply.daterangepicker', function(ev, picker) {
-								      $(this).val(picker.startDate.format('YYYY-MM-DD HH:MM:SS') + ' - ' + picker.endDate.format('YYYY-MM-DD HH:MM:SS'));
-								      $('#DebutIncidentDate').val(picker.startDate.format('YYYY-MM-DD'));
-								      $('#finIncidentDate').val(picker.endDate.format('YYYY-MM-DD'));
-								      $('#heuredebutIncident').val(picker.startDate.format('HH:MM:SS'));
-								      $('#heurefinIncident').val(picker.endDate.format('HH:MM:SS'));
-								      
-								  });
-								
-								  $('#DateIncident').on('cancel.daterangepicker', function(ev, picker) {
-								      $(this).val('');
-								  });
+	  $('#DateIncident').on('cancel.daterangepicker', function(ev, picker) {
+	      $(this).val('');
+	  });
 								  
 								  
 								  
 });
-
-
-
-
 		 
 		 
     
