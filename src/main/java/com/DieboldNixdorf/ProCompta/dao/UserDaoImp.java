@@ -52,7 +52,17 @@ public class UserDaoImp implements UserDao {
 		Session currentSession = this.sessionFactory.getCurrentSession();		
 		User u = (User) currentSession.load(User.class, new String(userName));
 		logger.info("Person loaded successfully, Person details="+u);
-		return u;
+		
+		/*
+		Query query = openSession().createQuery("from User u where u.login = :login");
+        query.setParameter("login", login);
+        userList = query.list();
+        
+        */
+        if (u != null )
+        	return u;
+        else
+            return null; 
 	}
 
 	@Override

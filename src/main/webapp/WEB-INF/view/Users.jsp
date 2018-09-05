@@ -8,8 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
- 
- 
 
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/plugins/pace/pace-theme-flash.css"/>" />
@@ -57,8 +55,6 @@
 
 
 
-
-
 </head>
 
 
@@ -78,262 +74,141 @@
 			<div class="page-content-wrapper">
                      
                      
-
-<!-- *************** -->
-<!--    container 1  -->
-<!-- *************** -->
+ 
 				<div class="content">
+					<div class=" container-fluid   container-fixed-lg">   
+                       <div id="rootwizard" class="m-t-60">
 
-					<div class=" container-fluid   container-fixed-lg">
-             <div id="rootwizard" class="m-t-50">
-
-				<ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm" role="tablist" data-init-reponsive-tabs="dropdownfx">
-				<li class="nav-item" >
-				<a id="listeAtm" class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold" data-toggle="tab" href="#tab1" data-target="#tab1" role="tab"><i class="fa fa-shopping-cart tab-icon"></i> <span>Users</span></a>
-				</li>
-				 
-				</ul>
-
-
-
-
-       <div class="tab-content">
-				<div class="tab-pane padding-20 sm-no-padding active slide-left" id="tab1">
-				<div class="row row-same-height">
-								<div class="col-md-2 b-r b-dashed b-grey sm-b-b">
-								
-								<div class="   sm-m-t-15 m-t-50">
-								<i class="fa fa-university fa-2x hint-text" ></i>
-								 
-								<h4>la liste des USER</h4>
-								<p>Our Solution is multi Vendor </p>
-								</div>	
-								</div>
+						<ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm" role="tablist" data-init-reponsive-tabs="dropdownfx">
+						<li class="nav-item" >
+						<a id="listeAtm" class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold" data-toggle="tab" href="#tab1" data-target="#tab1" role="tab"><i class="fa fa-user-circle fa-4x"></i> <span>Users</span></a>
+						</li>
+						</ul>
+						
+                           <div class="tab-content">
+       	   
+									<div class="tab-pane padding-20 sm-no-padding active slide-left" id="tab1">
+									<div class="row row-same-height">
+													
+										<div class="col-md-2 b-r b-dashed b-grey sm-b-b">
+														<div class="sm-m-t-15 m-t-50">
+														<i class="fa fa-user-circle fa-3x" ></i> 
+														<h2>List of users</h2>
+														<p>You can add, modify , or delete users here  </p>
+														</div>	
+										</div>
 			
 								
-				<div class="col-md-10">
+				                       <div class="col-md-10">
 				 
 												<div class="pull-right">
 													<div class="col-xs-12">
-													<button  id="show-modal" class="btn btn-primary btn-cons"   ><i class="fa fa-plus"></i> Add row
+													<button  id="show-modal" class="btn btn-primary btn-cons"   ><i class="fa fa-user-plus"></i> Add user
 													</button>
 													</div>
 												</div>
+                                                <br>
 				
-				                                 
+				                     <div class="padding-30 sm-padding-5">
+										
+										<table class="table table-hover table-responsive-block nowrap " id="tableUser">
+										 <thead>
+										 <tr>
+										 
+										 <td class="v-align-middle">User Name</td>
+										 <td class="v-align-middle">Password </td>
+										 <td class="v-align-middle">email </td>
+										 <td class="v-align-middle">creationDate</td>
+										 <td class="v-align-middle">lastLogin </td>
+										 <td class="v-align-middle">state </td>
+										 <td class="v-align-middle">  </td>
+										 
+										 
+										 
+										 </tr>
+										 </thead>
+										 <tbody>
+										 
+										 <c:forEach var="user" items="${listeUsers}">
+										 <c:url var ="updateLink" value="/user/updateUser">
+											   <c:param name="userName" value="${user.userName}"></c:param>
+										 </c:url>
+										 <c:url var ="deleteLink" value="/user/deleteUser">
+											   <c:param name="userName" value="${user.userName}"></c:param>
+										 </c:url>
+										  <tr>
+										 <td class="text-primary font-montserrat v-align-middle">${user.userName}</td>
+										 <td class="text-primary font-montserrat v-align-middle password">${user.password}</td>
+										 <td class="text-primary font-montserrat v-align-middle">${user.email}</td>
+										 <td class="text-primary font-montserrat v-align-middle">${user.creationDate}</td>
+										 <td class="text-primary font-montserrat v-align-middle">${user.lastLogin}</td>
+										 <td class="text-primary font-montserrat v-align-middle">${user.state}</td>
+										  
+										 <td class="text-primary font-montserrat v-align-middle">
+										 
+										 <div class="btn-group">
+											 
+											
+											 <button onclick="window.location.href='${updateLink}'" type="button" id="Update"  class="btn btn-sm btn-rounded btn-success"><i class="fa fa-pencil"></i>
+											</button>
+											 <button onclick="window.location.href='${deleteLink}'" type="button" id="delete" class="btn btn-sm  btn-rounded btn-danger"><i class="fa fa-trash-o"></i>
+											</button>	
+						                 </div>
+						               
+						                 </td>
+										  
+										 
+										 </tr>
+										 </c:forEach>
+										 
+										 
+										 </tbody>
+										 <tfoot>
+										 <tr>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										 </tr>
+										 </tfoot>
+										     </table>
 				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				<br>
-				
-				<div class="padding-30 sm-padding-5">
-				<table class="table table-responsive-block nowrap ">
-				 <thead>
-				 <tr>
-				 
-				 <td class="v-align-middle">User Name</td>
-				 <td class="v-align-middle">Password </td>
-				 <td class="v-align-middle">email </td>
-				 <td class="v-align-middle">creationDate</td>
-				 <td class="v-align-middle">lastLogin </td>
-				 <td class="v-align-middle">state </td>
-				 <td class="v-align-middle">  </td>
-				 
-				 
-				 
-				 </tr>
-				 </thead>
-				 <tbody>
-				 
-				 <c:forEach var="user" items="${listeUsers}">
-				 <c:url var ="updateLink" value="/user/updateUser">
-					   <c:param name="userName" value="${user.userName}"></c:param>
-				 </c:url>
-				 <c:url var ="deleteLink" value="/user/deleteUser">
-					   <c:param name="userName" value="${user.userName}"></c:param>
-				 </c:url>
-				  <tr>
-				 <td class="text-primary font-montserrat v-align-middle">${user.userName}</td>
-				 <td class="text-primary font-montserrat v-align-middle password">${user.password}</td>
-				 <td class="text-primary font-montserrat v-align-middle">${user.email}</td>
-				 <td class="text-primary font-montserrat v-align-middle">${user.creationDate}</td>
-				 <td class="text-primary font-montserrat v-align-middle">${user.lastLogin}</td>
-				  <td class="text-primary font-montserrat v-align-middle">${user.state}</td>
-				  
-				 <td class="text-primary font-montserrat v-align-middle">
-				 
-				 <div class="btn-group">
-					 
-					
-					 <button onclick="window.location.href='${updateLink}'" type="button" id="Update"  class="btn btn-sm btn-rounded btn-success"><i class="fa fa-pencil"></i>
-					</button>
-					 <button onclick="window.location.href='${deleteLink}'" type="button" id="delete" class="btn btn-sm  btn-rounded btn-danger"><i class="fa fa-trash-o"></i>
-					</button>	
-                 </div>
-               
-                 </td>
-				  
-				 
-				 </tr>
-				 </c:forEach>
-				 
-				 
-				 </tbody>
-				 <tfoot>
-				 <tr>
-				 <td></td>
-				 <td></td>
-				 <td></td>
-				 <td></td>
-				 <td></td>
-				 <td></td>
-				 <td></td>
-				 </tr>
-				 </tfoot>
-				 
-				 
-				 </table>
-				
-				
-				
-			 
-				 
-				<br>
-				<div class="row b-a b-grey no-margin">
-				<div class="col-md-3 p-l-10 sm-padding-15 align-items-center d-flex">
-				<div>
-				<h5 class="font-montserrat all-caps small no-margin hint-text bold">Total </h5>
-				<p class="no-margin">4</p>
-				</div>
-				</div>
-				<div class="col-md-4 col-middle sm-padding-15 align-items-center d-flex">
-				<div>
-				<h5 class="font-montserrat all-caps small no-margin hint-text bold">Local Connexion</h5>
-				<p class="no-margin">3</p>
-				</div>
-				</div>
-				<div class="col-md-3 col-middle sm-padding-15 align-items-center d-flex">
-				<div>
-				<h5 class="font-montserrat all-caps small no-margin hint-text bold">Remote Connexion</h5>
-				<p class="no-margin">1</p>
-				</div>
-				</div>
-				
-				<div class="col-md-2 text-right bg-primary padding-10">
-				<h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Last Modification</h5>
-				<h4 class="no-margin text-white">22-01-1989</h4>
-				</div>
-				
-				</div>
+				                     <br>
+														<div class="row b-a b-grey no-margin">
+															<div class="col-md-3 p-l-10 sm-padding-15 align-items-center d-flex">
+															<div>
+															<h5 class="font-montserrat all-caps small no-margin hint-text bold">Total </h5>
+															<p class="no-margin">4</p>
+															</div>
+															</div>
+															<div class="col-md-4 col-middle sm-padding-15 align-items-center d-flex">
+															<div>
+															<h5 class="font-montserrat all-caps small no-margin hint-text bold">Local Connexion</h5>
+															<p class="no-margin">3</p>
+															</div>
+															</div>
+															<div class="col-md-3 col-middle sm-padding-15 align-items-center d-flex">
+															<div>
+															<h5 class="font-montserrat all-caps small no-margin hint-text bold">Remote Connexion</h5>
+															<p class="no-margin">1</p>
+															</div>
+															</div>
+															<div class="col-md-2 text-right bg-primary padding-10">
+															<h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Last Modification</h5>
+															<h4 class="no-margin text-white">22-01-1989</h4>
+															</div>
+														
+														</div>
 				</div>
 				</div>
 				</div>
 				</div>
 
-
-
-										<div class="tab-pane slide-left padding-20 sm-no-padding" id="tab2">
-										<div class="row row-same-height">
-										
-										<div class="col-md-2 b-r b-dashed b-grey ">
-										<div class=" sm-m-t-15 m-t-50">
-										<h2>Ajouter un nouveau DAB!</h2>
-										
-										<p class="small hint-text">Created ATM using infomation Elementes</p>
-										</div>
-										</div>
-										
-										
-										<div class="col-md-10">
-										<div class="padding-30 sm-padding-5">
-										 
-										</div>
-										</div>
-										</div>
-										</div>
-										
-										
-										
-						<div class="tab-pane slide-left padding-20 sm-no-padding" id="tab3">
-						<div class="row row-same-height">
-						
-						
-						<div class="col-md-2 b-r b-dashed b-grey ">
-						 <div class=" sm-m-t-15 m-t-50">
-						<h2>Update the informations about ATM</h2>
-                        </div>
-						</div>
-						
-						
-						
-						 
-						
-						<div class="col-md-10">
-										<div class="padding-30 sm-padding-5">
-										 
-										</div>
-										 
-						
-						
-						 
 						</div>
 						</div>
-						</div>
-						
-						
-						
-						
-						
-<div class="tab-pane slide-left padding-20 sm-no-padding" id="tab4">
-<h1>Thank you.</h1>
-</div>
-<div class="padding-20 sm-padding-5 sm-m-b-20 sm-m-t-20 bg-white clearfix">
-<ul class="pager wizard no-style">
-<li class="next">
-<button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-<span>Next</span>
-</button>
-</li>
-<li class="next finish hidden">
- <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-<span>Finish</span>
-</button>
-</li>
-<li class="previous first hidden">
-<button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-<span>First</span>
-</button>
-</li>
-<li class="previous">
-<button class="btn btn-default btn-cons pull-right" type="button">
-<span>Previous</span>
-</button>
-</li>
-</ul>
-</div>
- 
-</div>
-</div>
  
 				 
  
@@ -370,7 +245,7 @@
 													<h4 class="p-b-5"><span class="semi-bold">New</span> Utilisateur</h4>
 													</div>
 													<div class="modal-body">
-													<p class="small-text">Create a new users </p>
+													<p class="small-text">Create a new user </p>
 													
 													
 													<form:form id="addUserForm" action="addUser" modelAttribute="user" method="POST" >
@@ -384,16 +259,12 @@
 													</div>
 													<div class="row">
 													
-													<div class="col-sm-12">
+													<div class="col-sm-6">
 													<div class="form-group form-group-default">
 													<label>Email</label>
 													<form:input path="email" id="email" type="text" cssClass="form-control" placeholder="Tell us more about it"/>
 													</div>
 													</div>
-													
-													</div>
-													<div class="row">
-													
 													<div class="col-sm-6">
 													<div class="form-group form-group-default">
 													<label>Password</label>
@@ -401,7 +272,11 @@
 													</div>
 													</div>
 													
-													<div class="col-sm-6">
+													</div>
+													<div class="row">
+													
+													
+													<div class="col-sm-12">
 													 <div class="form-group form-group-default">
 													<label>Etat</label>
 													<form:input path="state" id="state" type="text"  class="form-control" placeholder="1 or 2"/>
@@ -409,6 +284,16 @@
 													</div>
 													 
 													
+													
+													</div>
+													<div class="row">
+													
+													<div class="col-sm-12">
+													<div class="form-group form-group-default">
+													<label>Role </label> 
+													<input   type="text"    />
+													</div>
+													</div>
 													
 													</div>
 													
@@ -433,26 +318,32 @@
 													</div>
 													</div>
 													
+													 
 													</div>
 													
 												</div>
 												
+												<c:if test="${!empty msgTraitment }">
+												   <script type="text/javascript">
+													$(document).ready(function() {
+														$('body').pgNotification({
+															 style: 'circle',
+															 message: "${msgTraitment}${theUser.userName}",  
+															 position: 'top-right',  
+															 timeout: 0,  
+															 type: "${style}"
+															}).show();
+													});
+				                                    </script>								
+												</c:if>
 												
-												
-												
-												
-												
-												
-											 
-												<c:if test="${!empty msg }">
-												  
-												  
-															<script type="text/javascript">
-															$(function () {
-															$('#updateUserModel').modal('show');
-															});
-															</script>
-												  
+									           <c:if test="${!empty msg }">
+												<script type="text/javascript">
+												$(function () {
+												$('#updateUserModel').modal('show');
+												});
+												</script>
+									  
 												<div class="modal fade slide-up" tabindex="-1" role="dialog" id="updateUserModel" aria-labelledby="updateUserModel" aria-hidden="true">
 													
 													<div class="modal-dialog">
@@ -603,6 +494,11 @@ function form_insert_submit() {
 
 
 $(function () {
+	
+
+	
+ 
+
 	
 	$('#show-modal').click(function(){$('#addNewAppModal').modal('show');});
 	

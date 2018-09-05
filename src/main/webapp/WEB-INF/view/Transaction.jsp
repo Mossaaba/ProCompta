@@ -801,18 +801,7 @@ $(function() {
 	         
 		} );
 	    } );
-	 
-	 
-	    
-	
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+	   
 	    
 	var elems = Array.prototype.slice.call(document.querySelectorAll('#AmountHandler'));
 

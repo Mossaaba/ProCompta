@@ -3,6 +3,7 @@ package com.DieboldNixdorf.ProCompta.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
  
@@ -10,8 +11,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
  
 
 @Configuration
@@ -19,6 +22,14 @@ import org.springframework.security.provisioning.UserDetailsManager;
  
 public class ProComptaSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	
+	 @Autowired
+	    @Qualifier("customUserDetailsService")
+	    UserDetailsService userDetailsService;
+	 
+	 @Autowired
+	 PersistentTokenRepository tokenRepository;
+	
 	// add a reference to our security data source
 	@Autowired
 	private DataSource securityDataSource;

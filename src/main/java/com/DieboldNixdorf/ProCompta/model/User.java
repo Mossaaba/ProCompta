@@ -2,11 +2,14 @@ package com.DieboldNixdorf.ProCompta.model;
 
  
 import java.sql.Timestamp;
-
+ 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+ 
+ 
 import javax.persistence.Table;
+ 
  
 @Entity
 @Table(name="account")
@@ -30,40 +33,24 @@ public class User {
 	
 	@Column(name="enabled")
 	private int state;
-
-	
-	
 	
 	public User() {
 		 
 	}
 
-	 
-
 	public Timestamp getCreationDate() {
 		return creationDate;
 	}
 
-
-
 	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
-
-
-
 	public Timestamp getLastLogin() {
 		return lastLogin;
 	}
-
-
-
 	public void setLastLogin(Timestamp lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-
-
-
 	public String getUserName() {
 		return userName;
 	}
@@ -98,9 +85,7 @@ public class User {
 	}
 	
 	
-
-	
-	
+ 
 	
 }
  

@@ -24,11 +24,8 @@ public class AtmDaoImp implements AtmDao {
 	public List<Atm> listAtms() {
 		 
 		Session currentSession = sessionFactory.getCurrentSession();
-		
 		Query<Atm> theQuery = currentSession.createQuery("from Atm", Atm.class);
-		List<Atm> listAtm = theQuery.getResultList();
-		
-		
+		List<Atm> listAtm = theQuery.getResultList();	
 		return listAtm;
 	}
 

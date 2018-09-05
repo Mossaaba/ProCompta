@@ -1,6 +1,4 @@
 package com.DieboldNixdorf.ProCompta.controller;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+ 
 import com.DieboldNixdorf.ProCompta.model.User;
+ 
 import com.DieboldNixdorf.ProCompta.service.UserService;
  
 
@@ -21,10 +21,11 @@ import com.DieboldNixdorf.ProCompta.service.UserService;
 @RequestMapping("user")
 public class UserController {
 	
-	
-	
+
 	@Autowired
 	private UserService userService;
+	
+ 
 	
 	@RequestMapping("/list")
 	public String listUsers(Model theModel) {
@@ -34,10 +35,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/addUser")
-	public String addUser(@ModelAttribute("user") User theUser)
+	public String addUser(@ModelAttribute("user") User theUser , final RedirectAttributes redirectAttrs)
 	{
 		userService.addUser(theUser);
-		System.out.println("creationDate  ! : "+theUser.getCreationDate());
+		redirectAttrs.addFlashAttribute("msgTraitment" ,"Add USER : " );
+		redirectAttrs.addFlashAttribute("theUser" ,theUser );
+		redirectAttrs.addFlashAttribute("style" ,"info" );
 		return "redirect:/user/list";
 	}
 	
@@ -52,28 +55,39 @@ public class UserController {
 	}
 	
 	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute("userUpdate") User theUser)
+	public String saveUser(@ModelAttribute("userUpdate") User theUser ,   final RedirectAttributes redirectAttrs )
 	{
 		userService.updateUser(theUser);
+		redirectAttrs.addFlashAttribute("msgTraitment" ,"Update USER : " );
+		redirectAttrs.addFlashAttribute("theUser" ,theUser );
+		redirectAttrs.addFlashAttribute("style" ,"success" );
 		return "redirect:/user/list";
 	}
 	
 	
 	@GetMapping("/deleteUser")
-	public String deleteUser(@RequestParam("userName") String theName , Model theModel )
+	public String deleteUser(@RequestParam("userName") String theName , Model theModel , final RedirectAttributes redirectAttrs)
 	{ 
-		 
+		User userUpdate =  userService.getUserByName(theName); 
 		userService.removeUser(theName);
+		redirectAttrs.addFlashAttribute("theUser" ,userUpdate );
+		redirectAttrs.addFlashAttribute("msgTraitment" ,"Delete user : " );
+		redirectAttrs.addFlashAttribute("style" ,"danger" );
 		return "redirect:/user/list";
 	}
 
 	private void populateDefaultModel(Model model)
 	{
-		List<User> listeUsers = userService.listUsers();		
+		List<User> listeUsers = userService.listUsers();
+ 
 		// add the customers to the model
 		model.addAttribute("listeUsers", listeUsers);
+		 
 		User user = new User();
-		model.addAttribute("user", user);	  
+		model.addAttribute("user", user);	
+		
+		
 	}
+	
 	
 }
