@@ -16,10 +16,11 @@ import com.DieboldNixdorf.ProCompta.model.User;
  
 import com.DieboldNixdorf.ProCompta.service.UserService;
  
-
+/*
 @Controller
 @RequestMapping("user")
 public class UserController {
+	
 	
 
 	@Autowired
@@ -43,6 +44,9 @@ public class UserController {
 		redirectAttrs.addFlashAttribute("style" ,"info" );
 		return "redirect:/user/list";
 	}
+	
+	
+	
 	
 	@GetMapping("/updateUser")
 	public String updateUser(@RequestParam("userName") String theName , Model theModel )
@@ -91,3 +95,4 @@ public class UserController {
 	
 	
 }
+*/

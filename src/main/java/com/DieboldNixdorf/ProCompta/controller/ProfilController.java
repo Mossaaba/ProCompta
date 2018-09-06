@@ -12,16 +12,6 @@ public class ProfilController {
 		return "profil";
 	}
 	
-	@RequestMapping ("/login")
-	public String GoHome () {
-		
-		return "login";
-	}
-	@RequestMapping ("/")
-	public String GoHomeFromApp () {
-		
-		return "login";
-	}
-	  
+ 
  
 }

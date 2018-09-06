@@ -1,4 +1,4 @@
-package com.DieboldNixdorf.ProCompta.config;
+package com.DieboldNixdorf.ProCompta.tools;
 
 
 

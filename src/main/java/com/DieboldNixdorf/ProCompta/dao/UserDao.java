@@ -4,13 +4,20 @@ import java.util.List;
 
 import com.DieboldNixdorf.ProCompta.model.User;
 
-public interface UserDao 
-{
+ 
+
+
+public interface UserDao {
+
+	User findById(int id);
 	
-	public void addUser(User u);
-	public void updateUser(User u);
-	public List<User> listUsers();
-	public User getUserByName(String userName);
-	public void removeUser(String userName);
+	User findBySSO(String sso);
+	
+	void save(User user);
+	
+	void deleteBySSO(String sso);
+	
+	List<User> findAllUsers();
 
 }
+

@@ -4,15 +4,23 @@ import java.util.List;
 
 import com.DieboldNixdorf.ProCompta.model.User;
 
+ 
+
+
 public interface UserService {
 	
-	public void addUser(User u);
-	public void updateUser(User u);
-	public List<User> listUsers();
-	public User getUserByName(String userName);
-	public void removeUser(String userName);
-	 
+	User findById(int id);
 	
+	User findBySSO(String sso);
 	
+	void saveUser(User user);
+	
+	void updateUser(User user);
+	
+	void deleteUserBySSO(String sso);
+
+	List<User> findAllUsers(); 
+	
+	boolean isUserSSOUnique(Integer id, String sso);
 
 }

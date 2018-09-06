@@ -1,14 +1,15 @@
 <%@ page session="false"%>
+<%@ page isELIgnored="false" %>
 <%@page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
  
 <!DOCTYPE html>
 <html>
 <head>
-
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/plugins/pace/pace-theme-flash.css"/>" />
 <link rel="stylesheet" type="text/css"
@@ -81,7 +82,8 @@
 
 						<ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm" role="tablist" data-init-reponsive-tabs="dropdownfx">
 						<li class="nav-item" >
-						<a id="listeAtm" class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold" data-toggle="tab" href="#tab1" data-target="#tab1" role="tab"><i class="fa fa-user-circle fa-4x"></i> <span>Users</span></a>
+						<a id="listeAtm" class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold" data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
+						 <span> space</span><span> </span><span> </span><i class="fa fa-user-circle fa-4x"></i> <span>Users</span></a>
 						</li>
 						</ul>
 						
@@ -90,7 +92,7 @@
 									<div class="tab-pane padding-20 sm-no-padding active slide-left" id="tab1">
 									<div class="row row-same-height">
 													
-										<div class="col-md-2 b-r b-dashed b-grey sm-b-b">
+										<div class="col-md-3 b-r b-dashed b-grey sm-b-b">
 														<div class="sm-m-t-15 m-t-50">
 														<i class="fa fa-user-circle fa-3x" ></i> 
 														<h2>List of users</h2>
@@ -99,11 +101,11 @@
 										</div>
 			
 								
-				                       <div class="col-md-10">
+				                       <div class="col-md-9">
 				 
 												<div class="pull-right">
 													<div class="col-xs-12">
-													<button  id="show-modal" class="btn btn-primary btn-cons"   ><i class="fa fa-user-plus"></i> Add user
+													<button  id="show-modal" class="btn btn-primary btn-cons" ><i class="fa fa-user-plus"></i> Add user
 													</button>
 													</div>
 												</div>
@@ -115,48 +117,57 @@
 										 <thead>
 										 <tr>
 										 
-										 <td class="v-align-middle">User Name</td>
-										 <td class="v-align-middle">Password </td>
-										 <td class="v-align-middle">email </td>
-										 <td class="v-align-middle">creationDate</td>
-										 <td class="v-align-middle">lastLogin </td>
-										 <td class="v-align-middle">state </td>
-										 <td class="v-align-middle">  </td>
+										 <th class="v-align-middle">Firstname</th>
+										 <th class="v-align-middle">Lastname</th>
+										 <th class="v-align-middle">Email</th>
+										 <th class="v-align-middle">SSO ID</th>
 										 
-										 
-										 
+				                         <security:authorize access="hasRole('ADMIN')">
+				                         <th class="v-align-middle"> </th>
+				                         </security:authorize> 
 										 </tr>
 										 </thead>
 										 <tbody>
 										 
-										 <c:forEach var="user" items="${listeUsers}">
-										 <c:url var ="updateLink" value="/user/updateUser">
-											   <c:param name="userName" value="${user.userName}"></c:param>
-										 </c:url>
-										 <c:url var ="deleteLink" value="/user/deleteUser">
-											   <c:param name="userName" value="${user.userName}"></c:param>
-										 </c:url>
-										  <tr>
-										 <td class="text-primary font-montserrat v-align-middle">${user.userName}</td>
-										 <td class="text-primary font-montserrat v-align-middle password">${user.password}</td>
-										 <td class="text-primary font-montserrat v-align-middle">${user.email}</td>
-										 <td class="text-primary font-montserrat v-align-middle">${user.creationDate}</td>
-										 <td class="text-primary font-montserrat v-align-middle">${user.lastLogin}</td>
-										 <td class="text-primary font-montserrat v-align-middle">${user.state}</td>
-										  
-										 <td class="text-primary font-montserrat v-align-middle">
+										 <c:forEach items="${users}" var="user">
 										 
-										 <div class="btn-group">
-											 
+										 
+										 <c:url var ="updateLink" value="/user/edit-user-${user.ssoId}">
+											    
+										 </c:url>
+										 
+										 
+										 <c:url var ="deleteLink" value="/user/delete-user-${user.ssoId}">
+											  
+										 </c:url>
+										 
+										 
+										  <tr>
+										 <td class="text-primary font-montserrat v-align-middle">${user.firstName}</td>
+										 <td class="text-primary font-montserrat v-align-middle password">${user.lastName}</td>
+										 <td class="text-primary font-montserrat v-align-middle">${user.email}</td>
+										 <td class="text-primary font-montserrat v-align-middle">${user.ssoId}</td>
+										 
+										 
+										  <security:authorize access="hasRole('ADMIN')">
+										 
+										 <td class="text-primary font-montserrat v-align-middle">
+							              <div class="btn-group">
+							                 <button onclick="window.location.href='${updateLink}'" type="button" id="Update"  class="btn btn-sm btn-rounded btn-success"><i class="fa fa-pencil"></i>
+											 </button>
 											
-											 <button onclick="window.location.href='${updateLink}'" type="button" id="Update"  class="btn btn-sm btn-rounded btn-success"><i class="fa fa-pencil"></i>
-											</button>
-											 <button onclick="window.location.href='${deleteLink}'" type="button" id="delete" class="btn btn-sm  btn-rounded btn-danger"><i class="fa fa-trash-o"></i>
+											<button onclick="window.location.href='${deleteLink}'" type="button" id="delete" class="btn btn-sm  btn-rounded btn-danger" ><i class="fa fa-trash-o"></i>
 											</button>	
-						                 </div>
-						               
-						                 </td>
-										  
+											
+											    
+											
+											
+											
+									    </div>
+									    </td>
+									    
+				                       </security:authorize>
+				                      
 										 
 										 </tr>
 										 </c:forEach>
@@ -170,42 +181,47 @@
 										 <td></td>
 										 <td></td>
 										 <td></td>
-										 <td></td>
-										 <td></td>
+										 
 										 </tr>
 										 </tfoot>
 										     </table>
 				 
-				                     <br>
-														<div class="row b-a b-grey no-margin">
-															<div class="col-md-3 p-l-10 sm-padding-15 align-items-center d-flex">
-															<div>
-															<h5 class="font-montserrat all-caps small no-margin hint-text bold">Total </h5>
-															<p class="no-margin">4</p>
-															</div>
-															</div>
-															<div class="col-md-4 col-middle sm-padding-15 align-items-center d-flex">
-															<div>
-															<h5 class="font-montserrat all-caps small no-margin hint-text bold">Local Connexion</h5>
-															<p class="no-margin">3</p>
-															</div>
-															</div>
-															<div class="col-md-3 col-middle sm-padding-15 align-items-center d-flex">
-															<div>
-															<h5 class="font-montserrat all-caps small no-margin hint-text bold">Remote Connexion</h5>
-															<p class="no-margin">1</p>
-															</div>
-															</div>
-															<div class="col-md-2 text-right bg-primary padding-10">
-															<h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Last Modification</h5>
-															<h4 class="no-margin text-white">22-01-1989</h4>
-															</div>
-														
-														</div>
-				</div>
-				</div>
-				</div>
-				</div>
+				                         <br>
+				                         
+				                         
+				                         
+										<div class="row b-a b-grey no-margin">
+											<div class="col-md-3 p-l-10 sm-padding-15 align-items-center d-flex">
+													<div>
+													<h5 class="font-montserrat all-caps small no-margin hint-text bold">Total </h5>
+													<p class="no-margin">4</p>
+													</div>
+											</div>
+											
+											<div class="col-md-4 col-middle sm-padding-15 align-items-center d-flex">
+													<div>
+													<h5 class="font-montserrat all-caps small no-margin hint-text bold">Local Connexion</h5>
+													<p class="no-margin">3</p>
+													</div>
+											</div>
+											
+											<div class="col-md-3 col-middle sm-padding-15 align-items-center d-flex">
+													<div>
+													<h5 class="font-montserrat all-caps small no-margin hint-text bold">Remote Connexion</h5>
+													<p class="no-margin">1</p>
+													</div>
+											</div>
+											
+											<div class="col-md-2 text-right bg-primary padding-10">
+											<h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Last Modification</h5>
+											<h4 class="no-margin text-white">22-01-1989</h4>
+											</div>
+										
+										</div>
+									</div>
+									</div>
+									</div>
+									</div>
 
 						</div>
 						</div>
@@ -231,11 +247,40 @@
 
 
 
-
-
-
 	</div>
-	                                       <div class="modal fade slide-up " id="addNewAppModal" tabindex="-1" role="dialog" aria-labelledby="addNewAppModal" aria-hidden="true">
+                                             <c:if test="${!empty msgTraitment }">
+												   <script type="text/javascript">
+													$(document).ready(function() {
+														$('body').pgNotification({
+															 style: 'circle',
+															 title :"${msgTraitment}",
+															 message: "${theUser}",  
+															 position: 'top-right',  
+															 timeout: 10000,  
+															 type: "${style}"
+															}).show();
+													});
+				                                    </script>								
+												</c:if>
+                                     
+                                               <c:if test="${!empty msg }">
+												<script type="text/javascript">
+												$(function () {
+												$('#addNewAppModal').modal('show');
+												});
+												</script>
+												
+                                               </c:if>
+                                               <c:if test="${!empty editUser }">
+												<script type="text/javascript">
+												$(function () {
+												$('#addNewAppModal').modal('show');
+												});
+												</script>
+                                               </c:if>
+                                     
+                                                 <div class="modal fade slide-up " id="addNewAppModal" 
+                                                  tabindex="-1" role="dialog" aria-labelledby="addNewAppModal" aria-hidden="true">
 													
 													<div class="modal-dialog">
 													<div class="modal-content">
@@ -244,78 +289,142 @@
 													</button>
 													<h4 class="p-b-5"><span class="semi-bold">New</span> Utilisateur</h4>
 													</div>
+												 
+												        
+													 
+													<form:form id="addUserForm"   modelAttribute="user" method="POST" >
+													
+													
+													
 													<div class="modal-body">
 													<p class="small-text">Create a new user </p>
 													
+													 
 													
-													<form:form id="addUserForm" action="addUser" modelAttribute="user" method="POST" >
+													
+													<div class="row ">
+													<div class="col-sm-6 ">
+													<div class="form-group form-group-default">
+													 
+													<label>First Name</label>
+													<form:input path="firstName"  id="userName" type="text" cssClass="form-control" placeholder="First Name of your new user"/>
+												    
+													</div>
+													<form:errors path="firstName" cssClass="alert alert-danger"/>
+													</div>
+													<div class="col-sm-6">
+													<div class="form-group form-group-default">
+													<form:input type="hidden" path="id" id="id"/>
+													<label>Last Name</label>
+													<form:input path="lastName"  id="lastName" type="text" cssClass="form-control" placeholder="Last Name of your new user"/>
+													
+													</div>
+													<form:errors path="lastName" cssClass="alert alert-danger"/>
+													</div>
+													</div>
+													
+													
 													<div class="row">
 													<div class="col-sm-12">
-													<div class="form-group form-group-default">
-													<label>Name user </label>
-													<form:input path="userName" id="userName" type="text" cssClass="form-control" placeholder="Name of your new user"/>
-													</div>
-													</div>
-													</div>
-													<div class="row">
 													
-													<div class="col-sm-6">
-													<div class="form-group form-group-default">
-													<label>Email</label>
-													<form:input path="email" id="email" type="text" cssClass="form-control" placeholder="Tell us more about it"/>
-													</div>
-													</div>
-													<div class="col-sm-6">
-													<div class="form-group form-group-default">
-													<label>Password</label>
-													<form:input path="password" id="password" type="password" cssClass="form-control" placeholder="your price"/>
+													<c:choose>
+												       <c:when test="${edit}">
+												       <div class="form-group form-group-default">
+													   <label>LoginID</label>
+							                            <form:input type="text" path="ssoId"   id="ssoId" placeholder="Your login ID" cssClass="form-control" disabled="true"/>
+						                               </div>
+													  
+						                               </c:when>
+						                        
+												        <c:otherwise>
+												         <div class="form-group form-group-default">
+													   <label>LoginID</label>
+							                            <form:input type="text" path="ssoId" id="ssoId" placeholder="Your login ID" cssClass="form-control" />
+							                            </div>
+													      <form:errors path="ssoId" cssClass="alert alert-danger"/>
+							                           </c:otherwise>
+										            </c:choose>
+										             
+													
 													</div>
 													</div>
 													
-													</div>
+													
+													
 													<div class="row">
 													
 													
 													<div class="col-sm-12">
 													 <div class="form-group form-group-default">
-													<label>Etat</label>
-													<form:input path="state" id="state" type="text"  class="form-control" placeholder="1 or 2"/>
+													<label>Password </label>
+													<form:input path="password" id="password" type="password" cssClass="form-control" placeholder="your password"/>
+															
 													</div>
+													<form:errors path="password" cssClass="alert alert-danger"/>
 													</div>
 													 
 													
 													
 													</div>
-													<div class="row">
-													
-													<div class="col-sm-12">
-													<div class="form-group form-group-default">
-													<label>Role </label> 
-													<input   type="text"    />
-													</div>
-													</div>
-													
-													</div>
 													
 													<div class="row">
 													
 													<div class="col-sm-12">
 													<div class="form-group form-group-default">
-													<label>Created ON </label> 
-													<form:input path="creationDate" id="creationDate" type="text"  disabled="true" cssClass="form-control"  />
+													<label>Email</label> 
+													<form:input path="email" id="email" type="text" cssClass="form-control" placeholder="Your email"/>
+													
 													</div>
+													<form:errors path="email" cssClass="alert alert-danger"/>
 													</div>
 													
 													</div>
-													</form:form>
+													
+													<div class="row">
+													
+													<div class="col-sm-12">
+													<div class="form-group form-group-default form-group-default-select2">
+															<label class="">Role</label> 
+															
+															<form:select path="userProfiles" cssClass="full-width"
+																		  id="userProfiles" data-placeholder="Role"
+																		  cssStyle="width: 100%;" data-init-plugin="select2"
+																		  items="${roles}" itemValue="id" itemLabel="type"  />
+																			
+																			
+															
+															 
+													</div>
+													<form:errors path="userProfiles" cssClass="alert alert-danger"/>
+													</div>
+													
+													</div>
+													
+													
+													
 													</div>
 													<div class="modal-footer">
 													
-													 
-													<button type="submit" onclick="form_insert_submit()" class="btn btn-primary  btn-cons">Add</button>
-													
-													<button type="button" class="btn btn-cons" data-dismiss="modal">Close</button>
+													 <c:choose>
+						                                
+						                                <c:when test="${edit}">
+						                                
+						                                <button type="submit"   class="btn btn-primary  btn-cons">Update</button>
+						                                or 
+						                                <button type="button"  class="btn btn-cons" data-dismiss="modal">Close</button>
+						                                
+						                                </c:when>
+						                                
+						                                
+						                                <c:otherwise>
+						                              <form:button type="submit" class="btn btn-primary  btn-cons">Add</form:button>
+						                              or 
+						                              <form:button type="button"  class="btn btn-cons" data-dismiss="modal">Close</form:button>
+						                                </c:otherwise> 
+						                               
+						                             </c:choose>  
 													</div>
+													</form:form>
 													</div>
 													
 													 
@@ -323,104 +432,26 @@
 													
 												</div>
 												
-												<c:if test="${!empty msgTraitment }">
-												   <script type="text/javascript">
-													$(document).ready(function() {
-														$('body').pgNotification({
-															 style: 'circle',
-															 message: "${msgTraitment}${theUser.userName}",  
-															 position: 'top-right',  
-															 timeout: 0,  
-															 type: "${style}"
-															}).show();
-													});
-				                                    </script>								
-												</c:if>
-												
-									           <c:if test="${!empty msg }">
-												<script type="text/javascript">
-												$(function () {
-												$('#updateUserModel').modal('show');
-												});
-												</script>
-									  
-												<div class="modal fade slide-up" tabindex="-1" role="dialog" id="updateUserModel" aria-labelledby="updateUserModel" aria-hidden="true">
-													
-													<div class="modal-dialog">
-													<div class="modal-content">
-													<div class="modal-header clearfix ">
-													<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
-													</button>
-													<h4 class="p-b-5"><span class="semi-bold">Update</span> Utilisateur</h4>
-													</div>
-													<div class="modal-body">
-													<p class="small-text">Create a new users </p>
-													
-													
-													<form:form id="saveUserForm" action="saveUser" modelAttribute="userUpdate" method="POST" >
-													<div class="row">
-													<div class="col-sm-12">
-													<div class="form-group form-group-default">
-													<label>Name user </label>
-													<form:input path="userName" id="userName" type="text" cssClass="form-control" placeholder="Name of your new user"/>
-													</div>
-													</div>
-													</div>
-													<div class="row">
-													
-													<div class="col-sm-12">
-													<div class="form-group form-group-default">
-													<label>Email</label>
-													<form:input path="email" id="email" type="text" cssClass="form-control" placeholder="Tell us more about it"/>
-													</div>
-													</div>
-													
-													</div>
-													<div class="row">
-													
-													<div class="col-sm-6">
-													<div class="form-group form-group-default">
-													<label>Password</label>
-													<form:input path="password" id="password" type="password" cssClass="form-control" placeholder="your price"/>
-													</div>
-													</div>
-													
-													<div class="col-sm-6">
-													 <div class="form-group form-group-default">
-													<label>Etat</label>
-													<form:input path="state" id="state" type="text"  class="form-control" placeholder="1 or 2"/>
-													</div>
-													</div>
-													 
-													
-													
-													</div>
-													
-													<div class="row">
-													
-													<div class="col-sm-12">
-													<div class="form-group form-group-default">
-													<label>Created ON </label> 
-													<form:input path="creationDate" id="creationDate" type="text"  disabled="true" cssClass="form-control"  />
-													</div>
-													</div>
-													
-													</div>
-													</form:form>
-													</div>
-													<div class="modal-footer">
-													
-													 
-													<button type="submit" onclick="form_update_submit()" class="btn btn-primary  btn-cons">Add</button>
-													
-													<button type="button" class="btn btn-cons" data-dismiss="modal">Close</button>
-													</div>
-													</div>
-													
-													</div>
-													
+												<div class="modal fade slide-up disable-scroll" id="modalSlideUpSmall" tabindex="-1" role="dialog" aria-hidden="false">
+												<div class="modal-dialog modal-sm">
+												<div class="modal-content-wrapper">
+												<div class="modal-content">
+												<div class="modal-body text-center m-t-20">
+												<h4 class="no-margin p-b-10">Are you sure</h4>
+												<button type="button"  class="btn btn-danger btn-cons" data-dismiss="modal" >Continue</button>
+												<button type="button" class="btn btn-primary btn-cons" data-dismiss="modal">Cancel</button>
 												</div>
-												</c:if>
+												</div>
+												</div>
+												
+												</div>
+												</div>	
+												
+												                                     
+                                     
+                                     
+                       
+	                                   
 
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js"/>"></script>
@@ -483,27 +514,15 @@
 
 <script type="text/javascript">
 
-function form_update_submit() {
-    document.getElementById("saveUserForm").submit();
-}  
-function form_insert_submit() {
-	document.getElementById("addUserForm").submit();
-	
-}
-
-
+ 
 
 $(function () {
 	
-
-	
- 
-
 	
 	$('#show-modal').click(function(){$('#addNewAppModal').modal('show');});
-	
-	 $("#creationDate").val(new Date().toISOString());
-	$("#TyepAtm").select2();
+	$('#delete').click(function(){$('#modalSlideUpSmall').modal('show');});
+	$("#creationDate").val(new Date().toISOString());
+	$("#userProfiles").select2();
 	$("#TyepHost").select2();
 	$("#TyepAtmUpdate").select2();
 	$("#TyepHostUpdate").select2();
@@ -537,6 +556,9 @@ $("#ConnexionHandler").on("change",function()
 		    $("#AdressIp").prop('disabled', true);
 		    $("#readingDisuqeLetter").prop('disabled', true);
 		 }
+	    
+	    
+	    
 	
  });
  
@@ -544,11 +566,7 @@ $("#ConnexionHandler").on("change",function()
  
  
  
-document.getElementById("delete").onclick = function () {
-     
-	document.getElementById('DeleteAtm').click();
-	 
-};
+ 
  
 } );
  

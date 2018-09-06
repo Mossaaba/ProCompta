@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
  <html>
-<!-- Mirrored from pages.revox.io/dashboard/4.0.0/html/corporate/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Aug 2018 17:23:32 GMT -->
+ 
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <title>ProCompta - DN - acces denied</title>
@@ -58,10 +58,16 @@
 <body class="fixed-header error-page">
 <div class="d-flex justify-content-center full-height full-width align-items-center">
 <div class="error-container text-center">
+
+
+
 <h1 class="error-number">Acces Denied ! </h1>
 <h2 class="semi-bold">Sorry but we couldnt find this page</h2>
-<p class="p-b-10">This page you are looking for does not exsist <a href="#">Report this?</a>
+<p class="p-b-10"><span>Dear <strong>${loggedinuser}</strong>, You are not authorized to access this page.</span> <span class="floatRight"><a href="<c:url value="/logout" />">Logout</a></span>
 </p>
+
+
+
 <a href="${pageContext.request.contextPath}/home">Back to Home Page</a>
 </div>
 </div>
@@ -102,5 +108,4 @@
 </script>
 </body>
 
-<!-- Mirrored from pages.revox.io/dashboard/4.0.0/html/corporate/500.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Aug 2018 17:23:32 GMT -->
-</html>
+ 

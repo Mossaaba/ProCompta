@@ -12,13 +12,7 @@ public class HomeController {
 	{
 		return "home";
 	}
-	 
-	
-	@GetMapping("/access-denied")
-	public String showAccessDeniedPage() {
-		return "access-denied";
-	}
-	
+
 	@GetMapping("/dashboard")
 	public String GoDashboard ()
 	{

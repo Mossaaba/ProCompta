@@ -1,12 +1,9 @@
 package com.DieboldNixdorf.ProCompta.config;
 
 import java.beans.PropertyVetoException;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
-
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,20 +12,20 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import com.DieboldNixdorf.ProCompta.dao.IncidentDao;
 import com.DieboldNixdorf.ProCompta.dao.IncidentDaoImpl;
 import com.DieboldNixdorf.ProCompta.dao.TransactionDao;
 import com.DieboldNixdorf.ProCompta.dao.TransactionDaoImpl;
+import com.DieboldNixdorf.ProCompta.tools.RoleToUserProfileConverter;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
@@ -45,6 +42,12 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	@Autowired
 	private Environment env ; 
 	
+	
+	 @Autowired
+	    RoleToUserProfileConverter roleToUserProfileConverter;
+	 
+	 
+	 
 	
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
@@ -66,6 +69,19 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	          .addResourceHandler("/resources/**")
 	          .addResourceLocations("/resources/"); 
 	}	
+	
+	// i18n 
+    @Bean
+	public ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
+		rb.setBasenames(new String[] { "i18n/messages" });
+		return rb;
+	}
+	
+	@Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(roleToUserProfileConverter);
+    }
 	
 	
 	
@@ -122,57 +138,8 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	}
     
     
-  //get Property of hibernate from the file hibernate.cfg.xml
-    private Properties getHibernateProperties() {
-
-		// set hibernate properties
-		Properties props = new Properties();
-
-		props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-		props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-		
-		return props;				
-	}
+ 
     
-    //hibernate session factory 
-    
-    @Bean
-	public LocalSessionFactoryBean sessionFactory(){
-		
-		// create session factorys
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		
-		// set the properties
-		sessionFactory.setDataSource(securityDataSource());
-		sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
-		sessionFactory.setHibernateProperties(getHibernateProperties());
-		
-		return sessionFactory;
-	}
-    
-  //Transaction Manager of hibernate session factory 
-    
-    @Bean
-	@Autowired
-	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-		
-		// setup transaction manager based on session factory
-		HibernateTransactionManager txManager = new HibernateTransactionManager();
-		txManager.setSessionFactory(sessionFactory);
-		return txManager;
-	}	
-	
-  //allow static resources 
-    
-   
-    
-    //Internazionaliation i18n 
-    @Bean
-	public ResourceBundleMessageSource messageSource() {
-		ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
-		rb.setBasenames(new String[] { "i18n/messages" });
-		return rb;
-	}
 	
     
     //JDBC TEMPLATE
@@ -185,8 +152,7 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	{
 		return new JdbcTemplate(dataSource);
 	}
-    
-	
+ 
 	@Bean
     public TransactionDao getTransactionDao() {
 		return new TransactionDaoImpl(dataSource);
@@ -197,6 +163,12 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
     public IncidentDao getIncidentDao() {
 		return new IncidentDaoImpl(dataSource);
         
+    }
+	
+	
+	@Override
+    public void configurePathMatch(PathMatchConfigurer matcher) {
+        matcher.setUseRegisteredSuffixPatternMatch(true);
     }
     
 }
