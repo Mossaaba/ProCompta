@@ -6,10 +6,20 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
- 
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+
+ 
+
+
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/plugins/pace/pace-theme-flash.css"/>" />
 <link rel="stylesheet" type="text/css"
@@ -83,7 +93,7 @@
 						<ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm" role="tablist" data-init-reponsive-tabs="dropdownfx">
 						<li class="nav-item" >
 						<a id="listeAtm" class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold" data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
-						 <span> space</span><span> </span><span> </span><i class="fa fa-user-circle fa-4x"></i> <span>Users</span></a>
+						 <span>Space</span><span> </span><span> </span><i class="fa fa-user-circle fa-4x"></i> <span>Users</span></a>
 						</li>
 						</ul>
 						
@@ -94,7 +104,6 @@
 													
 										<div class="col-md-3 b-r b-dashed b-grey sm-b-b">
 														<div class="sm-m-t-15 m-t-50">
-														<i class="fa fa-user-circle fa-3x" ></i> 
 														<h2>List of users</h2>
 														<p>You can add, modify , or delete users here  </p>
 														</div>	
@@ -109,6 +118,7 @@
 													</button>
 													</div>
 												</div>
+												
                                                 <br>
 				
 				                     <div class="padding-30 sm-padding-5">
@@ -117,10 +127,10 @@
 										 <thead>
 										 <tr>
 										 
-										 <th class="v-align-middle">Firstname</th>
-										 <th class="v-align-middle">Lastname</th>
-										 <th class="v-align-middle">Email</th>
-										 <th class="v-align-middle">SSO ID</th>
+										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-address-card-o" aria-hidden="true"></i> Firstname</th>
+										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Lastname</th>
+										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</th>
+										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-id-badge" aria-hidden="true"></i> SSO ID</th>
 										 
 				                         <security:authorize access="hasRole('ADMIN')">
 				                         <th class="v-align-middle"> </th>
@@ -130,62 +140,45 @@
 										 <tbody>
 										 
 										 <c:forEach items="${users}" var="user">
-										 
-										 
-										 <c:url var ="updateLink" value="/user/edit-user-${user.ssoId}">
-											    
-										 </c:url>
-										 
-										 
-										 <c:url var ="deleteLink" value="/user/delete-user-${user.ssoId}">
-											  
-										 </c:url>
+
+										 <c:url var ="updateLink" value="/user/edit-user-${user.ssoId}"></c:url>
+										 <c:url var ="deleteLink" value="/user/delete-user-${user.ssoId}"></c:url>
 										 
 										 
 										  <tr>
-										 <td class="text-primary font-montserrat v-align-middle">${user.firstName}</td>
-										 <td class="text-primary font-montserrat v-align-middle password">${user.lastName}</td>
-										 <td class="text-primary font-montserrat v-align-middle">${user.email}</td>
-										 <td class="text-primary font-montserrat v-align-middle">${user.ssoId}</td>
-										 
+											 <td class="text-primary font-montserrat v-align-middle">${user.firstName}</td>
+											 <td class="text-primary font-montserrat v-align-middle password">${user.lastName}</td>
+											 <td class="text-primary font-montserrat v-align-middle">${user.email}</td>
+											 <td class="text-primary font-montserrat v-align-middle">${user.ssoId}</td>
+										      
 										 
 										  <security:authorize access="hasRole('ADMIN')">
-										 
-										 <td class="text-primary font-montserrat v-align-middle">
-							              <div class="btn-group">
-							                 <button onclick="window.location.href='${updateLink}'" type="button" id="Update"  class="btn btn-sm btn-rounded btn-success"><i class="fa fa-pencil"></i>
-											 </button>
-											
-											<button onclick="window.location.href='${deleteLink}'" type="button" id="delete" class="btn btn-sm  btn-rounded btn-danger" ><i class="fa fa-trash-o"></i>
-											</button>	
-											
-											    
-											
-											
-											
-									    </div>
-									    </td>
-									    
-				                       </security:authorize>
-				                      
-										 
+												 <td class="text-primary font-montserrat v-align-middle">
+									              <div class="btn-group">
+									                 <button onclick="window.location.href='${updateLink}'" type="button" id="Update"  class="btn btn-sm btn-rounded btn-success"><i class="fa fa-pencil"></i>
+													 </button>
+													
+													<a class="btn btn-sm  btn-rounded btn-danger delete"   data-title="are you sure to delete the user ?" href="${deleteLink}"><i class="fa fa-trash-o"></i></a>	
+											     </div>
+											    </td>
+				                         </security:authorize>
 										 </tr>
+										 
 										 </c:forEach>
 										 
 										 
 										 </tbody>
-										 <tfoot>
-										 <tr>
-										 <td></td>
-										 <td></td>
-										 <td></td>
-										 <td></td>
-										 <td></td>
-										 
-										 </tr>
-										 </tfoot>
-										     </table>
-				 
+												 <tfoot>
+												 <tr>
+												 <td></td>
+												 <td></td>
+												 <td></td>
+												 <td></td>
+												 <td></td>
+											 
+												 </tr>
+												 </tfoot>
+								    </table>
 				                         <br>
 				                         
 				                         
@@ -219,8 +212,8 @@
 										
 										</div>
 									</div>
-									</div>
-									</div>
+							   </div>
+						   </div>
 									</div>
 
 						</div>
@@ -238,19 +231,12 @@
 
 				<jsp:include page="../view/fragments/footer.jsp"></jsp:include>
 			</div>
-
-
-
-
-
 		</div>
-
-
-
 	</div>
                                              <c:if test="${!empty msgTraitment }">
-												   <script type="text/javascript">
-													$(document).ready(function() {
+												    <script type="text/javascript">
+													$(document).ready(function() 
+													{
 														$('body').pgNotification({
 															 style: 'circle',
 															 title :"${msgTraitment}",
@@ -279,7 +265,7 @@
 												</script>
                                                </c:if>
                                      
-                                                 <div class="modal fade slide-up " id="addNewAppModal" 
+                                                 <div class="modal fade  fill-in" id="addNewAppModal" 
                                                   tabindex="-1" role="dialog" aria-labelledby="addNewAppModal" aria-hidden="true">
 													
 													<div class="modal-dialog">
@@ -287,7 +273,7 @@
 													<div class="modal-header clearfix ">
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
 													</button>
-													<h4 class="p-b-5"><span class="semi-bold">New</span> Utilisateur</h4>
+													<h4 class="p-b-5"><span class="semi-bold"> <i class="fa fa-user-plus"></i> ADD New</span> User</h4>
 													</div>
 												 
 												        
@@ -303,24 +289,28 @@
 													
 													
 													<div class="row ">
-													<div class="col-sm-6 ">
-													<div class="form-group form-group-default">
-													 
-													<label>First Name</label>
-													<form:input path="firstName"  id="userName" type="text" cssClass="form-control" placeholder="First Name of your new user"/>
-												    
-													</div>
-													<form:errors path="firstName" cssClass="alert alert-danger"/>
-													</div>
-													<div class="col-sm-6">
-													<div class="form-group form-group-default">
-													<form:input type="hidden" path="id" id="id"/>
-													<label>Last Name</label>
-													<form:input path="lastName"  id="lastName" type="text" cssClass="form-control" placeholder="Last Name of your new user"/>
 													
-													</div>
-													<form:errors path="lastName" cssClass="alert alert-danger"/>
-													</div>
+															<div class="col-sm-6 ">
+															<div class="form-group form-group-default required">
+															 <i class="fa fa-address-card-o" aria-hidden="true"></i>
+															<label>First Name</label>
+															<form:input path="firstName"   id="userName" type="text" cssClass="form-control" autocomplete="off" placeholder="First Name of your the user"/>
+															</div>
+															<form:errors path="firstName" cssClass="alert alert-danger"/>
+															</div>
+															
+															
+															<div class="col-sm-6">
+															<div class="form-group form-group-default required">
+															<form:input type="hidden" path="id" id="id"/>
+															<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+															<label>Last Name</label>
+															<form:input path="lastName"  id="lastName" type="text" cssClass="form-control" autocomplete="off" placeholder="Last Name of your the user"/>
+															</div>
+															<form:errors path="lastName" cssClass="alert alert-danger"/>
+															</div>
+															
+															
 													</div>
 													
 													
@@ -329,17 +319,19 @@
 													
 													<c:choose>
 												       <c:when test="${edit}">
-												       <div class="form-group form-group-default">
-													   <label>LoginID</label>
-							                            <form:input type="text" path="ssoId"   id="ssoId" placeholder="Your login ID" cssClass="form-control" disabled="true"/>
+												       <div class="form-group form-group-default required">
+												       <i class="fa fa-sign-in" aria-hidden="true"></i>
+													   <label>LoginID </label>
+							                            <form:input type="text" path="ssoId"  id="ssoId" autocomplete="off" placeholder="Your login ID , 'Connexion ID'" cssClass="form-control" disabled="true"/>
 						                               </div>
 													  
 						                               </c:when>
 						                        
 												        <c:otherwise>
-												         <div class="form-group form-group-default">
+												         <div class="form-group form-group-default ">
+												         <i class="fa fa-sign-in" aria-hidden="true"></i>
 													   <label>LoginID</label>
-							                            <form:input type="text" path="ssoId" id="ssoId" placeholder="Your login ID" cssClass="form-control" />
+							                            <form:input type="text" path="ssoId" id="ssoId" autocomplete="off" placeholder="Your login ID" cssClass="form-control" />
 							                            </div>
 													      <form:errors path="ssoId" cssClass="alert alert-danger"/>
 							                           </c:otherwise>
@@ -355,9 +347,10 @@
 													
 													
 													<div class="col-sm-12">
-													 <div class="form-group form-group-default">
+													 <div class="form-group form-group-default required">
+													 <i class="fa fa-key" aria-hidden="true"></i>
 													<label>Password </label>
-													<form:input path="password" id="password" type="password" cssClass="form-control" placeholder="your password"/>
+													<form:input path="password" id="password" type="password"   cssClass="form-control" placeholder="your password"/>
 															
 													</div>
 													<form:errors path="password" cssClass="alert alert-danger"/>
@@ -370,9 +363,10 @@
 													<div class="row">
 													
 													<div class="col-sm-12">
-													<div class="form-group form-group-default">
+													<div class="form-group form-group-default required">
+													<i class="fa fa-envelope-o" aria-hidden="true"></i>
 													<label>Email</label> 
-													<form:input path="email" id="email" type="text" cssClass="form-control" placeholder="Your email"/>
+													<form:input path="email" id="email" type="text" cssClass="form-control" autocomplete="off" placeholder="Your email"/>
 													
 													</div>
 													<form:errors path="email" cssClass="alert alert-danger"/>
@@ -383,11 +377,12 @@
 													<div class="row">
 													
 													<div class="col-sm-12">
-													<div class="form-group form-group-default form-group-default-select2">
-															<label class="">Role</label> 
+													<div class="form-group form-group-default required">
+													<i class="fa fa-link" aria-hidden="true"></i>
+													<label >Role</label> 
 															
-															<form:select path="userProfiles" cssClass="full-width"
-																		  id="userProfiles" data-placeholder="Role"
+															<form:select path="userProfiles" cssClass="form-control full-width"
+																		  id="userProfiles"  
 																		  cssStyle="width: 100%;" data-init-plugin="select2"
 																		  items="${roles}" itemValue="id" itemLabel="type"  />
 																			
@@ -411,15 +406,15 @@
 						                                
 						                                <button type="submit"   class="btn btn-primary  btn-cons">Update</button>
 						                                or 
-						                                <button type="button"  class="btn btn-cons" data-dismiss="modal">Close</button>
+						                                <button type="button" onclick="window.location.href='<spring:url value="/user/list"/>'" class="btn btn-cons" data-dismiss="modal">Close</button>
 						                                
 						                                </c:when>
 						                                
 						                                
 						                                <c:otherwise>
-						                              <form:button type="submit" class="btn btn-primary  btn-cons">Add</form:button>
+						                              <form:button type="submit" class="btn btn-primary  btn-cons"><i class="fa fa-user-plus"></i> Add the User</form:button>
 						                              or 
-						                              <form:button type="button"  class="btn btn-cons" data-dismiss="modal">Close</form:button>
+						                              <form:button type="button"    class="btn btn-cons btn-danger" data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i> Close</form:button>
 						                                </c:otherwise> 
 						                               
 						                             </c:choose>  
@@ -437,7 +432,7 @@
 												<div class="modal-content-wrapper">
 												<div class="modal-content">
 												<div class="modal-body text-center m-t-20">
-												<h4 class="no-margin p-b-10">Are you sure</h4>
+												<h4 class="no-margin p-b-10">Are you sure to delet the user </h4>
 												<button type="button"  class="btn btn-danger btn-cons" data-dismiss="modal" >Continue</button>
 												<button type="button" class="btn btn-primary btn-cons" data-dismiss="modal">Cancel</button>
 												</div>
@@ -510,7 +505,7 @@
 		
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
 	<script src="<spring:url value="/resources/assets/js/form_wizard.js"/>"></script>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
 <script type="text/javascript">
 
@@ -519,8 +514,50 @@
 $(function () {
 	
 	
+	$(document).ready(function() {
+	    $('#addUserForm').validate();
+	});
+	
+	
+	
+	
+	$('a.delete').confirm({
+	    content: "",
+	    type: 'red',
+	    typeAnimated: true,
+	         buttons: {
+	        	 
+	             Delete: {
+	                       text: 'Delete user',
+	                       btnClass: 'btn-red',
+	                       action : function()
+	                       {
+             	            location.href = this.$target.attr('href');
+                           }
+	                     },
+	             
+	        close: function () {
+	        }
+	    }
+	});
+	
+	
+	
+	
+	$('a.delete').confirm({
+	    buttons: {
+	        hey: function(){
+	            location.href = this.$target.attr('href');
+	        }
+	    }
+	});
+	
 	$('#show-modal').click(function(){$('#addNewAppModal').modal('show');});
-	$('#delete').click(function(){$('#modalSlideUpSmall').modal('show');});
+	$('#delete').click(function()
+			{
+		    $('#modalSlideUpSmall').modal('show');
+});
+	
 	$("#creationDate").val(new Date().toISOString());
 	$("#userProfiles").select2();
 	$("#TyepHost").select2();
@@ -533,8 +570,11 @@ $(function () {
 var elems = Array.prototype.slice.call(document.querySelectorAll('#ConnexionHandler'));
 
 elems.forEach(function(html) {
-  var switchery = new Switchery(html);
+    var switchery = new Switchery(html);
 });
+ 
+ 
+ 
  
  
 $("#ConnexionHandler").on("change",function()
@@ -542,6 +582,7 @@ $("#ConnexionHandler").on("change",function()
 		{
 	
 	     var isDisabled = $('#typeConnexion').prop('disabled');
+	     
 	    if (isDisabled == true)
 		{	 
 		    $("#typeConnexion").removeAttr("disabled");
@@ -555,18 +596,9 @@ $("#ConnexionHandler").on("change",function()
 	    	$("#typeConnexion").prop('disabled', true);
 		    $("#AdressIp").prop('disabled', true);
 		    $("#readingDisuqeLetter").prop('disabled', true);
-		 }
-	    
-	    
-	    
+		}
 	
  });
- 
- 
- 
- 
- 
- 
  
 } );
  

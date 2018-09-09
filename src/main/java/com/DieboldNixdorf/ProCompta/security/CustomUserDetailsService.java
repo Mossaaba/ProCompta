@@ -49,4 +49,14 @@ public class CustomUserDetailsService implements UserDetailsService{
 		return authorities;
 	}
 	
+	public List<GrantedAuthority> getGrantedAuthoritiesRole(User user){
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		
+		for(UserProfile userProfile : user.getUserProfiles()){
+			 
+			authorities.add(new SimpleGrantedAuthority("ROLE_"+userProfile.getType()));
+		}
+		 
+		return authorities;
+	}
 }

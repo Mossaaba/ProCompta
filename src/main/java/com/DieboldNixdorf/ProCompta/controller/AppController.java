@@ -9,9 +9,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
- 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  
 import com.DieboldNixdorf.ProCompta.model.User;
 import com.DieboldNixdorf.ProCompta.model.UserProfile;
+import com.DieboldNixdorf.ProCompta.security.CustomUserDetailsService;
 import com.DieboldNixdorf.ProCompta.service.UserProfileService;
 import com.DieboldNixdorf.ProCompta.service.UserService;
  
@@ -52,8 +54,15 @@ public class AppController {
 	UserProfileService userProfileService;
 	
 	@Autowired
+	UserDetailsService userDetailsService;
+	
+	
+ 
+	
+	@Autowired
 	MessageSource messageSource;
 
+	
 	@Autowired
 	PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 	
@@ -76,12 +85,15 @@ public class AppController {
 
 		List<User> users = userService.findAllUsers();
 		model.addAttribute("users", users);
+		
 		User user = new User();
 		model.addAttribute("user", user);
+		 
+      
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
-		
+ 
 		return "Users";
 	}
 
@@ -98,7 +110,7 @@ public class AppController {
 		if (result.hasErrors()) {
 			
 			model.addAttribute("msgTraitment" ,"Errore adding " );
-			model.addAttribute("theUser" ,user );
+			model.addAttribute("theUser" ,user.getSsoId() );
 			model.addAttribute("style" ,"danger" );
 			model.addAttribute("msg" ,"Error validation" );
 			
@@ -124,7 +136,7 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		System.out.println("+++++++++++++++++++ Saved");
 		    redirectAttrs.addFlashAttribute("msgTraitment" ,"Add USER : " );
-			redirectAttrs.addFlashAttribute("theUser" ,user );
+			redirectAttrs.addFlashAttribute("theUser" ,user.getSsoId() );
 			redirectAttrs.addFlashAttribute("style" ,"success" );
 		//return "success";
 		 return "redirect:/user/list";
@@ -140,7 +152,8 @@ public class AppController {
 	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.GET)
 	public String editUser(@PathVariable String ssoId, ModelMap model) {
 		
-		
+		List<User> users = userService.findAllUsers();
+		model.addAttribute("users", users);
 		
 		User user = userService.findBySSO(ssoId);
 		model.addAttribute("user", user);
@@ -148,9 +161,6 @@ public class AppController {
 		model.addAttribute("edit", true);
 		model.addAttribute("editUser", "editUser");
 		model.addAttribute("loggedinuser", getPrincipal());
-		
-		
-		
 		
 		return "Users";
 	}
@@ -215,7 +225,7 @@ public class AppController {
 		return userProfileService.findAll();
 	}
 	
-	
+ 
 
 	
 	/**
