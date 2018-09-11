@@ -49,7 +49,7 @@
 			<a href="<spring:url value="/dashboard"/>"  >
 			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Dashboard"></spring:message></span>
 			</a>
-			<span class="bg-success icon-thumbnail"><i class="pg-home" style="font-size :27px;"></i></span>
+			<span class="bg-success icon-thumbnail"><i class="fa fa-tachometer" style="font-size :27px;"></i></span>
 			</li>
 			<li class="">
 			<a href="<spring:url value="/incident"/>"  >
@@ -94,8 +94,8 @@
 			<ul class="sub-menu">
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="secondary_layout.html"><spring:message code="label.HostFile"></spring:message> </a>
-			<span class="icon-thumbnail" style="font-size :27px;">FH</span>
-			</li>
+			<span class="icon-thumbnail" ><i class=" fa fa-file-text-o" style="font-size :27px;"></i></span>
+			</li>        
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="secondary_layout.html"><spring:message code="label.Tally"></spring:message></a>
 			<span class="icon-thumbnail" style="font-size :27px;">PT</span>
@@ -134,20 +134,40 @@
 			
 			<li>
 			<a href="javascript:;"><span class="title font-montserrat  text-uppercase"><spring:message code="label.Administration"></spring:message></span></a>
-			<span class="icon-thumbnail"><i class="pg-bag" style="font-size :25px;"></i></span>
+			<span class="icon-thumbnail"> <i class="fa fa-wrench" aria-hidden="true" style="font-size :25px;"></i></span>
 			<ul class="sub-menu">
 			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="Atm/list"/>">Create ATM</a>
-			<span class="icon-thumbnail">ATM</span>
+			<a href="<spring:url value="/bank/list"/>" >Banque</a>
+			<span class="icon-thumbnail"><i class="fa fa-building" style="font-size :25px; "></i></span>
+			</li> 
+			
+			<li class="title font-montserrat no-margin text-uppercase">
+			<a href="<spring:url value="/branch/list"/>" >Agence</a>
+			<span class="icon-thumbnail"><i class="fa fa-thumb-tack" style="font-size :25px;"></i></span>
 			</li>
 			
+			<li class="title font-montserrat no-margin text-uppercase">
+			<a href="<spring:url value="/host/list"/>">Host</a>  
+			<span class="icon-thumbnail"><i class="fa fa-server" style="font-size :25px;"></i></span>
+			</li>
+			
+			<li class="title font-montserrat no-margin text-uppercase">
+			<a href="<spring:url value="Atm/list"/>">ATM</a>  
+			<span class="icon-thumbnail"><i class="fa fa-microchip" style="font-size :25px;"></i></span>
+			</li>
 			
 			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="/user/list"/>" >Users</a>
-			<span class="icon-thumbnail">Usr</span>
+			<a href="<spring:url value="/user/list"/>" >Users</a> 
+			<span class="icon-thumbnail"><i class="fa fa-group" style="font-size :25px;"></i></span>
 			</li>
+			
+			<li class="title font-montserrat no-margin text-uppercase">
+			<a href="<spring:url value="Atm/list"/>">Initialisation</a>
+			<span class="icon-thumbnail"><i class="fa fa-cog" style="font-size :25px;"></i></span>
+			</li>
+			
 			 
 			</ul>
 			</li>

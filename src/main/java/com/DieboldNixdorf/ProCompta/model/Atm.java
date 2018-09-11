@@ -46,6 +46,11 @@ public class Atm {
 	@Column(name="repertoire")
 	private String repositoryFile;
 
+	
+	
+	
+	
+	
 	public Atm() {
 		 
 	}

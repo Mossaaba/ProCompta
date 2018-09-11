@@ -10,13 +10,14 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.DieboldNixdorf.ProCompta.model.Transaction;
 import com.DieboldNixdorf.ProCompta.tools.ToolsToUse;
 
  
  
-
+@Repository("transactionDao")
 public class TransactionDaoImpl implements TransactionDao {
 
 	

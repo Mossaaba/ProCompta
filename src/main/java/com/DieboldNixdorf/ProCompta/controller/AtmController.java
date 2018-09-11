@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.DieboldNixdorf.ProCompta.dao.AtmDao;
 import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.service.AtmService;
 
@@ -20,6 +22,10 @@ public class AtmController {
 	@Autowired 
 	private AtmService atmService;
 	
+	@Autowired 
+	private AtmDao atmDao;
+	
+	
 	@RequestMapping("/list")
 	public String listAtm(Model theModel)
 	{
@@ -29,6 +35,8 @@ public class AtmController {
 		Atm atm = new Atm();
 		theModel.addAttribute("atm", atm);
 		theModel.addAttribute("listAtms",listAtms);
+		atmDao.saveAgence();
+		
 		
 		return "AtmCreation";
 	}

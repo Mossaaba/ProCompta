@@ -266,7 +266,7 @@
                                                </c:if>
                                      
                                                  <div class="modal fade  fill-in" id="addNewAppModal" 
-                                                  tabindex="-1" role="dialog" aria-labelledby="addNewAppModal" aria-hidden="true">
+                                                  tabindex="-1" role="dialog" aria-labelledby="addNewAppModal" aria-hidden="true" data-backdrop="static">
 													
 													<div class="modal-dialog">
 													<div class="modal-content">

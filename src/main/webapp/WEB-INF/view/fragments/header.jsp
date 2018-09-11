@@ -161,13 +161,13 @@
 		            </div>
 
 					 
-
+ 
 				</div>
 			</li>
 			<li class="p-r-10 inline"><a href="#"
 				class="header-icon pg pg-link"></a></li>
-			<li class="p-r-10 inline"><a href="#"
-				class="header-icon pg pg-thumbs"></a></li>
+			<li class="p-r-10 inline"><a onclick="go_full_screen()"
+				class="header-icon fa fa-arrows-alt"></a></li>
 		</ul>
 
 
@@ -337,3 +337,17 @@ src="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/Bo
 <script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
 <script src="<spring:url value="/resources/assets/js/datatables.js"/>"></script>
 
+<script>
+function go_full_screen(){
+    var elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    }
+}
+</script>
