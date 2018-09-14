@@ -51,8 +51,8 @@ public class BranchDaoImpl implements BranchDao {
 		
 		int theId = 1 ; 
 		Session currentSession = sessionFactory.getCurrentSession();
-		Bank bankTemp = currentSession.get(Bank.class, theId);
 		
+		Bank bankTemp = currentSession.get(Bank.class, theId);
 		bankTemp.add(branch);
 		
 		currentSession.saveOrUpdate(branch);	

@@ -52,7 +52,7 @@
 			<span class="bg-success icon-thumbnail"><i class="fa fa-tachometer" style="font-size :27px;"></i></span>
 			</li>
 			<li class="">
-			<a href="<spring:url value="/incident"/>"  >
+			<a href="<spring:url value="/uploading"/>"  >
 			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.UplodingFile"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-cloud-upload" style="font-size :27px;" ></i></span>
@@ -153,7 +153,7 @@
 			</li>
 			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="Atm/list"/>">ATM</a>  
+			<a href="<spring:url value="/Atm/list"/>">ATM</a>  
 			<span class="icon-thumbnail"><i class="fa fa-microchip" style="font-size :25px;"></i></span>
 			</li>
 			
@@ -164,7 +164,7 @@
 			</li>
 			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="Atm/list"/>">Initialisation</a>
+			<a href="#">Initialisation</a>
 			<span class="icon-thumbnail"><i class="fa fa-cog" style="font-size :25px;"></i></span>
 			</li>
 			

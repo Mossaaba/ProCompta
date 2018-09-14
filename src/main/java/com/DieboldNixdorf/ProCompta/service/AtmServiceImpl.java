@@ -11,7 +11,9 @@ import com.DieboldNixdorf.ProCompta.dao.AtmDao;
 import com.DieboldNixdorf.ProCompta.model.Atm;
 
 
-@Service
+ 
+@Service("atmService")
+@Transactional
 public class AtmServiceImpl implements AtmService {
 
 	
@@ -26,6 +28,35 @@ public class AtmServiceImpl implements AtmService {
 	public List<Atm> listAtms() {
 		 
 		return atmDao.listAtms() ;
+	}
+
+
+
+	@Override
+	public Atm findById(int idAtm) {
+		 return atmDao.findById(idAtm);
+	}
+
+
+
+	@Override
+	public void save(Atm atm) {
+			atmDao.save(atm);
+	}
+
+
+
+	@Override
+	public void deleteById(int idAtm) {
+		atmDao.deleteById(idAtm);
+	}
+
+
+
+	@Override
+	public void saveAtm(Atm atm, int idHost, int idBranch) {
+		 atmDao.saveAtm(atm, idHost, idBranch);
+		
 	}
 	
 	

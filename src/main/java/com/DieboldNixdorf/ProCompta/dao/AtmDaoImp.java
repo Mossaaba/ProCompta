@@ -7,14 +7,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+ 
 
 import com.DieboldNixdorf.ProCompta.model.Atm;
-import com.DieboldNixdorf.ProCompta.model.Bank;
 import com.DieboldNixdorf.ProCompta.model.Branch;
+import com.DieboldNixdorf.ProCompta.model.Host;
+ 
 
 @Repository("atmDao")
-@Transactional
 public class AtmDaoImp implements AtmDao {
 
 	@Autowired
@@ -34,40 +34,59 @@ public class AtmDaoImp implements AtmDao {
 
 
 	@Override
-	public void save() {
+	public Atm findById(int idAtm) {
 		
-		@SuppressWarnings("unused")
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-		 
-			System.out.println("Done Saving");
-	 
-			 
- 
-		
+		 @SuppressWarnings("rawtypes")
+		  Query theQuery = currentSession.createQuery("from Atm where idatm=:theAtmId" , Atm.class);
+		 theQuery.setParameter("theAtmId", idAtm);
+		 Atm atm =  (Atm) theQuery.getSingleResult();
+		 return atm;
 	}
 
 
 
 	@Override
-	public void saveAgence() {
+	public void save(Atm atm) {
+		
+		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
+		currentSession.save(atm);
 		
-		int theId = 1 ; 
-		Bank bankTemp = currentSession.get(Bank.class, theId);
-		Branch tempBranch = new Branch("Agence centrale", "City el bahia", "074444444", 2, "364396");
-		Branch tempBranch2 = new Branch("Agence centrale2", "City el bahia2", "0744444442", 22, "3624396");
-		
-		
-		bankTemp.add(tempBranch);
-		bankTemp.add(tempBranch2);
-		
-		
-		currentSession.save(tempBranch);
-		currentSession.save(tempBranch2);
-		
-	
 	}
 
+	
+	
+	@Override
+	public void saveAtm(Atm atm , int idHost , int idBranch) {
+		
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Branch branchTemp = currentSession.get(Branch.class, idBranch);
+		Host hostTemp = currentSession.get(Host.class, idHost);
+		branchTemp.addAtm(atm);
+		hostTemp.addAtm(atm);
+
+		
+		currentSession.save(atm);
+		
+	}
+
+
+	@Override
+	public void deleteById(int idAtm) {
+	
+		Session currentSession = sessionFactory.getCurrentSession();
+		@SuppressWarnings("rawtypes")
+		Query  theQuery = currentSession.createQuery("delete from Atm where idatm=:theAtmId");
+		theQuery.setParameter("theAtmId", idAtm);
+		theQuery.executeUpdate();
+		
+	}
+
+
+
+	 
 }

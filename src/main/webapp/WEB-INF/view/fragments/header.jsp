@@ -66,9 +66,7 @@
 <link rel="stylesheet"
 	href="<spring:url value="/resources/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css"/>"
 	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/dropzone/css/dropzone.css"/>"
-	type="text/css" />
+ 
 <link rel="stylesheet"
 	href="<spring:url value="/resources/assets/plugins/summernote/css/summernote.css"/>"
 	type="text/css" />
@@ -267,8 +265,7 @@
 	src="<spring:url value="/resources/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"/>"></script>		
 <script
 	src="<spring:url value="/resources/assets/plugins/jquery-autonumeric/autoNumeric.js"/>"></script>		
-<script
-		src="<spring:url value="/resources/assets/plugins/dropzone/dropzone.min.js"/>"></script>		
+ 
 <script
 		src="<spring:url value="/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"/>"></script>			
 <script

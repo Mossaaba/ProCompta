@@ -26,6 +26,12 @@
 		<!-- Spring MVC support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
@@ -50,6 +56,14 @@
 			<version>${hibernate.version}</version>
 		</dependency>
         
+        <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency> 
+		
+		
+		
        <!-- Postgress Server SQL  -->
          <dependency>
 		    <groupId>org.postgresql</groupId>
@@ -113,6 +127,29 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- Apache Commons FileUpload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<!-- Common IO -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<!-- Jackson JSON Processor -->
+		  <dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
+	      </dependency>
+		 
+		
+		<!-- Java tests Unit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -125,12 +162,6 @@
 			<artifactId>standard</artifactId>
 			<version>${tld.version}</version>
 		</dependency>
-		
-		
-		
-		
-		
-        
         
 		<!-- to compensate for java 9 not including jaxb -->
 		<dependency>
@@ -151,7 +182,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.0</version>
-				</plugin> 
+				</plugin>
+				
+				 
+				 
+               
+               
 				<plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>

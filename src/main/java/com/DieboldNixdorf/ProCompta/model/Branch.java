@@ -1,5 +1,8 @@
 package com.DieboldNixdorf.ProCompta.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,11 +39,26 @@ public class Branch {
 	private int nbrStation ;
 	
 	
-	@ManyToOne (cascade= {CascadeType.PERSIST , CascadeType.DETACH , CascadeType .MERGE , CascadeType.REFRESH})
+	@ManyToOne (cascade= {CascadeType.PERSIST , CascadeType.DETACH ,
+			              CascadeType .MERGE , CascadeType.REFRESH})
 	@JoinColumn  (name="idbankref") 
 	private Bank bank;
 	
+	@OneToMany(mappedBy="branch" , 
+			   cascade= {CascadeType.PERSIST , CascadeType.DETACH ,
+					     CascadeType .MERGE , CascadeType.REFRESH})
+	private List<Atm> atms; 
 	
+	public List<Atm> getAtms() {
+		return atms;
+	}
+
+
+	public void setAtms(List<Atm> atms) {
+		this.atms = atms;
+	}
+
+
 	public Bank getBank() {
 		return bank;
 	}
@@ -57,15 +76,21 @@ public class Branch {
 	}
 	
 	
-	public Branch(String nomBranch, String adressBranch, String phoneBranch, int nbrStation , String codeBranche) {
  
-		this.nomBranch = nomBranch;
-		this.adressBranch = adressBranch;
-		this.phoneBranch = phoneBranch;
-		this.nbrStation = nbrStation;
-		this.codeBranche = codeBranche;
-	}
 	
+	public Branch(int idBranch, String codeBranche, String nomBranch, String phoneBranch, String adressBranch,
+			int nbrStation, Bank bank, List<Atm> atms) {
+	 
+		this.idBranch = idBranch;
+		this.codeBranche = codeBranche;
+		this.nomBranch = nomBranch;
+		this.phoneBranch = phoneBranch;
+		this.adressBranch = adressBranch;
+		this.nbrStation = nbrStation;
+		 
+	}
+
+
 	public int getIdBranch() {
 		return idBranch;
 	}
@@ -96,19 +121,20 @@ public class Branch {
 	public void setNbrStation(int nbrStation) {
 		this.nbrStation = nbrStation;
 	}
-
-
 	public String getCodeBranche() {
 		return codeBranche;
 	}
-
-
 	public void setCodeBranche(String codeBranche) {
 		this.codeBranche = codeBranche;
 	} 
 	
-	
-	
-	
-
+	public void addAtm(Atm atm) 
+	{
+		
+		if (atms == null) {
+			atms = new ArrayList<>();
+		}
+		
+		atms.add(atm);
+	}	
 }

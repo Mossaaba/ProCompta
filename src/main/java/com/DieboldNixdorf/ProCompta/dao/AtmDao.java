@@ -4,13 +4,20 @@ import java.util.List;
 
 import com.DieboldNixdorf.ProCompta.model.Atm;
  
+ 
 
 public interface AtmDao {
 
 	
 	public List<Atm> listAtms();
-	void save();
-	void saveAgence();
+	 
+	Atm findById(int idAtm);
 	
+	void save(Atm atm);
 	
+	void saveAtm (Atm atm , int idHost , int idBranch);
+	
+	void deleteById(int idAtm);
+	
+
 }

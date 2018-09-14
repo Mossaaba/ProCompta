@@ -142,7 +142,6 @@ public class Bank {
 		 if (branche == null) 
 		 {
 			 branche = new ArrayList<>();
- 
 		 }
 		 
 		branche.add(tempBranch);

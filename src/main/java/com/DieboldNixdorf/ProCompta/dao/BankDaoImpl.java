@@ -25,7 +25,7 @@ public class BankDaoImpl implements BankDao {
 	public Bank findById(int idBank) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		 @SuppressWarnings("rawtypes")
-		Query theQuery = currentSession.createQuery("from Bank where idbank=:theBankId" , Bank.class);
+		  Query theQuery = currentSession.createQuery("from Bank where idbank=:theBankId" , Bank.class);
 		 theQuery.setParameter("theBankId", idBank);
 		 Bank bank =  (Bank) theQuery.getSingleResult();
 		 return bank;
@@ -34,7 +34,7 @@ public class BankDaoImpl implements BankDao {
 	@Override
 	public List<Bank> getAllBanks() {
 		 
-		Session currentSession = sessionFactory.getCurrentSession();
+		 Session currentSession = sessionFactory.getCurrentSession();
 		 Query<Bank> theQuery = currentSession.createQuery("from Bank" , Bank.class);
 		 List<Bank> banks = theQuery.getResultList();
 		return banks;
