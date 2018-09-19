@@ -47,6 +47,7 @@ public class BranchController {
 	@PostMapping("/list")
 	public String saveBranch(ModelMap model , @ModelAttribute("branch") Branch branch) 
 	{
+
 		branchService.saveBranch(branch);
 		return "redirect:/branch/list";
     }  

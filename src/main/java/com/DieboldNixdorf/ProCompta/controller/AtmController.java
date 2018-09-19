@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,41 +44,65 @@ public class AtmController {
 	public String listAtm(Model theModel)
 	{
 		populateDefaultModel(theModel);
-		
-		
 		List<Atm> listAtms = atmService.listAtms();
 		theModel.addAttribute("listAtms",listAtms);
-		
-		
-		
-		
-		
 		Atm atm = new Atm();
-		
-		 
-		
 		theModel.addAttribute("atm", atm);
-		 
-		
-		
-		 
 		return "atm";
 	}
 	
 	@PostMapping("/list")
 	public String saveAtm(ModelMap model , @ModelAttribute("atm") Atm atm) 
 	{
-		 
-		
-		System.out.println(" Parametters : ++++++++++  "+atm.getHost());
-		
 		  Host hostHandler = atm.getHost() ;
 		  Branch branchHandler = atm.getBranch();
 		  atmService.saveAtm(atm, hostHandler.getIdHost(), branchHandler.getIdBranch());
 		  
-		return "atm";
+		return "redirect:/Atm/list";
     }  
 	
+	
+	
+	@GetMapping("/edit-atm-{idAtm}") 
+	public String editAtm(@PathVariable int idAtm, Model model) 
+	{
+		
+		 
+		List<Atm> listAtms = atmService.listAtms();
+		
+		populateDefaultModel(model);
+		
+		model.addAttribute("listAtms", listAtms);
+		Atm atm = atmService.findById(idAtm);
+		model.addAttribute("atm", atm);
+		model.addAttribute("edit", true);
+		model.addAttribute("editAtm", "editAtm");
+		 
+		
+		return "atm";
+	}
+	
+	
+	@PostMapping("/edit-atm-{idAtm}")
+	public String editAtmforSavig (ModelMap model , @ModelAttribute("atm") Atm atm ) {
+		
+		   Host hostHandler = atm.getHost() ;
+		   Branch branchHandler = atm.getBranch();
+		   atmService.saveAtm(atm, hostHandler.getIdHost(), branchHandler.getIdBranch());
+	
+		return "redirect:/Atm/list";
+	}
+	
+	
+	@GetMapping("/delete-atm-{idAtm}")
+	public String DeleteAtm(@PathVariable int idAtm) 
+	{
+          atmService.deleteById(idAtm);
+
+		return "redirect:/Atm/list";
+    }  
+	
+
 	
 	private void populateDefaultModel(Model model)
 	{

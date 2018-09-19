@@ -43,4 +43,9 @@ public class BankServiceImpl implements BankService {
 	     bankDao.saveBank(bank);
 	}
 
+	@Override
+	public boolean isbankUnique(String abbreviation) {
+		return bankDao.isbankUnique(abbreviation);
+	}
+
 }

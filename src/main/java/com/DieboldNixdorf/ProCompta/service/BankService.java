@@ -16,5 +16,7 @@ public interface BankService {
 	void saveBank(Bank bank);
 	
 	void deleteBankById(int idBank);
+	
+	boolean isbankUnique(String abbreviation);
 
 }

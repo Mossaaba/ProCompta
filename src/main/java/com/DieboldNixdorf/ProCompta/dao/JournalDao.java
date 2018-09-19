@@ -17,5 +17,6 @@ public interface JournalDao {
      
     void deleteById(int idjournal);
 	
+    void save(Journal journal  , int idAtm);
 
 }

@@ -5,7 +5,8 @@ import java.util.List;
 import com.DieboldNixdorf.ProCompta.model.Bank;
  
 
-public interface BankDao    {
+public interface BankDao    
+{
 
 	public List<Bank> getAllBanks();
 	
@@ -15,6 +16,8 @@ public interface BankDao    {
 	
 	void deleteBankById(int idBank);
 	
+	boolean isbankUnique(String abbreviation);
+	
+	
 	
 }
-

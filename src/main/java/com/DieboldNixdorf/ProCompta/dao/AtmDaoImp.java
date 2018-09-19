@@ -48,12 +48,8 @@ public class AtmDaoImp implements AtmDao {
 
 	@Override
 	public void save(Atm atm) {
-		
-		
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-		currentSession.save(atm);
-		
+		currentSession.saveOrUpdate(atm);
 	}
 
 	
@@ -61,17 +57,12 @@ public class AtmDaoImp implements AtmDao {
 	@Override
 	public void saveAtm(Atm atm , int idHost , int idBranch) {
 		
-		
 		Session currentSession = sessionFactory.getCurrentSession();
-		
 		Branch branchTemp = currentSession.get(Branch.class, idBranch);
 		Host hostTemp = currentSession.get(Host.class, idHost);
 		branchTemp.addAtm(atm);
 		hostTemp.addAtm(atm);
-
-		
-		currentSession.save(atm);
-		
+		currentSession.saveOrUpdate(atm);
 	}
 
 

@@ -18,6 +18,6 @@ public interface JounalService {
     void deleteById(int idjournal);
 	
 	
-	
+    void save(Journal journal  , int idAtm);
 
 }

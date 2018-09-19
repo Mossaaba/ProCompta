@@ -61,9 +61,9 @@ public class Atm {
 	
 	public Atm(int idAtm , String vendor, String nameAtm, String typeConnexion, String adressIp, String userSession,
 			String passwordSession, String readingDisuqeLetter, String repositoryFile, String numeroSerie,
-			List<Journal> atmJounals, Branch branch, Host host) {
-	 
-		
+			List<Journal> atmJounals, Branch branch, Host host) 
+	{
+
 		this.idAtm = idAtm;
 		Vendor = vendor;
 		this.nameAtm = nameAtm;
@@ -201,7 +201,7 @@ public class Atm {
 	}
 	
 	
-	public void addReview(Journal journal) {
+	public void addJournal(Journal journal) {
 		
 		if (AtmJounals == null) {
 			AtmJounals = new ArrayList<>();

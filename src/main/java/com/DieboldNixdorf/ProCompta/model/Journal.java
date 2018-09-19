@@ -1,5 +1,6 @@
 package com.DieboldNixdorf.ProCompta.model;
 
+import java.sql.Date;
 import java.sql.Time;
 
 import javax.persistence.Basic;
@@ -27,10 +28,11 @@ public class Journal {
 	    private String nomJournal;
 	     
 	    @Column(name="datejournal")
-	    private String dateJournal;
+	    private Date dateJournal;
 	   
 	    @Column(name="datemodifjournal")
         private Time dateModifJournal;
+	    
 	    
 	    @Column(name="traitementjournal")
 	    private String handledJournal;
@@ -73,13 +75,17 @@ public class Journal {
 			this.nomJournal = nomJournal;
 		}
 
-		public String getDateJournal() {
+		 
+
+		public Date getDateJournal() {
 			return dateJournal;
 		}
 
-		public void setDateJournal(String dateJournal) {
+
+		public void setDateJournal(Date dateJournal) {
 			this.dateJournal = dateJournal;
 		}
+
 
 		public Time getDateModifJournal() {
 			return dateModifJournal;

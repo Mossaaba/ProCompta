@@ -61,6 +61,20 @@ public class BankDaoImpl implements BankDao {
 
 	}
 
+	@Override
+	public boolean isbankUnique(String abbreviation) {
+		 
+		  Session currentSession = sessionFactory.getCurrentSession();
+		  @SuppressWarnings("rawtypes")
+		  Query theQuery = currentSession.createQuery("from Bank where abbreviation=:theBankSSO" , Bank.class);
+		  theQuery.setParameter("theBankSSO", abbreviation);
+		  List results = theQuery.getResultList();
+		  if (results.isEmpty()) {return true;}
+		  else return false;
+		  
+		  
+	}
+
 	
 
 }

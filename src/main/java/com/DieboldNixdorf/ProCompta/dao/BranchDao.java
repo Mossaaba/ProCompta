@@ -20,8 +20,5 @@ public interface BranchDao {
 	void deleteBranchById(int idBranch);
 	
 	boolean isBranchUnique(Integer idBranch, String codeBranche);
-	
-	
-
 }
 

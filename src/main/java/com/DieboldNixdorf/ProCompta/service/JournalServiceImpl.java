@@ -49,4 +49,10 @@ public class JournalServiceImpl  implements JounalService {
 		
 	}
 
+	@Override
+	public void save(Journal journal, int idAtm) {
+		journalDao.save(journal, idAtm); 
+		
+	}
+
 }

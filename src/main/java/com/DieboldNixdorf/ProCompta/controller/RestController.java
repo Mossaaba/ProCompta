@@ -18,10 +18,17 @@ public class RestController {
 	 public List<String> listDisque() {
 	 
 		List<String> listDisque = Stream.of("C:", "D:", "E:").collect(Collectors.toList());
-		
-		
-		
-		
 		return listDisque;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -16,7 +16,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+ 
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
@@ -50,15 +52,6 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 	 @Autowired
 	 RoleToUserProfileConverter roleToUserProfileConverter;
 	 
-
-	
-	
-	@Bean(name="multipartResolver")
-    public StandardServletMultipartResolver resolver(){
-        return new StandardServletMultipartResolver();
-    }
-	
-	
 	
 	//define a bean for ViewResolver 
 	@Bean
@@ -69,6 +62,17 @@ public class ProComptaAppConfig  implements WebMvcConfigurer {
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	} 
+	
+	
+	@Bean
+	   public MultipartResolver multipartResolver() {
+	      CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	      multipartResolver.setMaxUploadSize(1048576000 ); // 10MB
+	      multipartResolver.setMaxUploadSizePerFile(1048576000 ); // 1MB
+	      return multipartResolver;
+	   }
+	
+	
 	
 	//Define a static ressources 
 	@Override
