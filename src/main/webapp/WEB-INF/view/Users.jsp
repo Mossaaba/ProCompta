@@ -241,7 +241,8 @@
 															 style: 'circle',
 															 title :"${msgTraitment}",
 															 message: "${theUser}",  
-															 position: 'top-right',  
+															 position: 'top-right',
+														
 															 timeout: 10000,  
 															 type: "${style}"
 															}).show();

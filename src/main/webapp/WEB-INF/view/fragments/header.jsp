@@ -95,9 +95,8 @@
 	href="<spring:url value="/resources/assets/plugins/datatables-responsive/css/datatables.responsive.css"/>"
 	type="text/css" />
 	
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/pages/Font-css/all.css"/>"
-	type="text/css" />
+<link  
+	href="<spring:url value="/resources/assets/pages/Font-css/all.css"/>" />
 
  
 
@@ -114,6 +113,11 @@
 		if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
 			document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
 	}
+	
+	
+	 
+	
+	
 </script>
 </head>
 
