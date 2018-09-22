@@ -15,9 +15,26 @@
 <html>
 <head>
 
+<link rel="stylesheet" type="text/css"
+	href="<spring:url value="/resources/assets/jquery-confirm.min.css"/>" />
+	
+	
+<style type="text/css">
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+input[type="file"] {
+    display: none;
+}
+ 
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+
+</style>
+
 
 </head>
 
@@ -47,12 +64,12 @@
 							<li class="nav-item"><a id="listeAtm"
 								class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold"
 								data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
-									<span>Space</span><span> </span><span> </span><i
-									class="fa fa-university fa-4x"></i> <span>Bnaks</span>
+									<span><spring:message code="label.space"></spring:message></span><span> </span><span> </span><i
+									class="fa fa-building fa-4x"></i> <span><spring:message code="label.bank"></spring:message></span>
 							</a></li>
 						</ul>
 
-
+                           <br>
 						<div class="row bg-white">
 							<div class="col-md-5">
 
@@ -60,7 +77,7 @@
 									<div class="card-header ">
 										<div
 											class="card-title font-montserrat blod text-primary bold fs-15">
-											<i class="fa fa-list" aria-hidden="true"></i>List Bank
+											<i class="fa fa-list" aria-hidden="true"></i><spring:message code="label.listBanks"></spring:message>
 										</div>
 									</div>
 
@@ -75,13 +92,13 @@
 
 													<th
 														class="v-align-middle text-primary bold fs-12 text-uppercase"><i
-														class="fa fa-university" aria-hidden="true"></i> Name</th>
+														class="fa fa-building" aria-hidden="true"></i> <spring:message code="label.BankName"></spring:message></th>
 													<th
 														class="v-align-middle text-primary bold fs-12 text-uppercase"><i
-														class="fa fa-picture-o" aria-hidden="true"></i> Logo</th>
+														class="fa fa-picture-o" aria-hidden="true"></i> <spring:message code="label.Banklogo"></spring:message></th>
 													<th
 														class="v-align-middle text-primary bold fs-12 text-uppercase"><i
-														class="fa fa-credit-card-alt" aria-hidden="true"></i> Bin
+														class="fa fa-credit-card-alt" aria-hidden="true"></i> <spring:message code="label.BankBin"></spring:message>
 														°</th>
 
 													<security:authorize access="hasRole('ADMIN')">
@@ -198,16 +215,16 @@
 
 
 										<p class="font-montserrat blod text-primary bold fs-15">
-											<i class="fa fa-info-circle m-l-5" aria-hidden="true"> </i>
-											Basic Information of the bank
+											<i class="fa fa-info-circle m-l-5" aria-hidden="true"> </i> 
+											<spring:message code="label.BankInfoForm"></spring:message>  
 										</p>
 
 										<div class="form-group-attached">
 											<form:errors path="abbreviation"
 												cssClass="alert alert-danger" />
 											<div class="form-group form-group-default required">
-												<label>Bank name<i
-													class="fa fa fa-university text-complete m-l-5"></i></label>
+												<label><spring:message code="label.BankName"></spring:message><i
+													class="fa fa-building text-complete m-l-5"></i></label>
 												<form:input path="namBank" type="text"
 													cssClass="form-control" />
 											</div>
@@ -217,7 +234,7 @@
 
 
 													<div class="form-group form-group-default">
-														<label>Adress <i
+														<label><spring:message code="label.BankAdresse"></spring:message><i
 															class="fa fa-map text-complete m-l-5"></i>
 														</label>
 														<form:input path="adressBank" type="text"
@@ -228,15 +245,20 @@
 
 												<div class="col-md-6">
 													<div class="form-group form-group-default  ">
-														<label>Logo<i
+														<label><spring:message code="label.Banklogo"></spring:message><i
 															class="fa fa-picture-o text-complete m-l-5"></i></label>
 														<div class="">
-
-															<form:input path="logo" type='file' id='file'
+														
+                                                             <label for="file-upload" class="custom-file-upload new_Btn" id="new_Btn">
+														    <i class="fa fa-cloud-upload text-complete m-l-5 "></i> Click here To Upload
+														    </label>
+														    
+															<form:input path="logo" type='file' id='file' 
 																cssClass="btn btn-sm " />
-															<br> <br>
-															<button class="btn btn-sm btn-primary pull-right"
-																onclick="uplaod();">
+															<br> 
+															
+															<button id="UplaodLogo" class="btn btn-sm btn-primary pull-right"
+																onclick="uplaod();" style="display: none;">
 																<i class="fa fa-upload" aria-hidden="true"></i> Upload
 															</button>
 
@@ -257,7 +279,7 @@
 										<div class="form-group-attached">
 
 											<div class="form-group form-group-default required">
-												<label>Abriviation<i
+												<label><spring:message code="label.BankAbbreviation"></spring:message><i
 													class="fa fa-address-card-o text-complete m-l-5"></i></label>
 												<form:input path="abbreviation" type="text"
 													cssClass="form-control" maxlength="9" />
@@ -271,7 +293,7 @@
 
 												<div class="col-md-6">
 													<div class="form-group form-group-default">
-														<label>Telephone<i
+														<label><spring:message code="label.BankPhone"></spring:message><i
 															class="fa fa-phone-square text-complete m-l-5"></i></label>
 														<form:input path="phoneBank" type="text"
 															cssClass="form-control"
@@ -283,13 +305,13 @@
 													<div
 														class="form-group form-group-default input-group required">
 														<div class="form-input-group">
-															<label>BIN number<i
+															<label><spring:message code="label.BankBin"></spring:message><i
 																class="fa fa-credit-card-alt text-complete m-l-5"></i></label>
 															<form:input path="bin" type="text"
 																cssClass="form-control usd " minlength="6" maxlength="6" />
 														</div>
 														<div class="input-group-append ">
-															<span class="input-group-text">BIN Number </span>
+															<span class="input-group-text">BIN N°</span>
 														</div>
 													</div>
 												</div>
@@ -306,10 +328,10 @@
 
 												<form:button type="submit" id="addBankSumit"
 													class="btn btn-primary  btn-cons">
-													<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update</form:button>
+													<i class="fa fa-pencil-square-o" aria-hidden="true"></i><spring:message code="label.update"></spring:message></form:button>
 												<button type="button" id="ClearForm"
 													class="btn btn-cons btn-danger">
-													<i class="fa fa-times-circle"></i> Clear
+													<i class="fa fa-times-circle"></i> <spring:message code="label.clear"></spring:message>
 												</button>
 
 											</c:when>
@@ -318,12 +340,12 @@
 
 												<form:button type="submit" id="addBankSumit"
 													class="btn btn-primary  btn-cons">
-													<i class="fa fa-plus-circle"></i> Add</form:button>
+													<i class="fa fa-plus-circle"></i> <spring:message code="label.add"></spring:message></form:button>
 
 
 												<button type="button" id="ClearForm"
 													class="btn btn-cons btn-danger">
-													<i class="fa fa-times-circle"></i> Clear
+													<i class="fa fa-times-circle"></i> <spring:message code="label.clear"></spring:message>
 												</button>
 
 											</c:otherwise>
@@ -357,7 +379,7 @@
 												{
 													style : 'circle',
 													title : "${msgTraitment}",
-													message : "${theUser}",
+													message : "${theBank}",
 													position : 'top-right',
 													thumbnail : '<img width="40" height="40" style="display: inline-block;" src="<spring:url value="/resources/pages/img/profile-pictures/${logo}"/>" data-src="<spring:url value="/resources/pages/img/profile-pictures/${logo}"/>" data-src-retina="<spring:url value="/resources/pages/img/profile-pictures/${logo}"/>" alt="">',
 													timeout : 10000,
@@ -380,10 +402,8 @@
 	<script src="<spring:url value="/resources/assets/js/card.js"/>"></script>
 
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
-
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-
+		src="<spring:url value="/resources/assets/jquery-confirm.min.js"/>"></script>
 
 	<script src="<spring:url value="/resources/pages/js/bank.js"/>"></script>
 

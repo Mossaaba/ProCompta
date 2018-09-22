@@ -3,7 +3,6 @@ package com.DieboldNixdorf.ProCompta.controller;
 import java.util.List;
 import java.util.Locale;
 
- 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -28,10 +27,6 @@ import com.DieboldNixdorf.ProCompta.service.UserProfileService;
 import com.DieboldNixdorf.ProCompta.service.UserService;
 import com.DieboldNixdorf.ProCompta.validator.UserFormValidator;
 
- 
-
-
-
 @Controller
 @SessionAttributes("roles")
 @RequestMapping("user")
@@ -39,173 +34,145 @@ public class UsersController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	UserProfileService userProfileService;
-	
+
 	@Autowired
 	UserDetailsService userDetailsService;
-	
+
 	@Autowired
 	MessageSource messageSource;
 
 	@Autowired
 	PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
-	
+
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
-	
+
 	@Autowired
 	UserFormValidator userFormValidator;
- 
-	
- 
-	
- 
+
 	@RequestMapping("/list")
 	public String listUsers(ModelMap model) {
 
 		List<User> users = userService.findAllUsers();
+	 
+ 
+		
 		User user = new User();
 
-				
 		model.addAttribute("users", users);
 		model.addAttribute("user", user);
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
- 
+
 		return "Users";
 	}
 
-	
-	 
-	 
 	@RequestMapping(value = { "/list" }, method = RequestMethod.POST)
-	public String saveUser(@Valid  User user, BindingResult result,
-			ModelMap model , final RedirectAttributes redirectAttrs) {
+	public String saveUser(@Valid User user, BindingResult result, ModelMap model,
+			final RedirectAttributes redirectAttrs) {
 
-		if (result.hasErrors()) 
-		{
-			
-			model.addAttribute("msgTraitment" ,"Errore adding " );
-			model.addAttribute("theUser" ,user.getSsoId() );
-			model.addAttribute("style" ,"danger" );
-			model.addAttribute("msg" ,"Error validation" ); 
-			return "Users";	
-		}
- 
-		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId",
-					                                    new String[]{user.getSsoId()}, Locale.getDefault()));
-		    result.addError(ssoError);
-		    
-		    model.addAttribute("style" ,"danger" );
-			model.addAttribute("msg" ,"User "+user.getSsoId()+ " Existe Deja" );
-		   
+		if (result.hasErrors()) {
+
+			model.addAttribute("msgTraitment", "Errore adding ");
+			model.addAttribute("theUser", user.getSsoId());
+			model.addAttribute("style", "danger");
+			model.addAttribute("msg", "Error validation");
 			return "Users";
 		}
-		
-		userService.saveUser(user);
 
-		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " registered successfully");
+		if (!userService.isUserSSOUnique(user.getId(), user.getSsoId())) {
+			FieldError ssoError = new FieldError("user", "ssoId", messageSource.getMessage("non.unique.ssoId",
+					new String[] { user.getSsoId() }, Locale.getDefault()));
+			result.addError(ssoError);
+
+			model.addAttribute("style", "danger");
+			model.addAttribute("msg", "User " + user.getSsoId() + " Existe Deja");
+
+			return "Users";
+		}
+
+		userService.saveUser(user);
+		model.addAttribute("success",
+				"User " + user.getFirstName() + " " + user.getLastName() + " registered successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
-	 
-	    redirectAttrs.addFlashAttribute("msgTraitment" ,"Add USER : " );
-		redirectAttrs.addFlashAttribute("theUser" ,user.getSsoId() );
-		redirectAttrs.addFlashAttribute("style" ,"success" );
- 
-		 return "redirect:/user/list";
+
+		redirectAttrs.addFlashAttribute("msgTraitment", "Add USER : ");
+		redirectAttrs.addFlashAttribute("theUser", user.getSsoId());
+		redirectAttrs.addFlashAttribute("style", "success");
+
+		return "redirect:/user/list";
 	}
 
-
 	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.GET)
-	public String editUser(@PathVariable String ssoId, ModelMap model) 
-	{
-		
+	public String editUser(@PathVariable String ssoId, ModelMap model) {
+
 		List<User> users = userService.findAllUsers();
 		User user = userService.findBySSO(ssoId);
-		
+
 		model.addAttribute("users", users);
 		model.addAttribute("user", user);
 		model.addAttribute("loginID", user.getSsoId());
 		model.addAttribute("edit", true);
 		model.addAttribute("editUser", "editUser");
 		model.addAttribute("loggedinuser", getPrincipal());
-		
+
 		return "Users";
 	}
-	
-	 
-	
-	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
-	public String updateUser(@Valid User user, BindingResult result,
-			ModelMap model, @PathVariable String ssoId , final RedirectAttributes redirectAttrs) {
 
-		if (result.hasErrors()) 
-		{
-			
-			model.addAttribute("msgTraitment" ,"Errore Update User  " );
-			model.addAttribute("theUser" ,user );
-			model.addAttribute("style" ,"danger" );
-			 
-			
+	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
+	public String updateUser(@Valid User user, BindingResult result, ModelMap model, @PathVariable String ssoId,
+			final RedirectAttributes redirectAttrs) {
+
+		if (result.hasErrors()) {
+
+			model.addAttribute("msgTraitment", "Errore Update User  ");
+			model.addAttribute("theUser", user);
+			model.addAttribute("style", "danger");
+
 			return "Users";
 		}
 
-		/*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
-		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
-		    result.addError(ssoError);
-			return "registration";
-		}*/
-
-
 		userService.updateUser(user);
 
-		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " updated successfully");
-		redirectAttrs.addFlashAttribute("msgTraitment" ,"Update User successfully " );
-		redirectAttrs.addFlashAttribute("theUser" ,""+ user.getFirstName() + " "+ user.getLastName() +"");
-		redirectAttrs.addFlashAttribute("style" ,"success" );
+		model.addAttribute("success",
+				"User " + user.getFirstName() + " " + user.getLastName() + " updated successfully");
+		redirectAttrs.addFlashAttribute("msgTraitment", "Update User successfully ");
+		redirectAttrs.addFlashAttribute("theUser", "" + user.getFirstName() + " " + user.getLastName() + "");
+		redirectAttrs.addFlashAttribute("style", "success");
 		model.addAttribute("loggedinuser", getPrincipal());
-		
-		
-		 return "redirect:/user/list";
+
+		return "redirect:/user/list";
 	}
 
-	
-	/**
-	 * This method will delete an user by it's SSOID value.
-	 */
+	 
 	@RequestMapping(value = { "/delete-user-{ssoId}" }, method = RequestMethod.GET)
 	public String deleteUser(@PathVariable String ssoId) {
 		userService.deleteUserBySSO(ssoId);
 		return "redirect:/user/list";
 	}
-	
 
-	/**
-	 * This method will provide UserProfile list to views
-	 */
+	 
 	@ModelAttribute("roles")
 	public List<UserProfile> initializeProfiles() {
+	 
 		return userProfileService.findAll();
 	}
-	
 
-	/**
-	 * This method returns the principal[user-name] of logged-in user.
-	 */
-	private String getPrincipal(){
+	 
+	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if (principal instanceof UserDetails) {
-			userName = ((UserDetails)principal).getUsername();
+			userName = ((UserDetails) principal).getUsername();
 		} else {
 			userName = principal.toString();
 		}
 		return userName;
 	}
-	
+
 }

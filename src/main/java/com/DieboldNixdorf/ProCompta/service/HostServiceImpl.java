@@ -11,13 +11,12 @@ import com.DieboldNixdorf.ProCompta.model.Host;
 @Transactional
 public class HostServiceImpl implements HostService {
 
-    
 	@Autowired
 	private HostDao hostDao;
-	
+
 	@Override
 	public Host findHostById(int idHost) {
-		 return hostDao.findHostById(idHost);
+		return hostDao.findHostById(idHost);
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class HostServiceImpl implements HostService {
 
 	@Override
 	public List<Host> findAllHosts() {
-		 
+
 		return hostDao.findAllHosts();
 	}
 

@@ -18,9 +18,16 @@ uplaod = function()
 			type:'POST',
 			success: function(response){
 				if(response.Status == 200){
-					alert(response.SucessfulList);
+					
+					
+					 
+					
+					document.getElementById("new_Btn").innerHTML = "response.SucessfulList";
+					
+					
 				}else{
-					alert('Error');
+					document.getElementById("new_Btn").innerHTML = "Errore !";
+					 
 				}	
 			}				
 		});
@@ -31,6 +38,18 @@ uplaod = function()
 	
 	
 	$(document).ready(function() {
+		
+		
+		
+		
+		$('.new_Btn').bind("click" , function () {
+	        $('#file').click();
+	        $("#UplaodLogo").show();
+	    });
+		
+		
+		
+		
 		
 		
 		$("#bin").mask("999999");
@@ -97,46 +116,7 @@ uplaod = function()
 				}
 			});
 
-			$('#show-modal').click(function() {
-				$('#addNewAppModal').modal('show');
-			});
-			$('#delete').click(function() {
-				$('#modalSlideUpSmall').modal('show');
-			});
-
-			$("#creationDate").val(new Date().toISOString());
-			$("#userProfiles").select2();
-			$("#TyepHost").select2();
-			$("#TyepAtmUpdate").select2();
-			$("#TyepHostUpdate").select2();
-
-			var elems = Array.prototype.slice.call(document
-					.querySelectorAll('#ConnexionHandler'));
-
-			elems.forEach(function(html) {
-				var switchery = new Switchery(html);
-			});
-
-			$("#ConnexionHandler").on("change", function()
-
-			{
-
-				var isDisabled = $('#typeConnexion').prop('disabled');
-
-				if (isDisabled == true) {
-					$("#typeConnexion").removeAttr("disabled");
-					$("#AdressIp").removeAttr("disabled");
-					$("#readingDisuqeLetter").removeAttr("disabled");
-				}
-
-				else {
-
-					$("#typeConnexion").prop('disabled', true);
-					$("#AdressIp").prop('disabled', true);
-					$("#readingDisuqeLetter").prop('disabled', true);
-				}
-
-			});
+		  
 
 		});
 		
@@ -159,9 +139,7 @@ uplaod = function()
 			document.getElementById('abbreviation').value = '';
 			document.getElementById('bin').value = '';
 			document.getElementById('phoneBank').value = '';
-			
-			
-			 
+ 
 			
 		});
 		

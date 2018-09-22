@@ -1,6 +1,5 @@
 package com.DieboldNixdorf.ProCompta.model;
 
- 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -16,53 +15,48 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="atm2")
+@Table(name = "atm2")
 public class Atm {
-	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="idAtm")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idAtm")
 	private int idAtm;
-	
-	@Column(name="idtypeatm")
-	private String Vendor ; 
-	
-	@Column(name="nomatm")
+
+	@Column(name = "idtypeatm")
+	private String Vendor;
+
+	@Column(name = "nomatm")
 	private String nameAtm;
-	
-	@Column(name="typecnx")
+
+	@Column(name = "typecnx")
 	private String typeConnexion;
-	
-	@Column(name="adresseip")
+
+	@Column(name = "adresseip")
 	private String AdressIp;
-	
-	@Column(name="utilisateur")
+
+	@Column(name = "utilisateur")
 	private String userSession;
-	
-	@Column(name="motdepasse")
+
+	@Column(name = "motdepasse")
 	private String passwordSession;
-	
-	@Column(name="lettrelecteur")
+
+	@Column(name = "lettrelecteur")
 	private String readingDisuqeLetter;
-	
-	@Column(name="repertoire")
+
+	@Column(name = "repertoire")
 	private String repositoryFile;
 
-	@Column(name="nserie")
-	private String NumeroSerie ; 
-	
-	
-	public Atm() {	
-		
-	}
-	
-	
-	
+	@Column(name = "nserie")
+	private String NumeroSerie;
 
-	
-	public Atm(int idAtm , String vendor, String nameAtm, String typeConnexion, String adressIp, String userSession,
+	public Atm() {
+
+	}
+
+	public Atm(int idAtm, String vendor, String nameAtm, String typeConnexion, String adressIp, String userSession,
 			String passwordSession, String readingDisuqeLetter, String repositoryFile, String numeroSerie,
-			List<Journal> atmJounals, Branch branch, Host host) 
-	{
+			List<Journal> atmJounals, Branch branch, Host host) {
 
 		this.idAtm = idAtm;
 		Vendor = vendor;
@@ -81,20 +75,15 @@ public class Atm {
 
 	@Transient
 	@OneToMany(mappedBy = "atm", cascade = CascadeType.ALL)
-    private List<Journal> AtmJounals;
-	
-	
-	@ManyToOne (cascade= {CascadeType.PERSIST , CascadeType.DETACH ,
-			              CascadeType .MERGE , CascadeType.REFRESH})
-	@JoinColumn  (name="idBanque") 
+	private List<Journal> AtmJounals;
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "idBanque")
 	private Branch branch;
-	
-	
-	@ManyToOne (cascade= {CascadeType.PERSIST , CascadeType.DETACH ,
-			             CascadeType .MERGE , CascadeType.REFRESH})
-	@JoinColumn  (name="idConfiguration") 
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "idConfiguration")
 	private Host host;
-	
 
 	public List<Journal> getAtmJounals() {
 		return AtmJounals;
@@ -103,6 +92,7 @@ public class Atm {
 	public void setAtmJounals(List<Journal> atmJounals) {
 		AtmJounals = atmJounals;
 	}
+
 	public int getIdAtm() {
 		return idAtm;
 	}
@@ -173,9 +163,9 @@ public class Atm {
 
 	public void setRepositoryFile(String repositoryFile) {
 		this.repositoryFile = repositoryFile;
-	}	
-	
-	 public Branch getBranch() {
+	}
+
+	public Branch getBranch() {
 		return branch;
 	}
 
@@ -191,7 +181,6 @@ public class Atm {
 		this.host = host;
 	}
 
-	
 	public String getNumeroSerie() {
 		return NumeroSerie;
 	}
@@ -199,19 +188,13 @@ public class Atm {
 	public void setNumeroSerie(String numeroSerie) {
 		NumeroSerie = numeroSerie;
 	}
-	
-	
+
 	public void addJournal(Journal journal) {
-		
+
 		if (AtmJounals == null) {
 			AtmJounals = new ArrayList<>();
 		}
 		AtmJounals.add(journal);
 	}
-	  
-	
-	
-	    
-	    
 
 }

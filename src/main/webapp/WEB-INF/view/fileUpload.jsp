@@ -21,10 +21,15 @@
 <body>
 <security:csrfMetaTags />
 	<h1> File Upload </h1>
+	
+	
 			<form id='fileUpload' onsubmit="return false;">
 				File <input type='file' id='file' multiple="multiple">
 				<button onclick="uplaod();">Upload</button>
 			</form>
+			
+			
+			
 			
 	<script type="text/javascript">
 	

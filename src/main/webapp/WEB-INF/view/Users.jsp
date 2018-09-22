@@ -1,6 +1,6 @@
 <%@ page session="false"%>
 <%@ page isELIgnored="false" %>
-<%@page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -15,57 +15,13 @@
 <head>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-
+<link rel="stylesheet" type="text/css"
+	href="<spring:url value="/resources/assets/jquery-confirm.min.css"/>" />
  
-
-
-<link rel="stylesheet" type="text/css"
-	href="<spring:url value="/resources/assets/plugins/pace/pace-theme-flash.css"/>" />
-<link rel="stylesheet" type="text/css"
-	href="<spring:url value="/resources/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>" />
 <link rel="stylesheet"
 	href="<spring:url value="/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.css"/>"
 	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/dropzone/css/dropzone.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/summernote/css/summernote.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/select2/css/select2.min.css"/>"
-	type="text/css" media="screen" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/ion-slider/css/ion.rangeSlider.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/ion-slider/css/ion.rangeSlider.skinFlat.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.nouislider.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css"/>"
-	type="text/css" />
-<link rel="stylesheet"
-	href="<spring:url value="/resources/assets/plugins/datatables-responsive/css/datatables.responsive.css"/>"
-	type="text/css" />
-
-
-
+ 
 </head>
 
 
@@ -90,31 +46,35 @@
 					<div class=" container-fluid   container-fixed-lg">   
                        <div id="rootwizard" class="m-t-60">
 
-						<ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm" role="tablist" data-init-reponsive-tabs="dropdownfx">
-						<li class="nav-item" >
-						<a id="listeAtm" class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold" data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
-						 <span>Space</span><span> </span><span> </span><i class="fa fa-user-circle fa-4x"></i> <span>Users</span></a>
-						</li>
+                        <ul class="nav nav-tabs nav-tabs-linetriangle   nav-stack-sm"
+							role="tablist" data-init-reponsive-tabs="dropdownfx">
+							<li class="nav-item"><a id="listeAtm"
+								class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold"
+								data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
+									<span> <spring:message code="label.space"></spring:message>
+								</span><span> </span><span> </span><i class="fa fa-user-circle fa-4x"></i> <span><spring:message code="label.users"></spring:message></span>
+							</a></li>
 						</ul>
-						
+                              <br>
+
                            <div class="tab-content">
        	   
 									<div class="tab-pane padding-20 sm-no-padding active slide-left" id="tab1">
 									<div class="row row-same-height">
 													
-										<div class="col-md-3 b-r b-dashed b-grey sm-b-b">
+										<div class="col-md-2 b-r b-dashed b-grey sm-b-b">
 														<div class="sm-m-t-15 m-t-50">
-														<h2>List of users</h2>
-														<p>You can add, modify , or delete users here  </p>
+														<h2><spring:message code="label.listOfusers"></spring:message></h2> 
 														</div>	
 										</div>
 			
 								
-				                       <div class="col-md-9">
+				                       <div class="col-md-10">
 				 
 												<div class="pull-right">
 													<div class="col-xs-12">
-													<button  id="show-modal" class="btn btn-primary btn-cons" ><i class="fa fa-user-plus"></i> Add user
+													<button  id="show-modal" class="btn btn-rounded btn-primary m-b-10 bold fs-15 blod" >
+													<i class="fa fa-user-plus fa-2X"></i> <spring:message code="label.addNewUser"></spring:message>
 													</button>
 													</div>
 												</div>
@@ -125,13 +85,34 @@
 										
 										<table class="table table-hover table-responsive-block nowrap " id="tableUser">
 										 <thead>
-										 <tr>
+										 <tr> 
 										 
-										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-address-card-o" aria-hidden="true"></i> Firstname</th>
-										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Lastname</th>
-										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</th>
-										 <th class="v-align-middle text-primary bold fs-14"><i class="fa fa-id-badge" aria-hidden="true"></i> SSO ID</th>
+										 <th class="v-align-middle text-primary bold fs-14">
+										 <span class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa-address-card-o fa-stack-1x"></i>
+																</span> <spring:message code="label.firstName"></spring:message></th>
 										 
+										 <th class="v-align-middle text-primary bold fs-14">
+										 <span class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa fa-user-circle-o fa-stack-1x"></i>
+																</span> <spring:message code="label.lastName"></spring:message></th>
+																
+										 <th class="v-align-middle text-primary bold fs-14">
+										 <span class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa fa-envelope-o fa-stack-1x"></i>
+																</span>  <spring:message code="label.emailUser"></spring:message></th>
+																
+																
+										 <th class="v-align-middle text-primary bold fs-14">
+										 <span class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa fa-id-badge fa-stack-1x"></i>
+																</span> <spring:message code="label.loginIDUser"></spring:message></th>
+																
+										
 				                         <security:authorize access="hasRole('ADMIN')">
 				                         <th class="v-align-middle"> </th>
 				                         </security:authorize> 
@@ -150,6 +131,7 @@
 											 <td class="text-primary font-montserrat v-align-middle password">${user.lastName}</td>
 											 <td class="text-primary font-montserrat v-align-middle">${user.email}</td>
 											 <td class="text-primary font-montserrat v-align-middle">${user.ssoId}</td>
+											 
 										      
 										 
 										  <security:authorize access="hasRole('ADMIN')">
@@ -193,21 +175,21 @@
 											
 											<div class="col-md-4 col-middle sm-padding-15 align-items-center d-flex">
 													<div>
-													<h5 class="font-montserrat all-caps small no-margin hint-text bold">Local Connexion</h5>
+													<h5 class="font-montserrat all-caps small no-margin hint-text bold">Admin</h5>
 													<p class="no-margin">3</p>
 													</div>
 											</div>
 											
 											<div class="col-md-3 col-middle sm-padding-15 align-items-center d-flex">
 													<div>
-													<h5 class="font-montserrat all-caps small no-margin hint-text bold">Remote Connexion</h5>
+													<h5 class="font-montserrat all-caps small no-margin hint-text bold">Manager</h5>
 													<p class="no-margin">1</p>
 													</div>
 											</div>
 											
 											<div class="col-md-2 text-right bg-primary padding-10">
 											<h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Last Modification</h5>
-											<h4 class="no-margin text-white">22-01-1989</h4>
+											<h4 class="no-margin text-white">25-02-1991</h4>
 											</div>
 										
 										</div>
@@ -272,9 +254,10 @@
 													<div class="modal-dialog">
 													<div class="modal-content">
 													<div class="modal-header clearfix ">
-													<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
-													</button>
-													<h4 class="p-b-5"><span class="semi-bold"> <i class="fa fa-user-plus"></i> ADD New</span> User</h4>
+													 
+													<h4 class="p-b-5"><span class="font-montserrat blod text-primary bold fs-17"> 
+													<i class="fa fa-user-plus"></i> <spring:message code="label.addNewUser"></spring:message> </span>
+													 </h4>
 													</div>
 												 
 												        
@@ -284,17 +267,13 @@
 													
 													
 													<div class="modal-body">
-													<p class="small-text">Create a new user </p>
-													
-													 
-													
-													
+											
 													<div class="row ">
 													
 															<div class="col-sm-6 ">
 															<div class="form-group form-group-default required">
-															 <i class="fa fa-address-card-o" aria-hidden="true"></i>
-															<label>First Name</label>
+															 <i class="fa fa-address-card-o text-complete m-l-5" aria-hidden="true"></i>
+															<label><spring:message code="label.firstName"></spring:message> </label>
 															<form:input path="firstName"   id="userName" type="text" cssClass="form-control" autocomplete="off" placeholder="First Name of your the user"/>
 															</div>
 															<form:errors path="firstName" cssClass="alert alert-danger"/>
@@ -304,8 +283,8 @@
 															<div class="col-sm-6">
 															<div class="form-group form-group-default required">
 															<form:input type="hidden" path="id" id="id"/>
-															<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-															<label>Last Name</label>
+															<i class="fa fa-user-circle-o text-complete m-l-5" aria-hidden="true"></i>
+															<label><spring:message code="label.lastName"></spring:message></label>
 															<form:input path="lastName"  id="lastName" type="text" cssClass="form-control" autocomplete="off" placeholder="Last Name of your the user"/>
 															</div>
 															<form:errors path="lastName" cssClass="alert alert-danger"/>
@@ -321,8 +300,8 @@
 													<c:choose>
 												       <c:when test="${edit}">
 												       <div class="form-group form-group-default required">
-												       <i class="fa fa-sign-in" aria-hidden="true"></i>
-													   <label>LoginID </label>
+												       <i class="fa fa-sign-in text-complete m-l-5" aria-hidden="true"></i>
+													   <label><spring:message code="label.loginIDUser"></spring:message> </label>
 							                            <form:input type="text" path="ssoId"  id="ssoId" autocomplete="off" placeholder="Your login ID , 'Connexion ID'" cssClass="form-control" disabled="true"/>
 						                               </div>
 													  
@@ -330,8 +309,8 @@
 						                        
 												        <c:otherwise>
 												         <div class="form-group form-group-default ">
-												         <i class="fa fa-sign-in" aria-hidden="true"></i>
-													   <label>LoginID</label>
+												         <i class="fa fa-sign-in text-complete m-l-5" aria-hidden="true"></i>
+													   <label><spring:message code="label.loginIDUser"></spring:message></label>
 							                            <form:input type="text" path="ssoId" id="ssoId" autocomplete="off" placeholder="Your login ID" cssClass="form-control" />
 							                            </div>
 													      <form:errors path="ssoId" cssClass="alert alert-danger"/>
@@ -349,8 +328,8 @@
 													
 													<div class="col-sm-12">
 													 <div class="form-group form-group-default required">
-													 <i class="fa fa-key" aria-hidden="true"></i>
-													<label>Password </label>
+													 <i class="fa fa-key text-complete m-l-5" aria-hidden="true"></i>
+													<label><spring:message code="label.loginPasswordUser"></spring:message> </label>
 													<form:input path="password" id="password" type="password"   cssClass="form-control" placeholder="your password"/>
 															
 													</div>
@@ -365,8 +344,8 @@
 													
 													<div class="col-sm-12">
 													<div class="form-group form-group-default required">
-													<i class="fa fa-envelope-o" aria-hidden="true"></i>
-													<label>Email</label> 
+													<i class="fa fa-envelope-o text-complete m-l-5" aria-hidden="true"></i>
+													<label><spring:message code="label.emailUser"></spring:message></label> 
 													<form:input path="email" id="email" type="text" cssClass="form-control" autocomplete="off" placeholder="Your email"/>
 													
 													</div>
@@ -379,25 +358,21 @@
 													
 													<div class="col-sm-12">
 													<div class="form-group form-group-default required">
-													<i class="fa fa-link" aria-hidden="true"></i>
-													<label >Role</label> 
+													<i class="fa fa-link text-complete m-l-5" aria-hidden="true"></i>
+													<label ><spring:message code="label.roleUser"></spring:message></label> 
 															
 															<form:select path="userProfiles" cssClass="form-control full-width"
 																		  id="userProfiles"  
 																		  cssStyle="width: 100%;" data-init-plugin="select2"
 																		  items="${roles}" itemValue="id" itemLabel="type"  />
-																			
-																			
-															
+								
 															 
 													</div>
 													<form:errors path="userProfiles" cssClass="alert alert-danger"/>
 													</div>
 													
 													</div>
-													
-													
-													
+
 													</div>
 													<div class="modal-footer">
 													
@@ -405,17 +380,19 @@
 						                                
 						                                <c:when test="${edit}">
 						                                
-						                                <button type="submit"   class="btn btn-primary  btn-cons">Update</button>
+						                                <button type="submit" class="btn btn-primary  btn-cons"> <i class="fa fa-user-plus"></i> <spring:message code="label.update"></spring:message></button>
 						                                or 
-						                                <button type="button" onclick="window.location.href='<spring:url value="/user/list"/>'" class="btn btn-cons" data-dismiss="modal">Close</button>
+						                                <button type="button" class="btn btn-cons btn-danger" onclick="window.location.href='<spring:url value="/user/list"/>'" class="btn btn-cons" 
+						                                data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i> <spring:message code="label.close"></spring:message></button>
 						                                
 						                                </c:when>
 						                                
 						                                
 						                                <c:otherwise>
-						                              <form:button type="submit" class="btn btn-primary  btn-cons"><i class="fa fa-user-plus"></i> Add the User</form:button>
+						                              <form:button type="submit" class="btn btn-primary  btn-cons"><i class="fa fa-user-plus"></i> <spring:message code="label.addNewUser"></spring:message></form:button>
 						                              or 
-						                              <form:button type="button"    class="btn btn-cons btn-danger" data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i> Close</form:button>
+						                              <form:button type="button" class="btn btn-cons btn-danger" 
+						                              data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i> <spring:message code="label.close"></spring:message></form:button>
 						                                </c:otherwise> 
 						                               
 						                             </c:choose>  
@@ -427,77 +404,16 @@
 													</div>
 													
 												</div>
-												
-												<div class="modal fade slide-up disable-scroll" id="modalSlideUpSmall" tabindex="-1" role="dialog" aria-hidden="false">
-												<div class="modal-dialog modal-sm">
-												<div class="modal-content-wrapper">
-												<div class="modal-content">
-												<div class="modal-body text-center m-t-20">
-												<h4 class="no-margin p-b-10">Are you sure to delet the user </h4>
-												<button type="button"  class="btn btn-danger btn-cons" data-dismiss="modal" >Continue</button>
-												<button type="button" class="btn btn-primary btn-cons" data-dismiss="modal">Cancel</button>
-												</div>
-												</div>
-												</div>
-												
-												</div>
-												</div>	
-												
-												                                     
-                                     
-                                     
-                       
-	                                   
+											
 
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-inputmask/jquery.inputmask.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-form-wizard/js/jquery.bootstrap.wizard.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/moment/moment.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-autonumeric/autoNumeric.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/dropzone/dropzone.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/summernote/js/summernote.min.js"/>"></script>
-		<script
-		src="<spring:url value="/resources/assets/plugins/popper/umd/popper.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-typehead/typeahead.jquery.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/handlebars/handlebars-v4.0.5.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/select2/js/select2.full.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/ion-slider/js/ion.rangeSlider.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.nouislider.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.liblink.js"/>"></script>
-	<script 
-	    src="<spring:url value="/resources/assets/js/slider.js"/>"></script>
-	<script 
-	    src="<spring:url value="/resources/assets/js/card.js"/>"></script>
+		<script src="<spring:url value="/resources/assets/js/card.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js"/>"></script>
-    <script
+	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/datatables.responsive.js"/>"></script>
@@ -505,112 +421,10 @@
 		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/lodash.min.js"/>"></script>
 		
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
-	<script src="<spring:url value="/resources/assets/js/form_wizard.js"/>"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-
-<script type="text/javascript">
-
- 
-
-$(function () {
-	
-	
-	$(document).ready(function() {
-	    $('#addUserForm').validate();
-	});
-	
-	
-	
-	
-	$('a.delete').confirm({
-	    content: "",
-	    type: 'red',
-	    typeAnimated: true,
-	         buttons: {
-	        	 
-	             Delete: {
-	                       text: 'Delete user',
-	                       btnClass: 'btn-red',
-	                       action : function()
-	                       {
-             	            location.href = this.$target.attr('href');
-                           }
-	                     },
-	             
-	        close: function () {
-	        }
-	    }
-	});
-	
-	
-	
-	
-	$('a.delete').confirm({
-	    buttons: {
-	        hey: function(){
-	            location.href = this.$target.attr('href');
-	        }
-	    }
-	});
-	
-	$('#show-modal').click(function(){$('#addNewAppModal').modal('show');});
-	$('#delete').click(function()
-			{
-		    $('#modalSlideUpSmall').modal('show');
-});
-	
-	$("#creationDate").val(new Date().toISOString());
-	$("#userProfiles").select2();
-	$("#TyepHost").select2();
-	$("#TyepAtmUpdate").select2();
-	$("#TyepHostUpdate").select2();
-	
-	 
-	
-	
-var elems = Array.prototype.slice.call(document.querySelectorAll('#ConnexionHandler'));
-
-elems.forEach(function(html) {
-    var switchery = new Switchery(html);
-});
- 
- 
- 
- 
- 
-$("#ConnexionHandler").on("change",function()
+	<script
+		src="<spring:url value="/resources/assets/jquery-confirm.min.js"/>"></script>
+		<script src="<spring:url value="/resources/pages/js/user.js"/>"></script>
 		
-		{
-	
-	     var isDisabled = $('#typeConnexion').prop('disabled');
-	     
-	    if (isDisabled == true)
-		{	 
-		    $("#typeConnexion").removeAttr("disabled");
-		    $("#AdressIp").removeAttr("disabled");
-		    $("#readingDisuqeLetter").removeAttr("disabled");
-		}
-	    
-	    else 
-	    {
-	     
-	    	$("#typeConnexion").prop('disabled', true);
-		    $("#AdressIp").prop('disabled', true);
-		    $("#readingDisuqeLetter").prop('disabled', true);
-		}
-	
- });
- 
-} );
- 
- 
- 
- 
- 
- 
- 
-   
-</script>
 
 </body>
 </html>

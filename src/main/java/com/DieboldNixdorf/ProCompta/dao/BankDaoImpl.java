@@ -12,41 +12,36 @@ import org.springframework.stereotype.Repository;
 
 import com.DieboldNixdorf.ProCompta.model.Bank;
 
-
 @Repository("bankDao")
 public class BankDaoImpl implements BankDao {
-	
+
 	static final Logger logger = LoggerFactory.getLogger(BankDaoImpl.class);
-	
-	@Autowired 
-	private SessionFactory sessionFactory; 
-	
+
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	@Override
 	public Bank findById(int idBank) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		 @SuppressWarnings("rawtypes")
-		  Query theQuery = currentSession.createQuery("from Bank where idbank=:theBankId" , Bank.class);
-		 theQuery.setParameter("theBankId", idBank);
-		 Bank bank =  (Bank) theQuery.getSingleResult();
-		 return bank;
+		@SuppressWarnings("rawtypes")
+		Query theQuery = currentSession.createQuery("from Bank where idbank=:theBankId", Bank.class);
+		theQuery.setParameter("theBankId", idBank);
+		Bank bank = (Bank) theQuery.getSingleResult();
+		return bank;
 	}
-	
+
 	@Override
 	public List<Bank> getAllBanks() {
-		 
-		 Session currentSession = sessionFactory.getCurrentSession();
-		 Query<Bank> theQuery = currentSession.createQuery("from Bank" , Bank.class);
-		 List<Bank> banks = theQuery.getResultList();
+
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Bank> theQuery = currentSession.createQuery("from Bank", Bank.class);
+		List<Bank> banks = theQuery.getResultList();
 		return banks;
 	}
-	
-	
 
 	@Override
 	public void saveBank(Bank bank) {
-		
-		
-		
+
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.saveOrUpdate(bank);
 	}
@@ -55,7 +50,7 @@ public class BankDaoImpl implements BankDao {
 	public void deleteBankById(int idBank) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		@SuppressWarnings("rawtypes")
-		Query  theQuery = currentSession.createQuery("delete from Bank where idbank=:theBankId");
+		Query theQuery = currentSession.createQuery("delete from Bank where idbank=:theBankId");
 		theQuery.setParameter("theBankId", idBank);
 		theQuery.executeUpdate();
 
@@ -63,18 +58,18 @@ public class BankDaoImpl implements BankDao {
 
 	@Override
 	public boolean isbankUnique(String abbreviation) {
-		 
-		  Session currentSession = sessionFactory.getCurrentSession();
-		  @SuppressWarnings("rawtypes")
-		  Query theQuery = currentSession.createQuery("from Bank where abbreviation=:theBankSSO" , Bank.class);
-		  theQuery.setParameter("theBankSSO", abbreviation);
-		  List results = theQuery.getResultList();
-		  if (results.isEmpty()) {return true;}
-		  else return false;
-		  
-		  
-	}
 
-	
+		Session currentSession = sessionFactory.getCurrentSession();
+		@SuppressWarnings("rawtypes")
+		Query theQuery = currentSession.createQuery("from Bank where abbreviation=:theBankSSO", Bank.class);
+		theQuery.setParameter("theBankSSO", abbreviation);
+		@SuppressWarnings("rawtypes")
+		List results = theQuery.getResultList();
+		if (results.isEmpty()) {
+			return true;
+		} else
+			return false;
+
+	}
 
 }

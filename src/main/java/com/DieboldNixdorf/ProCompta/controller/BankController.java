@@ -85,7 +85,7 @@ public class BankController {
 		}
 		
 		redirectAttrs.addFlashAttribute("msgTraitment" ,"ADD A NEW BANK : " );
-		redirectAttrs.addFlashAttribute("theUser" ,bank.getAbbreviation() );
+		redirectAttrs.addFlashAttribute("theBank" ,bank.getAbbreviation() );
 		redirectAttrs.addFlashAttribute("style" ,"success" );
 		redirectAttrs.addFlashAttribute("logo" ,bank.getLogo());
 		bankService.saveBank(bank);
@@ -101,7 +101,7 @@ public class BankController {
 		model.addAttribute("banks", banks);
 		model.addAttribute("bank", bank);
 		model.addAttribute("edit", true);
-		model.addAttribute("msgTraitment" ,"please entre the information in the form for  Updating bank :  " +bank.getAbbreviation() );
+		model.addAttribute("msgTraitment" ,"please entre the information for  Updating bank :  " +bank.getAbbreviation() );
 		model.addAttribute("logo" ,bank.getLogo());
 		model.addAttribute("style" ,"warning" );	
 		return "bank";
@@ -113,7 +113,7 @@ public class BankController {
 		bankService.saveBank(bank);
 		
 		redirectAttrs.addFlashAttribute("msgTraitment" ,"Update the BANK : " );
-		redirectAttrs.addFlashAttribute("theUser" ,bank.getAbbreviation() );
+		redirectAttrs.addFlashAttribute("theBank" ,bank.getAbbreviation() );
 		redirectAttrs.addFlashAttribute("style" ,"success" );
 		redirectAttrs.addFlashAttribute("logo" ,bank.getLogo());
 		return "redirect:/bank/list";
@@ -124,7 +124,7 @@ public class BankController {
 	{
 		Bank bank = bankService.findById(idBank);	
 		redirectAttrs.addFlashAttribute("msgTraitment" ,"Deleting the bank the BANK : " );
-		redirectAttrs.addFlashAttribute("theUser" ,bank.getAbbreviation() );
+		redirectAttrs.addFlashAttribute("theBank" ,bank.getAbbreviation() );
 		redirectAttrs.addFlashAttribute("style" ,"danger" );
 		redirectAttrs.addFlashAttribute("logo" ,bank.getLogo());
         bankService.deleteBankById(idBank);
@@ -152,6 +152,4 @@ public class BankController {
 		map.put("SucessfulList", fileUploadedList);
 		return map;
 	}
-	
-
 }

@@ -7,7 +7,7 @@
 	<div class="copyright sm-text-center">
 	<p class="small no-margin pull-left sm-pull-reset">
 	<span class="hint-text">Copyright © Dibold Nixdorf algeria </span>
-	<span class="font-montserrat">MBS</span>.
+	<span class="font-montserrat">SBMYA</span>.
 	<span class="hint-text">All rights reserved. </span>
     </p>
 	<div class="clearfix"></div>

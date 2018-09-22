@@ -13,30 +13,30 @@ import com.DieboldNixdorf.ProCompta.model.Branch;
 public class BranchServiceImpl implements BranchService {
 
 	@Autowired
-    private BranchDao branchDao;
+	private BranchDao branchDao;
 
 	@Override
 	public List<Branch> getAllBranchs() {
-		 
+
 		return branchDao.getAllBranchs();
 	}
 
 	@Override
 	public Branch findById(int idBranch) {
-		 
+
 		return branchDao.findById(idBranch);
 	}
 
 	@Override
 	public void saveBranch(Branch branch) {
-		
-		      branchDao.saveBranch(branch);
+
+		branchDao.saveBranch(branch);
 	}
 
 	@Override
 	public void deleteBranchById(int idBranch) {
-		
-		      branchDao.deleteBranchById(idBranch);
+
+		branchDao.deleteBranchById(idBranch);
 	}
 
 	@Override
@@ -44,6 +44,5 @@ public class BranchServiceImpl implements BranchService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	 
+
 }

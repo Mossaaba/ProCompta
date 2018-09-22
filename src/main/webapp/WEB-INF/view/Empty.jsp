@@ -15,7 +15,7 @@
     
     
     <body class="fixed-header windows desktop pace-done">
-     
+     <security:csrfMetaTags />
     <jsp:include page="../view/fragments/menu.jsp"></jsp:include>    
     
          
@@ -57,22 +57,18 @@
 							<a class="remove" href="javascript:;"></a>
 							</div>
 							</div>
-							
-							
 							<div class="card-body no-scroll no-padding">
-							<form action="http://pages.revox.io/file-upload" class="dropzone no-margin">
 							
 							
+							<form:form action="/fileUpload" class="dropzone no-margin">
 							<div class="fallback">
 							 <input name="file" type="file" multiple />
+							 
+							 
+							 
 							</div>
-							
-							
-							</form>
+							</form:form>
 							</div>
-							
-							
-							
 							</div>
 
                        </div>

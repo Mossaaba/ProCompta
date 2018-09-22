@@ -8,31 +8,100 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/pace/pace-theme-flash.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/bootstrap/css/bootstrap.min.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/font-awesome/css/font-awesome.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/jquery-scrollbar/jquery.scrollbar.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/switchery/css/switchery.min.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/pages/css/pages-icons.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/bootstrap-datepicker/css/datepicker3.css"/>"
+	type="text/css" />
+<link class="main-stylesheet" rel="stylesheet"
+	href="<spring:url value="/resources/pages/css/themes/corporate.css"/>"
+	type="text/css" />
+<link rel="stylesheet" type="text/css"
+	href="<spring:url value="/resources/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/bootstrap-tag/bootstrap-tagsinput.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css"/>"
+	type="text/css" />
+ 
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/summernote/css/summernote.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/select2/css/select2.min.css"/>"
+	type="text/css" media="screen" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/ion-slider/css/ion.rangeSlider.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/ion-slider/css/ion.rangeSlider.skinFlat.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.nouislider.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css"/>"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<spring:url value="/resources/assets/plugins/datatables-responsive/css/datatables.responsive.css"/>"
+	type="text/css" />
+	
+<link  
+	href="<spring:url value="/resources/assets/pages/Font-css/all.css"/>" />
+
+ 
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+	window.onload = function() {
+		// fix for windows 8
+		if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+			document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
+	}
+	
+	
+	 
+	
+	
+</script>
+
+
+
       <nav class="page-sidebar" data-pages="sidebar">
 				
-				<div class="sidebar-overlay-slide from-top" id="appMenu">
-					<div class="row">
-					<div class="col-xs-6 no-padding">
-					<a href="#" class="p-l-40"><img src="<spring:url value="/resources/assets/img/demo/social_app.svg"/>" alt="socail">
-					</a>
-					</div>
-					<div class="col-xs-6 no-padding">
-					<a href="#" class="p-l-10"><img src="<spring:url value="/resources/assets/img/demo/email_app.svg"/>" alt="socail">
-					</a>
-					</div>
-					</div>
-					
-					<div class="row">
-					<div class="col-xs-6 m-t-20 no-padding">
-					<a href="#" class="p-l-40"><img src="<spring:url value="/resources/assets/img/demo/calendar_app.svg"/>" alt="socail">
-					</a>
-					</div>
-					<div class="col-xs-6 m-t-20 no-padding">
-					<a href="#" class="p-l-10"><img src="<spring:url value="/resources/assets/img/demo/add_more.svg"/>" alt="socail">
-					</a>
-					</div>
-					</div> 
-				</div>
+				 
 
 				<div class="sidebar-header">
 				       <span class=""><i class="pg-menu_justify"></i></span>
@@ -160,7 +229,15 @@
 			
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="<spring:url value="/Atm/list"/>">ATM</a>  
-			<span class="icon-thumbnail"><i class="fa fa-microchip" style="font-size :25px;"></i></span>
+			
+			
+			<span class="icon-thumbnail">
+			  <img
+			width="30" height="30"
+			src="<spring:url value="/resources/assets/img/atm-white.svg"/>">
+		    </span>
+																
+															 
 			</li>
 			
 			
