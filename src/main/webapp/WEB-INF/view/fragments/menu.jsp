@@ -127,7 +127,7 @@
 			</li>
 			<li class="">
 			
-			<a href="<spring:url value="/fileuploadController/"/>"  >
+			<a href="<spring:url value="/fileUploader"/>"  >
 			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.UplodingFile"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-cloud-upload" style="font-size :27px;" ></i></span>
@@ -238,6 +238,10 @@
 		    </span>
 																
 															 
+			</li>
+			<li class="title font-montserrat no-margin text-uppercase">
+			<a href="<spring:url value="/regeX/list"/>">RegeX</a>  
+			<span class="icon-thumbnail"><i class="fa fa-etsy" style="font-size :25px;"></i></span>
 			</li>
 			
 			

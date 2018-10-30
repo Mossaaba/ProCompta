@@ -1,119 +1,131 @@
 package com.DieboldNixdorf.ProCompta.controller;
 
- 
- 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
  
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.DieboldNixdorf.ProCompta.model.Atm;
-import com.DieboldNixdorf.ProCompta.model.Journal;
-import com.DieboldNixdorf.ProCompta.service.AtmService;
-import com.DieboldNixdorf.ProCompta.service.JounalService;
- 
-import com.DieboldNixdorf.ProCompta.tools.FileBucket;
-import com.DieboldNixdorf.ProCompta.validator.FileValidator;
- 
- 
+import com.DieboldNixdorf.ProCompta.model.UploadedFile;
+import com.DieboldNixdorf.ProCompta.service.FileUploadService;
+
 @Controller
-@RequestMapping("/uploading")
-public class FileUploadController {
+public class FileUploadController { 
 
-	 
-	@Autowired
-	JounalService jounalService;
-     
-    @Autowired
-    MessageSource messageSource;
- 
-    @Autowired
-    FileValidator fileValidator;
-    
-    
-    @Autowired
-    AtmService atmService;
-     
-    @InitBinder("fileBucket")
-    protected void initBinder(WebDataBinder binder) {
-       binder.setValidator(fileValidator);
+  @Autowired
+  private FileUploadService uploadService;
+
+  @RequestMapping("/fileUploader")
+  public String home() {
+
+    return "fileUploader";
+  }
+
+  @RequestMapping(value = "/upload", method = RequestMethod.POST)
+  public @ResponseBody List<UploadedFile> upload(MultipartHttpServletRequest request,
+      HttpServletResponse response) throws IOException {
+
+    // Getting uploaded files from the request object
+    Map<String, MultipartFile> fileMap = request.getFileMap();
+
+    // Maintain a list to send back the files info. to the client side
+    List<UploadedFile> uploadedFiles = new ArrayList<UploadedFile>();
+
+    // Iterate through the map
+    for (MultipartFile multipartFile : fileMap.values()) {
+
+      // Save the file to local disk
+      saveFileToLocalDisk(multipartFile);
+
+      UploadedFile fileInfo = getUploadedFileInfo(multipartFile);
+
+      // Save the file info to database
+      fileInfo = saveFileToDatabase(fileInfo);
+
+      // adding the file info to the list
+      uploadedFiles.add(fileInfo);
     }
-    
-    
-    @RequestMapping(value = { "/add-JournalFile-{idAtm}" }, method = RequestMethod.GET)
-    public String addDocuments(@PathVariable int idAtm, ModelMap model) {
-    	
-    	Atm atm = atmService.findById(idAtm);
-        model.addAttribute("atm", atm);
-        
-        FileBucket fileModel = new FileBucket();
-        model.addAttribute("fileBucket", fileModel);
-        
-        List<Journal> journals = jounalService.findAll();
-        model.addAttribute("journals", journals);
-         
-        return "managedocuments";
+
+    return uploadedFiles;
+  }
+
+
+  @RequestMapping(value = {"/list"})
+  public String listBooks(Map<String, Object> map) {
+
+    map.put("fileList", uploadService.listFiles());
+
+    return "/listFiles";
+  }
+
+  @RequestMapping(value = "/get/{fileId}", method = RequestMethod.GET)
+  public void getFile(HttpServletResponse response, @PathVariable Long fileId) {
+
+    UploadedFile dataFile = uploadService.getFile(fileId);
+
+    File file = new File(dataFile.getLocation(), dataFile.getName());
+
+    try {
+      response.setContentType(dataFile.getType());
+      response.setHeader("Content-disposition", "attachment; filename=\"" + dataFile.getName()
+          + "\"");
+
+      FileCopyUtils.copy(FileUtils.readFileToByteArray(file), response.getOutputStream());
+
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    
-    @PostMapping (value= {"/add-JournalFile-{idAtm}"})
-    public String addDocumenets (FileBucket fileBucket , @PathVariable int idAtm ,
-    		                     Model model ,  HttpServletResponse response) throws IOException
-    
-    {
-    	
-    	
-    	Atm atm= atmService.findById(idAtm);
-    	model.addAttribute("atm",atm);
-    
-    	saveDocument(fileBucket, atm);
-   
-        return "managedocuments";
-    	
-    	
-    	 
-    }
-    
-    
-    private void saveDocument(FileBucket fileBucket, Atm atm) throws IOException{
-        
-        Journal jrn = new Journal();
-         
-        MultipartFile multipartFile = fileBucket.getFile();
-        jrn.setNomJournal(multipartFile.getOriginalFilename());
-        jrn.setContent(multipartFile.getContentType().getBytes());
-        jrn.setContent(multipartFile.getBytes());
-        jrn.setAtm(atm);
-        
-        
-        
-        
-        //Traitement 
-        
-        
-        
-        jounalService.save(jrn, atm.getIdAtm());
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-	
+  }
+
+
+  private void saveFileToLocalDisk(MultipartFile multipartFile) throws IOException,
+      FileNotFoundException {
+
+    String outputFileName = getOutputFilename(multipartFile);
+
+    FileCopyUtils.copy(multipartFile.getBytes(), new FileOutputStream(outputFileName));
+  }
+
+  private UploadedFile saveFileToDatabase(UploadedFile uploadedFile) {
+
+    return uploadService.saveFile(uploadedFile);
+
+  }
+
+  private String getOutputFilename(MultipartFile multipartFile) {
+
+    return getDestinationLocation() + multipartFile.getOriginalFilename();
+  }
+
+  private UploadedFile getUploadedFileInfo(MultipartFile multipartFile) throws IOException {
+
+    UploadedFile fileInfo = new UploadedFile();
+    fileInfo.setName(multipartFile.getOriginalFilename());
+    fileInfo.setSize(multipartFile.getSize());
+    fileInfo.setType(multipartFile.getContentType());
+    fileInfo.setLocation(getDestinationLocation());
+
+    return fileInfo;
+  }
+
+  private String getDestinationLocation() {
+    return "C:/myProComptaTemp/";
+  }
 }

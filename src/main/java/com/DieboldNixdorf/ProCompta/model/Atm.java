@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "atm2")
+@Table(name = "atm")
 public class Atm {
 
 	@Id

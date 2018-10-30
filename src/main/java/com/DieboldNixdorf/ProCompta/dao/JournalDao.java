@@ -6,7 +6,6 @@ import com.DieboldNixdorf.ProCompta.model.Journal;
 
 public interface JournalDao {
 	
-	
 	List<Journal> findAll();
     
 	Journal findById(int idjournal);
@@ -17,6 +16,7 @@ public interface JournalDao {
      
     void deleteById(int idjournal);
 	
-    void save(Journal journal  , int idAtm);
+    void save(Journal journal , int idAtm);
 
 }
+  
