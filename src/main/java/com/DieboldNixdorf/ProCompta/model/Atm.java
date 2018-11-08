@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "atm")
 public class Atm {
@@ -74,13 +76,20 @@ public class Atm {
 	}
 
 	@Transient
+	@JsonIgnore
 	@OneToMany(mappedBy = "atm", cascade = CascadeType.ALL)
 	private List<Journal> AtmJounals;
-
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "atm", cascade = CascadeType.ALL)
+	private List<FileUpload> AtmFileUpload;
+	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name = "idBanque")
 	private Branch branch;
 
+	
+	@JsonIgnore
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name = "idConfiguration")
 	private Host host;
@@ -195,6 +204,15 @@ public class Atm {
 			AtmJounals = new ArrayList<>();
 		}
 		AtmJounals.add(journal);
+	}
+	
+	
+	public void addFile(FileUpload fileUpload) {
+
+		if (AtmFileUpload == null) {
+			AtmFileUpload = new ArrayList<>();
+		}
+		AtmFileUpload.add(fileUpload);
 	}
 
 }

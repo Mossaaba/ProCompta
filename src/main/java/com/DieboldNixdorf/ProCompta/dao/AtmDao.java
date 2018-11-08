@@ -15,5 +15,7 @@ public interface AtmDao {
 	void saveAtm(Atm atm, int idHost, int idBranch);
 
 	void deleteById(int idAtm);
+	
+	public List<Atm> listAtmsByBranch(int idBranch);
 
 }

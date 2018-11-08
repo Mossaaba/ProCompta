@@ -11,34 +11,44 @@ import javax.persistence.Table;
 @Table(name = "uploaded_file")
 public class UploadedFile {
 
-  private Long id;
-  private String name;
-  private String location;
-  private Long size;
-  private String type;
+	  @Id 
+	  @GeneratedValue(strategy=GenerationType.IDENTITY)
+	  @Column(name="id_file")
+      private Long id;
+	 
+	 @Column(name="nom_uploadedfile")
+     private String name;
+	 
+	 @Column(name="location")
+     private String location;
+	 
+	 @Column(name="size")
+     private Long size;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+	 @Column(name="type_file")
+     private String type;
+
+ 
   public Long getId() {
     return id;
   }
 
-  @Column(nullable = false)
+  
   public String getName() {
     return name;
   }
 
-  @Column(nullable = false)
+ 
   public String getLocation() {
     return location;
   }
 
-  @Column()
+ 
   public Long getSize() {
     return size;
   }
 
-  @Column(nullable = false)
+ 
   public String getType() {
     return type;
   }

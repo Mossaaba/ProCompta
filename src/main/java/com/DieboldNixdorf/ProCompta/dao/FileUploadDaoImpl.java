@@ -14,32 +14,31 @@ import com.DieboldNixdorf.ProCompta.model.UploadedFile;
 @Repository
 public class FileUploadDaoImpl implements FileUploadDao {
 
-  @Autowired
-  private SessionFactory sessionFactory;
+	@Autowired
+    private SessionFactory sessionFactory;
 
-  @SuppressWarnings({ "unchecked", "deprecation" })
-  public List<UploadedFile> listFiles() {
-    return getSession().createCriteria(UploadedFile.class).list();
-  }
-
-  public UploadedFile getFile(Long id) {
-    return (UploadedFile) getSession().get(UploadedFile.class, id);
-  }
-
-  private Session getSession() {
-    Session sess = getSessionFactory().getCurrentSession();
-    if (sess == null) {
-      sess = getSessionFactory().openSession();
+    public List<UploadedFile> listFiles() {
+           return getSession().createCriteria(UploadedFile.class).list();
     }
-    return sess;
-  }
 
-  public UploadedFile saveFile(UploadedFile uploadedFile) {
-    return (UploadedFile) getSession().merge(uploadedFile);
+    public UploadedFile getFile(Long id) {
+           return (UploadedFile) getSession().get(UploadedFile.class, id);
+    }
 
-  }
+    public UploadedFile saveFile(UploadedFile uploadedFile) {
+           return (UploadedFile) getSession().merge(uploadedFile);
+    }
 
-  private SessionFactory getSessionFactory() {
-    return sessionFactory;
-  }
+    private Session getSession() {
+           Session sess = getSessionFactory().getCurrentSession();
+           if (sess == null) {
+                  sess = getSessionFactory().openSession();
+           }
+           return sess;
+    }
+
+    private SessionFactory getSessionFactory() {
+           return sessionFactory;
+    }
+    
 }

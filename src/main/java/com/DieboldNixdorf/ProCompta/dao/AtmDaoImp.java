@@ -66,4 +66,13 @@ public class AtmDaoImp implements AtmDao {
 
 	}
 
+	@Override
+	public List<Atm> listAtmsByBranch(int idBranch) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Atm> theQuery = currentSession.createQuery("from Atm where idbanque=:theBrancheId ", Atm.class);
+		theQuery.setParameter("theBrancheId", idBranch);
+		List<Atm> listAtms = theQuery.getResultList();
+		return listAtms;
+	}
+
 }

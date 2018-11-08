@@ -5,93 +5,85 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
  
-
-import org.apache.commons.io.FileUtils;
+ 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.DieboldNixdorf.ProCompta.model.Branch;
+import com.DieboldNixdorf.ProCompta.model.FileUpload;
+import com.DieboldNixdorf.ProCompta.model.Transaction;
 import com.DieboldNixdorf.ProCompta.model.UploadedFile;
+import com.DieboldNixdorf.ProCompta.service.BranchService;
+import com.DieboldNixdorf.ProCompta.service.FileService;
 import com.DieboldNixdorf.ProCompta.service.FileUploadService;
 
-@Controller
+@CrossOrigin
+@RestController
 public class FileUploadController { 
 
   @Autowired
+  private FileService fileService;
+  
+  
+  @Autowired
   private FileUploadService uploadService;
+  
+  @Autowired 
+  private BranchService branchService;
 
-  @RequestMapping("/fileUploader")
-  public String home() {
-
-    return "fileUploader";
+  @RequestMapping(value = "/upload", method = RequestMethod.GET)
+      public ModelAndView downloadFile( ) {	  
+	  ModelAndView mav = new ModelAndView("fileUpload");
+	   
+	  List<Branch> listBranches =  branchService.getAllBranchs();
+	  mav.addObject("listBranches", listBranches);
+	  
+	  FileUpload fileUpload = new FileUpload();
+	  mav.addObject("fileUpload",fileUpload); 	  
+	  
+	  return mav; 
+       
   }
-
-  @RequestMapping(value = "/upload", method = RequestMethod.POST)
+  
+  @PostMapping("/upload")
   public @ResponseBody List<UploadedFile> upload(MultipartHttpServletRequest request,
-      HttpServletResponse response) throws IOException {
+      HttpServletResponse response ,  @ModelAttribute FileUpload fileUpload  ) throws IOException {
 
-    // Getting uploaded files from the request object
+  
     Map<String, MultipartFile> fileMap = request.getFileMap();
 
-    // Maintain a list to send back the files info. to the client side
+     
     List<UploadedFile> uploadedFiles = new ArrayList<UploadedFile>();
-
-    // Iterate through the map
     for (MultipartFile multipartFile : fileMap.values()) {
-
-      // Save the file to local disk
       saveFileToLocalDisk(multipartFile);
-
       UploadedFile fileInfo = getUploadedFileInfo(multipartFile);
-
-      // Save the file info to database
       fileInfo = saveFileToDatabase(fileInfo);
-
-      // adding the file info to the list
       uploadedFiles.add(fileInfo);
     }
 
     return uploadedFiles;
-  }
-
-
-  @RequestMapping(value = {"/list"})
-  public String listBooks(Map<String, Object> map) {
-
-    map.put("fileList", uploadService.listFiles());
-
-    return "/listFiles";
-  }
-
-  @RequestMapping(value = "/get/{fileId}", method = RequestMethod.GET)
-  public void getFile(HttpServletResponse response, @PathVariable Long fileId) {
-
-    UploadedFile dataFile = uploadService.getFile(fileId);
-
-    File file = new File(dataFile.getLocation(), dataFile.getName());
-
-    try {
-      response.setContentType(dataFile.getType());
-      response.setHeader("Content-disposition", "attachment; filename=\"" + dataFile.getName()
-          + "\"");
-
-      FileCopyUtils.copy(FileUtils.readFileToByteArray(file), response.getOutputStream());
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
 
@@ -128,4 +120,5 @@ public class FileUploadController {
   private String getDestinationLocation() {
     return "C:/myProComptaTemp/";
   }
+  
 }

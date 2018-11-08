@@ -8,6 +8,7 @@
 	<packaging>war</packaging>
 
 	<name>ProCompta</name>
+	
 
 	<properties>
 		<springframework.version>5.0.2.RELEASE</springframework.version>
@@ -142,18 +143,15 @@
 </dependency>
 
 		 
-		  <!-- Jackson JSON Processor -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		 
+<dependency>
+
+<groupId>com.fasterxml.jackson.core</groupId>
+
+<artifactId>jackson-databind</artifactId>
+
+<version>2.9.5</version>
+
+</dependency>		 
 		 
 		
 		<!-- Java tests Unit -->
@@ -176,6 +174,7 @@
 		    <artifactId>jaxb-api</artifactId>
 		    <version>2.3.0</version>
 		</dependency>
+		 
 
 	</dependencies>
 
@@ -190,11 +189,6 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.0</version>
 				</plugin>
-				
-				 
-				 
-               
-               
 				<plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>

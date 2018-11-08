@@ -58,6 +58,14 @@ public class AtmServiceImpl implements AtmService {
 		 atmDao.saveAtm(atm, idHost, idBranch);
 		
 	}
+
+
+
+	@Override
+	public List<Atm> listAtmsByBranch(int idBranch) {
+		// TODO Auto-generated method stub
+		return atmDao.listAtmsByBranch(idBranch);
+	}
 	
 	
 	

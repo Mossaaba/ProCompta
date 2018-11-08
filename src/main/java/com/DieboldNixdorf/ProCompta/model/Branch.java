@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "banque")
 public class Branch {
@@ -38,10 +40,12 @@ public class Branch {
 	@Column(name = "nombrestation")
 	private int nbrStation;
 
+	@JsonIgnore
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name = "idbankref")
 	private Bank bank;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "branch", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
 			CascadeType.REFRESH })
 	private List<Atm> atms;
