@@ -262,8 +262,7 @@
 
 																<tr>
 
-																	<td
-																		class="text-primary font-montserrat v-align-middle password">${regeX.nameRegex}</td>
+																	<td class="text-primary font-montserrat v-align-middle password">${regeX.nameRegex}</td>
 																	<td class="text-primary font-montserrat v-align-middle fs-10 ">${regeX.valueRegex}</td>
 																	<td class="text-primary font-montserrat v-align-middle fs-10 ">${regeX.index_X}</td>
 																	<td class="text-primary font-montserrat v-align-middle fs-10 ">${regeX.index_Y}</td>

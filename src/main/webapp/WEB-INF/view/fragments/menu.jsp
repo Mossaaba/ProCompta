@@ -127,7 +127,7 @@
 			</li>
 			<li class="">
 			
-			<a href="<spring:url value="/fileUploader"/>"  >
+			<a href="<spring:url value="/upload"/>"  >
 			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.UplodingFile"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-cloud-upload" style="font-size :27px;" ></i></span>
@@ -141,7 +141,7 @@
 			</li>
 			
 			<li class=" ">
-			<a href="<spring:url value="/transaction"/>"  >
+			<a href="<spring:url value="/transaction"/>"  > 
 			<span class="title font-montserrat no-margin text-uppercase "><spring:message code="label.Transactions"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-exchange" style="font-size :25px;"></i></span>
@@ -179,10 +179,6 @@
 			 
            </ul>
             </li>
-
-		
-
-		
 
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="charts.html">

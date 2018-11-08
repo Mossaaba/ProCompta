@@ -1,119 +1,150 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ page isELIgnored="false"%>
-<%@page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
-
-
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" name="viewport"
-	content="width=device-width, initial-scale=1">
+       content="width=device-width, initial-scale=1">
 <title>Spring MVC + Dropzone.js Example</title>
 
 <link rel="stylesheet" type="text/css"
-	href='<c:url value="/resources/assets/dropzone/libs/bootstrap-3.1.1/css/bootstrap.min.css"/>'>
+	href="<spring:url value="/resources/assets/plugins/dropzone/css/dropzone.css"/>" />
+
 <link rel="stylesheet" type="text/css"
-	href='<c:url value="/resources/assets/dropzone/libs/bootstrap-dialog/css/bootstrap-dialog.min.css"/>'>
-<link rel="stylesheet" type="text/css"
-	href='<c:url value="/resources/assets/dropzone/css/style.css"/>'>
+	href="<spring:url value="/resources/pages/css/hover.css"/>" />
+	
+	
 
-<body class="fixed-header windows desktop pace-done">
-<security:csrfMetaTags />
-<jsp:include page="../view/fragments/menu.jsp"></jsp:include>
- 
-	 
-
-	<div class="page-container ">
-		<jsp:include page="../view/fragments/header.jsp"></jsp:include>
-
-
-
-
-		<div class="page-content-wrapper content-builder active full-height"
+</head>
+<body class="fixed-header windows desktop pace-done" >
+	<jsp:include page="../view/fragments/menu.jsp"></jsp:include>
+       <div class="container">
+       <jsp:include page="../view/fragments/header.jsp"></jsp:include>
+       
+       
+       
+       <br>   <br>   <br>   <br>
+       <div class="page-content-wrapper content-builder active full-height"
 			id="plainContent">
+
+	<div class=" container-fluid container-fixed-lg ">
+
 			<div class="page-content-wrapper">
 				<div class="content ">
+       
+       
+              <div class="panel panel-default">
+                     <div class="panel-heading text-center">
+                           <h3>Spring MVC + Dropzone.js Example</h3>
+                     </div>
+                     <div class="panel-body">
+                           <div>
+                                  <form:form id="dropzone-form" class="dropzone"
+                                         enctype="multipart/form-data" action="uploadX?${_csrf.parameterName}=${_csrf.token}">
 
+                                         <div class="dz-default dz-message file-dropzone text-center well col-sm-12">
+                                                 <span class="glyphicon glyphicon-paperclip"></span> <span>
+                                                       To attach files, drag and drop here</span><br>
+                                                <span>OR</span><br>
+                                                <span>Just Click</span>
+                                         </div>
 
-					<div class=" container-fluid   container-fixed-lg ">
+                                         <!-- this is were the previews should be shown. -->
+                                         <div class="dropzone-previews"></div>
+                                         <button id="upload-button" class="btn btn-primary">
+                                         <span class="glyphicon glyphicon-upload"></span> Upload
+                                  </button>
+                                  </form:form>
+                                  <hr>
+                                  
+                                  <a class="btn btn-primary pull-right" href="list"> <span
+                                         class="glyphicon glyphicon-eye-open"></span> View All Uploads
+                                  </a>
+                           </div>
+                     </div>
+              </div></div></div></div></div>
+       </div>
+ 	<script
+		src="<spring:url value="/resources/assets/plugins/dropzone/dropzone.min.js"/>"></script>
+       <script >
+       Dropzone.options.dropzoneForm = {
 
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">File Upload</li>
-						</ol>
+    		  
+              autoProcessQueue : false,
+              uploadMultiple : true,
+              maxFilesize : 256, // MB
+              parallelUploads : 100,
+              maxFiles : 100,
+              addRemoveLinks : true,
+               
+              previewsContainer : ".dropzone-previews",
 
-						<div class="row bg-white">
+              // The setting up of the dropzone
+              init : function() {
 
+                     var myDropzone = this;
 
-							<div class="col-md-5">
+                     // first set autoProcessQueue = false
+                     $('#upload-button').on("click", function(e) {
 
-								<div class="card card-transparent">
-									<div class="card-body">
+                           myDropzone.processQueue();
+                     });
 
-										<form:form id="dropzone-form" class="dropzone"
-											enctype="multipart/form-data">
+                     // customizing the default progress bar
+                     this.on("uploadprogress", function(file, progress) {
 
-											<div
-												class="dz-default dz-message file-dropzone text-center well col-sm-12">
+                           progress = parseFloat(progress).toFixed(0);
 
-												<span class="glyphicon glyphicon-paperclip"></span> <span>
-													To attach files, drag and drop here</span><br> <span>OR</span><br>
-												<span>Just Click</span>
-											</div>
+                           var progressBar = file.previewElement.getElementsByClassName("dz-upload")[0];
+                           progressBar.innerHTML = progress + "%";
+                     });
 
-											<!-- this is were the previews should be shown. -->
-											<div class="dropzone-previews"></div>
-										</form:form>
-										<hr>
-												<button id="upload-button" class="btn btn-primary">
-													<span class="glyphicon glyphicon-upload"></span> Upload
-												</button>
-												<a class="btn btn-primary pull-right" href="list"> <span
-													class="glyphicon glyphicon-eye-open"></span> View All Uploads
-												</a>
-										
-										
-									</div>
-								</div>
+                     // displaying the uploaded files information in a Bootstrap dialog
+                     this.on("successmultiple", function(files, serverResponse) {
+                           showInformationDialog(files, serverResponse);
+                     });
+              }
+       }
 
-							</div>
+       
+       function showInformationDialog(files, objectArray) 
+       {
 
+              var responseContent = "";
 
+              for (var i = 0; i < objectArray.length; i++) {
 
-						</div>
-					</div>
-				</div>
+                     var infoObject = objectArray[i];
 
+                     for ( var infoKey in infoObject) {
+                           if (infoObject.hasOwnProperty(infoKey)) {
+                             responseContent = responseContent + " " + infoKey + " -> " + infoObject[infoKey] + "<br>";
+                           }
+                     }
+                     responseContent = responseContent + "<hr>";
+              }
 
-				<jsp:include page="../view/fragments/footer.jsp"></jsp:include>
-			</div>
-		</div>
+              // from the library bootstrap-dialog.min.js
+              BootstrapDialog.show({
+                     title : '<b>-----Server Response------</b>',
+                     message : responseContent
+              });
+       }
 
-	</div>
-
-
-
-    <script type="text/javascript"
-		src='<c:url value="/resources/assets/dropzone/libs/jquery/jquery-2.1.1.js"/>'></script>
-	<script type="text/javascript"
-		src='<c:url value="/resources/assets/dropzone/libs/bootstrap-3.1.1/js/bootstrap.js"/>'></script>
-	<script type="text/javascript"
-		src='<c:url value="/resources/assets/dropzone/libs/bootstrap-dialog/js/bootstrap-dialog.min.js"/>'></script>
-	<script type="text/javascript"
-		src='<c:url value="/resources/assets/dropzone/libs/dropzone.js"/>'></script>
-	<script type="text/javascript"
-		src='<c:url value="/resources/assets/dropzone/js/app.js"/>'></script>
-
-
-	 
-	
-	
+ 
+    
+          
+       
+       
+       </script>
+      
 </body>
 </html>
