@@ -43,7 +43,6 @@
 <link rel="stylesheet"
 	href="<spring:url value="/resources/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css"/>"
 	type="text/css" />
- 
 <link rel="stylesheet"
 	href="<spring:url value="/resources/assets/plugins/summernote/css/summernote.css"/>"
 	type="text/css" />
@@ -74,6 +73,9 @@
 	
 <link  
 	href="<spring:url value="/resources/assets/pages/Font-css/all.css"/>" />
+	
+	<link rel="stylesheet" type="text/css"
+	href="<spring:url value="/resources/pages/css/hover.css"/>" />
 
  
 
@@ -249,16 +251,9 @@
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="#">Initialisation</a>
 			<span class="icon-thumbnail"><i class="fa fa-cog" style="font-size :25px;"></i></span>
-			</li>
-			
-			 
+			</li>	 
 			</ul>
 			</li>
-
            </ul>
-
-
-
- 
         </div>
 </nav>

@@ -4,14 +4,12 @@ import java.util.List;
 
 import com.DieboldNixdorf.ProCompta.model.UploadedFile;
 
- 
-
 public interface FileUploadService {
 
-  List<UploadedFile> listFiles();
+	List<UploadedFile> listFiles();
 
-  UploadedFile getFile(Long id);
+	UploadedFile getFile(Long id);
 
-  UploadedFile saveFile(UploadedFile uploadedFile);
+	UploadedFile saveFile(UploadedFile uploadedFile);
 
 }

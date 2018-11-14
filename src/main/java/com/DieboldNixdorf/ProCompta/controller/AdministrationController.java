@@ -15,7 +15,6 @@ public class AdministrationController
 	@RequestMapping ("/administration")
 	public String GoAdministration () 
 	{
-		 
 		return "administration";
 	}
 	

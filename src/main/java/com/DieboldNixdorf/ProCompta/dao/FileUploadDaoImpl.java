@@ -17,7 +17,8 @@ public class FileUploadDaoImpl implements FileUploadDao {
 	@Autowired
     private SessionFactory sessionFactory;
 
-    public List<UploadedFile> listFiles() {
+    @SuppressWarnings({ "unchecked", "deprecation" })
+	public List<UploadedFile> listFiles() {
            return getSession().createCriteria(UploadedFile.class).list();
     }
 

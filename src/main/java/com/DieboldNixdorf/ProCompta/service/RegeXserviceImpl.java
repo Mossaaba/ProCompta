@@ -14,13 +14,12 @@ import com.DieboldNixdorf.ProCompta.model.RegeX;
 @Transactional
 public class RegeXserviceImpl implements RegeXService {
 
-	@Autowired 
+	@Autowired
 	private RegexDao regexDao;
-	
-	
+
 	@Override
 	public List<RegeX> getAllRegeX() {
-		 
+
 		return regexDao.getAllRegeX();
 	}
 

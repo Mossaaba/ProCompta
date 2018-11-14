@@ -8,22 +8,14 @@ import org.springframework.validation.Validator;
 
 import com.DieboldNixdorf.ProCompta.model.Incident;
 import com.DieboldNixdorf.ProCompta.service.IncidentService;
- 
-
- 
- 
-
- 
 
 //http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html#validation-mvc-configuring
 @Component
 public class IncidentFormValidator implements Validator {
 
-	 
-	
 	@Autowired
 	IncidentService incidentService;
-	
+
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Incident.class.equals(clazz);
@@ -31,17 +23,15 @@ public class IncidentFormValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "DateIncident", "NotEmpty.transactioForm.DateIncident");
-		  
+
 		/*
-		  
-		 Transaction transaction = (Transaction) target;
-		if(nauthorisation.getNumber()==null || nauthorisation.getNumber()<=0){
-			errors.rejectValue("number", "NotEmpty.userForm.number");
-		 }
-	    */
-		 
+		 * 
+		 * Transaction transaction = (Transaction) target;
+		 * if(nauthorisation.getNumber()==null || nauthorisation.getNumber()<=0){
+		 * errors.rejectValue("number", "NotEmpty.userForm.number"); }
+		 */
 
 	}
 

@@ -17,22 +17,17 @@
 
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/jquery-confirm.min.css"/>" />
-	
-	
 <style type="text/css">
-
 input[type="file"] {
-    display: none;
+	display: none;
 }
- 
+
 .custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+	border: 1px solid #ccc;
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
 }
-
-
 </style>
 
 
@@ -64,12 +59,13 @@ input[type="file"] {
 							<li class="nav-item"><a id="listeAtm"
 								class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold"
 								data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
-									<span><spring:message code="label.space"></spring:message></span><span> </span><span> </span><i
-									class="fa fa-building fa-4x"></i> <span><spring:message code="label.bank"></spring:message></span>
+									<span><spring:message code="label.space"></spring:message></span><span>
+								</span><span> </span><i class="fa fa-building fa-4x"></i> <span><spring:message
+											code="label.bank"></spring:message></span>
 							</a></li>
 						</ul>
 
-                           <br>
+						<br>
 						<div class="row bg-white">
 							<div class="col-md-5">
 
@@ -77,7 +73,8 @@ input[type="file"] {
 									<div class="card-header ">
 										<div
 											class="card-title font-montserrat blod text-primary bold fs-15">
-											<i class="fa fa-list" aria-hidden="true"></i><spring:message code="label.listBanks"></spring:message>
+											<i class="fa fa-list" aria-hidden="true"></i>
+											<spring:message code="label.listBanks"></spring:message>
 										</div>
 									</div>
 
@@ -92,14 +89,16 @@ input[type="file"] {
 
 													<th
 														class="v-align-middle text-primary bold fs-12 text-uppercase"><i
-														class="fa fa-building" aria-hidden="true"></i> <spring:message code="label.BankName"></spring:message></th>
+														class="fa fa-building" aria-hidden="true"></i> <spring:message
+															code="label.BankName"></spring:message></th>
 													<th
 														class="v-align-middle text-primary bold fs-12 text-uppercase"><i
-														class="fa fa-picture-o" aria-hidden="true"></i> <spring:message code="label.Banklogo"></spring:message></th>
+														class="fa fa-picture-o" aria-hidden="true"></i> <spring:message
+															code="label.Banklogo"></spring:message></th>
 													<th
 														class="v-align-middle text-primary bold fs-12 text-uppercase"><i
-														class="fa fa-credit-card-alt" aria-hidden="true"></i> <spring:message code="label.BankBin"></spring:message>
-														°</th>
+														class="fa fa-credit-card-alt" aria-hidden="true"></i> <spring:message
+															code="label.BankBin"></spring:message> °</th>
 
 													<security:authorize access="hasRole('ADMIN')">
 														<th
@@ -215,8 +214,8 @@ input[type="file"] {
 
 
 										<p class="font-montserrat blod text-primary bold fs-15">
-											<i class="fa fa-info-circle m-l-5" aria-hidden="true"> </i> 
-											<spring:message code="label.BankInfoForm"></spring:message>  
+											<i class="fa fa-info-circle m-l-5" aria-hidden="true"> </i>
+											<spring:message code="label.BankInfoForm"></spring:message>
 										</p>
 
 										<div class="form-group-attached">
@@ -235,8 +234,7 @@ input[type="file"] {
 
 													<div class="form-group form-group-default">
 														<label><spring:message code="label.BankAdresse"></spring:message><i
-															class="fa fa-map text-complete m-l-5"></i>
-														</label>
+															class="fa fa-map text-complete m-l-5"></i> </label>
 														<form:input path="adressBank" type="text"
 															cssClass="form-control" />
 													</div>
@@ -248,16 +246,19 @@ input[type="file"] {
 														<label><spring:message code="label.Banklogo"></spring:message><i
 															class="fa fa-picture-o text-complete m-l-5"></i></label>
 														<div class="">
-														
-                                                             <label for="file-upload" class="custom-file-upload new_Btn" id="new_Btn">
-														    <i class="fa fa-cloud-upload text-complete m-l-5 "></i> Click here To Upload
-														    </label>
-														    
-															<form:input path="logo" type='file' id='file' 
+
+															<label for="file-upload"
+																class="custom-file-upload new_Btn" id="new_Btn">
+																<i class="fa fa-cloud-upload text-complete m-l-5 "></i>
+																Click here To Upload
+															</label>
+
+															<form:input path="logo" type='file' id='file'
 																cssClass="btn btn-sm " />
-															<br> 
-															
-															<button id="UplaodLogo" class="btn btn-sm btn-primary pull-right"
+															<br>
+
+															<button id="UplaodLogo"
+																class="btn btn-sm btn-primary pull-right"
 																onclick="uplaod();" style="display: none;">
 																<i class="fa fa-upload" aria-hidden="true"></i> Upload
 															</button>
@@ -328,10 +329,13 @@ input[type="file"] {
 
 												<form:button type="submit" id="addBankSumit"
 													class="btn btn-primary  btn-cons">
-													<i class="fa fa-pencil-square-o" aria-hidden="true"></i><spring:message code="label.update"></spring:message></form:button>
+													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+													<spring:message code="label.update"></spring:message>
+												</form:button>
 												<button type="button" id="ClearForm"
 													class="btn btn-cons btn-danger">
-													<i class="fa fa-times-circle"></i> <spring:message code="label.clear"></spring:message>
+													<i class="fa fa-times-circle"></i>
+													<spring:message code="label.clear"></spring:message>
 												</button>
 
 											</c:when>
@@ -340,12 +344,15 @@ input[type="file"] {
 
 												<form:button type="submit" id="addBankSumit"
 													class="btn btn-primary  btn-cons">
-													<i class="fa fa-plus-circle"></i> <spring:message code="label.add"></spring:message></form:button>
+													<i class="fa fa-plus-circle"></i>
+													<spring:message code="label.add"></spring:message>
+												</form:button>
 
 
 												<button type="button" id="ClearForm"
 													class="btn btn-cons btn-danger">
-													<i class="fa fa-times-circle"></i> <spring:message code="label.clear"></spring:message>
+													<i class="fa fa-times-circle"></i>
+													<spring:message code="label.clear"></spring:message>
 												</button>
 
 											</c:otherwise>
@@ -365,10 +372,6 @@ input[type="file"] {
 		</div>
 	</div>
 	</div>
-
-
-
-
 	<c:if test="${!empty msgTraitment }">
 		<script type="text/javascript">
 			$(document)
@@ -388,25 +391,16 @@ input[type="file"] {
 							});
 		</script>
 	</c:if>
-
-
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js"/>"></script>
-
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-autonumeric/autoNumeric.js"/>"></script>
-
 	<script
 		src="<spring:url value="/resources/assets/plugins/jquery-nouislider/jquery.liblink.js"/>"></script>
-
 	<script src="<spring:url value="/resources/assets/js/card.js"/>"></script>
-
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/assets/jquery-confirm.min.js"/>"></script>
-
 	<script src="<spring:url value="/resources/pages/js/bank.js"/>"></script>
-
-
 </body>
 </html>

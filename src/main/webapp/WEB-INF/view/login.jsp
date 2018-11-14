@@ -107,20 +107,20 @@
 							    
 								</c:if>
 								
-								<div class="form-group form-group-default">
-								<label>Login</label>
+								<div class="form-group form-group-default required">
+								 <i class="fa fa-user-circle-o" > <label>Login</label>  </i> 
 									<div class="controls">
-									 
-									<input type="text" id="username" name="ssoId"  placeholder="User Name" class="form-control" required>
+									
+									<input type="text" id="username" name="ssoId" class="form-control" >
 									</div>
 								</div>
 								
 								
-								<div class="form-group form-group-default">
-									<label>Password</label>
+								<div class="form-group form-group-default required ">
+									<i class="fa fa-key" > <label>Password</label></i> 
 									<div class="controls">
 									 
-									<input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+									<input type="password" class="form-control" id="password" name="password"  >
 									</div>
 								</div>
 								
@@ -139,7 +139,7 @@
 								
 								</div>
 								
-								<button class="btn btn-primary btn-cons m-t-10" type="submit" value="Log in">Sign in</button>
+								<button class="btn btn-primary btn-cons m-t-10" type="submit" value="Log in"> <i class="fa fa-sign-in" ></i> Sign in</button>
 												
 								</form:form>
 		

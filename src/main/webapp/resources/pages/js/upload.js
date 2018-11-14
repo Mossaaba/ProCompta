@@ -1,250 +1,85 @@
-         //---------------------------------------------------------------------------------------------------------------------------------------------------//
-		//---------------------------------------------------------------------------------------------------------------------------------------------------//
-		// ---------------------------------------------------------------- Start DropZone --------------------------------------------------------------------//
-		//---------------------------------------------------------------------------------------------------------------------------------------------------//
-		//---------------------------------------------------------------------------------------------------------------------------------------------------//
-
-
-Dropzone.autoDiscover = false;
-		Dropzone.options.mydropzone = false;
-		$(document)
-				.ready(
-						function() {
-
-							myDropzone = new Dropzone(
-									'#mydropzone',
-
-									{
-
-										url : "upload?${_csrf.parameterName}=${_csrf.token}",
-
-										maxFiles : null,
-
-										uploadMultiple : true,
-
-										parallelUploads : 100,
-
-										maxFilesize : 256, // MB
-
-										timeout : 60000,
-
-										autoProcessQueue : false,
-
-										addRemoveLinks : true,
-
-										acceptedFiles : '.jrn,.log',
-
-										ignoreHiddenFiles : true,
-
-										dictDefaultMessage : "Please drop journal or  log file here to be uploaded",
-										dictFallbackMessage : "Your browser does not support drag'n'drop file uploads.",
-										dictFallbackText : "Please use the fallback form below to upload your files like in the olden days.",
-										dictFileTooBig : "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
-										dictInvalidFileType : "You can't upload files of this type.",
-										dictResponseError : "Server responded with {{statusCode}} code.",
-										dictCancelUpload : "Cancel upload",
-										dictCancelUploadConfirmation : "Are you sure you want to cancel this upload?",
-										dictRemoveFile : "Remove file",
-										dictMaxFilesExceeded : "You can not upload any more files. thank ",
-
-										headers : {
-											'X-CSRFToken' : $(
-													'meta[name="token"]').attr(
-													'content')
-										},
-										accept : function(file, done) {
-											console.log("uploaded");
-											$('.dz-message').remove();
-											done();
-										},
-										error : function(file, msg) {
-											$('#modalSlideUpErrore').modal(
-													'show');
-											$("#infosError").html(msg);
-											myDropzone.removeAllFiles();
-										},
-
-										init : function() {
-
-											var myDropzone = this;
-											var stillSending = false;
-											var nbrFile = 0;
-											this.on("addedfile",
-													function(file) {
-														nbrFile++;
-														$("#nbrFiles").val(
-																nbrFile);
-														$("#ClearFileDive").show();
-														$("#startProsessingDive").show();
-
-													});
-
-											this.on("sendingmultiple",
-													function(file, progress) {
-														stillSending = true;
-
-													});
-
-											this.on("processingmultiple",
-													function(file, progress) {
-
-													});
-
-											this
-													.on(
-															"totaluploadprogress",
-															function(
-																	uploadProgress) {
-
-																document
-																		.querySelector("#progresUpload").style.width = uploadProgress
-																		+ "%";
-																document
-																		.querySelector("#pourcentage").value = uploadProgress
-																		+ "%";
-
-																if (uploadProgress != 100) {
-																	$(
-																			'#CloseResponse')
-																			.hide();
-
-																} else
-
-																{
-
-																	$(
-																			'#progressing')
-																			.html(
-																					"<span class='pull-right' id='progressing'><i class='fa fa-check-circle fa-3x text-primary'></i> </span>");
-																	$('#status')
-																			.text(
-																					"Done");
-																	$(
-																			'#CloseResponse')
-																			.show();
-
-																}
-
-															});
-
-											this.on("completemultiple",
-													function(file) {
-
-														this.removeAllFiles();
-														stillSending = false;
-
-													});
-
-											this.on('resetFiles', function() {
-												this.removeAllFiles();
-											});
-
-											this.on("queuecomplete", function(
-													progress) {
-
-											});
-
-											this
-													.on(
-															"successmultiple",
-															function(files,
-																	serverResponse) {
-																showInformationDialog(
-																		files,
-																		serverResponse);
-															});
-
-											$("#ClearAllFiles")
-													.on(
-															"click",
-															function() {
-																myDropzone.removeAllFiles();
-																nbrFile = 0;
-																$("#nbrFiles")
-																		.val(
-																				"0");
-																$("#ClearFileDive").hide();
-																$("#startProsessingDive").hide();
-																$('#dz-messageDiv').show();
-																
-															});
-
-											document.getElementById("sbmtbtn").onclick = function(
-													e) {
-												e.preventDefault();
-												var files = myDropzone
-														.getQueuedFiles();
-												files.forEach(function(file) {
-													myDropzone
-															.processFile(file);
-												});
-
-											};
-
-											function showInformationDialog(
-													files, objectArray) {
-
-												var responseContent = "";
-
-												for (var i = 0; i < objectArray.length; i++) {
-
-													var infoObject = objectArray[i];
-
-													for ( var infoKey in infoObject) {
-														if (infoObject
-																.hasOwnProperty(infoKey)) {
-															responseContent = responseContent
-																	+ " "
-																	+ infoKey
-																	+ " -> "
-																	+ infoObject[infoKey]
-																	+ "<br>";
-														}
-													}
-													responseContent = responseContent
-															+ "<hr>";
-												}
-
-												$('#modalSlideUp')
-														.modal('show');
-												$("#infos").append(
-														responseContent);
-
-											}
-
-										}
-
-									});
-						 
-						 
-						});
-
-		
-		
-		
-		
-		//---------------------------------------------------------------------------------------------------------------------------------------------------//
-		//---------------------------------------------------------------------------------------------------------------------------------------------------//
-		// ---------------------------------------------------------------- Fin DropZone --------------------------------------------------------------------//
-		//---------------------------------------------------------------------------------------------------------------------------------------------------//
-		//---------------------------------------------------------------------------------------------------------------------------------------------------//
-		
-		
-		
-		// Fin Drop Zzone 
-		
-		
-		
+			
+							
 		$(function() {
 			
-			
-	 
-			
-			
-			
+			$("#InfoAutomatique").hide();
+			$("#testConexion").hide();
+			$("#ClearFileDive").hide();
+			$("#startProsessingDive").hide();
+
+			$("#AutoUpload").on("change", function()
+
+			{
+				
+                     //Manuel Uoplaod
+                     if(!$(this).is(':checked'))
+                	 {
+                	 $("#cardUpload").toggle();
+                	 $('#ManuelUpload').trigger('click');
+                	 $('#ManuelUploadDive').css('visibility','visible');
+                	 $("#InfoAutomatique").hide();
+                	 $("#testConexion").hide();
+                	 $("#startProsessingDive").hide();
+                	 $("#typeProcessingFile").val('manuel');
+                	 $("#nbrFileDive").show();
+                	 
+                	 
+                	 }
+                
+                     else 
+                     {
+                    	//Automatique Uplaod 	 
+                   	$("#cardUpload").toggle();
+                   	$('#ManuelUpload').trigger('click');
+                   	$('#ManuelUploadDive').css('visibility','hidden')
+                   	$("#InfoAutomatique").show();
+                    $("#testConexion").show();
+                    $("#startProsessingDive").show();
+                    $("#nbrFileDive").hide();
+                    
+                    $("#typeProcessingFile").val('automatique');
+
+                     }
+                     
+                     
+                     var type = $("#typeProcessingFile").val();
+                     
+                     if (type === 'automatique') {
+                    	 
+                    	 $("#sbmtbtn").click(function() {
+
+                    		 var idAtm = $("#atm").val();
+                    		 var TyepFile = $("#typeFile").val();
+                                     
+                    		 
+                                         $.ajax({
+                                             url : 'uploadAuto-'+ idAtm +'-'+TyepFile,
+                                             method : 'GET',
+                                             contentType: "application/json",
+                                             timeout: 600000,
+                                             success : function(data) {
+                                            	 $('#modalSlideUp').modal('show');
+                                            	 
+                                                 if (data.status == 200) 
+                                                 {
+                                                	 $('#modalSlideUp').modal('show');	 
+                                                 } 
+                                             },
+
+                                             error : function(xhr, status, error) {
+                                                 
+                                             }
+                                         });
+
+                    	 }); 
+                     }
+                     
+                      
+                     
+
+			});
+
 			$('#atm').select2({});
-			
-			
 			$('#typeFile').select2({
 				
 				dropdownCssClass : "font-montserrat blod text-primary bold fs-12",
@@ -303,7 +138,7 @@ Dropzone.autoDiscover = false;
 								} ]
 							});
 
-			$("#branch").on('change', function(e) {
+			$("#branch").on('change', function(e) {  
 
 				$("#atm").prop("disabled", false);
 				var id = $("#branch").val();
@@ -326,7 +161,8 @@ Dropzone.autoDiscover = false;
 								results : $.map(data, function(obj) {
 									return {
 										id : obj.idAtm,
-										text : obj.nameAtm
+										text : obj.nameAtm, 
+										
 									};
 								})
 							};
@@ -359,62 +195,8 @@ Dropzone.autoDiscover = false;
 
 					size : 'large',
 					color : '#6D5CAE',
-					 
-						 
-
 				});
 			});
-
-			$("#InfoAutomatique").hide();
-			$("#testConexion").hide();
-			$("#ClearFileDive").hide();
-			$("#startProsessingDive").hide();
-			
-			
-			$("#AutoUpload").on("change", function()
-
-			{
-				
-				 
-				 
-           
-                 
-                     if(!$(this).is(':checked'))
-                	 {
-                	 $("#cardUpload").toggle();
-                	 $('#ManuelUpload').trigger('click');
-                	 $('#ManuelUploadDive').css('visibility','visible');
-                	 $("#InfoAutomatique").hide();
-                	 $("#testConexion").hide();
-                	 $("#startProsessingDive").hide();
-                	 
-                	 
-                	 //$('#').hide();
-                	 
-                	 }
-                
-                     else 
-                     {
-                    	 
-                   	$("#cardUpload").toggle();
-                   	$('#ManuelUpload').trigger('click');
-                   	$('#ManuelUploadDive').css('visibility','hidden')
-                   	$("#InfoAutomatique").show();
-                    $("#testConexion").show();
-                    $("#startProsessingDive").show();
-
-                 
-                
-                   
-                    
-                     }
-
-			});
-
-	 		 
-
-			
-			
 			
 			$('#myCard').card({
 				onRefresh : function() {
@@ -438,16 +220,9 @@ Dropzone.autoDiscover = false;
 				}
 			});
 
-			$('#myCardX2').card({
-				onRefresh : function() {
-					 
-					setTimeout(function() {
-						$('#myCardX2').card({
-							refresh : false
-						});
-					}, 2000);
-				}
-			});
+			
+			
+ 
 			
 			
 		});

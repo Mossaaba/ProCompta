@@ -9,21 +9,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.DieboldNixdorf.ProCompta.dao.UserProfileDao;
 import com.DieboldNixdorf.ProCompta.model.UserProfile;
 
- 
-
-
 @Service("userProfileService")
 @Transactional
-public class UserProfileServiceImpl implements UserProfileService{
-	
+public class UserProfileServiceImpl implements UserProfileService {
+
 	@Autowired
 	UserProfileDao dao;
-	
+
 	public UserProfile findById(int id) {
 		return dao.findById(id);
 	}
 
-	public UserProfile findByType(String type){
+	public UserProfile findByType(String type) {
 		return dao.findByType(type);
 	}
 

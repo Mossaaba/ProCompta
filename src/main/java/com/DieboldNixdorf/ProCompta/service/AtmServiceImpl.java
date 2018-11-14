@@ -10,64 +10,45 @@ import org.springframework.stereotype.Service;
 import com.DieboldNixdorf.ProCompta.dao.AtmDao;
 import com.DieboldNixdorf.ProCompta.model.Atm;
 
-
- 
 @Service("atmService")
 @Transactional
 public class AtmServiceImpl implements AtmService {
 
-	
-	
-	@Autowired 
+	@Autowired
 	private AtmDao atmDao;
-	
-	
-	
+
 	@Override
 	@Transactional
 	public List<Atm> listAtms() {
-		 
-		return atmDao.listAtms() ;
+
+		return atmDao.listAtms();
 	}
-
-
 
 	@Override
 	public Atm findById(int idAtm) {
-		 return atmDao.findById(idAtm);
+		return atmDao.findById(idAtm);
 	}
-
-
 
 	@Override
 	public void save(Atm atm) {
-			atmDao.save(atm);
+		atmDao.save(atm);
 	}
-
-
 
 	@Override
 	public void deleteById(int idAtm) {
 		atmDao.deleteById(idAtm);
 	}
 
-
-
 	@Override
 	public void saveAtm(Atm atm, int idHost, int idBranch) {
-		 atmDao.saveAtm(atm, idHost, idBranch);
-		
+		atmDao.saveAtm(atm, idHost, idBranch);
+
 	}
-
-
 
 	@Override
 	public List<Atm> listAtmsByBranch(int idBranch) {
 		// TODO Auto-generated method stub
 		return atmDao.listAtmsByBranch(idBranch);
 	}
-	
-	
-	
 
 }

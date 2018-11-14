@@ -1,10 +1,8 @@
 package com.DieboldNixdorf.ProCompta.controller;
 
- 
- 
 import java.io.FileOutputStream;
 import java.io.IOException;
- 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,113 +36,106 @@ import com.DieboldNixdorf.ProCompta.service.BankService;
 import com.DieboldNixdorf.ProCompta.service.UserService;
 import com.DieboldNixdorf.ProCompta.validator.UserFormValidator;
 
-
-
-@Controller 
+@Controller
 @RequestMapping("bank")
 public class BankController {
-	
- 
-	
+
 	@Autowired
 	BankService bankService;
-	 
+
 	@Autowired
 	MessageSource messageSource;
 
 	@Autowired
 	UserFormValidator userFormValidator;
- 
-    @Autowired 
-    UserService userService;
- 
-	
+
+	@Autowired
+	UserService userService;
 
 	@RequestMapping("/list")
 	public String listBank(ModelMap model) {
-		 List<Bank> banks = bankService.getAllBanks();
-		 model.addAttribute("banks", banks);
-		 Bank bank = new Bank();
-		 model.addAttribute("bank" ,bank );
+		List<Bank> banks = bankService.getAllBanks();
+		model.addAttribute("banks", banks);
+		Bank bank = new Bank();
+		model.addAttribute("bank", bank);
 		return "bank";
 	}
 
 	@PostMapping("/list")
-	public String saveBank(ModelMap model , @ModelAttribute("bank") Bank bank ,
-			               final RedirectAttributes redirectAttrs , BindingResult result ) 
-	{
-		if(! bankService.isbankUnique(bank.getAbbreviation()))
-		{
-			FieldError ssoError =new FieldError("bank","abbreviation",messageSource.getMessage("non.unique.bank",
-	                                    new String[]{bank.getAbbreviation()}, Locale.getDefault()));
-		    result.addError(ssoError);
-		    model.addAttribute("style" ,"danger" );
-			model.addAttribute("msgTraitment" ,"Banque "+bank.getAbbreviation()+ " Existe Deja" );
-			redirectAttrs.addFlashAttribute("style" ,"danger" );
+	public String saveBank(ModelMap model, @ModelAttribute("bank") Bank bank, final RedirectAttributes redirectAttrs,
+			BindingResult result) {
+		if (!bankService.isbankUnique(bank.getAbbreviation())) {
+			FieldError ssoError = new FieldError("bank", "abbreviation", messageSource.getMessage("non.unique.bank",
+					new String[] { bank.getAbbreviation() }, Locale.getDefault()));
+			result.addError(ssoError);
+			model.addAttribute("style", "danger");
+			model.addAttribute("msgTraitment", "Banque " + bank.getAbbreviation() + " Existe Deja");
+			redirectAttrs.addFlashAttribute("style", "danger");
 			return "bank";
 		}
-		
-		redirectAttrs.addFlashAttribute("msgTraitment" ,"ADD A NEW BANK : " );
-		redirectAttrs.addFlashAttribute("theBank" ,bank.getAbbreviation() );
-		redirectAttrs.addFlashAttribute("style" ,"success" );
-		redirectAttrs.addFlashAttribute("logo" ,bank.getLogo());
+
+		redirectAttrs.addFlashAttribute("msgTraitment", "ADD A NEW BANK : ");
+		redirectAttrs.addFlashAttribute("theBank", bank.getAbbreviation());
+		redirectAttrs.addFlashAttribute("style", "success");
+		redirectAttrs.addFlashAttribute("logo", bank.getLogo());
 		bankService.saveBank(bank);
 		return "redirect:/bank/list";
-    }  
-	
-	
-	@GetMapping("/edit-bank-{idBank}") 
-	public String editBank(@PathVariable int idBank, ModelMap model  ) 
-	{
-		Bank bank = bankService.findById(idBank);		 
+	}
+
+	@GetMapping("/edit-bank-{idBank}")
+	public String editBank(@PathVariable int idBank, ModelMap model) {
+		Bank bank = bankService.findById(idBank);
 		List<Bank> banks = bankService.getAllBanks();
 		model.addAttribute("banks", banks);
 		model.addAttribute("bank", bank);
 		model.addAttribute("edit", true);
-		model.addAttribute("msgTraitment" ,"please entre the information for  Updating bank :  " +bank.getAbbreviation() );
-		model.addAttribute("logo" ,bank.getLogo());
-		model.addAttribute("style" ,"warning" );	
+		model.addAttribute("msgTraitment",
+				"please entre the information for  Updating bank :  " + bank.getAbbreviation());
+		model.addAttribute("logo", bank.getLogo());
+		model.addAttribute("style", "warning");
 		return "bank";
 	}
-	
+
 	@PostMapping("/edit-bank-{idBank}")
-	public String editBankforSavig (ModelMap model , @ModelAttribute("bank") Bank bank  , final RedirectAttributes redirectAttrs) {
-		
+	public String editBankforSavig(ModelMap model, @ModelAttribute("bank") Bank bank,
+			final RedirectAttributes redirectAttrs) {
+
 		bankService.saveBank(bank);
-		
-		redirectAttrs.addFlashAttribute("msgTraitment" ,"Update the BANK : " );
-		redirectAttrs.addFlashAttribute("theBank" ,bank.getAbbreviation() );
-		redirectAttrs.addFlashAttribute("style" ,"success" );
-		redirectAttrs.addFlashAttribute("logo" ,bank.getLogo());
+
+		redirectAttrs.addFlashAttribute("msgTraitment", "Update the BANK : ");
+		redirectAttrs.addFlashAttribute("theBank", bank.getAbbreviation());
+		redirectAttrs.addFlashAttribute("style", "success");
+		redirectAttrs.addFlashAttribute("logo", bank.getLogo());
 		return "redirect:/bank/list";
 	}
-	
+
 	@GetMapping("/delete-bank-{idBank}")
-	public String DeleteBank(@PathVariable int idBank , final RedirectAttributes redirectAttrs) 
-	{
-		Bank bank = bankService.findById(idBank);	
-		redirectAttrs.addFlashAttribute("msgTraitment" ,"Deleting the bank the BANK : " );
-		redirectAttrs.addFlashAttribute("theBank" ,bank.getAbbreviation() );
-		redirectAttrs.addFlashAttribute("style" ,"danger" );
-		redirectAttrs.addFlashAttribute("logo" ,bank.getLogo());
-        bankService.deleteBankById(idBank);
+	public String DeleteBank(@PathVariable int idBank, final RedirectAttributes redirectAttrs) {
+		Bank bank = bankService.findById(idBank);
+		redirectAttrs.addFlashAttribute("msgTraitment", "Deleting the bank the BANK : ");
+		redirectAttrs.addFlashAttribute("theBank", bank.getAbbreviation());
+		redirectAttrs.addFlashAttribute("style", "danger");
+		redirectAttrs.addFlashAttribute("logo", bank.getLogo());
+		bankService.deleteBankById(idBank);
 		return "redirect:/bank/list";
-    }  
-	
-	@RequestMapping(value="/imageUpload", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> fileUpload(MultipartHttpServletRequest request, HttpServletResponse response){
-		
-		Map<String,Object> map = new HashMap<String,Object>();
+	}
+
+	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> fileUpload(MultipartHttpServletRequest request,
+			HttpServletResponse response) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> fileUploadedList = new ArrayList<String>();
-		Iterator<String> itr =  request.getFileNames();
+		Iterator<String> itr = request.getFileNames();
 		MultipartFile mpf = null;
-		while(itr.hasNext()){
-			mpf = request.getFile(itr.next()); 
-			try{
-				String path = request.getSession().getServletContext().getRealPath("/resources/pages/img/profile-pictures"); 
-				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(path+"/"+mpf.getOriginalFilename().replace(" ", "-")));
+		while (itr.hasNext()) {
+			mpf = request.getFile(itr.next());
+			try {
+				String path = request.getSession().getServletContext().getRealPath("/resources/pages/img/banks");
+				FileCopyUtils.copy(mpf.getBytes(),
+						new FileOutputStream(path + "/" + mpf.getOriginalFilename().replace(" ", "-")));
 				fileUploadedList.add(mpf.getOriginalFilename().replace(" ", "-"));
-			}catch(IOException e){
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}

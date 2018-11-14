@@ -9,18 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.DieboldNixdorf.ProCompta.dao.TransactionDao;
 import com.DieboldNixdorf.ProCompta.model.Transaction;
- 
- 
- 
-
- 
 
 @Service("transctionService")
 public class TransactionServiceImpl implements TransactionService {
-	
-	
+
 	private TransactionDao transactionDao;
-	
+
 	@Autowired
 	public void setTransactionDao(TransactionDao transactionDao) {
 		this.transactionDao = transactionDao;
@@ -28,7 +22,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public Transaction findById(Integer id) {
-	return transactionDao.findById(id);
+		return transactionDao.findById(id);
 	}
 
 	@Override
@@ -36,40 +30,30 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionDao.findAll();
 	}
 
-
 	@Override
 	public List<String> listCardState() {
 		return transactionDao.listCardState();
 	}
-
 
 	@Override
 	public List<String> listCashState() {
 		return transactionDao.listCashState();
 	}
 
-
 	@Override
 	public List<String> listErreurs() {
 		return transactionDao.listErreurs();
 	}
 
-
 	@Override
-	public List<Transaction> listTransactionByFilter(Date DebuttransactionDate , Date fintransactionDate ,
-			Time startingTimeTransaction,  Time fnisgingTimeTransaction , 
-			String cardNumber ,  String CradState  , long montant  , String etatcash , 
-			String numberAuthorisatin  , String errorTransaction , 
-			long MinAmount  , long MaxAmount ) {
+	public List<Transaction> listTransactionByFilter(Date DebuttransactionDate, Date fintransactionDate,
+			Time startingTimeTransaction, Time fnisgingTimeTransaction, String cardNumber, String CradState,
+			long montant, String etatcash, String numberAuthorisatin, String errorTransaction, long MinAmount,
+			long MaxAmount) {
 
-		return transactionDao.listTransactionByFilter(DebuttransactionDate, fintransactionDate ,
-				startingTimeTransaction, fnisgingTimeTransaction , 
-				cardNumber ,   CradState , montant , etatcash  ,numberAuthorisatin  ,errorTransaction , 
-				 MinAmount  ,  MaxAmount );
+		return transactionDao.listTransactionByFilter(DebuttransactionDate, fintransactionDate, startingTimeTransaction,
+				fnisgingTimeTransaction, cardNumber, CradState, montant, etatcash, numberAuthorisatin, errorTransaction,
+				MinAmount, MaxAmount);
 	}
 
-	
- 
-
-	 
 }

@@ -1,4 +1,3 @@
-
 <%@ page session="false"%>
 <%@ page isELIgnored="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
@@ -6,8 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <html>
 <head>
@@ -15,9 +13,15 @@
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/plugins/dropzone/css/dropzone.css"/>" />
 <link rel="stylesheet" type="text/css"
+	href="<spring:url value="/resources/assets/jquery-confirm.min.css"/>" />	
+ 
+	 
+<link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/pages/css/hover.css"/>" />
 <style>
 </style>
+
+
 <body class="fixed-header windows desktop pace-done">
 	<jsp:include page="../view/fragments/menu.jsp"></jsp:include>
 	<div class="page-container">
@@ -41,46 +45,44 @@
 
 
 
-						<form:form modelAttribute="fileUpload" method="post"
-							enctype="multipart/form-data">
+						<form:form modelAttribute="fileUpload"  method="POST"  enctype="multipart/form-data" id ="UploadingForm" role="form">
 
 							<div class="row">
 								<div class="col-lg-9">
 									<div id="myCard" class="card card-default">
 										<div class="card-header ">
-											<div class="card-title bold text-primary fs-16 ">
-												<i class="fa fa-upload" aria-hidden="true"></i> Uplodaing
-												journal file
-											</div>
-											<div class="card-controls hvr-grow-shadow">
-												<ul>
-													<li>
-														<div class="dropdown">
-															<a data-target="#" href="#" data-toggle="dropdown"
-																aria-haspopup="flase" role="button"
-																aria-expanded="false"> <i
-																class="card-icon card-icon-settings "></i>
-															</a>
-
-															<ul class="dropdown-menu pull-left" role="menu"
-																aria-labelledby="card-settings">
-																<li><a href="#">Historique </a></li>
-
-															</ul>
-														</div>
-													</li>
-													<li><a href="#" class="card-collapse"
-														id="colpaseAreaUplod" data-toggle="collapse"><i
-															class="card-icon card-icon-collapse"></i></a></li>
-													<li><a href="#" class="card-refresh"
-														data-toggle="refresh"><i
-															class="card-icon card-icon-refresh"></i></a></li>
-													<li><a href="#" class="card-maximize"
-														data-toggle="maximize"><i
-															class="card-icon card-icon-maximize"></i></a></li>
-
-												</ul>
-											</div>
+													<div class="card-title bold text-primary fs-16 ">
+														<i class="fa fa-upload" aria-hidden="true"></i> Uplodaing
+														journal file
+													</div>
+											         <div class="card-controls  ">
+														<ul>
+															<li>
+																<div class="dropup show">
+															  <a class="btn  dropdown-toggle b-dashed b-rad-lg " href="#" role="button" id="dropdownMenuLink" 
+															  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															    <i class="fa fa-history" aria-hidden="true"></i> History 
+															  </a>
+															
+															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+															    <a class="dropdown-item" href="#">Log</a>
+															    <a class="dropdown-item" href="#">Journal</a>
+															  
+															  </div>
+															</div>
+															</li>
+															<li><a href="#" class="card-collapse"
+																id="colpaseAreaUplod" data-toggle="collapse"><i
+																	class="card-icon card-icon-collapse"></i></a></li>
+															<li><a href="#" class="card-refresh"
+																data-toggle="refresh"><i
+																	class="card-icon card-icon-refresh"></i></a></li>
+															<li><a href="#" class="card-maximize"
+																data-toggle="maximize"><i
+																	class="card-icon card-icon-maximize"></i></a></li>
+		
+														</ul>
+											         </div>
 
 										</div>
 										<div class="card-header ">
@@ -88,72 +90,23 @@
 											<div class="row">
 												<div class="col-md-12 ">
 													<div class="row">
-														
-
-														<div class="col-md-2 pull-left">
-															<div class="input-group transparent m-b-15">
-																<div class="input-group-prepend m-b-15 hvr-grow-shadow">
-																	<span class="input-group-text text-primary bold text-uppercase transparent center title small no-margin  fs-14 "><i
-																		class="fa fa-file" aria-hidden="true"></i> &nbsp;Files </span> <input
-																		type="text" value="" placeholder="000" class="form-control text-primary bold text-uppercase center title small   fs-14  "
-																		disabled id="nbrFiles">
-																</div>
-															</div>
-														</div>
-														<div class="col-md-10  "></div>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-
-												<div class="col-md-4">
-													<div
-														class="form-group form-group-default form-group-default-select2 input-group hvr-grow">
-														<label class="">Branche </label>
-														<form:select path="atm.branch.idBranch"
-															cssClass="full-width" id="branch" style="width: 100%;"
-															data-init-plugin="select2" items="${listBranches}"
-															itemValue="idBranch" itemLabel="nomBranch" />
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div
-														class="form-group form-group-default form-group-default-select2 input-group hvr-grow">
-														<label class="">ATM</label>
-														<form:select path="atm" cssClass="full-width" id="atm"
-															data-placeholder="Select an atm here"
-															cssStyle="width: 100%;" data-init-plugin="select2" />
-													</div>
-												</div>
-												
-												<div class="col-md-4">
-													<div
-														class="form-group form-group-default form-group-default-select2 input-group hvr-grow">
-														<label class="">Type File </label>
-														<form:select path="typeFile" cssClass="full-width" id="typeFile"
-															data-placeholder="Select a type of file "
-															cssStyle="width: 100%;" data-init-plugin="select2" />
-													</div>
-												</div>
-												</div>
-												<div class="row">
-												<div class="col-md-12">
-													<div class="row">
-														<div class="col-md-4" id="AutolUploadDive">
+                                                        
+														<div class="col-md-5" id="AutolUploadDive">
 															<div
 																class="form-group form-group-default input-group hvr-grow">
 																<div class="form-input-group">
 																	<label class="inline">Automatic&nbsp;&nbsp;</label>
 																</div>
-																<div class="input-group-append h-c-50">
+																<div class="input-group-append h-c-50 ">
 																	<span class="input-group-text transparent"> <input
 																		type="checkbox" data-init-plugin="switchery"
-																		id="AutoUpload" data-size="small" data-color="red" />
+																		id="AutoUpload" data-size="large" data-color="primary"  />
+																		
 																	</span>
 																</div>
 															</div>
 														</div>
-														<div class="col-md-4" id="ManuelUploadDive">
+														<div class="col-md-5" id="ManuelUploadDive">
 															<div
 																class="form-group form-group-default input-group hvr-grow ">
 																<div class="form-input-group">
@@ -162,43 +115,75 @@
 																<div class="input-group-append h-c-50">
 																	<span class="input-group-text transparent"> <input
 																		type="checkbox" data-init-plugin="switchery"
-																		id="ManuelUpload" data-size="small" data-color="red" checked disabled="disabled" />
+																		id="ManuelUpload" data-size="large" data-color="primary" checked="checked"/>	
 																	</span>
 																</div>
 															</div>
 														</div>
-														<div class="col-md-4" id="InfoAutomatique" >
-															<div
-																class="form-group form-group-default input-group hvr-grow ">
-																<div class="form-input-group">
-																	<label class="inline">Path folder</label>
-																</div>
-																<div class="input-group-append h-c-50">
-																	<span class="input-group-text transparent">  
-																	</span>
-																</div>
+														<div class="col-md-2 pull-left m-t-5" id="nbrFileDive" >
+														<div class="form-group form-group-default input-group">
+															<div class="form-input-group  ">
+																 
+																<input type="number" class="form-control usd text-primary bold p-t-15 p-l-5 fs-16 " disabled id="nbrFiles" > 
+															<br>
+															<br>
+															 
+															</div>
+															<div class="input-group-append font-montserrat bold text-uppercase ">
+															<br>
+																<span class="input-group-text text-primary font-montserrat bold text-uppercase "><i class="fa fa-file-text-o fa-2x" aria-hidden="true"> </i>   </span>
 															</div>
 														</div>
+													</div>
+												 
+														<input id="typeProcessingFile" name="typeProcessingFile" type="hidden" value="manuel">
+														
+													</div>
+												</div>
+											</div>
+											<div class="row">
 
+												<div class="col-md-4">
+													<div
+														class="form-group form-group-default form-group-default-select2 input-group hvr-grow required">
+														<label class="">Branche </label>
+														<form:select path="atm.branch.idBranch"
+															cssClass="full-width" id="branch" style="width: 100%;"
+															data-init-plugin="select2" items="${listBranches}"
+															itemValue="idBranch" itemLabel="nomBranch"   />
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div
+														class="form-group form-group-default form-group-default-select2  hvr-grow required" id="divATM">
+														<label >ATM</label>
+														<form:select path="atm" cssClass="full-width" id="atm"
+															data-placeholder="Select an atm here"  
+															cssStyle="width: 100%;" data-init-plugin="select2"  /> 
+													</div> 
+												</div>
+												
+												<div class="col-md-4">
+													<div 
+														class="form-group form-group-default form-group-default-select2  hvr-grow required" id="divTypeFile" >
+														<label class="">Type File </label>
+														<form:select path="typeFile" cssClass="full-width" id="typeFile"
+															data-placeholder="Select a type of file "
+															cssStyle="width: 100%;" data-init-plugin="select2" /> 
 													</div>
 												</div>
 												</div>
-											
 										</div>
 
 
 										<div class="card-block" id="cardUpload">
 											<div class="card-body no-scroll no-padding">
 
-												<div id="mydropzone" class="dropzone" multiple>
+												<div id="mydropzone" class="dropzone" >
 												
                                                    <div class="dz-message text-center" data-dz-message id="dz-messageDiv">
-                                                   <br>
-                                                   <br>
-                                                   <br>
-                                                   <br>
-                                                   <br>
-                                                   <br>
+                                                   <br> <br> <br>   <br>  <br>   <br>
+                                                  
                                                    <span class=" center title text-uppercase text-primary  font-montserrat all-caps small bold fs-16">
                                                    Please drop journal or log file here to be uploaded 
                                                    <br>
@@ -206,6 +191,7 @@
                                                    </span>
                                                    </div>
 													<div id="dropzonePreview"></div>
+													 
 												</div>
 
 											</div>
@@ -214,6 +200,8 @@
 								</div>
 
 								<div class="col-xl-3 col-lg-12 text-center">
+									
+									
 									<div class="card card-default" id="startProsessingDive">
 										<div class="card-header ">
 											<div class="card-title text-center bold text-primary fs-16 ">Start
@@ -224,14 +212,17 @@
 											
 											
 											<button class="btn btn-block btn-primary hvr-grow-shadow btn-rounded"
-												id="sbmtbtn">
-
+												id="sbmtbtn" type="submit"  >
 												<span class="font-montserrat bold fs-16 m-t-2"> Start
-													parsing files </span> <span class="m-r-20 m-b-2"><i
+													parsing files </span> 
+													<span class="m-r-20 m-b-2"><i
 													class="fa fa-play-circle fa-2x " aria-hidden="true"></i> </span>
 											</button>
 										</div>
 									</div>
+									
+									
+									
 									<div class="card card-default" id="ClearFileDive" >
 										<div class="card-header ">
 											<div class="card-title text-center bold text-primary fs-16  ">Clear
@@ -251,6 +242,9 @@
 											</button>
 										</div>
 									</div>
+									
+									
+									
 									<div class="card card-default" id="testConexion">
 										<div class="card-header ">
 											<div class="card-title text-center bold text-primary fs-16  ">Test
@@ -269,6 +263,8 @@
 
 										</div>
 									</div>
+									
+									
 								</div>
 							</div>
 						</form:form>
@@ -304,14 +300,15 @@
 						<br>
 						<div class="row">
 
-							<div class="col-md-12">
+							<div class="col-md-12 ">
 
 								<div class="card card-default hover-stroke">
 									<div class="card-body no-padding">
 										<div class="container-sm-height">
-											<div class="row row-sm-height">
+											<div class="row row-sm-height  b-grey  b-dashed ">
 												<div class="col-md-12 ">
-													<p class="font-montserrat bold">Progression</p>
+												<br>
+													<p class="font-montserrat bold text-uppercase "> <i class="fa fa-tasks" aria-hidden="true"></i> Progression</p>
 													<div class="row">
 														<div class="col-md-8  ">
 															<div style="width: 100%">
@@ -323,11 +320,11 @@
 														</div>
 
 														<div class="col-md-2 ">
-															<div class="input-group transparent m-b-15">
-																<div class="input-group m-b-15 hvr-grow-shadow">
+															<div class="input-group  m-b-15">
+																<div class="input-group ">
 
 																	<input type="text" value=""
-																		class="form-control text-primary fs-10" disabled
+																		class="form-control text-primary bold fs-10" disabled
 																		id="pourcentage">
 
 
@@ -343,8 +340,7 @@
 																	<span class="pull-right" id="progressing"> <i
 																		class="fa fa-spinner fa-pulse fa-3x fa-fw text-primary "></i>
 																	</span> <span id="status"
-																		class="font-montserrat bold fs-10 m-t-2"> En
-																		cours </span>
+																		class="font-montserrat bold fs-10 m-t-2"> En cours </span>
 
 																</div>
 															</div>
@@ -424,130 +420,7 @@
 
 
 						</div>
-						<div class="row">
-
-							<div class="col-md-12">
-
-
-								<div id="myCardX2" class="card card-default">
-									<div class="card-header ">
-										<div class="card-title font-montserrat bold">Statistique</div>
-										<div class="card-controls">
-											<ul>
-												<li>
-													<div class="dropdown">
-														<a id="card-settings" data-target="#" href="#"
-															data-toggle="dropdown" aria-haspopup="true" role="button"
-															aria-expanded="false"> <i
-															class="card-icon card-icon-settings "></i>
-														</a> ​
-														<ul class="dropdown-menu pull-right" role="menu"
-															aria-labelledby="card-settings">
-															<li><a href="#">Item 1</a></li>
-															<li><a href="#">Item 2</a></li>
-														</ul>
-													</div>
-												</li>
-												<li><a href="#" class="card-collapse"
-													data-toggle="collapse"><i
-														class="card-icon card-icon-collapse"></i></a></li>
-												<li><a href="#" class="card-refresh"
-													data-toggle="refresh"><i
-														class="card-icon card-icon-refresh"></i></a></li>
-												<li><a href="#" class="card-maximize"
-													data-toggle="maximize"><i
-														class="card-icon card-icon-maximize"></i></a></li>
-												<li><a href="#" class="card-close" data-toggle="close"><i
-														class="card-icon card-icon-close"></i></a></li>
-											</ul>
-										</div>
-									</div>
-
-									<div class="card-block">
-										<div class="row">
-
-											<div class="col-lg-12">
-
-												<div class="card card-transparent">
-													<div class="card-body">
-														<div class="row">
-															<div class="col-lg-4 col-md-6">
-																<div class="bg-master b-a b-grey m-b-15">
-																	<div class="bg-white m-t-45 padding-10">
-																		<p class=" no-margin pull-left">Transaction</p>
-																		<p class=" no-margin pull-right">XXX</p>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-4 col-md-6">
-																<div class="bg-primary b-a b-grey m-b-15">
-																	<div class="bg-white m-t-45 padding-10 text-master">
-																		<p class=" no-margin pull-left">Replanishement</p>
-																		<p class=" no-margin pull-right">XXX</p>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-4 col-md-6">
-																<div class="bg-complete b-a b-grey m-b-15">
-																	<div class="bg-white m-t-45 padding-10">
-																		<p class=" no-margin pull-left">Incident</p>
-																		<p class=" no-margin pull-right">XXX</p>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-															</div>
-
-														</div>
-														<div class="row">
-															<div class="col-lg-4 col-md-6">
-																<div class="bg-menu b-a b-grey m-b-15">
-																	<div class="bg-white m-t-45 padding-10">
-																		<p class=" no-margin pull-left">Communication</p>
-																		<p class=" no-margin pull-right">XXX</p>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-4 col-md-6">
-																<div class="bg-info b-a b-grey m-b-15">
-																	<div class="bg-white m-t-45 padding-10">
-																		<p class=" no-margin pull-left">Already uploaded</p>
-																		<p class=" no-margin pull-right">XXX</p>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-4 col-md-6">
-																<div class="bg-danger b-a b-grey m-b-15">
-																	<div class="bg-white m-t-45 padding-10">
-																		<p class=" no-margin pull-left">File erreur</p>
-																		<p class=" no-margin pull-right">XXX</p>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-															</div>
-
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-
-
-						</div>
-
-
-
-
-
-
+						 
 					</div>
 					<div class="modal-footer   clearfix   text-center">
 
@@ -618,6 +491,262 @@
 	<script
 		src="<spring:url value="/resources/assets/plugins/dropzone/dropzone.min.js"/>"></script>
 		<script src="<spring:url value="/resources/pages/js/upload.js"/>"></script>
+		
+		<script type="text/javascript">
+
+		Dropzone.autoDiscover = false;
+		Dropzone.options.mydropzone = false;
+		$(document)
+				.ready(
+						function() {
+
+							myDropzone = new Dropzone(
+									'#mydropzone',
+
+									{
+
+										url : "upload?${_csrf.parameterName}=${_csrf.token}",
+
+										maxFiles : null,
+
+										uploadMultiple : true,
+
+										parallelUploads : 100,
+
+										maxFilesize : 256, // MB
+
+										timeout : 60000,
+
+										autoProcessQueue : false,
+
+										addRemoveLinks : true,
+
+										acceptedFiles : '.jrn,.log',
+
+										ignoreHiddenFiles : true,
+
+										dictDefaultMessage : "Please drop journal or  log file here to be uploaded",
+										dictFallbackMessage : "Your browser does not support drag'n'drop file uploads.",
+										dictFallbackText : "Please use the fallback form below to upload your files like in the olden days.",
+										dictFileTooBig : "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
+										dictInvalidFileType : "You can't upload files of this type.",
+										dictResponseError : "Server responded with {{statusCode}} code.",
+										dictCancelUpload : "Cancel upload",
+										dictCancelUploadConfirmation : "Are you sure you want to cancel this upload?",
+										dictRemoveFile : "<span class='text-danger hvr-grow-shadow'> <i class='fa fa-trash-o' aria-hidden='true'></i>  Remove file</span> ",
+										dictMaxFilesExceeded : "You can not upload any more files. thank ",
+
+										headers : {
+											'X-CSRFToken' : $('meta[name="token"]').attr('content')
+										},
+										accept : function(file, done) 
+										{
+											console.log("uploaded");
+											$('.dz-message').hide();
+											done();
+										},
+										error : function(file, msg) {
+											$('#modalSlideUpErrore').modal(
+													'show');
+											$("#infosError").html(msg);
+											myDropzone.removeAllFiles();
+										},
+
+										init : function() {
+
+											var myDropzone = this;
+											var stillSending = false;
+											var nbrFile = 0;
+											this.on("addedfile",
+													function(file)
+													{
+														nbrFile++;
+														$("#nbrFiles").val(nbrFile);
+														$("#ClearFileDive").show();
+														$("#startProsessingDive").show();
+													});
+
+											     
+											this.on("removedfile", function(file)
+													{
+												    	nbrFile--;
+												    	$("#nbrFiles").val(nbrFile);
+												    	
+												    	
+												    	if (nbrFile=='0'){
+												    		
+												    		$("#ClearFileDive").hide();
+															$("#startProsessingDive").hide();
+															$('.dz-message').show();
+												    		
+												    	}
+											            
+											});
+											
+											
+											this.on("sendingmultiple",function(file, xhr, formData)   
+														 {
+												              var type = $('#typeFile').val();
+												              var atm = $('#atm').val();
+                                                              var typeProcessingFile = $('#typeProcessingFile').val();
+												              formData.append("typeFile",type );
+														      formData.append("idAtm",atm );
+														      formData.append("typeProcessingFile",typeProcessingFile ); 
+														     
+												    	});
+
+											this.on("processingmultiple",function(file, progress) {
+
+													});
+
+											this.on("totaluploadprogress",function(uploadProgress) {
+
+																document.querySelector("#progresUpload").style.width = uploadProgress+ "%";
+																document.querySelector("#pourcentage").value = uploadProgress+ "%";
+
+																if (uploadProgress != '100') {
+																	
+																	$('#CloseResponse').hide();
+
+																} else
+
+																{
+
+																	$('#progressing').html("<span class='pull-right' id='progressing'><i class='fa fa-check-circle fa-3x text-primary'></i> </span>");
+																	$('#status').text("Done");
+																	$('#CloseResponse').show();
+
+																}
+
+															});
+
+											this.on("completemultiple",function(file) {
+
+														this.removeAllFiles();
+														stillSending = false;
+
+													});
+
+											this.on('resetFiles', function() {
+												this.removeAllFiles();
+												
+											});
+											this.on('resetFiles', function() {
+								                this.removeAllFiles();
+								            });
+											 
+
+
+											this.on("queuecomplete", function(progress) {
+
+											});
+
+											this.on("successmultiple",function(files,serverResponse) 
+													{
+												showInformationDialog(files,serverResponse);
+												});
+
+									$("#ClearAllFiles").on("click",function() {
+												
+										
+									 
+																myDropzone.emit("resetFiles");
+																nbrFile = 0;
+																$("#nbrFiles").val("0");
+																$("#ClearFileDive").hide();
+																$("#startProsessingDive").hide();
+																$("#dz-messageDiv").show();
+																 
+															 
+																
+															});
+
+											document.getElementById("sbmtbtn").onclick = function(e) 
+													{
+												e.preventDefault();
+												var files = myDropzone.getQueuedFiles();
+												 
+												var atmValue  = $("#atm").val();
+												var typeFileValue  = $("#typeFile").val();
+												 
+												if (atmValue==null || typeFileValue == '-1'){
+													
+													$.confirm({
+													    title: 'Encountered an error!',
+													    content: 'You should select an ATM , and a type of file',
+													    type: 'red',
+													    animation: 'left',
+													    icon: 'fa fa-exclamation-circle fa-spin',
+													    typeAnimated: true,
+													    buttons: {
+													        
+													        close:{
+													        	text: 'Close',
+													            btnClass: 'btn-red',
+													        	action : function () { 
+													        		$('#divTypeFile').addClass('bg-danger');
+													        		$('#divATM ').addClass('bg-danger');
+														        }
+													        	
+													        }
+													    }
+													});
+ 
+													return false;
+													
+												}
+												
+												console.log(atmValue);
+												console.log(typeFileValue);
+												files.forEach(function(file) {
+													myDropzone.processFile(file);
+												});
+
+											};
+
+											function showInformationDialog(
+													files, objectArray) {
+
+												var responseContent = "";
+
+												for (var i = 0; i < objectArray.length; i++) {
+
+													var infoObject = objectArray[i];
+
+													for ( var infoKey in infoObject) {
+														if (infoObject
+																.hasOwnProperty(infoKey)) {
+															responseContent = responseContent
+																	+ " "
+																	+ infoKey
+																	+ " -> "
+																	+ infoObject[infoKey]
+																	+ "<br>";
+														}
+													}
+													responseContent = responseContent
+															+ "<hr>";
+												}
+
+												$('#modalSlideUp')
+														.modal('show');
+												$("#infos").append(responseContent);
+
+											}
+
+										}
+
+									});
+						 
+						 
+						});
+
+	 
+		 
+
+</script>
+
+<script src="<spring:url value="/resources/assets/jquery-confirm.min.js"/>"></script>
 	 
 </body>
 
