@@ -2,6 +2,8 @@ package com.DieboldNixdorf.ProCompta.dao;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.DieboldNixdorf.ProCompta.model.Journal;
 
 public interface JournalDao {
@@ -17,6 +19,10 @@ public interface JournalDao {
     void deleteById(int idjournal);
 	
     void save(Journal journal , int idAtm);
+    
+    boolean JounralExiste(String journalName);
+    
+    List<String> ParseJournal(MultipartFile multipartFile , int idAtm);
 
 }
   

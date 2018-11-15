@@ -32,7 +32,9 @@ import com.DieboldNixdorf.ProCompta.model.FileUpload;
 import com.DieboldNixdorf.ProCompta.model.UploadedFile;
 import com.DieboldNixdorf.ProCompta.service.BranchService;
 import com.DieboldNixdorf.ProCompta.service.FileUploadService;
+import com.DieboldNixdorf.ProCompta.service.JounalService;
 
+import org.apache.commons.io.FilenameUtils;
 @CrossOrigin
 @RestController
 public class FileUploadController {
@@ -42,6 +44,11 @@ public class FileUploadController {
 
 	@Autowired
 	private BranchService branchService;
+	
+	@Autowired
+	private JounalService jounalService;
+	
+	
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public ModelAndView downloadFile() {
@@ -65,39 +72,51 @@ public class FileUploadController {
 			@ModelAttribute("fileUpload") FileUpload fileUpload, @RequestParam String typeFile,
 			@RequestParam Integer idAtm, @RequestParam String typeProcessingFile) throws IOException {
 
-		System.out.println("typeFile : " + typeFile);
-		System.out.println("idAtm : " + idAtm);
 		Map<String, MultipartFile> fileMap = request.getFileMap();
-
-		
-		
-		
-		
-		
-		
-
-	 
-		
-		
-		
-		
-		
-
 		List<UploadedFile> uploadedFiles = new ArrayList<UploadedFile>();
+		
+		if (typeFile.equalsIgnoreCase("1"))
+		{
+			 
+		
 		for (MultipartFile multipartFile : fileMap.values())
 
 		{
-
-			saveFileToLocalDisk(multipartFile);
-			UploadedFile fileInfo = getUploadedFileInfo(multipartFile);
-			fileInfo = saveFileToDatabase(fileInfo);
-			uploadedFiles.add(fileInfo);
-			
-			
+			 
+			 String fileNameWithOutExt = FilenameUtils.removeExtension(multipartFile.getOriginalFilename());
+             
+             boolean ExisteJournal = jounalService.JounralExiste(fileNameWithOutExt); 
+             @SuppressWarnings("unused")
+			int ExistingJounral = 0;
+              
+			 
+             if (!ExisteJournal) 
+             {
+            	List<String> listeSingleResultParsing= jounalService.ParseJournal(multipartFile, idAtm);  
+            	
+            	saveFileToLocalDisk(multipartFile);
+     			
+            	UploadedFile fileInfo = getUploadedFileInfo(multipartFile);
+     			
+            	fileInfo = saveFileToDatabase(fileInfo);
+     			
+            	uploadedFiles.add(fileInfo);
+            	 
+            
+             
+             }
+             else 
+             {
+            	 System.out.println("Jounal : "+fileNameWithOutExt+ " existe");
+            	 ExistingJounral++;
+            	 
+             }
 			
 		}
-
+		}
+		
 		return uploadedFiles;
+		
 	}
 
 	

@@ -85,7 +85,7 @@ public class Atm {
 	private List<FileUpload> AtmFileUpload;
 	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
-	@JoinColumn(name = "idBanque")
+	@JoinColumn(name = "idbranch")
 	private Branch branch;
 
 	

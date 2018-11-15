@@ -26,7 +26,7 @@ public class BranchDaoImpl implements BranchDao {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 		@SuppressWarnings("rawtypes")
-		Query theQuery = currentSession.createQuery("from Branch where idbanque=:theBranchId", Branch.class);
+		Query theQuery = currentSession.createQuery("from Branch where idbranch=:theBranchId", Branch.class);
 		theQuery.setParameter("theBranchId", idBranch);
 		Branch branch = (Branch) theQuery.getSingleResult();
 		return branch;
@@ -44,7 +44,7 @@ public class BranchDaoImpl implements BranchDao {
 	@Override
 	public void saveBranch(Branch branch) {
 
-		int theId = 32;
+		int theId = 35;
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Bank bankTemp = currentSession.get(Bank.class, theId);
@@ -59,7 +59,7 @@ public class BranchDaoImpl implements BranchDao {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 		@SuppressWarnings("rawtypes")
-		Query theQuery = currentSession.createQuery("delete from Branch where idbanque=:theBranchId");
+		Query theQuery = currentSession.createQuery("delete from Branch where idbranch=:theBranchId");
 		theQuery.setParameter("theBranchId", idBranch);
 		theQuery.executeUpdate();
 

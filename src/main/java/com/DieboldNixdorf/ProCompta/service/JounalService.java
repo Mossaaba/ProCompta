@@ -2,6 +2,8 @@ package com.DieboldNixdorf.ProCompta.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.DieboldNixdorf.ProCompta.model.Journal;
 
 public interface JounalService {
@@ -17,5 +19,9 @@ public interface JounalService {
 	void deleteById(int idjournal);
 
 	void save(Journal journal, int idAtm);
+	
+    boolean JounralExiste(String journalName);
+    
+    List<String> ParseJournal(MultipartFile multipartFile , int idAtm);
 
 }

@@ -17,24 +17,24 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "banque")
+@Table(name = "branch")
 public class Branch {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idbanque")
+	@Column(name = "idbranch")
 	private int idBranch;
 
-	@Column(name = "codebanque")
+	@Column(name = "codebranch")
 	private String codeBranche;
 
-	@Column(name = "nombanque")
+	@Column(name = "nombranch")
 	private String nomBranch;
 
-	@Column(name = "telbanque")
+	@Column(name = "telbranch")
 	private String phoneBranch;
 
-	@Column(name = "adressebanque")
+	@Column(name = "adressebranch")
 	private String adressBranch;
 
 	@Column(name = "nombrestation")

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.DieboldNixdorf.ProCompta.dao.JournalDao;
 import com.DieboldNixdorf.ProCompta.model.Journal;
@@ -51,6 +52,18 @@ public class JournalServiceImpl implements JounalService {
 	public void save(Journal journal, int idAtm) {
 		journalDao.save(journal, idAtm);
 
+	}
+
+	@Override
+	public boolean JounralExiste(String journalName) {
+		return journalDao.JounralExiste(journalName);
+		 
+	}
+
+	@Override
+	public List<String> ParseJournal(MultipartFile multipartFile , int idAtm) {
+		 
+		return journalDao.ParseJournal(multipartFile,idAtm);
 	}
 
 }
