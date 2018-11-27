@@ -18,9 +18,6 @@ public interface TransactionService {
 
 	List<String> listErreurs();
 
-	List<Transaction> listTransactionByFilter(Date DebuttransactionDate, Date fintransactionDate,
-			Time startingTimeTransaction, Time fnisgingTimeTransaction, String cardNumber, String CradState,
-			long montant, String etatcash, String numberAuthorisatin, String errorTransaction, long MinAmount,
-			long MaxAmount);
+	 
 
 }

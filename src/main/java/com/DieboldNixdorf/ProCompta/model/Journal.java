@@ -2,6 +2,8 @@ package com.DieboldNixdorf.ProCompta.model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -14,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -51,6 +54,12 @@ public class Journal {
 	    		    		CascadeType.PERSIST, CascadeType.REFRESH})
 	    @JoinColumn  (name="idAtm") 
 	    private Atm atm;
+	    
+	    
+	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
+				CascadeType.REFRESH })
+		private List<Transaction> transactions;
+	    
 	    
 	    
 	    public Journal() {
@@ -127,7 +136,13 @@ public class Journal {
 			this.atm = atm;
 		}
 	
+		public void addTransaction(Transaction transaction) 
+		{
 
-	
+			if (transactions == null) {
+				transactions = new ArrayList<>();
+			}
+			transactions.add(transaction);
+		}
 
 }

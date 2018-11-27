@@ -107,27 +107,9 @@ public class TransactionController
 			{
 				populateDefaultModel(model);
 				
-				String dateStart = transaction.getDebuttransactionDate();
-			    String dateFinish = transaction.getFintransactionDate(); 		
-			    Time startingTimeTransaction = transaction.getHeuredebut();
-			    Time fnisgingTimeTransaction = transaction.getHeurefin();
-			    String cardNumber = transaction.getNumerocarte();
-			    String CradState = transaction.getEtatcarte();
-			    long montant  = transaction.getMontant();
-			    String etatcash = transaction.getEtatcash();
-			    String errorTransaction = transaction.getRemarque();
-			    String numberAuthorisatin = transaction.getNauthorisation();
-			    long MinAmount = transaction.getMontantMin();
-			    long MaxAmount = transaction.getMontantMax();
-			    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		        java.util.Date parsed = format.parse(dateStart);
-		        java.util.Date parsed2 = format.parse(dateFinish);  
-		        java.sql.Date DebuttransactionDate = new java.sql.Date(parsed.getTime());
-		        java.sql.Date fintransactionDate = new java.sql.Date(parsed2.getTime());
+				 
 		        
-                model.addAttribute("ListTransactionAfterFiltring" ,transactionService.listTransactionByFilter(DebuttransactionDate ,
-						fintransactionDate , startingTimeTransaction , fnisgingTimeTransaction , cardNumber ,  CradState  ,  
-						montant , etatcash  , numberAuthorisatin  , errorTransaction , MinAmount  , MaxAmount ));
+                
 				
 				model.addAttribute("msg", "Totalité des transaction");
 				model.addAttribute("css" , "success");

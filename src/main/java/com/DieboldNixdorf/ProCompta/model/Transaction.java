@@ -1,34 +1,135 @@
 package com.DieboldNixdorf.ProCompta.model;
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
  
  
 
- 
-public class Transaction implements Serializable {
+@Entity
+@Table(name="transaction")
+public class Transaction  {
 
-	private static final long serialVersionUID = 1L;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idtransaction")
 	private int idtransaction;
-	private int idjournal;
-	private String DebuttransactionDate;
-	private String fintransactionDate;
-	private String dateTransaction;
-	private Time heuredebut;
-	private Time heurefin;
-	private String numerocarte;
-	private String etatcarte;
-	private long montant;
-	private String etatcash;
-	private String remarque;
-	private String nauthorisation;
-	private int cassette1;
+	
+	@Column(name = "starting_date")
+	private Date startingDate;
+	
+	@Column(name = "starting_time")
+	private Time startingTime;
+	
+	@Column(name = "card_number")
+	private String cardNumber;
+	
+	@Column(name = "amount_entred")
+	private String amountEntred;
+	
+	@Column(name = "cash_request")
+	private String cashRequest;
+	
+	@Column(name = "cash_dispensed")
+	private String cashDispensed;
+	
+	@Column(name = "cash_presented")
+	private boolean cashPresented;
+	
+	@Column(name = "cash_taken")
+	private boolean cashTaken;
+	
+	@Column(name = "card_taken")
+	private boolean cardTaken;
+	
+	@Column(name = "finishing_date")
+	private Date finishingDate;
+	
+	@Column(name = "transaction_date_host")
+	private Date transactionDateHost;
+	
+	@Column(name = "transaction_host_time")
+	private Time transactionHostTime;
+	
+	@Column(name = "transaction_host_amount")
+	private float transactionHostAmount;
+	
+	@Column(name = "utrnno")
+	private String UTRNNO;
+	
+	@Column(name = "auth_number")
+	private String AUTH;
+	
+	@Column(name = "cassette1")
+    private int cassette1;
+	
+	@Column(name = "cassette2")
 	private int cassette2;
+	
+	@Column(name = "cassette3")
 	private int cassette3;
+	
+	@Column(name = "cassette4")
 	private int cassette4;
-	private long montantMin; 
-	private long montantMax ;
+	
+	
+	@Column(name = "error_transaction")
+	private int errorTransaction;
+	
+	
+	@Column(name = "transaction_infos")
+	private int infosTransaction;
+	
+	
+	
+	@JsonIgnore
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "idjournal")
+	private Journal journal;
+	
+
+	public Time getStartingTime() {
+		return startingTime;
+	}
+	public void setStartingTime(Time startingTime) {
+		this.startingTime = startingTime;
+	}
+	public float getTransactionHostAmount() {
+		return transactionHostAmount;
+	}
+	public void setTransactionHostAmount(float transactionHostAmount) {
+		this.transactionHostAmount = transactionHostAmount;
+	}
+	public int getErrorTransaction() {
+		return errorTransaction;
+	}
+	public void setErrorTransaction(int errorTransaction) {
+		this.errorTransaction = errorTransaction;
+	}
+	public int getInfosTransaction() {
+		return infosTransaction;
+	}
+	public void setInfosTransaction(int infosTransaction) {
+		this.infosTransaction = infosTransaction;
+	}
+	public Journal getJournal() {
+		return journal;
+	}
+	public void setJournal(Journal journal) {
+		this.journal = journal;
+	}
 	
 	public int getIdtransaction() {
 		return idtransaction;
@@ -36,72 +137,85 @@ public class Transaction implements Serializable {
 	public void setIdtransaction(int idtransaction) {
 		this.idtransaction = idtransaction;
 	}
-	public int getIdjournal() {
-		return idjournal;
+ 
+	public Date getStartingDate() {
+		return startingDate;
 	}
-	public void setIdjournal(int idjournal) {
-		this.idjournal = idjournal;
+	public void setStartingDate(Date startingDate) {
+		this.startingDate = startingDate;
 	}
-	public String getDebuttransactionDate() {
-		return DebuttransactionDate;
+	public String getCardNumber() {
+		return cardNumber;
 	}
-	public void setDebuttransactionDate(String debuttransactionDate) {
-		DebuttransactionDate = debuttransactionDate;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
-	public String getFintransactionDate() {
-		return fintransactionDate;
+	public String getAmountEntred() {
+		return amountEntred;
 	}
-	public void setFintransactionDate(String fintransactionDate) {
-		this.fintransactionDate = fintransactionDate;
+	public void setAmountEntred(String amountEntred) {
+		this.amountEntred = amountEntred;
 	}
-	public String getDateTransaction() {
-		return dateTransaction;
+	public String getCashRequest() {
+		return cashRequest;
 	}
-	public void setDateTransaction(String dateTransaction) {
-		this.dateTransaction = dateTransaction;
+	public void setCashRequest(String cashRequest) {
+		this.cashRequest = cashRequest;
 	}
-	public Time getHeuredebut() {
-		return heuredebut;
+	public String getCashDispensed() {
+		return cashDispensed;
 	}
-	public void setHeuredebut(Time heuredebut) {
-		this.heuredebut = heuredebut;
+	public void setCashDispensed(String cashDispensed) {
+		this.cashDispensed = cashDispensed;
 	}
-	public Time getHeurefin() {
-		return heurefin;
+	public boolean isCashPresented() {
+		return cashPresented;
 	}
-	public void setHeurefin(Time heurefin) {
-		this.heurefin = heurefin;
+	public void setCashPresented(boolean cashPresented) {
+		this.cashPresented = cashPresented;
 	}
-	public String getNumerocarte() {
-		return numerocarte;
+	public boolean isCashTaken() {
+		return cashTaken;
 	}
-	public void setNumerocarte(String numerocarte) {
-		this.numerocarte = numerocarte;
+	public void setCashTaken(boolean cashTaken) {
+		this.cashTaken = cashTaken;
 	}
-	public String getEtatcarte() {
-		return etatcarte;
+	public boolean isCardTaken() {
+		return cardTaken;
 	}
-	public void setEtatcarte(String etatcarte) {
-		this.etatcarte = etatcarte;
+	public void setCardTaken(boolean cardTaken) {
+		this.cardTaken = cardTaken;
+	}
+	public Date getFinishingDate() {
+		return finishingDate;
+	}
+	public void setFinishingDate(Date finishingDate) {
+		this.finishingDate = finishingDate;
+	}
+	public Date getTransactionDateHost() {
+		return transactionDateHost;
+	}
+	public void setTransactionDateHost(Date transactionDateHost) {
+		this.transactionDateHost = transactionDateHost;
+	}
+	public Time getTransactionHostTime() {
+		return transactionHostTime;
+	}
+	public void setTransactionHostTime(Time transactionHostTime) {
+		this.transactionHostTime = transactionHostTime;
 	}
 	 
-	public String getEtatcash() {
-		return etatcash;
+	public String getUTRNNO() {
+		return UTRNNO;
 	}
-	public void setEtatcash(String etatcash) {
-		this.etatcash = etatcash;
+	public void setUTRNNO(String uTRNNO) {
+		UTRNNO = uTRNNO;
 	}
-	public String getRemarque() {
-		return remarque;
+	public String getAUTH() {
+		return AUTH;
 	}
-	public void setRemarque(String remarque) {
-		this.remarque = remarque;
-	}
-	public String getNauthorisation() {
-		return nauthorisation;
-	}
-	public void setNauthorisation(String nauthorisation) {
-		this.nauthorisation = nauthorisation;
+	public void setAUTH(String aUTH) {
+		AUTH = aUTH;
 	}
 	public int getCassette1() {
 		return cassette1;
@@ -127,62 +241,6 @@ public class Transaction implements Serializable {
 	public void setCassette4(int cassette4) {
 		this.cassette4 = cassette4;
 	}
-	 
-	public long getMontantMin() {
-		return montantMin;
-	}
-	public void setMontantMin(long montantMin) {
-		this.montantMin = montantMin;
-	}
-	public long getMontantMax() {
-		return montantMax;
-	}
-	public void setMontantMax(long montantMax) {
-		this.montantMax = montantMax;
-	}
-	public Transaction() {
-		 
-	}
-	public Long getMontant() {
-		return montant;
-	}
-	public void setMontant(Long montant) {
-		this.montant = montant;
-	}
-	
-	
-	public Transaction(int idtransaction, int idjournal, String debuttransactionDate, String fintransactionDate,
-			String dateTransaction, Time heuredebut, Time heurefin, String numerocarte, String etatcarte,
-			Long montant, String etatcash, String remarque, String nauthorisation, int cassette1, int cassette2,
-			int cassette3, int cassette4, long montantMin, long montantMax ) {
-	 
-		this.idtransaction = idtransaction;
-		this.idjournal = idjournal;
-		this.DebuttransactionDate = debuttransactionDate;
-		this.fintransactionDate = fintransactionDate;
-		this.dateTransaction = dateTransaction;
-		this.heuredebut = heuredebut;
-		this.heurefin = heurefin;
-		this.numerocarte = "";
-		this.etatcarte = "";
-		this.montant = (long) 0 ;
-		this.etatcash = "";
-		this.remarque = "";
-		this.nauthorisation = "";
-		this.cassette1 = 0;
-		this.cassette2 = 0;
-		this.cassette3 = 0;
-		this.cassette4 = 0;
-		this.montantMin = (long) 0;
-		this.montantMax = (long) 0;
-	 
-		
-	}
-	 
- 
-	
-	
-	
-	 
+
 	 
 }

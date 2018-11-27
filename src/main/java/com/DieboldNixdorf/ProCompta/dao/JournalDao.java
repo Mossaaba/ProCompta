@@ -22,7 +22,7 @@ public interface JournalDao {
     
     boolean JounralExiste(String journalName);
     
-    List<String> ParseJournal(MultipartFile multipartFile , int idAtm);
+    List<String> ParseJournal(MultipartFile multipartFile , int idAtm );
 
 }
   

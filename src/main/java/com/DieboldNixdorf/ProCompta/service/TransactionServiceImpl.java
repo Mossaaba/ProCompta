@@ -45,15 +45,6 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionDao.listErreurs();
 	}
 
-	@Override
-	public List<Transaction> listTransactionByFilter(Date DebuttransactionDate, Date fintransactionDate,
-			Time startingTimeTransaction, Time fnisgingTimeTransaction, String cardNumber, String CradState,
-			long montant, String etatcash, String numberAuthorisatin, String errorTransaction, long MinAmount,
-			long MaxAmount) {
-
-		return transactionDao.listTransactionByFilter(DebuttransactionDate, fintransactionDate, startingTimeTransaction,
-				fnisgingTimeTransaction, cardNumber, CradState, montant, etatcash, numberAuthorisatin, errorTransaction,
-				MinAmount, MaxAmount);
-	}
+	 
 
 }
