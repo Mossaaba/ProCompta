@@ -25,10 +25,7 @@ import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import com.DieboldNixdorf.ProCompta.dao.IncidentDao;
-import com.DieboldNixdorf.ProCompta.dao.IncidentDaoImpl;
-import com.DieboldNixdorf.ProCompta.dao.TransactionDao;
-import com.DieboldNixdorf.ProCompta.dao.TransactionDaoImpl;
+ 
 import com.DieboldNixdorf.ProCompta.tools.RoleToUserProfileConverter;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -123,17 +120,9 @@ public class ProComptaAppConfig implements WebMvcConfigurer {
 		return new JdbcTemplate(dataSource);
 	}
 
-	@Bean
-	public TransactionDao getTransactionDao() {
-		return new TransactionDaoImpl(dataSource);
+	 
 
-	}
-
-	@Bean
-	public IncidentDao getIncidentDao() {
-		return new IncidentDaoImpl(dataSource);
-
-	}
+	 
 
 	@Override
 	public void configurePathMatch(PathMatchConfigurer matcher) {

@@ -1,5 +1,4 @@
 package com.DieboldNixdorf.ProCompta.model;
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -33,6 +32,9 @@ public class Transaction  {
 	@Column(name = "starting_time")
 	private Time startingTime;
 	
+	@Column(name = "finishing_time")
+	private Time finishingTime;
+	
 	@Column(name = "card_number")
 	private String cardNumber;
 	
@@ -57,6 +59,10 @@ public class Transaction  {
 	@Column(name = "finishing_date")
 	private Date finishingDate;
 	
+	@Column(name = "type_transaction")
+	private String transactionType;
+	
+
 	@Column(name = "transaction_date_host")
 	private Date transactionDateHost;
 	
@@ -64,13 +70,16 @@ public class Transaction  {
 	private Time transactionHostTime;
 	
 	@Column(name = "transaction_host_amount")
-	private float transactionHostAmount;
+	private Double transactionHostAmount;
+	
+	@Column(name = "transaction_host_branch")
+	private String transactionHostBranch;
 	
 	@Column(name = "utrnno")
 	private String UTRNNO;
 	
 	@Column(name = "auth_number")
-	private String AUTH;
+	private String taransaction_AUTH;
 	
 	@Column(name = "cassette1")
     private int cassette1;
@@ -86,11 +95,16 @@ public class Transaction  {
 	
 	
 	@Column(name = "error_transaction")
-	private int errorTransaction;
+	private String errorTransaction;
 	
 	
 	@Column(name = "transaction_infos")
-	private int infosTransaction;
+	private String infosTransaction;
+	
+	
+	@Column(name="transaction_host_card")
+	private String transaction_host_card;
+	
 	
 	
 	
@@ -106,22 +120,25 @@ public class Transaction  {
 	public void setStartingTime(Time startingTime) {
 		this.startingTime = startingTime;
 	}
-	public float getTransactionHostAmount() {
+ 
+	
+	public Double getTransactionHostAmount() {
 		return transactionHostAmount;
 	}
-	public void setTransactionHostAmount(float transactionHostAmount) {
+	public void setTransactionHostAmount(Double transactionHostAmount) {
 		this.transactionHostAmount = transactionHostAmount;
 	}
-	public int getErrorTransaction() {
+	public String getErrorTransaction() {
 		return errorTransaction;
 	}
-	public void setErrorTransaction(int errorTransaction) {
+	public void setErrorTransaction(String errorTransaction) {
 		this.errorTransaction = errorTransaction;
 	}
-	public int getInfosTransaction() {
+ 
+	public String getInfosTransaction() {
 		return infosTransaction;
 	}
-	public void setInfosTransaction(int infosTransaction) {
+	public void setInfosTransaction(String infosTransaction) {
 		this.infosTransaction = infosTransaction;
 	}
 	public Journal getJournal() {
@@ -192,11 +209,12 @@ public class Transaction  {
 	public void setFinishingDate(Date finishingDate) {
 		this.finishingDate = finishingDate;
 	}
+	 
 	public Date getTransactionDateHost() {
 		return transactionDateHost;
 	}
-	public void setTransactionDateHost(Date transactionDateHost) {
-		this.transactionDateHost = transactionDateHost;
+	public void setTransactionDateHost(java.util.Date date) {
+		this.transactionDateHost = (Date) date;
 	}
 	public Time getTransactionHostTime() {
 		return transactionHostTime;
@@ -204,18 +222,23 @@ public class Transaction  {
 	public void setTransactionHostTime(Time transactionHostTime) {
 		this.transactionHostTime = transactionHostTime;
 	}
-	 
+	public String getTransactionType() {
+		return transactionType;
+	}
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
 	public String getUTRNNO() {
 		return UTRNNO;
 	}
 	public void setUTRNNO(String uTRNNO) {
 		UTRNNO = uTRNNO;
 	}
-	public String getAUTH() {
-		return AUTH;
+	public String getTaransaction_AUTH() {
+		return taransaction_AUTH;
 	}
-	public void setAUTH(String aUTH) {
-		AUTH = aUTH;
+	public void setTaransaction_AUTH(String taransaction_AUTH) {
+		this.taransaction_AUTH = taransaction_AUTH;
 	}
 	public int getCassette1() {
 		return cassette1;
@@ -241,6 +264,25 @@ public class Transaction  {
 	public void setCassette4(int cassette4) {
 		this.cassette4 = cassette4;
 	}
+	public String getTransactionHostBranch() {
+		return transactionHostBranch;
+	}
+	public void setTransactionHostBranch(String transactionHostBranch) {
+		this.transactionHostBranch = transactionHostBranch;
+	}
+	public String getTransaction_host_card() {
+		return transaction_host_card;
+	}
+	public void setTransaction_host_card(String transaction_host_card) {
+		this.transaction_host_card = transaction_host_card;
+	}
+	
+	public Time getFinishingTime() {
+		return finishingTime;
+	}
+	public void setFinishingTime(Time finishingTime) {
+		this.finishingTime = finishingTime;
+	} 
 
 	 
 }

@@ -1,19 +1,20 @@
 package com.DieboldNixdorf.ProCompta.dao;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
+ 
 import java.util.List;
  
-import javax.sql.DataSource;
+ 
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+ 
 import org.springframework.stereotype.Repository;
 
+ 
 import com.DieboldNixdorf.ProCompta.model.Transaction;
-import com.DieboldNixdorf.ProCompta.tools.ToolsToUse;
+ 
 
  
  
@@ -21,48 +22,59 @@ import com.DieboldNixdorf.ProCompta.tools.ToolsToUse;
 public class TransactionDaoImpl implements TransactionDao {
 
 	
-	ToolsToUse toolToUse = new ToolsToUse();
-	
-	private JdbcTemplate jdbcTemplate;
-	
-	public TransactionDaoImpl(DataSource dataSource) 
-	{
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	
 	@Override
-	public Transaction findById(Integer id) {
+	public Transaction findById(Integer idTransaction) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		@SuppressWarnings("rawtypes")
+		Query theQuery = currentSession.createQuery("from Transaction where idtransaction=:theTransactionId", Transaction.class);
+		theQuery.setParameter("theTransactionId", idTransaction);
+		Transaction transaction = (Transaction) theQuery.getSingleResult();
+		return transaction;
+	}
+
+
+	@Override
+	public List<Transaction> findAllTransaction() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Transaction> theQuery = currentSession.createQuery("from Transaction", Transaction.class);
+		List<Transaction> listTransactions = theQuery.getResultList();
+		return listTransactions;
+	}
+
+	 
+	@Override
+	public List<String> listErreursTransaction() {
+		return null;
+		
+		 
+		 
+	}
+
+
+	@Override
+	public List<String> listinfosTransaction() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public List<Transaction> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public void saveTrasanction(Transaction transaction) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.saveOrUpdate(transaction);
+		
 	}
 
-	@Override
-	public List<String> listCardState() {
-		 
-		String sqlQuery = "select DISTINCT etatcarte from TRANSACTION ORDER BY etatcarte ASC ";
-		List<String> listCardState =jdbcTemplate.queryForList(sqlQuery,String.class);
-		return listCardState;
-	}
-	@Override
-	public List<String> listCashState() {
-		 
-		String sqlQuery = "select DISTINCT etatcash from TRANSACTION ORDER BY etatcash ASC ";
-		List<String> listCashState =jdbcTemplate.queryForList(sqlQuery,String.class);
-		return listCashState;
-	}
 
 	@Override
-	public List<String> listErreurs() {
-		String sqlQuery = "select DISTINCT remarque from TRANSACTION ORDER BY remarque ASC ";
-		List<String> listErreurs =jdbcTemplate.queryForList(sqlQuery,String.class);
-		return listErreurs;
+	public void deleteTransaction(Transaction transaction) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.delete(transaction);
+		
 	}
 
 	 

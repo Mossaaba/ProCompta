@@ -12,14 +12,13 @@ public interface JournalDao {
     
 	Journal findById(int idjournal);
      
-    void save(Journal journal);
+	int saveJournal(Journal journal, int idAtm);
      
     List<Journal> findAllByAtmId(int idAtm);
      
     void deleteById(int idjournal);
 	
-    void save(Journal journal , int idAtm);
-    
+   
     boolean JounralExiste(String journalName);
     
     List<String> ParseJournal(MultipartFile multipartFile , int idAtm );

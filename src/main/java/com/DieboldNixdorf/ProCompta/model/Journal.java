@@ -1,20 +1,21 @@
 package com.DieboldNixdorf.ProCompta.model;
 
-import java.sql.Date;
+ 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Basic;
+ 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+ 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
+ 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -45,10 +46,7 @@ public class Journal {
 	    private int ligneJournal;
 	     
 	    
-	    @Lob @Basic(fetch = FetchType.LAZY)
-	    @Column(name="content")
-	    private byte[] content;
-	
+	     
 
 	    @ManyToOne( cascade={CascadeType.DETACH, CascadeType.MERGE,
 	    		    		CascadeType.PERSIST, CascadeType.REFRESH})
@@ -59,6 +57,19 @@ public class Journal {
 	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
 				CascadeType.REFRESH })
 		private List<Transaction> transactions;
+	    
+	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
+				CascadeType.REFRESH })
+		private List<Incident> incidents;
+	    
+	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
+				CascadeType.REFRESH })
+		private List<Replenishment> replenishments;
+	    
+	    
+	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
+				CascadeType.REFRESH })
+		private List<ErrorATM> errorsATM;
 	    
 	    
 	    
@@ -120,13 +131,7 @@ public class Journal {
 			this.ligneJournal = ligneJournal;
 		}
 
-		public byte[] getContent() {
-			return content;
-		}
-
-		public void setContent(byte[] content) {
-			this.content = content;
-		}
+		 
 
 		public Atm getAtm() {
 			return atm;
@@ -144,5 +149,36 @@ public class Journal {
 			}
 			transactions.add(transaction);
 		}
+		
+		public void addIncident(Incident incident) 
+		{
+
+			if (incidents == null) {
+				incidents = new ArrayList<>();
+			}
+			incidents.add(incident);
+		}
+		
+		public void addReplenishment(Replenishment replenishment) 
+		{
+
+			if (replenishments == null) {
+				replenishments = new ArrayList<>();
+			}
+			replenishments.add(replenishment);
+		}
+		
+		
+		public void adderrorATM(ErrorATM errorATM) 
+		{
+
+			if (errorsATM == null) {
+				errorsATM = new ArrayList<>();
+			}
+			errorsATM.add(errorATM);
+		}
+		
+		
+		
 
 }

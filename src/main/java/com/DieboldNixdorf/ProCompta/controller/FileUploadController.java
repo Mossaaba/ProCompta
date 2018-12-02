@@ -92,7 +92,8 @@ public class FileUploadController {
 			 
              if (!ExisteJournal) 
              {
-            	List<String> listeSingleResultParsing= jounalService.ParseJournal(multipartFile, idAtm);  
+            	@SuppressWarnings("unused")
+				List<String> listeSingleResultParsing= jounalService.ParseJournal(multipartFile, idAtm);  
             	
             	saveFileToLocalDisk(multipartFile);
      			

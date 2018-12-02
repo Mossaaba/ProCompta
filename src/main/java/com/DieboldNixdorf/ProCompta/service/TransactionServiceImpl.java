@@ -1,8 +1,8 @@
 package com.DieboldNixdorf.ProCompta.service;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,41 +10,47 @@ import org.springframework.stereotype.Service;
 import com.DieboldNixdorf.ProCompta.dao.TransactionDao;
 import com.DieboldNixdorf.ProCompta.model.Transaction;
 
-@Service("transctionService")
+@Service
+@Transactional
 public class TransactionServiceImpl implements TransactionService {
 
-	private TransactionDao transactionDao;
-
 	@Autowired
-	public void setTransactionDao(TransactionDao transactionDao) {
-		this.transactionDao = transactionDao;
-	}
+	private TransactionDao transactionDao;
 
 	@Override
 	public Transaction findById(Integer id) {
+
 		return transactionDao.findById(id);
 	}
 
 	@Override
-	public List<Transaction> findAll() {
-		return transactionDao.findAll();
+	public List<Transaction> findAllTransaction() {
+
+		return transactionDao.findAllTransaction();
 	}
 
 	@Override
-	public List<String> listCardState() {
-		return transactionDao.listCardState();
+	public List<String> listErreursTransaction() {
+
+		return transactionDao.listErreursTransaction();
 	}
 
 	@Override
-	public List<String> listCashState() {
-		return transactionDao.listCashState();
+	public List<String> listinfosTransaction() {
+
+		return transactionDao.listinfosTransaction();
 	}
 
 	@Override
-	public List<String> listErreurs() {
-		return transactionDao.listErreurs();
+	public void saveTrasanction(Transaction transaction) {
+		transactionDao.saveTrasanction(transaction);
+
 	}
 
-	 
+	@Override
+	public void deleteTransaction(Transaction transaction) {
+		transactionDao.deleteTransaction(transaction);
+
+	}
 
 }

@@ -1,88 +1,83 @@
 package com.DieboldNixdorf.ProCompta.model;
 
 import java.sql.Time;
+import java.util.Date;
 
-public class Incident {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="incidents")
+public class Incident 
+{
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idincident")
 	private int idIncident;
-	private int idjournal;
-	private String DebutIncidentDate;
-	private String finIncidentDate;
-	private String DateIncident;
-	private Time heuredebutIncident;
-	private Time heurefinIncident;
+	
+	@Column(name = "date_incident")
+    private Date incident_date;
+	
+	@Column(name = "time_incident")
+    private Time incident_time;
+	
+	@Column(name = "details_incidents")
 	private String detailsincidents ;
 	
- 
-	public Incident(int idIncident, int idjournal, String debutIncidentDate, String finIncidentDate,
-			String dateIncident, Time heuredebutIncident, Time heurefinIncident, String detailsincidents) {
-	 
-					this.idIncident = idIncident;
-					this.idjournal = idjournal;
-					DebutIncidentDate = debutIncidentDate;
-					this.finIncidentDate = finIncidentDate;
-					DateIncident = dateIncident;
-					this.heuredebutIncident = heuredebutIncident;
-					this.heurefinIncident = heurefinIncident;
-					this.detailsincidents = "";
-	}
-	
-	public Incident() {}
-	
-	
-	
+	@JsonIgnore
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "idjournal")
+	private Journal journal;
+
 	public int getIdIncident() {
 		return idIncident;
 	}
+
 	public void setIdIncident(int idIncident) {
 		this.idIncident = idIncident;
 	}
-	public int getIdjournal() {
-		return idjournal;
+
+	public Date getIncident_date() {
+		return incident_date;
 	}
-	public void setIdjournal(int idjournal) {
-		this.idjournal = idjournal;
+
+	public void setIncident_date(Date incident_date) {
+		this.incident_date = incident_date;
 	}
-	public String getDebutIncidentDate() {
-		return DebutIncidentDate;
+
+	public Time getIncident_time() {
+		return incident_time;
 	}
-	public void setDebutIncidentDate(String debutIncidentDate) {
-		DebutIncidentDate = debutIncidentDate;
+
+	public void setIncident_time(Time incident_time) {
+		this.incident_time = incident_time;
 	}
-	public String getFinIncidentDate() {
-		return finIncidentDate;
-	}
-	public void setFinIncidentDate(String finIncidentDate) {
-		this.finIncidentDate = finIncidentDate;
-	}
-	public String getDateIncident() {
-		return DateIncident;
-	}
-	public void setDateIncident(String dateIncident) {
-		DateIncident = dateIncident;
-	}
-	public Time getHeuredebutIncident() {
-		return heuredebutIncident;
-	}
-	public void setHeuredebutIncident(Time heuredebutIncident) {
-		this.heuredebutIncident = heuredebutIncident;
-	}
-	public Time getHeurefinIncident() {
-		return heurefinIncident;
-	}
-	public void setHeurefinIncident(Time heurefinIncident) {
-		this.heurefinIncident = heurefinIncident;
-	}
+
 	public String getDetailsincidents() {
 		return detailsincidents;
 	}
+
 	public void setDetailsincidents(String detailsincidents) {
 		this.detailsincidents = detailsincidents;
-	} 
-	
-	
-	
+	}
+
+	public Journal getJournal() {
+		return journal;
+	}
+
+	public void setJournal(Journal journal) {
+		this.journal = journal;
+	}
 	
 
 }

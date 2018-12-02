@@ -1,8 +1,8 @@
 package com.DieboldNixdorf.ProCompta.controller;
 
-import java.sql.Time;
+ 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+ 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,6 +41,7 @@ public class IncidentController {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	private IncidentService incidentService;
 
 	@Autowired
@@ -72,57 +73,18 @@ public class IncidentController {
 		
 		if (result.hasErrors())
 		 {
-			populateDefaultModel(model);
-			
-			model.addAttribute("msg", "Vérfier les donées saisies SVP");
-			model.addAttribute("css" , "danger");
+				populateDefaultModel(model);
+				model.addAttribute("msg", "Vérfier les donées saisies SVP");
+				model.addAttribute("css" , "danger");
 			
 			return "Incidents";
 		} 
 		else 
 		{
-			populateDefaultModel(model);
-			
-			String dateStart = incident.getDebutIncidentDate();
-		    String dateFinish = incident.getFinIncidentDate();
-		    Time startingTimeIncident = incident.getHeuredebutIncident();
-		    Time finishingTimeIncident = incident.getHeurefinIncident();
-		    String detailIncident = incident.getDetailsincidents();
-		  
-		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	        java.util.Date parsed = format.parse(dateStart);
-	        java.util.Date parsed2 = format.parse(dateFinish); 
-	        
-	        
-	        java.sql.Date DebutIncidentDate = new java.sql.Date(parsed.getTime());
-	        java.sql.Date finIncidentDate = new java.sql.Date(parsed2.getTime());
-		    
-		    
-		    
-		    
-			System.out.println("\n dateD :" +dateStart+"\n dateFinish "+dateFinish+"\n timeStart"+
-			startingTimeIncident+"\n Timefin "+finishingTimeIncident+"\n detailIn"+detailIncident+"");
-			
-			
-			
-			  model.addAttribute("ListIncidentAfterFiltring" ,incidentService.listIncidentByFilter(DebutIncidentDate, finIncidentDate,
-					  startingTimeIncident, finishingTimeIncident, detailIncident) );
-				
+			    populateDefaultModel(model);
 				model.addAttribute("msg", "Totalité des Incident");
-				model.addAttribute("css" , "success");
-				
-			
-			
-			
+				model.addAttribute("css" , "success");	
 		}
-		
-		
-		
-		
-		
-		
-
- 
 			    return "Incidents";
 		}
 
@@ -134,12 +96,10 @@ public class IncidentController {
 	{
 
 		
+		
 		List<String> TypeIncident = new LinkedList<>(Arrays.asList(new String[] {" "}));
 		
-		for(int i=0;i<incidentService.listTypeIncident().size();i++)
-		{
-			TypeIncident.add(incidentService.listTypeIncident().get(i));
-		}
+		 
 		model.addAttribute("TypeIncident", TypeIncident);
 
 		 

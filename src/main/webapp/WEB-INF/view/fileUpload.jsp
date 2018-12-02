@@ -521,7 +521,7 @@
 
 										addRemoveLinks : true,
 
-										acceptedFiles : '.jrn,.log',
+										acceptedFiles : '.jrn,.LOG',
 
 										ignoreHiddenFiles : true,
 

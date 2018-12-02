@@ -1,12 +1,6 @@
 package com.DieboldNixdorf.ProCompta.controller;
-
-
-import java.sql.Time;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +32,7 @@ public class TransactionController
 		binder.setValidator(transactionFormValidator);
 	}
 	
+	@SuppressWarnings("unused")
 	private TransactionService transactionService;
 
 	@Autowired
@@ -62,7 +57,7 @@ public class TransactionController
 	
 	private void populateDefaultModel(Model model)
 	{
-
+		/*
 		List<String> etatsCash = new LinkedList<>(Arrays.asList(new String[] {}));
 		for(int i=0;i<transactionService.listCardState().size();i++)
 		{
@@ -84,9 +79,10 @@ public class TransactionController
 		{
 			errorsTransaction.add(transactionService.listErreurs().get(i));
 		}
-		model.addAttribute("errorsTransaction", errorsTransaction);	 
+		model.addAttribute("errorsTransaction", errorsTransaction);	
+			*/ 
 	}
-	
+
 	 
 	@RequestMapping(value = "/transaction/find", method = RequestMethod.POST)
 	public String getListTransactionByfilter(@ModelAttribute("transaction") @Validated Transaction transaction,

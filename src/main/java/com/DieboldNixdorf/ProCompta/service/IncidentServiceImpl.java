@@ -1,44 +1,42 @@
 package com.DieboldNixdorf.ProCompta.service;
 
-import java.sql.Date;
-import java.sql.Time;
+ 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.DieboldNixdorf.ProCompta.dao.IncidentDao;
 import com.DieboldNixdorf.ProCompta.model.Incident;
 
-@Service("incidentService")
+@Service
+@Transactional
 public class IncidentServiceImpl implements IncidentService {
 
-	IncidentDao incidentDao;
-
 	@Autowired
-	public void setIncidentDao(IncidentDao incidentDao) {
-		this.incidentDao = incidentDao;
+	private IncidentDao IncidentDao;
+	
+	
+	@Override
+	public Incident findIncidentById(Integer id) {
+		return IncidentDao.findIncidentById(id);
 	}
 
 	@Override
-	public Incident findById(Integer id) {
-		return incidentDao.findById(id);
+	public List<Incident> findAllIncidents() {
+		return IncidentDao.findAllIncidents();
 	}
 
 	@Override
-	public List<Incident> findAll() {
-		return incidentDao.findAll();
+	public void saveIncident(Incident incident) {
+		IncidentDao.saveIncident(incident);
+		
 	}
 
 	@Override
-	public List<String> listTypeIncident() {
-
-		return incidentDao.listTypeIncident();
+	public void deleteIncident(Incident incident) {
+		IncidentDao.deleteIncident(incident);
+		
 	}
 
-	@Override
-	public List<Incident> listIncidentByFilter(Date DebutIncidentDate, Date finIncidentDate, Time startingTimeIncident,
-			Time fnisgingTimeIncident, String errorTransaction) {
-		return incidentDao.listIncidentByFilter(DebutIncidentDate, finIncidentDate, startingTimeIncident,
-				fnisgingTimeIncident, errorTransaction);
-	}
-
+	 
 }

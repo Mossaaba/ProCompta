@@ -12,13 +12,12 @@ public interface JounalService {
 
 	Journal findById(int idjournal);
 
-	void save(Journal journal);
 
 	List<Journal> findAllByAtmId(int idAtm);
 
 	void deleteById(int idjournal);
 
-	void save(Journal journal, int idAtm);
+	int saveJournal(Journal journal, int idAtm);
 	
     boolean JounralExiste(String journalName);
     

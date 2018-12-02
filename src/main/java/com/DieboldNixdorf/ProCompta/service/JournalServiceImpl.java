@@ -29,11 +29,7 @@ public class JournalServiceImpl implements JounalService {
 		return journalDao.findById(idjournal);
 	}
 
-	@Override
-	public void save(Journal journal) {
-		journalDao.save(journal);
-
-	}
+	 
 
 	@Override
 	public List<Journal> findAllByAtmId(int idAtm) {
@@ -48,11 +44,7 @@ public class JournalServiceImpl implements JounalService {
 
 	}
 
-	@Override
-	public void save(Journal journal, int idAtm) {
-		journalDao.save(journal, idAtm);
-
-	}
+	 
 
 	@Override
 	public boolean JounralExiste(String journalName) {
@@ -64,6 +56,14 @@ public class JournalServiceImpl implements JounalService {
 	public List<String> ParseJournal(MultipartFile multipartFile , int idAtm) {
 		 
 		return journalDao.ParseJournal(multipartFile,idAtm);
+	}
+
+	 
+
+	@Override
+	public int saveJournal(Journal journal, int idAtm) {
+		 
+		return journalDao.saveJournal(journal, idAtm);
 	}
 
 }
