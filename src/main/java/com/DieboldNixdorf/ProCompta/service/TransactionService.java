@@ -12,6 +12,8 @@ public interface TransactionService {
 	List<String> listinfosTransaction();
 	void saveTrasanction(Transaction transaction);
 	void deleteTransaction(Transaction transaction);
+	List<String> listATM();
+	List<Transaction> listTransactionAfterFiltring(Transaction trx);
 
 	 
 

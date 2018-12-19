@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +33,9 @@ public class Transaction  {
 	@Column(name = "starting_time")
 	private Time startingTime;
 	
+	@Column(name = "finishing_date")
+	private Date finishingDate;
+	
 	@Column(name = "finishing_time")
 	private Time finishingTime;
 	
@@ -51,17 +55,15 @@ public class Transaction  {
 	private boolean cashPresented;
 	
 	@Column(name = "cash_taken")
-	private boolean cashTaken;
+	private boolean cashTaken;   
 	
 	@Column(name = "card_taken")
 	private boolean cardTaken;
 	
-	@Column(name = "finishing_date")
-	private Date finishingDate;
+	
 	
 	@Column(name = "type_transaction")
 	private String transactionType;
-	
 
 	@Column(name = "transaction_date_host")
 	private Date transactionDateHost;
@@ -72,8 +74,8 @@ public class Transaction  {
 	@Column(name = "transaction_host_amount")
 	private Double transactionHostAmount;
 	
-	@Column(name = "transaction_host_branch")
-	private String transactionHostBranch;
+	@Column(name = "transaction_host_atm")
+	private String transactionHostATM;
 	
 	@Column(name = "utrnno")
 	private String UTRNNO;
@@ -103,9 +105,30 @@ public class Transaction  {
 	
 	
 	@Column(name="transaction_host_card")
-	private String transaction_host_card;
+	private String transactionHostCard;
 	
-	
+	@Transient
+	private String transactionCardPartOne;  
+	@Transient
+	private String transactionCardPartTwo;
+	@Transient
+	private String transactionDateStarting;
+	@Transient
+	private String transactionDateFinishing ;
+	@Transient
+	private String transactionTimeFinishing;
+	@Transient
+	private String transactionTimeStarting	;
+	@Transient
+	private String transactionVendor;
+	@Transient
+	private int transactionHostAmounttMin; 	
+	@Transient
+	private int transactionHostAmountMax;
+	@Transient
+	private String transactionCardStatus; 	
+	@Transient
+	private String transactionCashStatus;
 	
 	
 	@JsonIgnore
@@ -121,7 +144,6 @@ public class Transaction  {
 		this.startingTime = startingTime;
 	}
  
-	
 	public Double getTransactionHostAmount() {
 		return transactionHostAmount;
 	}
@@ -264,25 +286,97 @@ public class Transaction  {
 	public void setCassette4(int cassette4) {
 		this.cassette4 = cassette4;
 	}
-	public String getTransactionHostBranch() {
-		return transactionHostBranch;
-	}
-	public void setTransactionHostBranch(String transactionHostBranch) {
-		this.transactionHostBranch = transactionHostBranch;
-	}
-	public String getTransaction_host_card() {
-		return transaction_host_card;
-	}
-	public void setTransaction_host_card(String transaction_host_card) {
-		this.transaction_host_card = transaction_host_card;
-	}
-	
+ 
 	public Time getFinishingTime() {
 		return finishingTime;
 	}
 	public void setFinishingTime(Time finishingTime) {
 		this.finishingTime = finishingTime;
-	} 
-
+	}
+	
+	public String getTransactionDateFinishing() {
+		return transactionDateFinishing;
+	}
+	public void setTransactionDateFinishing(String transactionDateFinishing) {
+		this.transactionDateFinishing = transactionDateFinishing;
+	}
+	public String getTransactionDateStarting() {
+		return transactionDateStarting;
+	}
+	public void setTransactionDateStarting(String transactionDateStarting) {
+		this.transactionDateStarting = transactionDateStarting;
+	}
+	public String getTransactionTimeFinishing() {
+		return transactionTimeFinishing;
+	}
+	public void setTransactionTimeFinishing(String transactionTimeFinishing) {
+		this.transactionTimeFinishing = transactionTimeFinishing;
+	}
+	public String getTransactionTimeStarting() {
+		return transactionTimeStarting;
+	}
+	public void setTransactionTimeStarting(String transactionTimeStarting) {
+		this.transactionTimeStarting = transactionTimeStarting;
+	}
+	public int getTransactionHostAmounttMin() {
+		return transactionHostAmounttMin;
+	}
+	public void setTransactionHostAmounttMin(int transactionHostAmounttMin) {
+		this.transactionHostAmounttMin = transactionHostAmounttMin;
+	}
+	public int getTransactionHostAmountMax() {
+		return transactionHostAmountMax;
+	}
+	public void setTransactionHostAmountMax(int transactionHostAmountMax) {
+		this.transactionHostAmountMax = transactionHostAmountMax;
+	}
 	 
+	public String getTransactionVendor() {
+		return transactionVendor;
+	}
+	public void setTransactionVendor(String transactionVendor) {
+		this.transactionVendor = transactionVendor;
+	}
+	public String getTransactionHostATM() {
+		return transactionHostATM;
+	}
+	public void setTransactionHostATM(String transactionHostATM) {
+		this.transactionHostATM = transactionHostATM;
+	}
+	public String getTransactionHostCard() {
+		return transactionHostCard;
+	}
+	public void setTransactionHostCard(String transactionHostCard) {
+		this.transactionHostCard = transactionHostCard;
+	}
+	public String getTransactionCardPartOne() {
+		return transactionCardPartOne;
+	}
+	public void setTransactionCardPartOne(String transactionCardPartOne) {
+		this.transactionCardPartOne = transactionCardPartOne;
+	}
+	public String getTransactionCardPartTwo() {
+		return transactionCardPartTwo;
+	}
+	public void setTransactionCardPartTwo(String transactionCardPartTwo) {
+		this.transactionCardPartTwo = transactionCardPartTwo;
+	}
+	
+	public String getTransactionCardStatus() {
+		return transactionCardStatus;
+	}
+	public void setTransactionCardStatus(String transactionCardStatus) {
+		this.transactionCardStatus = transactionCardStatus;
+	}
+	
+	public String getTransactionCashStatus() {
+		return transactionCashStatus;
+	}
+	public void setTransactionCashStatus(String transactionCashStatus) {
+		this.transactionCashStatus = transactionCashStatus;
+	}
+ 
+	
+	
+	
 }

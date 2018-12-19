@@ -78,63 +78,7 @@ $(document).ready(function()
 										}
 									});
 
-							$('#dataTableAtm')
-									.DataTable(
-											{
-												"sDom" : "<'exportOptions2'T><'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>>"
-														+ "<'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> "
-														+ "<'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> "
-														+ "<'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> <'row'<'col-sm-12 col-md-2'><'col-sm-12 col-md-10'>> "
-														+ " <'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-10'f>> <'table-responsive't>  "
-														+ "<'row'<'col-sm-12 col-md-2'i><'col-sm-12 col-md-10'p>>",
-
-												"fixedHeader" : true,
-												"sPaginationType" : "bootstrap",
-												"destroy" : true,
-												"bPaginate" : true,
-												"lengthMenu" : [
-														[ 5, 10, 25, 50, -1 ],
-														[ 5, 10, 25, 50, "All" ] ],
-												"oLanguage" : {
-
-													"sInfo" : "Atms liste resultat "
-												},
-
-												"oTableTools" : {
-													"sSwfPath" : '<spring:url value="/resources/assets/plugins/jquery-datatable/extensions/TableTools/swf/copy_csv_xls_pdf.swf"/>',
-
-													"aButtons" : [
-															{
-																"sExtends" : "csv",
-																"sButtonText" : "<i class='pg-grid'></i>",
-															},
-															{
-																"sExtends" : "xls",
-																"sButtonText" : "<i class='fa fa-file-excel-o'></i>",
-															},
-															{
-																"sExtends" : "pdf",
-																"sButtonText" : "<i class='fa fa-file-pdf-o'></i>",
-															},
-															{
-																"sExtends" : "copy",
-																"sButtonText" : "<i class='fa fa-copy'></i>",
-															} ]
-												},
-
-												fnDrawCallback : function(
-														oSettings) {
-
-													$(
-															'.export-options-container2')
-															.append(
-																	$('.exportOptions2')); // Append the buttons to container export-options-container2 in the DOM
-
-													// In the DOM you'll find something like: <a id="ToolTables_historyDataTable_XXXXX" class="btn btn-white DTTT_button_csv" data-original-title="" title=">
-
-												}
-
-											});
+							
 						});
 
 		$(function() {

@@ -60,7 +60,7 @@ public class IncidentController {
 		populateDefaultModel(model);
 		model.addAttribute("incident" , new Incident());
 				
-        return "Incidents";
+        return "incident";
     }
 	
 	
@@ -77,7 +77,7 @@ public class IncidentController {
 				model.addAttribute("msg", "Vérfier les donées saisies SVP");
 				model.addAttribute("css" , "danger");
 			
-			return "Incidents";
+			return "incident";
 		} 
 		else 
 		{
@@ -85,7 +85,7 @@ public class IncidentController {
 				model.addAttribute("msg", "Totalité des Incident");
 				model.addAttribute("css" , "success");	
 		}
-			    return "Incidents";
+			    return "incident";
 		}
 
 	 

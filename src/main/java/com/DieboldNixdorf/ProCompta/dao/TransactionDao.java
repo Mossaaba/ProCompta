@@ -11,10 +11,13 @@ public interface TransactionDao {
 	
 	Transaction findById(Integer id);
 	List<Transaction> findAllTransaction();
-	List<String> listErreursTransaction();
 	List<String> listinfosTransaction();
 	void saveTrasanction(Transaction transaction);
 	void deleteTransaction(Transaction transaction);
+	List<String> listATM();
+	List<String> listErreursTransaction();
+	List<Transaction> listTransactionAfterFiltring(Transaction trx);
+	
 	 
 	
 

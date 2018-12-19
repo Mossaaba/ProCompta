@@ -696,7 +696,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 						  
 						  if (Io.toString().equalsIgnoreCase(HOST_BRANCH))
 							  {
-							  trx.setTransactionHostBranch(matcher.group(1));
+							  trx.setTransactionHostATM(matcher.group(1));
 							  
 							  }
 						  
@@ -731,7 +731,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 						  if (Io.toString().equalsIgnoreCase(HOST_CARD))
 							  {
 								  
-								  trx.setTransaction_host_card(matcher.group(1));
+								  trx.setTransactionHostCard(matcher.group(1));
 							  }
 						  
 						     /*==========================================================================*\
@@ -1028,7 +1028,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 													  
 													  if (Io.toString().equalsIgnoreCase(HOST_BRANCH))
 														  {
-														  trx_NCR.setTransactionHostBranch(matcher.group(1));
+														  trx_NCR.setTransactionHostATM(matcher.group(1));
 														  
 														  }
 													  
@@ -1068,7 +1068,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 													  if (Io.toString().equalsIgnoreCase(HOST_CARD))
 														  {
 															  
-														  trx_NCR.setTransaction_host_card(matcher.group(1));
+														  trx_NCR.setTransactionHostCard(matcher.group(1));
 														  }
 													  
 													     /*==========================================================================*\

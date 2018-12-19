@@ -53,4 +53,16 @@ public class TransactionServiceImpl implements TransactionService {
 
 	}
 
+	@Override
+	public List<String> listATM() {
+		 
+		return transactionDao.listATM();
+	}
+
+	@Override
+	public List<Transaction> listTransactionAfterFiltring(Transaction trx) {
+		 
+		return transactionDao.listTransactionAfterFiltring(trx);
+	}
+
 }

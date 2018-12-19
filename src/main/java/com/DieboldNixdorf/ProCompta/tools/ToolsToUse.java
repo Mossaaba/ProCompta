@@ -4,11 +4,15 @@ package com.DieboldNixdorf.ProCompta.tools;
 
  
 import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
+ 
 
  
  
@@ -23,6 +27,22 @@ public class ToolsToUse {
 		temp.add(newObj);
 		return temp.toArray();
 	  }
+	  
+	  
+	  public Date convertStringToDatenew(String dateString) throws ParseException 
+	  {
+		 
+		   
+	       
+	          DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	          Date date = new Date();
+	          date = df.parse(dateString);
+		      DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+		      
+	          
+		  return date;
+	  }
+	  
 
 	  
 	  //DATE TO CONVERT FROM JAVA TO SQL ON THE CONTROLLERS 
@@ -36,6 +56,31 @@ public class ToolsToUse {
 		  
 		  return sql;
 	  }
+	  
+	  
+	  public Time ConvertStringToTimeTrx(String timeString) throws ParseException
+	  {
+		   
+		  
+		  
+          SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
+		  
+		  java.sql.Time timeValue = new java.sql.Time(format.parse(timeString).getTime());
+		  System.out.println("    time ++++++++++++++++++++++++++++++++ "+timeValue);
+		
+		  return timeValue;
+		  
+		  
+	 
+		  
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	  
 	  public Time ConevretStringToTime(String timeString) throws ParseException {
 		  
@@ -58,6 +103,7 @@ public class ToolsToUse {
 		  
 		  return sql;
 	  }
+	  
 	  
 	
 	  @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -91,6 +137,9 @@ public class ToolsToUse {
 		  
 		  return ret;
 	  }
+	  
+	  
+	  
 	  
 	
 

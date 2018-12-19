@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.Branch;
+import com.DieboldNixdorf.ProCompta.model.Transaction;
 import com.DieboldNixdorf.ProCompta.service.AtmService;
 import com.DieboldNixdorf.ProCompta.service.BranchService;
+import com.DieboldNixdorf.ProCompta.service.TransactionService;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
@@ -23,6 +25,9 @@ public class RestController {
 
 	@Autowired
 	private AtmService atmService;
+	
+	@Autowired 
+	private TransactionService transactionService;
 
 	@GetMapping("/disque")
 	public List<String> listDisque() {
@@ -50,5 +55,15 @@ public class RestController {
 		List<Atm> ListAtms = atmService.listAtmsByBranch(brancheId);
 		return ListAtms;
 	}
-
+	
+	
+	@GetMapping("/transaction-{taransactionId}")
+	public @ResponseBody Transaction getTransactionDetails(@PathVariable("taransactionId") int taransactionId) {
+		Transaction trx =transactionService.findById(taransactionId);
+		return trx;
+	}
+	
+	
+	
+	
 }
