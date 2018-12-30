@@ -12,28 +12,42 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="incidents")
-public class Incident 
-{
-	
+@Table(name = "incidents")
+public class Incident {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idincident")
 	private int idIncident;
-	
+
 	@Column(name = "date_incident")
-    private Date incident_date;
-	
+	private Date incident_date;  
+
 	@Column(name = "time_incident")
-    private Time incident_time;
-	
+	private Time incident_time;
+
 	@Column(name = "details_incidents")
-	private String detailsincidents ;
+	private String detailsincidents;
+
+	@Transient
+	private int idAtm;
 	
+	
+	@Transient  
+	private String StartingDateFilterIncident; 
+	@Transient
+	private String FinishingDateFilterIncident;
+	@Transient
+	private String StartingTimeFilterIncident;
+	@Transient 
+	private String FinisingTimeFilterIncident;
+	
+
 	@JsonIgnore
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name = "idjournal")
@@ -78,6 +92,49 @@ public class Incident
 	public void setJournal(Journal journal) {
 		this.journal = journal;
 	}
+
+	public int getIdAtm() {
+		return idAtm;
+	}
+
+	public void setIdAtm(int idAtm) {
+		this.idAtm = idAtm;
+	}
+
+	public String getStartingDateFilterIncident() {
+		return StartingDateFilterIncident;
+	}
+
+	public void setStartingDateFilterIncident(String startingDateFilterIncident) {
+		StartingDateFilterIncident = startingDateFilterIncident;
+	}
+
+	public String getFinishingDateFilterIncident() {
+		return FinishingDateFilterIncident;
+	}
+
+	public void setFinishingDateFilterIncident(String finishingDateFilterIncident) {
+		FinishingDateFilterIncident = finishingDateFilterIncident;
+	}
+
+	public String getStartingTimeFilterIncident() {
+		return StartingTimeFilterIncident;
+	}
+
+	public void setStartingTimeFilterIncident(String startingTimeFilterIncident) {
+		StartingTimeFilterIncident = startingTimeFilterIncident;
+	}
+
+	public String getFinisingTimeFilterIncident() {
+		return FinisingTimeFilterIncident;
+	}
+
+	public void setFinisingTimeFilterIncident(String finisingTimeFilterIncident) {
+		FinisingTimeFilterIncident = finisingTimeFilterIncident;
+	}
+
+	 
+	
 	
 
 }

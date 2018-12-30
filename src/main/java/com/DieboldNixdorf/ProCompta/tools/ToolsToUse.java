@@ -7,12 +7,10 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
+ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Locale;
- 
+
 
  
  
@@ -37,7 +35,8 @@ public class ToolsToUse {
 	          DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	          Date date = new Date();
 	          date = df.parse(dateString);
-		      DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+		      @SuppressWarnings("unused")
+			  DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
 		      
 	          
 		  return date;
@@ -60,26 +59,15 @@ public class ToolsToUse {
 	  
 	  public Time ConvertStringToTimeTrx(String timeString) throws ParseException
 	  {
-		   
-		  
-		  
+ 
           SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
 		  
 		  java.sql.Time timeValue = new java.sql.Time(format.parse(timeString).getTime());
 		  System.out.println("    time ++++++++++++++++++++++++++++++++ "+timeValue);
 		
 		  return timeValue;
-		  
-		  
-	 
-		  
+ 
 	  }
-	  
-	  
-	  
-	  
-	  
-	  
 	  
 	  
 	  public Time ConevretStringToTime(String timeString) throws ParseException {
@@ -138,6 +126,20 @@ public class ToolsToUse {
 		  return ret;
 	  }
 	  
+	  public Date convertStringToDateFileHost(String dateString) throws ParseException 
+	  {
+		 
+		   
+	       
+	          DateFormat df = new SimpleDateFormat("yyMMdd");
+	          Date date = new Date();
+	          date = df.parse(dateString);
+		      @SuppressWarnings("unused")
+			DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+		      
+	          
+		  return date;
+	  }
 	  
 	  
 	  

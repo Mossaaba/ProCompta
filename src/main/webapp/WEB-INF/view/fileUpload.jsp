@@ -42,9 +42,6 @@
 							</a></li>
 						</ul>
 						<br>
-
-
-
 						<form:form modelAttribute="fileUpload"  method="POST"  enctype="multipart/form-data" id ="UploadingForm" role="form">
 
 							<div class="row">
@@ -521,10 +518,9 @@
 
 										addRemoveLinks : true,
 
-										acceptedFiles : '.jrn,.LOG',
+										acceptedFiles : '.jrn,.LOG,.txt',
 
 										ignoreHiddenFiles : true,
-
 										dictDefaultMessage : "Please drop journal or  log file here to be uploaded",
 										dictFallbackMessage : "Your browser does not support drag'n'drop file uploads.",
 										dictFallbackText : "Please use the fallback form below to upload your files like in the olden days.",
@@ -589,13 +585,21 @@
 												              var type = $('#typeFile').val();
 												              var atm = $('#atm').val();
                                                               var typeProcessingFile = $('#typeProcessingFile').val();
+                                                              
+                                                              if (atm === null) {
+                                                            	  
+                                                            	atm = 000;  
+                                                            	  
+                                                              }
 												              formData.append("typeFile",type );
 														      formData.append("idAtm",atm );
 														      formData.append("typeProcessingFile",typeProcessingFile ); 
 														     
 												    	});
 
-											this.on("processingmultiple",function(file, progress) {
+											this.on("processingmultiple",function(file, progress) 
+													
+													{
 
 													});
 
@@ -646,7 +650,7 @@
 												showInformationDialog(files,serverResponse);
 												});
 
-									$("#ClearAllFiles").on("click",function() {
+									               $("#ClearAllFiles").on("click",function() {
 												
 										
 									 
@@ -667,17 +671,25 @@
 												var files = myDropzone.getQueuedFiles();
 												 
 												var atmValue  = $("#atm").val();
-												var typeFileValue  = $("#typeFile").val();
+												var typeFileValue  = $("#typeFile").val().trim();
+												var TypeProcessingFile = $("#atm").val();
 												 
-												if (atmValue==null || typeFileValue == '-1'){
+												 
+												if (    (atmValue == null && typeFileValue === '1'  ) 
+													|| ( atmValue == null  && typeFileValue === '-1')
+												
+												    )
+												{
 													
-													$.confirm({
+													
+													    console.log(atmValue);
+													    $.confirm({
 													    title: 'Encountered an error!',
 													    content: 'You should select an ATM , and a type of file',
 													    type: 'red',
 													    animation: 'left',
 													    icon: 'fa fa-exclamation-circle fa-spin',
-													    typeAnimated: true,
+													    typeAnimated: true, 
 													    buttons: {
 													        
 													        close:{
@@ -696,16 +708,24 @@
 													
 												}
 												
+												 
+												
+											  
+												
 												console.log(atmValue);
 												console.log(typeFileValue);
+												
+												
+												
 												files.forEach(function(file) {
 													myDropzone.processFile(file);
 												});
-
+												 
 											};
 
 											function showInformationDialog(
-													files, objectArray) {
+													files, objectArray) 
+											{
 
 												var responseContent = "";
 

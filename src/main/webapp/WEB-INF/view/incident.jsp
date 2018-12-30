@@ -53,8 +53,7 @@
 							class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold"
 							data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
 								<span> <spring:message code="label.space"></spring:message>
-							</span><span> </span><span> </span><i class="fa fa-flash fa-4x"></i>
-								<span>Incident</span>
+							</span><span> </span><span> </span><i class="fa fa-flash fa-4x"></i> <span>Incident</span>
 						</a></li>
 					</ul>
 					<br>
@@ -66,6 +65,9 @@
 					<!-- -------------------------------------------------------- -->
 					<!-- -------------------------------------------------------- -->
 					<!-- -------------------------------------------------------- -->
+					
+					
+					<c:if test="${empty Filter }">
 					<div class="col-lg-12 sm-no-padding">
 						<div class="card card-transparent">
 							<div class="card-body no-padding">
@@ -109,63 +111,64 @@
 											</ul>
 										</div>
 									</div>
-									<div class="card-body">
 
 
-										<div class="row b-grey no-margin ">
-											<div class="col-md-3">
 
-												<div
-													class="form-group form-group-default form-group-default-select2 required">
-													<label class="">Vendor</label> <select class="full-width"
-														data-placeholder="Select Country"
-														data-init-plugin="select2" id="vendor">
-														<option value="AK">Alaska</option>
-														<option value="CA">California</option>
-														<option value="NV">Nevada</option>
-														<option value="OR">Oregon</option>
-														<option value="WA">Washington</option>
+									<spring:url value="/incident/find" var="formUrlIncident" />
 
-													</select>
+									<form:form action="${formUrlIncident}" method="POST"
+										modelAttribute="incident" id="incidentFilterForm">
+										<div class="card-body">
+
+											<div class="row">
+												<div class="col-md-4">
+
+													<div
+														class="form-group form-group-default form-group-default-select2 ">
+														<label class="">ATM</label>
+														<form:select path="idAtm" cssClass="full-width"
+															data-placeholder="Select an ATM"
+															data-init-plugin="select2" id="ATM">
+
+
+															<c:forEach var="atm" items="${listATM}">
+																<form:option value="${atm.idAtm}">${atm.nameAtm} </form:option>
+															</c:forEach>
+														</form:select>
+													</div>
+
 												</div>
+												<div class="col-md-8">
+													<div class="row">
 
-
-											</div>
-											<div class="col-md-3">
-
-												<div
-													class="form-group form-group-default form-group-default-select2 required">
-													<label class="">Branch</label> <select class="full-width"
-														data-placeholder="Select Country"
-														data-init-plugin="select2" id="branch">
-														<option value="AK">Alaska</option>
-														<option value="CA">California</option>
-														<option value="NV">Nevada</option>
-														<option value="OR">Oregon</option>
-														<option value="WA">Washington</option>
-
-													</select>
-												</div>
-
-
-											</div>
-
-
-
-											<div class="col-md-6 pull-right">
-
-												<div class="row" id="basicExample">
-													<div class="col-md-6">
-
-														<div class="col-md-12">
-
+														<div class="col-md-6">
 
 															<div class="form-group form-group-default input-group  ">
 
 																<div class="form-input-group">
-																	<label>Start Date</label> <input type="text"
-																		class="form-control date start "
-																		placeholder="Pick a date">
+																	<label>Start Date</label>
+																	<form:input path="StartingDateFilterIncident"
+																		type="text" id="incidentDateStarting"
+																		class="form-control date" placeholder="Pick a date" />
+																</div>
+
+																<div class="input-group-append ">
+																	<span class="input-group-text"><i
+																		class="fa fa-calendar"></i></span>
+																</div>
+															</div>
+
+														</div> 
+
+														<div class="col-md-6">
+
+															<div class="form-group form-group-default input-group  ">
+
+																<div class="form-input-group">
+																	<label>Finising Date</label>
+																	<form:input path="FinishingDateFilterIncident"
+																		type="text" id="incidentDateFinishing"
+																		class="form-control date" placeholder="Pick a date" />
 																</div>
 
 																<div class="input-group-append ">
@@ -176,15 +179,37 @@
 
 														</div>
 
-														<div class="col-md-12">
+
+													</div>
 
 
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-4">
+
+													<div
+														class="form-group form-group-default form-group-default-select2 ">
+														<label class="">Type of incident</label>
+														<form:select path="detailsincidents" cssClass="full-width"
+															data-placeholder="Select an ATM"
+															data-init-plugin="select2" id="IncidentATM"
+															items="${listIncident}" />
+													</div>
+
+												</div>
+												<div class="col-md-8">
+													<div class="row">
+
+														<div class="col-md-6">
 															<div class="form-group form-group-default input-group  ">
 
 																<div class="form-input-group">
-																	<label>Start Time</label> <input type="text"
-																		class="form-control time start "
-																		placeholder="Pick a date">
+																	<label>Start Time</label>
+																	<form:input path="StartingTimeFilterIncident"
+																		type="text" class="form-control time"
+																		placeholder="Pick a date" />
 																</div>
 
 																<div class="input-group-append ">
@@ -192,21 +217,15 @@
 																		class="fa fa-clock-o"></i></span>
 																</div>
 															</div>
-
 														</div>
-
-
-													</div>
-													<div class="col-md-6">
-														<div class="col-md-12">
-
-
+														<div class="col-md-6">
 															<div class="form-group form-group-default input-group  ">
 
 																<div class="form-input-group">
-																	<label>Finising Date</label> <input type="text"
-																		class="form-control date end "
-																		placeholder="Pick a date">
+																	<label>Finishing Time</label>
+																	<form:input path="FinisingTimeFilterIncident"
+																		type="text" class="form-control time endTime "
+																		placeholder="Pick a date" />
 																</div>
 
 																<div class="input-group-append ">
@@ -214,88 +233,33 @@
 																		class="fa fa-calendar"></i></span>
 																</div>
 															</div>
-
 														</div>
-
-														<div class="col-md-12">
-
-
-															<div class="form-group form-group-default input-group  ">
-
-																<div class="form-input-group">
-																	<label>Finising Date</label> <input type="text"
-																		class="form-control time endTime "
-																		placeholder="Pick a date">
-																</div>
-
-																<div class="input-group-append ">
-																	<span class="input-group-text"><i
-																		class="fa fa-calendar"></i></span>
-																</div>
-															</div>
-
-														</div>
-
-
 
 													</div>
 												</div>
-
-
 											</div>
-
-
-
-
-
-										</div>
-
-
-										 
-
-
-										
-										<br>
-									
-
-
-										<div class="row b-grey no-margin ">
-											<div class="col-md-12 text-center">
-
-
-
-
-
-												<button class="btn btn-primary bold" type="submit">
-													<i class="fa fa-search fa-3x"></i> Submit
-												</button>
-												<button class="btn btn-danger bold">
-													<i class="fa fa-eraser fa-3x"></i> Clear
-												</button>
-
-
-
-
-
-
-
+											<br>
+											<div class="row b-grey no-margin ">
+												<div class="col-md-12 text-center">
+													<button class="btn btn-primary bold" type="submit">
+														<i class="fa fa-search fa-3x"></i> Submit
+													</button>
+													<button class="btn btn-danger bold">
+														<i class="fa fa-eraser fa-3x"></i> Clear
+													</button>
+												</div>
 											</div>
 										</div>
-
-
-
-
-
-									</div>
+									</form:form>
 								</div>
 							</div>
 						</div>
 					</div>
 
 
+                    </c:if>
 
-
-
+                          <c:if test="${!empty Filter }">
 					<div class="col-lg-12 sm-no-padding text-center">
 						<div class="card card-transparent">
 							<div class="card-body no-padding">
@@ -305,10 +269,30 @@
 
 											<h5>
 												<span class="semi-bold text-primary bold"> <i
-													class="fa fa-flash fa-2x m-b-5"></i> Incident
-													Resultat
+													class="fa fa-flash fa-2x m-b-5"></i> Incident Resultat
 												</span>
 											</h5>
+											<br>
+											
+											
+											<c:if test="${!empty Filter }">
+													<span
+														class="   p-t-5 m-l-5 p-b-5 inline fs-12 text-primary bold">
+														<i class="fa fa-filter fa-2x"></i> Filter :
+													</span>
+
+
+													 
+													 </c:if>
+
+													 
+											
+													 
+													 
+													 
+											
+											
+											
 										</div>
 										<div class="card-controls">
 											<ul>
@@ -344,69 +328,71 @@
 
 
 										<div class="card card-transparent">
-										<div class="card-header ">
-									 
-											<div class="pull-right">
-												  <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+											<div class="card-header ">
+
+												<div class="pull-right">
+													<input type="text" id="search-table"
+														class="form-control pull-right" placeholder="Search">
+												</div>
+												<div class="pull-left export-options-container "></div>
+												<div class="clearfix"></div>
 											</div>
-											<div class="pull-left export-options-container ">
-												
+											<div class="card-body">
+												<table
+													class="table table-hover demo-table-search table-responsive-block"
+													id="tableWithSearch" >
+													<thead>
+														<tr>
+															<th>DATE </th>
+															<th>TIME </th>
+															<th>DESCRUPTION</th>
+															 
+														</tr>
+													</thead>
+													<tbody>
+													<c:forEach var="incident"
+																items="${listIncidentAfterFilter}">
+														<tr>
+															<td>${incident.incident_date}</td>
+															<td>${incident.incident_time}</td>
+															<td>${incident.detailsincidents}</td>
+															 
+															
+															</tr>
+													</c:forEach>
+
+														
+
+
+
+
+
+													</tbody>
+												</table>
 											</div>
-											<div class="clearfix"></div>
 										</div>
-										<div class="card-body">
-											<table
-												class="table table-hover demo-table-search table-responsive-block"
-												id="tableWithSearch">
-												<thead>
-													<tr>
-														<th>Title</th>
-														<th>Places</th>
-														<th>Activities</th>
-														<th>Status</th>
-														<th>Last Update</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-													<td>Title</td>
-														<td>Places</td>
-														<td>Activities</td>
-														<td>Status</td>
-														<td>Last Update</td>
-														 
-													</tr>
-													
-													 
-													 
-													 
-													 
-												</tbody>
-											</table>
-										</div>
+
+
+
 									</div>
-
-
-
 								</div>
 							</div>
 						</div>
 					</div>
+
+                   </c:if>
+
+
+
+
+
+
 				</div>
 
-
-
-
-
-
-
-
+				<jsp:include page="../view/fragments/footer.jsp"></jsp:include>
 			</div>
 
-			<jsp:include page="../view/fragments/footer.jsp"></jsp:include>
 		</div>
-
-	</div>
 	</div>
 
 
@@ -429,27 +415,22 @@
 		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/datatables.responsive.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/lodash.min.js"/>"></script>
+
+
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
+
+
 	<script
 		src="<spring:url value="/resources/assets/jquery-confirm.min.js"/>"></script>
+
 	<script src="<spring:url value="/resources/pages/js/Datepair.js"/>"></script>
-	<script src="<spring:url value="/resources/pages/js/transaction.js"/>"></script>
+
+
+	<script src="<spring:url value="/resources/pages/js/incident.js"/>"></script>
 
 	<script type="text/javascript">
-		$('#basicExample .time').timepicker({
-			'showDuration' : true,
-			'timeFormat' : 'g:ia'
-		});
-
-		$('#basicExample .date').datepicker({
-			'format' : 'm/d/yyyy',
-			'autoclose' : true
-		});
-
-		// initialize datepair
-		var basicExampleEl = document.getElementById('basicExample');
-		var datepair = new Datepair(basicExampleEl);
-		
+	 
+ 
 		
 		
 		

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -39,6 +40,20 @@ public class ErrorATM {
 	
 	@Column(name = "code_error_atm")
 	private String codeErrorAtm;
+	
+	
+	@Transient
+	private int idAtm;
+	@Transient  
+	private String StartingDateFilterErrorATM; 
+	@Transient
+	private String FinishingDateFilterErrorATM;
+	@Transient
+	private String StartingTimeFilterErrorATM;
+	@Transient 
+	private String FinisingTimeFilterErrorATM;
+	
+	
 	
 	
 	
@@ -105,6 +120,56 @@ public class ErrorATM {
 
 	public void setCodeErrorAtm(String codeErrorAtm) {
 		this.codeErrorAtm = codeErrorAtm;
+	}
+
+
+	public String getStartingDateFilterErrorATM() {
+		return StartingDateFilterErrorATM;
+	}
+
+
+	public void setStartingDateFilterErrorATM(String startingDateFilterErrorATM) {
+		StartingDateFilterErrorATM = startingDateFilterErrorATM;
+	}
+
+
+	public String getFinishingDateFilterErrorATM() {
+		return FinishingDateFilterErrorATM;
+	}
+
+
+	public void setFinishingDateFilterErrorATM(String finishingDateFilterErrorATM) {
+		FinishingDateFilterErrorATM = finishingDateFilterErrorATM;
+	}
+
+
+	public String getStartingTimeFilterErrorATM() {
+		return StartingTimeFilterErrorATM;
+	}
+
+
+	public void setStartingTimeFilterErrorATM(String startingTimeFilterErrorATM) {
+		StartingTimeFilterErrorATM = startingTimeFilterErrorATM;
+	}
+
+
+	public String getFinisingTimeFilterErrorATM() {
+		return FinisingTimeFilterErrorATM;
+	}
+
+
+	public void setFinisingTimeFilterErrorATM(String finisingTimeFilterErrorATM) {
+		FinisingTimeFilterErrorATM = finisingTimeFilterErrorATM;
+	}
+
+
+	public int getIdAtm() {
+		return idAtm;
+	}
+
+
+	public void setIdAtm(int idAtm) {
+		this.idAtm = idAtm;
 	}
 	
 	

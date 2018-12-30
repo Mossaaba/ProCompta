@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.DieboldNixdorf.ProCompta.dao.ReplenishmentDao;
+import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.Replenishment;
 
 @Service
@@ -34,6 +35,18 @@ public class ReplenishmentServiceImpl implements ReplenishmentService {
 	public void deleteReplenishment(Replenishment replenishment) {
 		replenishmentDao.deleteReplenishment(replenishment);
 
+	}
+
+	@Override
+	public List<Atm> find_All_ATM_DIEBOLD_NIXDORF() {
+		 
+		return replenishmentDao.find_All_ATM_DIEBOLD_NIXDORF();
+	}
+
+	@Override
+	public List<Replenishment> listReplenishmentAfterFiltring(Replenishment rplsh) {
+	 
+		return replenishmentDao.listReplenishmentAfterFiltring(rplsh);
 	}
 
 }

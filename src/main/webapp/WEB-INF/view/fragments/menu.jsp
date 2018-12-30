@@ -135,12 +135,7 @@
 			<span class="icon-thumbnail"><i class="fa fa-cloud-upload" style="font-size :27px;" ></i></span>
 			</li>
 			
-			<li class="">
-			<a href="<spring:url value="/day"/>"  >
-			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Day"></spring:message></span>
-			</a>
-			<span class="icon-thumbnail"><i class="pg-calender" style="font-size :27px;" ></i></span>
-			</li>
+			
 			
 			<li class=" ">
 			<a href="<spring:url value="/transaction"/>"  > 
@@ -158,14 +153,31 @@
 			</li>
 			
 			<li class="">
-			<a href="<spring:url value="/incident"/>"  >
+			<a href="<spring:url value="/errorsATM"/>"  >
+			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.errorsATM"></spring:message></span>
+			</a>
+			<span class="icon-thumbnail"><i class="fa fa-exclamation-triangle" style="font-size :27px;" ></i></span>
+			</li>
+			
+			
+			<li class="">
+			<a href="<spring:url value="/replenishment"/>"  >
 			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Replenishment"></spring:message></span>
 			</a>
 			<span class="icon-thumbnail"><i class="fa fa-plus-square" style="font-size :27px;" ></i></span>
 			</li>
-			
+			<li class="">
+			<a href="<spring:url value="/cashBalance"/>"  >
+			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.cashBalance"></spring:message></span>
+			</a>
+			<span class="icon-thumbnail"><i class="fa fa-money" style="font-size :27px;" ></i></span>
+			</li>
+			 
+			 
+			 
 			<li>
-			<a href="javascript:;"><span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Host"></spring:message></span>
+			<a href="javascript:;" ><span class="title font-montserrat no-margin text-uppercase">
+			<spring:message code="label.Host"></spring:message></span>
 			<span class=" arrow"></span></a>
 			<span class="icon-thumbnail"><i class="pg-layouts2" style="font-size :27px;"></i></span>
 			<ul class="sub-menu">
@@ -181,6 +193,10 @@
 			 
            </ul>
             </li>
+            <li class="title font-montserrat no-margin text-uppercase">
+			<a href="<spring:url value="/host/list"/>">Recon Report</a>  
+			<span class="icon-thumbnail"><i class="fa fa-chain-broken" style="font-size :25px;"></i></span>
+			</li>
 
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="charts.html">
@@ -195,11 +211,11 @@
 			<span class="icon-thumbnail" ><i class="pg-tables" style="font-size :27px;"></i></span>
 			<ul class="sub-menu">
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="tables.html"><spring:message code="label.GlobalRapport"></spring:message></a>
+			<a href="tables.html" class="fs-13 bold"><spring:message code="label.GlobalRapport"></spring:message></a>
 			<span class="icon-thumbnail" style="font-size :27px;">GR</span>
 			</li>
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="datatables.html"><spring:message code="label.DetailsRapport"></spring:message></a>
+			<a href="datatables.html" class="fs-12 bold" ><spring:message code="label.DetailsRapport"></spring:message></a>
 			<span class="icon-thumbnail" style="font-size :27px;">DR</span>
 			</li>
 			</ul>
@@ -224,6 +240,8 @@
 			<a href="<spring:url value="/host/list"/>">Host</a>  
 			<span class="icon-thumbnail"><i class="fa fa-server" style="font-size :25px;"></i></span>
 			</li>
+			
+			
 			
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="<spring:url value="/Atm/list"/>">ATM</a>  

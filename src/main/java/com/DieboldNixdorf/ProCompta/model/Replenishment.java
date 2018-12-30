@@ -1,5 +1,6 @@
 package com.DieboldNixdorf.ProCompta.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +30,7 @@ public class Replenishment {
 	private Date dateReplenishment;
 	
 	@Column(name="time_replenishment")
-	private Date timeReplenishment;
+	private Time timeReplenishment;
 	
 	@Column(name="cassette_one_befor")
 	private int cassetteOneBefor;
@@ -59,7 +61,6 @@ public class Replenishment {
 	
 	@Column(name="cassette_retract_befor")
 	private int cassetteRetractBefor;
-	
 	
 	@Column(name="cassette_one_after")
 	private int cassetteOneAfter;
@@ -93,7 +94,20 @@ public class Replenishment {
 	@Column(name="cassette_retract_after")
 	private int cassetteRetractAfter;
 	
-
+	@Transient  
+	private String startingDateFilterReplenishment; 
+	@Transient
+	private String finishingDateFilterReplenishment;
+	@Transient
+	private String startingTimeFilterReplenishment;
+	@Transient 
+	private String finisingTimeFilterReplenishment;
+	@Transient 
+	private int idAtm;
+	
+	
+	
+	
 	@JsonIgnore
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name = "idjournal")
@@ -120,12 +134,14 @@ public class Replenishment {
 	}
 
 
-	public Date getTimeReplenishment() {
+	 
+
+	public Time getTimeReplenishment() {
 		return timeReplenishment;
 	}
 
 
-	public void setTimeReplenishment(Date timeReplenishment) {
+	public void setTimeReplenishment(Time timeReplenishment) {
 		this.timeReplenishment = timeReplenishment;
 	}
 
@@ -337,6 +353,58 @@ public class Replenishment {
 
 	public void setCassetteFourValueAfter(int cassetteFourValueAfter) {
 		this.cassetteFourValueAfter = cassetteFourValueAfter;
+	}
+
+
+	 
+
+	public String getStartingDateFilterReplenishment() {
+		return startingDateFilterReplenishment;
+	}
+
+
+	public void setStartingDateFilterReplenishment(String startingDateFilterReplenishment) {
+		this.startingDateFilterReplenishment = startingDateFilterReplenishment;
+	}
+
+
+	public String getFinishingDateFilterReplenishment() {
+		return finishingDateFilterReplenishment;
+	}
+
+
+	public void setFinishingDateFilterReplenishment(String finishingDateFilterReplenishment) {
+		this.finishingDateFilterReplenishment = finishingDateFilterReplenishment;
+	}
+
+
+	public String getStartingTimeFilterReplenishment() {
+		return startingTimeFilterReplenishment;
+	}
+
+
+	public void setStartingTimeFilterReplenishment(String startingTimeFilterReplenishment) {
+		this.startingTimeFilterReplenishment = startingTimeFilterReplenishment;
+	}
+
+
+	public String getFinisingTimeFilterReplenishment() {
+		return finisingTimeFilterReplenishment;
+	}
+
+
+	public void setFinisingTimeFilterReplenishment(String finisingTimeFilterReplenishment) {
+		this.finisingTimeFilterReplenishment = finisingTimeFilterReplenishment;
+	}
+
+
+	public int getIdAtm() {
+		return idAtm;
+	}
+
+
+	public void setIdAtm(int idAtm) {
+		this.idAtm = idAtm;
 	}
 
 	

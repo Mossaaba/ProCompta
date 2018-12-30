@@ -338,6 +338,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		collectionNCR.add(HOST_BRANCH);
 		collectionNCR.add(HOST_DATE);
 		collectionNCR.add(HOST_INFO_TRANSACTION);
+		collectionNCR.add(TYPE_TRANSACTION);
 		
 		
 		/* ___________________________________________________
@@ -366,11 +367,6 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		 */	
 		collection.add(ERROR_ATM);
 		collection.add(ERROR_ATM_WITHOUT_CODE);
-		
-		
-		
-		
-
 		@SuppressWarnings("unused")
 		Session currentSession = sessionFactory.getCurrentSession();
 		// ----------- get the RegX according to the ATM -----------\\
@@ -384,7 +380,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
   *|_________________________________________________________________________________________________|               
   *|_________________________________________________________________________________________________|
   */		
-		if (atm.getVendor().equalsIgnoreCase("Wincor-Nixdorf"))
+		if (atm.getVendor().equalsIgnoreCase("DIEBOLD-NIXDORF"))
 		
 		{
 			
@@ -764,6 +760,11 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							  {
 							   String newLineBefor = "";
 							   
+							   
+							   
+							   
+							   
+							   
 							   if (line.contains("CASH COUNTERS BEFOR")) 
 							      {
 								   newLineBefor = line;
@@ -850,6 +851,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							   
 							   Replsh.setCassetteRejectAfter(Integer.parseInt(MathcerRepAfter.group(10)));
 							   Replsh.setCassetteRetractAfter(Integer.parseInt(MathcerRepAfter.group(11)));
+							   
+							   
 							   
 							   
 							       rService.saveReplenishment(Replsh);
@@ -978,8 +981,11 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 				String line;
            
 				Transaction trx_NCR= new Transaction();
+				@SuppressWarnings("unused")
 				Incident incd_NCR = new Incident();
+				@SuppressWarnings("unused")
 				ErrorATM ErrATM_NCR = new ErrorATM();
+				@SuppressWarnings("unused") 
 				Replenishment Replsh_NCR = new Replenishment();
 			
 			
@@ -1018,9 +1024,12 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 															  
 															  try {
 																  trx_NCR.setTransactionDateHost((toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
-															} catch (ParseException e) {
-																e.printStackTrace();
-															}
+																  trx_NCR.setStartingDate((Date)(toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+																  trx_NCR.setFinishingDate((Date)(toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+															      } catch (ParseException e) 
+															      {
+																  e.printStackTrace();
+															      }
 														  }
 													     /*==========================================================================*\
 														 |                               HOST BRANCH                                 |
@@ -1045,6 +1054,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 														  }
 														      
 														  trx_NCR.setTransactionHostAmount(Double.parseDouble(amountR));
+														 
+														  
 														  }
 													  
 													     /*==========================================================================*\
@@ -1055,6 +1066,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 														  {
 														  try {
 															trx_NCR.setTransactionHostTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+															trx_NCR.setStartingTime  (toolsProCompta.ConevretStringToTime(matcher.group(1)));
+															trx_NCR.setFinishingTime (toolsProCompta.ConevretStringToTime(matcher.group(1)));
 														} catch (ParseException e) {
 															// TODO Auto-generated catch block
 															e.printStackTrace();
@@ -1069,27 +1082,35 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 														  {
 															  
 														  trx_NCR.setTransactionHostCard(matcher.group(1));
+														  
+														  trx_NCR.setCardNumber(matcher.group(1));
 														  }
 													  
 													     /*==========================================================================*\
 														 |                               HOST   UTRNNO                               |
 														 \*===========================================================================*/
-													   
+
+													  
 													   if (Io.toString().equalsIgnoreCase(HOST_UTRNNO))
 														  {
 														   trx_NCR.setUTRNNO(matcher.group(1));
 														  }
+													   /*==========================================================================*\
+														 |                               TYPE TARNSACTION                             |
+														 \*===========================================================================*/
+													     if (Io.toString().equalsIgnoreCase(TYPE_TRANSACTION))
+													     {
+														  trx_NCR.setTransactionType(matcher.group(1));; 
+													     }
+													     
 													     /*==========================================================================*\
 														 |                               HOST   AUTH                                 |
 														 \*===========================================================================*/
 													   
 													   if (Io.toString().equalsIgnoreCase(HOST_AUTH))
 														  {
-														     trx_NCR.setTaransaction_AUTH(matcher.group(1));
-														   
-														   
+														      trx_NCR.setTaransaction_AUTH(matcher.group(1));
 														      line = br.readLine();
-														      
 														      Pattern patternInfos = Pattern.compile(HOST_INFO_TRANSACTION); 
 															  Matcher matcherInfos = patternInfos.matcher(line); 
 														     /*==========================================================================*\
@@ -1100,8 +1121,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 																 {
 																  trx_NCR.setErrorTransaction(matcherInfos.group(1));
 																 }
-														   tService.saveTrasanction(trx_NCR);
-														   trx_NCR=new Transaction();
+														          tService.saveTrasanction(trx_NCR);
+														          trx_NCR=new Transaction();
 														  }
 													  
 								  

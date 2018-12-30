@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.DieboldNixdorf.ProCompta.dao.IncidentDao;
+import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.Incident;
 
 @Service
@@ -36,6 +37,24 @@ public class IncidentServiceImpl implements IncidentService {
 	public void deleteIncident(Incident incident) {
 		IncidentDao.deleteIncident(incident);
 		
+	}
+
+	@Override
+	public List<Atm> find_All_ATM_DIEBOLD_NIXDORF() {
+		 
+		return IncidentDao.find_All_ATM_DIEBOLD_NIXDORF();
+	}
+
+	@Override
+	public List<Incident> typeOfIncident() {
+		 
+		return IncidentDao.typeOfIncident();
+	}
+
+	@Override
+	public List<Incident> listincidentsAfterFiltring(Incident incd) {
+ 
+		return IncidentDao.listincidentsAfterFiltring(incd);
 	}
 
 	 

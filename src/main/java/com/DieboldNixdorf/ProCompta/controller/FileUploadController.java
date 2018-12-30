@@ -4,15 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Map;
- 
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
- 
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,21 +27,23 @@ import com.DieboldNixdorf.ProCompta.model.FileUpload;
 import com.DieboldNixdorf.ProCompta.model.UploadedFile;
 import com.DieboldNixdorf.ProCompta.service.BranchService;
 import com.DieboldNixdorf.ProCompta.service.FileUploadService;
+import com.DieboldNixdorf.ProCompta.service.HostFileService;
 import com.DieboldNixdorf.ProCompta.service.JounalService;
-
 import org.apache.commons.io.FilenameUtils;
+
+
 @CrossOrigin
 @RestController
 public class FileUploadController {
 
 	@Autowired
 	private FileUploadService uploadService;
-
 	@Autowired
 	private BranchService branchService;
-	
 	@Autowired
 	private JounalService jounalService;
+	@Autowired
+	private HostFileService hostFileService;
 	
 	
 
@@ -75,6 +72,11 @@ public class FileUploadController {
 		Map<String, MultipartFile> fileMap = request.getFileMap();
 		List<UploadedFile> uploadedFiles = new ArrayList<UploadedFile>();
 		
+		
+		/*------------------------------------------------------------------------------------------------*/
+		/*-------------------------------------- Journal File ------------------------------------------- */
+		/*------------------------------------------------------------------------------------------------*/
+		
 		if (typeFile.equalsIgnoreCase("1"))
 		{
 			 
@@ -102,10 +104,7 @@ public class FileUploadController {
             	fileInfo = saveFileToDatabase(fileInfo);
      			
             	uploadedFiles.add(fileInfo);
-            	 
-            
-             
-             }
+            	 }
              else 
              {
             	 System.out.println("Jounal : "+fileNameWithOutExt+ " existe");
@@ -115,50 +114,84 @@ public class FileUploadController {
 			
 		}
 		}
+		/*------------------------------------------------------------------------------------------------*/
+		/*-------------------------------------- Host   File ------------------------------------------- */
+		/*------------------------------------------------------------------------------------------------*/
+		else 
+		{
+		
+			
+			for (MultipartFile multipartFile : fileMap.values())
+
+			{
+				 
+				 String fileNameWithOutExt = FilenameUtils.removeExtension(multipartFile.getOriginalFilename());
+	             
+	             boolean ExisteHostFile = hostFileService.HostFileExiste(fileNameWithOutExt); 
+	             int ExistingHostFile= 0;
+	              
+				 
+	             if (!ExisteHostFile) 
+	             {
+	            	 
+	            	@SuppressWarnings("unused")
+					List<String> listeSingleResultParsing = hostFileService.ParseHostFile(multipartFile);
+	            	saveFileToLocalDisk(multipartFile);
+	            	UploadedFile fileInfo = getUploadedFileInfo(multipartFile);
+	            	fileInfo = saveFileToDatabase(fileInfo); 
+	            	uploadedFiles.add(fileInfo);
+	                System.out.println("Host File Uplaodeed ");
+	             
+	             }
+	             else 
+	             {
+	            	 System.out.println(" HostFile   :   "+fileNameWithOutExt+ " existe");
+	            	 ExistingHostFile++;
+	            	 System.out.println("Nbr Exsiting Host file "+ExistingHostFile);
+	            	 
+	             }
+				
+			}
+			
+		}
 		
 		return uploadedFiles;
 		
 	}
 
-	
 	//AUTOMATIQUE 
 	@GetMapping("/uploadAuto-{idAtm}-{typeFile}")
 	public @ResponseBody List<UploadedFile> uploadAuto(@PathVariable("idAtm") Integer idAtm,
-			@PathVariable("typeFile") String TyepFile) throws IOException {
-
+			@PathVariable("typeFile") String TyepFile) throws IOException 
+	{
 		System.out.println("Geting " + idAtm);
 		System.out.println("Geting " + TyepFile);
-
 		List<UploadedFile> uploadedFiles = new ArrayList<UploadedFile>();
 		return uploadedFiles;
 	}
-
 	
 	
-	
-	
-	
-	
-	
+	//-------------------------- Copy file to disk -------------------------------------------------------\\
 	private void saveFileToLocalDisk(MultipartFile multipartFile) throws IOException, FileNotFoundException {
 
 		String outputFileName = getOutputFilename(multipartFile );
 
 		FileCopyUtils.copy(multipartFile.getBytes(), new FileOutputStream(outputFileName));
 	}
-
+	//-------------------------- Save File to date base  -------------------------------------------------------\\
 	private UploadedFile saveFileToDatabase(UploadedFile uploadedFile) {
 
 		return uploadService.saveFile(uploadedFile);
 
 	}
-
+	//-------------------------- Save File to date base  -------------------------------------------------------\\
 	private String getOutputFilename(MultipartFile multipartFile) {
 
-		return getDestinationLocation() + multipartFile.getOriginalFilename();
+		return getDestinationLocation() + multipartFile.getOriginalFilename() + ".Done";
 	}
-
-	private UploadedFile getUploadedFileInfo(MultipartFile multipartFile) throws IOException {
+	//-------------------------- Save File to date base  -------------------------------------------------------\\
+	private UploadedFile getUploadedFileInfo(MultipartFile multipartFile) throws IOException 
+	{
 
 		UploadedFile fileInfo = new UploadedFile();
 		fileInfo.setName(multipartFile.getOriginalFilename());
@@ -169,7 +202,8 @@ public class FileUploadController {
 		return fileInfo;
 	}
 
-	private String getDestinationLocation() {
+	private String getDestinationLocation()
+	{
 		return "C:/myProComptaTemp/";
 	}
 

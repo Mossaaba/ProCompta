@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.DieboldNixdorf.ProCompta.dao.ErrorATMDao;
+import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.ErrorATM;
 
 
@@ -39,6 +40,23 @@ public class ErrorATMServiceImpl implements ErrorATMService {
 	public void deleteErrorATM(ErrorATM rrrorATM) {
 		errorATMDao.deleteErrorATM(rrrorATM);
 
+	}
+
+	@Override
+	public List<Atm> find_All_ATM_DIEBOLD_NIXDORF() {
+		 
+		return errorATMDao.find_All_ATM_DIEBOLD_NIXDORF();
+	}
+
+	@Override
+	public List<ErrorATM> typeOfErrorATM() {
+ 
+		return errorATMDao.typeOfErrorATM();
+	}
+
+	@Override
+	public List<ErrorATM> listErrorsAfterFiltring(ErrorATM err) {
+		return errorATMDao.listErrorsAfterFiltring(err);
 	}
 
 }

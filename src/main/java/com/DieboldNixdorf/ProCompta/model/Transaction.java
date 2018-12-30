@@ -60,8 +60,6 @@ public class Transaction  {
 	@Column(name = "card_taken")
 	private boolean cardTaken;
 	
-	
-	
 	@Column(name = "type_transaction")
 	private String transactionType;
 
@@ -95,14 +93,11 @@ public class Transaction  {
 	@Column(name = "cassette4")
 	private int cassette4;
 	
-	
 	@Column(name = "error_transaction")
 	private String errorTransaction;
 	
-	
 	@Column(name = "transaction_infos")
 	private String infosTransaction;
-	
 	
 	@Column(name="transaction_host_card")
 	private String transactionHostCard;

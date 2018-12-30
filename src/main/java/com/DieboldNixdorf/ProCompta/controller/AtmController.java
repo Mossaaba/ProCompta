@@ -127,7 +127,7 @@ public class AtmController {
 
 	private void populateDefaultModel(Model model) {
 
-		List<String> ListVendors = new LinkedList<>(Arrays.asList(new String[] { "", "NCR", "DIEBOLD", "WINCOR" }));
+		List<String> ListVendors = new LinkedList<>(Arrays.asList(new String[] { "", "NCR", "DIEBOLD-NIXDORF"}));
 		model.addAttribute("ListVendors", ListVendors);
 
 		List<Branch> branches = branchService.getAllBranchs();

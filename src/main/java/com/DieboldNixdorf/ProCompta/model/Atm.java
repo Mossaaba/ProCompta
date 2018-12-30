@@ -75,7 +75,7 @@ public class Atm {
 		this.host = host;
 	}
 
-	@Transient
+    @Transient
 	@JsonIgnore
 	@OneToMany(mappedBy = "atm", cascade = CascadeType.ALL)
 	private List<Journal> AtmJounals;

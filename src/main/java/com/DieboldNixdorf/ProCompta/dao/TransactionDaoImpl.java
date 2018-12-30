@@ -2,28 +2,16 @@ package com.DieboldNixdorf.ProCompta.dao;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Repository;
-
 import com.DieboldNixdorf.ProCompta.model.Transaction;
 import com.DieboldNixdorf.ProCompta.tools.ToolsToUse;
 
@@ -58,12 +46,12 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public List<String> listErreursTransaction() {
 		Session currentSession = sessionFactory.getCurrentSession();
+		@SuppressWarnings("rawtypes")
 		Query query = currentSession.createNativeQuery(
 				"select distinct trx.error_transaction from Transaction trx where trx.error_transaction is not null");
-
+		@SuppressWarnings("unchecked")
 		List<String> listErreursTransaction = (List<String>) query.list();
 		return listErreursTransaction;
-
 	}
 
 	@Override
@@ -90,9 +78,11 @@ public class TransactionDaoImpl implements TransactionDao {
 	public List<String> listATM() {
 		Session currentSession = sessionFactory.getCurrentSession();
 
+		@SuppressWarnings("rawtypes")
 		Query query = currentSession.createNativeQuery(
 				"select distinct trx.transaction_host_atm from Transaction trx where trx.transaction_host_atm is not null ");
 
+		@SuppressWarnings("unchecked")
 		List<String> listATMFromJrnHost = (List<String>) query.list();
 
 		return listATMFromJrnHost;
@@ -132,7 +122,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 				try {
 
-					predicates.add(builder.greaterThanOrEqualTo(root.get("transactionDateHost"),
+					predicates.add(builder.greaterThanOrEqualTo(root.get("startingDate"),
 							tools.convertStringToDatenew(trx.getTransactionDateStarting())));
 
 				} catch (ParseException e) {
@@ -144,7 +134,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 				try {
 
-					predicates.add(builder.between(root.get("transactionDateHost"),
+					predicates.add(builder.between(root.get("startingDate"),
 							tools.convertStringToDatenew(trx.getTransactionDateStarting()),
 							tools.convertStringToDatenew(trx.getTransactionDateFinishing())));
 
@@ -165,7 +155,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 			try {
 
-				predicates.add(builder.between(root.get("transactionHostTime"),
+				predicates.add(builder.between(root.get("startingTime"),
 						tools.ConvertStringToTimeTrx(trx.getTransactionTimeStarting()),
 						tools.ConvertStringToTimeTrx(trx.getTransactionTimeFinishing())));
 
@@ -181,7 +171,7 @@ public class TransactionDaoImpl implements TransactionDao {
 		if (!trx.getTransactionCardPartOne().equalsIgnoreCase("")
 				&& (!(trx.getTransactionCardPartTwo().equalsIgnoreCase("")))) {
 
-			predicates.add(builder.like(root.get("transactionHostCard"),
+			predicates.add(builder.like(root.get("cardNumber"),
 					"%" + trx.getTransactionCardPartOne() + "%" + trx.getTransactionCardPartTwo()));
 
 			// query.where(builder.like(root.get("transactionHostCard"), "%" +
@@ -253,7 +243,6 @@ public class TransactionDaoImpl implements TransactionDao {
 			} else {
 
 				predicates.add(builder.equal(root.get("cardTaken"), false));
-
 			}
 		}
 
@@ -272,7 +261,6 @@ public class TransactionDaoImpl implements TransactionDao {
 				predicates.add(builder.equal(root.get("cashTaken"), false));
 
 			}
-
 		}
 
 		/*---------------------------------------------------------------------------------------------------------*/
@@ -282,18 +270,10 @@ public class TransactionDaoImpl implements TransactionDao {
 		if (!trx.getErrorTransaction().equalsIgnoreCase("-1")) {
 
 			predicates.add(builder.like(root.get("errorTransaction"), trx.getErrorTransaction()));
-
 		}
-
 		query.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
-
 		Query<Transaction> requet = currentSession.createQuery(query);
-		
 		List<Transaction> ListTransactionAfterFiltring = requet.getResultList();
-		
-	
-		 
-		 
 		return ListTransactionAfterFiltring;
 	}
 

@@ -48,8 +48,7 @@ public class Journal {
 	    
 	     
 
-	    @ManyToOne( cascade={CascadeType.DETACH, CascadeType.MERGE,
-	    		    		CascadeType.PERSIST, CascadeType.REFRESH})
+	    @ManyToOne( cascade = CascadeType.ALL)
 	    @JoinColumn  (name="idAtm") 
 	    private Atm atm;
 	    
@@ -94,13 +93,10 @@ public class Journal {
 		public void setNomJournal(String nomJournal) {
 			this.nomJournal = nomJournal;
 		}
-
-		 
-
+		
 		public Date getDateJournal() {
 			return dateJournal;
 		}
-
 
 		public void setDateJournal(Date dateJournal) {
 			this.dateJournal = dateJournal;
