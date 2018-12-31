@@ -66,6 +66,9 @@ public class TransactionController {
 		System.out.println("Total Amount " + TotalAmount);
 		int countTransaction = TrasanctionFilterList.size();
 		model.addAttribute("TrasanctionFilterList", TrasanctionFilterList);
+		
+		
+		
 		System.out.println("Starting date : " + transaction.getStartingDate());
 		System.out.println("Starting date : " + transaction.getStartingTime());
 		System.out.println("Starting date : " + transaction.getFinishingDate());
@@ -76,6 +79,8 @@ public class TransactionController {
 		System.out.println(" tarnsction hots amount mIn " + transaction.getTransactionHostAmounttMin());
 		System.out.println(" tarnsction hots amount mIn " + transaction.getTransactionHostAmountMax());
 		System.out.println(" tarnsction hots amount mIn " + transaction.getTaransaction_AUTH());
+		
+		
 		populateDefaultModel(model);
 		model.addAttribute("Filter", "FilterResultat");
 		model.addAttribute("Filter", "FilterTable");
@@ -84,6 +89,8 @@ public class TransactionController {
 		model.addAttribute("countTransaction", countTransaction);
 		model.addAttribute("TotalAmount", TotalAmount);
 		model.addAttribute("css", "primary");
+		
+		
 		return "TransactionFilter";
 
 	}

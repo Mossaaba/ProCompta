@@ -143,12 +143,12 @@
 
 														<div class="col-md-6">
 
-															<div class="form-group form-group-default input-group  ">
+															<div class="form-group form-group-default input-group  required" id="startingDateDiv">
 
-																<div class="form-input-group">
+																<div class="form-input-group"> 
 																	<label>Start Date</label>
-																	<form:input path="StartingDateFilterErrorATM"
-																		type="text" id="ErrorATMDateStarting"
+																	<form:input path="startingDateFilterErrorATM" 
+																		type="text" id="startingDateFilterErrorATM"
 																		class="form-control date" placeholder="Pick a date" />
 																</div>
 
@@ -162,12 +162,12 @@
 
 														<div class="col-md-6">
 
-															<div class="form-group form-group-default input-group  "> 
+															<div class="form-group form-group-default input-group  required" id="finishingDateDiv" > 
 
 																<div class="form-input-group">
 																	<label>Finising Date</label>
-																	<form:input path="FinishingDateFilterErrorATM"
-																		type="text" id="ErrorATMDateFinishing"
+																	<form:input path="finishingDateFilterErrorATM"
+																		type="text" id="finishingDateFilterErrorATM"
 																		class="form-control date" placeholder="Pick a date" />
 																</div>
 
@@ -207,12 +207,12 @@
 
 																<div class="form-input-group">
 																	<label>Start Time</label>
-																	<form:input path="StartingTimeFilterErrorATM"
-																		type="text" class="form-control time"
+																	<form:input path="startingTimeFilterErrorATM"
+																		type="text" class="form-control time" id="startingTimeFilterErrorATM"
 																		placeholder="Pick a date" />
 																</div>
 
-																<div class="input-group-append ">
+																<div class="input-group-append "> 
 																	<span class="input-group-text"><i
 																		class="fa fa-clock-o"></i></span>
 																</div>
@@ -223,8 +223,8 @@
 
 																<div class="form-input-group">
 																	<label>Finishing Time</label>
-																	<form:input path="FinisingTimeFilterErrorATM"
-																	                   
+																	<form:input path="finisingTimeFilterErrorATM"
+																	           id="finisingTimeFilterErrorATM"        
 																		type="text" class="form-control time endTime "
 																		placeholder="Pick a date" />
 																</div>
@@ -245,7 +245,7 @@
 													<button class="btn btn-primary bold" type="submit">
 														<i class="fa fa-search fa-3x"></i> Submit
 													</button>
-													<button class="btn btn-danger bold">
+													<button class="btn btn-danger bold" id="ClearErrorForm">
 														<i class="fa fa-eraser fa-3x"></i> Clear
 													</button>
 												</div>
@@ -281,10 +281,60 @@
 														class="   p-t-5 m-l-5 p-b-5 inline fs-12 text-primary bold">
 														<i class="fa fa-filter fa-2x"></i> Filter :
 													</span>
+             
+                                                     <c:if
+														test="${!empty errorATM_Filter.startingDateFilterErrorATM  }">
+														<span
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-calendar-o" aria-hidden="true"></i> 
+															DATE START : ${errorATM_Filter.startingDateFilterErrorATM}</span>
+													</c:if>
+													<c:if
+														test="${!empty errorATM_Filter.finishingDateFilterErrorATM  }">
+														<span
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-calendar-o" aria-hidden="true"></i> 
+															DATE FINISH :
+															${errorATM_Filter.finishingDateFilterErrorATM}</span>
+													</c:if>
 
+													<c:if
+														test="${!empty errorATM_Filter.startingTimeFilterErrorATM  }">
+														
+														<span
+														
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-clock-o" aria-hidden="true"></i>
+															TIME START : ${errorATM_Filter.startingTimeFilterErrorATM}
+														</span>
+													</c:if>
 
-													 
-													 </c:if>
+													<c:if
+														test="${!empty errorATM_Filter.finisingTimeFilterErrorATM  }">
+														
+														<span
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-clock-o" aria-hidden="true"></i> 
+															TIME FINISH :
+															${errorATM_Filter.finisingTimeFilterErrorATM} </span>
+													</c:if>
+													
+													<c:if test="${errorATM_Filter.detailErrorAtm ne '-1' }">
+														<span
+															class=" label label-warning p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-flash" aria-hidden="true"></i> 
+															Type Of Incident : ${errorATM_Filter.detailErrorAtm}
+														</span>
+														
+													</c:if>
+
+													<br>
+													<br>
+													<button class="btn btn-sm btn-primary "
+														onclick="window.location.href='<spring:url value="/errorsATM"/>'">
+														<i class="fa fa-filter fa-2x"></i> New Filter
+													</button> 
+										  </c:if>
 
 													 
 											
@@ -343,20 +393,33 @@
 													class="table table-hover demo-table-search table-responsive-block"
 													id="tableWithSearch" >
 													<thead>
-														<tr>
-															<th>DATE </th>
-															<th>TIME </th>
-															<th>DESCRUPTION</th>
+														<tr class="text-center" >
+															<th class="v-align-middle text-primary bold fs-12"> <span
+																	class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa-calendar fa-stack-1x"></i>
+																</span> <br> Date</th>
+																
+															<th class="v-align-middle text-primary bold fs-12"> <span
+																	class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa-clock-o fa-stack-1x"></i>
+																</span> <br> Time </th>
+															<th class="v-align-middle text-primary bold fs-12"> <span
+																	class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa fa-info fa-stack-1x"></i>
+																</span> <br> Description</th>
 															 
 														</tr>
 													</thead>
 													<tbody>
 													<c:forEach var="errorATM"
 																items="${listErrorsATMAfterFilter}">
-														<tr>
-															<td>${errorATM.dateErrorATM}</td>
-															<td>${errorATM.timeErrorATM}</td>
-															<td>${errorATM.detailErrorAtm}</td>
+														<tr class="text-center" >
+															<td class="text-primary font-montserrat v-align-middle" >${errorATM.dateErrorATM}</td>
+															<td class="text-primary font-montserrat v-align-middle" >${errorATM.timeErrorATM}</td>
+															<td class="text-primary font-montserrat v-align-middle" >${errorATM.detailErrorAtm}</td>
 															</tr>
 													</c:forEach>
 													</tbody>
@@ -442,7 +505,7 @@
 	    	    "scrollCollapse": true,
 	    	    "oLanguage": {
 	    	        "sLengthMenu": "_MENU_ ",
-	    	        "sInfo": "Showing <b>_START_ to _END_</b>Transaction of _TOTAL_ Transaction"
+	    	        "sInfo": "Showing <b>_START_ to _END_</b> Error of _TOTAL_ Errors"
 	    	    },
 	    	    "iDisplayLength": 5,
 	    	    "oTableTools": {

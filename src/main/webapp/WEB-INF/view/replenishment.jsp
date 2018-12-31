@@ -218,7 +218,7 @@
 														<button class="btn btn-primary bold" type="submit">
 															<i class="fa fa-search fa-3x"></i> Submit
 														</button>
-														<bsutton class="btn btn-danger bold"
+														<button class="btn btn-danger bold"
 															id="clearFormReplenishment"> <i
 															class="fa fa-eraser fa-3x"></i> Clear
 														</button>

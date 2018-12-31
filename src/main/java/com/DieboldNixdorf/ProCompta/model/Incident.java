@@ -39,13 +39,13 @@ public class Incident {
 	
 	
 	@Transient  
-	private String StartingDateFilterIncident; 
+	private String startingDateFilterIncident;   
 	@Transient
-	private String FinishingDateFilterIncident;
+	private String finishingDateFilterIncident;
 	@Transient
-	private String StartingTimeFilterIncident;
+	private String startingTimeFilterIncident;
 	@Transient 
-	private String FinisingTimeFilterIncident;
+	private String finisingTimeFilterIncident;
 	
 
 	@JsonIgnore
@@ -102,37 +102,38 @@ public class Incident {
 	}
 
 	public String getStartingDateFilterIncident() {
-		return StartingDateFilterIncident;
+		return startingDateFilterIncident;
 	}
 
 	public void setStartingDateFilterIncident(String startingDateFilterIncident) {
-		StartingDateFilterIncident = startingDateFilterIncident;
+		this.startingDateFilterIncident = startingDateFilterIncident;
 	}
 
 	public String getFinishingDateFilterIncident() {
-		return FinishingDateFilterIncident;
+		return finishingDateFilterIncident;
 	}
 
 	public void setFinishingDateFilterIncident(String finishingDateFilterIncident) {
-		FinishingDateFilterIncident = finishingDateFilterIncident;
+		this.finishingDateFilterIncident = finishingDateFilterIncident;
 	}
 
 	public String getStartingTimeFilterIncident() {
-		return StartingTimeFilterIncident;
+		return startingTimeFilterIncident;
 	}
 
 	public void setStartingTimeFilterIncident(String startingTimeFilterIncident) {
-		StartingTimeFilterIncident = startingTimeFilterIncident;
+		this.startingTimeFilterIncident = startingTimeFilterIncident;
 	}
 
 	public String getFinisingTimeFilterIncident() {
-		return FinisingTimeFilterIncident;
+		return finisingTimeFilterIncident;
 	}
 
 	public void setFinisingTimeFilterIncident(String finisingTimeFilterIncident) {
-		FinisingTimeFilterIncident = finisingTimeFilterIncident;
+		this.finisingTimeFilterIncident = finisingTimeFilterIncident;
 	}
 
+	 
 	 
 	
 	

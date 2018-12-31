@@ -1,4 +1,4 @@
-$('#StartingTimeFilterIncident').timepicker({
+$('#startingTimeFilterIncident').timepicker({
 	'defaultTime' : false,
 	'showDuration' : true,
 	'minuteStep' : 1,
@@ -11,7 +11,7 @@ $('#StartingTimeFilterIncident').timepicker({
 		previous : 'fa fa-chevron-circle-left'
 	}
 });
-$('#FinisingTimeFilterIncident').timepicker({
+$('#finisingTimeFilterIncident').timepicker({
 	'defaultTime' : false,
 	'showDuration' : true,
 	'minuteStep' : 1,
@@ -86,7 +86,7 @@ $("#IncidentATM").select2({
 	allowClear : true,
 	placeholder : {
 		id : "-1",
-		text : "Please select an incident ",
+		text : "Please select a type of incident ",
 		selected : 'selected',
 	},
 	data : [ {
@@ -119,5 +119,64 @@ $("#ATM").select2({
   
 
 
+/*********************************
+ ********************************* 
+ ********************************* 
+ F O R M     V  A  L I D A T I O N 
+ ********************************* 
+ *********************************
+ *********************************
+ *********************************/
 
+$("#incidentFilterForm")
+		.submit(
+				function(e) {
+					
+					   
+					
+					var startingDateX = $("#incidentDateStarting").val();
+					var finshingDateY = $("#incidentDateFinishing").val();
 
+					
+					if (!startingDateX || !finshingDateY) 
+					{
+
+						$.confirm({
+									title : 'Date range is mandatory!',
+									content : 'You should select a date range (starting date and finishing date). ',
+									type : 'red',
+									animation : 'left',
+									icon : 'fa fa-exclamation-circle fa-spin',
+									typeAnimated : true,
+									buttons : {
+										  
+										close : {
+											text : 'Close',
+											btnClass : 'btn-red',
+											action : function() {
+												$('#startingDateDive').addClass(
+														'b-danger b-dashed');
+												$("#finishingDateDive")
+														.addClass(
+																'b-danger b-dashed');
+											}
+
+										}
+									}
+								});
+
+						return false;
+					}
+					 
+					
+				});
+
+ 
+
+$("#clearFormIncident").click(function() {
+    $(this).closest('form').find("input[type=text], textarea").val("");
+    $("#ATM").val('').trigger('change');
+	$("#IncidentATM").val('').trigger('change');
+});
+
+ 

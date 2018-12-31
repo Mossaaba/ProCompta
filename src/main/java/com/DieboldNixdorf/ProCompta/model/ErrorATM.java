@@ -45,13 +45,13 @@ public class ErrorATM {
 	@Transient
 	private int idAtm;
 	@Transient  
-	private String StartingDateFilterErrorATM; 
+	private String startingDateFilterErrorATM;   
+	@Transient  
+	private String finishingDateFilterErrorATM;
 	@Transient
-	private String FinishingDateFilterErrorATM;
-	@Transient
-	private String StartingTimeFilterErrorATM;
+	private String startingTimeFilterErrorATM;
 	@Transient 
-	private String FinisingTimeFilterErrorATM;
+	private String finisingTimeFilterErrorATM;
 	
 	
 	
@@ -123,43 +123,46 @@ public class ErrorATM {
 	}
 
 
+	 
+
+
 	public String getStartingDateFilterErrorATM() {
-		return StartingDateFilterErrorATM;
+		return startingDateFilterErrorATM;
 	}
 
 
 	public void setStartingDateFilterErrorATM(String startingDateFilterErrorATM) {
-		StartingDateFilterErrorATM = startingDateFilterErrorATM;
+		this.startingDateFilterErrorATM = startingDateFilterErrorATM;
 	}
 
 
 	public String getFinishingDateFilterErrorATM() {
-		return FinishingDateFilterErrorATM;
+		return finishingDateFilterErrorATM;
 	}
 
 
 	public void setFinishingDateFilterErrorATM(String finishingDateFilterErrorATM) {
-		FinishingDateFilterErrorATM = finishingDateFilterErrorATM;
+		this.finishingDateFilterErrorATM = finishingDateFilterErrorATM;
 	}
 
 
 	public String getStartingTimeFilterErrorATM() {
-		return StartingTimeFilterErrorATM;
+		return startingTimeFilterErrorATM;
 	}
 
 
 	public void setStartingTimeFilterErrorATM(String startingTimeFilterErrorATM) {
-		StartingTimeFilterErrorATM = startingTimeFilterErrorATM;
+		this.startingTimeFilterErrorATM = startingTimeFilterErrorATM;
 	}
 
 
 	public String getFinisingTimeFilterErrorATM() {
-		return FinisingTimeFilterErrorATM;
+		return finisingTimeFilterErrorATM;
 	}
 
 
 	public void setFinisingTimeFilterErrorATM(String finisingTimeFilterErrorATM) {
-		FinisingTimeFilterErrorATM = finisingTimeFilterErrorATM;
+		this.finisingTimeFilterErrorATM = finisingTimeFilterErrorATM;
 	}
 
 

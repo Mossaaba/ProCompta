@@ -188,7 +188,7 @@
 																	</div>
 																	<div class="form-input-group input-sm">
 																		<form:input path="transactionTimeStarting" type="text"
-																			id="startiingtime" class="form-control time start "
+																			id="transactionTimeStarting" class="form-control time start "
 																			placeholder="Starting Time" autocomplete="off" />
 																	</div>
 
@@ -223,7 +223,7 @@
 																	<div class="form-input-group input-sm">
 
 																		<form:input path="transactionTimeFinishing"
-																			type="text" class="form-control time endTime "
+																			type="text" class="form-control time endTime " id="transactionTimeFinishing"
 																			placeholder="Finising Time" autocomplete="off" />
 																	</div>
 																	<div class="input-group-append ">
@@ -370,7 +370,7 @@
 															</label> <br>
 															<form:input path="taransaction_AUTH" type="text"
 																class="form-control" maxlength="8"
-																onkeypress="return isNumberKey(event)" />
+																onkeypress="return isNumberKey(event)"  autocomplete="off"/>
 
 
 														</div>
@@ -481,7 +481,7 @@
 														<button class="btn btn-primary bold" type="submit" id="subFormTransaction">
 															<i class="fa fa-search fa-3x"></i> SEARCH
 														</button>
-														<button class="btn btn-danger bold" >
+														<button class="btn btn-danger bold" id="clearTransactionForm" >
 															<i class="fa fa-eraser fa-3x"></i> CLEAR
 														</button>
  

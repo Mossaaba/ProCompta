@@ -143,13 +143,13 @@
 
 														<div class="col-md-6">
 
-															<div class="form-group form-group-default input-group  ">
+															<div class="form-group form-group-default input-group required" id="startingDateDive">
 
-																<div class="form-input-group">
+																<div class="form-input-group"> 
 																	<label>Start Date</label>
-																	<form:input path="StartingDateFilterIncident"
+																	<form:input path="startingDateFilterIncident"
 																		type="text" id="incidentDateStarting"
-																		class="form-control date" placeholder="Pick a date" />
+																		class="form-control date" placeholder="Pick a date" autocomplete="off"  />
 																</div>
 
 																<div class="input-group-append ">
@@ -160,15 +160,15 @@
 
 														</div> 
 
-														<div class="col-md-6">
+														<div class="col-md-6">   
 
-															<div class="form-group form-group-default input-group  ">
+															<div class="form-group form-group-default input-group  required " id="finishingDateDive">
 
 																<div class="form-input-group">
 																	<label>Finising Date</label>
-																	<form:input path="FinishingDateFilterIncident"
+																	<form:input path="finishingDateFilterIncident"
 																		type="text" id="incidentDateFinishing"
-																		class="form-control date" placeholder="Pick a date" />
+																		class="form-control date" placeholder="Pick a date" autocomplete="off"  />
 																</div>
 
 																<div class="input-group-append ">
@@ -207,9 +207,9 @@
 
 																<div class="form-input-group">
 																	<label>Start Time</label>
-																	<form:input path="StartingTimeFilterIncident"
+																	<form:input path="startingTimeFilterIncident"
 																		type="text" class="form-control time"
-																		placeholder="Pick a date" />
+																		placeholder="Pick a time"  autocomplete="off"  />
 																</div>
 
 																<div class="input-group-append ">
@@ -223,9 +223,9 @@
 
 																<div class="form-input-group">
 																	<label>Finishing Time</label>
-																	<form:input path="FinisingTimeFilterIncident"
+																	<form:input path="finisingTimeFilterIncident"
 																		type="text" class="form-control time endTime "
-																		placeholder="Pick a date" />
+																		placeholder="Pick a time"  autocomplete="off" />
 																</div>
 
 																<div class="input-group-append ">
@@ -244,7 +244,7 @@
 													<button class="btn btn-primary bold" type="submit">
 														<i class="fa fa-search fa-3x"></i> Submit
 													</button>
-													<button class="btn btn-danger bold">
+													<button class="btn btn-danger bold" id="clearFormIncident"  >
 														<i class="fa fa-eraser fa-3x"></i> Clear
 													</button>
 												</div>
@@ -280,10 +280,60 @@
 														class="   p-t-5 m-l-5 p-b-5 inline fs-12 text-primary bold">
 														<i class="fa fa-filter fa-2x"></i> Filter :
 													</span>
+       
+                                                     <c:if
+														test="${!empty incidentFilter.startingDateFilterIncident  }">
+														<span
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-calendar-o" aria-hidden="true"></i> 
+															DATE START : ${incidentFilter.startingDateFilterIncident}</span>
+													</c:if>
+													<c:if
+														test="${!empty incidentFilter.finishingDateFilterIncident  }">
+														<span
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-calendar-o" aria-hidden="true"></i> 
+															DATE FINISH :
+															${incidentFilter.finishingDateFilterIncident}</span>
+													</c:if>
 
+													<c:if
+														test="${!empty incidentFilter.startingTimeFilterIncident  }">
+														
+														<span
+														
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-clock-o" aria-hidden="true"></i>
+															TIME START : ${incidentFilter.startingTimeFilterIncident}
+														</span>
+													</c:if>
 
-													 
-													 </c:if>
+													<c:if
+														test="${!empty incidentFilter.finisingTimeFilterIncident  }">
+														
+														<span
+															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-clock-o" aria-hidden="true"></i> 
+															TIME FINISH :
+															${incidentFilter.finisingTimeFilterIncident} </span>
+													</c:if>
+													
+													<c:if test="${incidentFilter.detailsincidents ne '-1' }">
+														<span
+															class=" label label-warning p-t-5 m-l-5 p-b-5 inline fs-12">
+															<i class="fa fa-flash" aria-hidden="true"></i> 
+															Type Of Incident : ${incidentFilter.detailsincidents}
+														</span>
+														
+													</c:if>
+
+													<br>
+													<br>
+													<button class="btn btn-sm btn-primary "
+														onclick="window.location.href='<spring:url value="/incident"/>'">
+														<i class="fa fa-filter fa-2x"></i> New Filter
+													</button> 
+										  </c:if>
 
 													 
 											
@@ -342,38 +392,41 @@
 													class="table table-hover demo-table-search table-responsive-block"
 													id="tableWithSearch" >
 													<thead>
-														<tr>
-															<th>DATE </th>
-															<th>TIME </th>
-															<th>DESCRUPTION</th>
+														<tr class="text-center">
+															<th class="v-align-middle text-primary bold fs-12"> <span
+																	class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa-calendar fa-stack-1x"></i>
+																</span> <br> Date</th>
+																
+															<th class="v-align-middle text-primary bold fs-12"> <span
+																	class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa-clock-o fa-stack-1x"></i>
+																</span> <br> Time </th>
+															<th class="v-align-middle text-primary bold fs-12"> <span
+																	class="fa-stack fa-lg"> <i
+																		class="fa fa-square-o fa-stack-2x"></i> <i
+																		class="fa fa fa-info fa-stack-1x"></i>
+																</span> <br> Description</th>
 															 
 														</tr>
 													</thead>
 													<tbody>
 													<c:forEach var="incident"
 																items="${listIncidentAfterFilter}">
-														<tr>
-															<td>${incident.incident_date}</td>
-															<td>${incident.incident_time}</td>
-															<td>${incident.detailsincidents}</td>
+														<tr class="text-center" >
+															<td class="text-primary font-montserrat v-align-middle" >${incident.incident_date}</td>
+															<td class="text-primary font-montserrat v-align-middle" >${incident.incident_time}</td>
+															<td class="text-primary font-montserrat v-align-middle" >${incident.detailsincidents}</td>
 															 
 															
 															</tr>
 													</c:forEach>
-
-														
-
-
-
-
-
 													</tbody>
 												</table>
 											</div>
 										</div>
-
-
-
 									</div>
 								</div>
 							</div>
@@ -381,12 +434,6 @@
 					</div>
 
                    </c:if>
-
-
-
-
-
-
 				</div>
 
 				<jsp:include page="../view/fragments/footer.jsp"></jsp:include>
@@ -415,19 +462,11 @@
 		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/datatables.responsive.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/assets/plugins/datatables-responsive/js/lodash.min.js"/>"></script>
-
-
 	<script src="<spring:url value="/resources/assets/js/tables.js"/>"></script>
-
-
 	<script
 		src="<spring:url value="/resources/assets/jquery-confirm.min.js"/>"></script>
-
 	<script src="<spring:url value="/resources/pages/js/Datepair.js"/>"></script>
-
-
 	<script src="<spring:url value="/resources/pages/js/incident.js"/>"></script>
-
 	<script type="text/javascript">
 	 
  
@@ -450,7 +489,7 @@
 	    	    "scrollCollapse": true,
 	    	    "oLanguage": {
 	    	        "sLengthMenu": "_MENU_ ",
-	    	        "sInfo": "Showing <b>_START_ to _END_</b>Transaction of _TOTAL_ Transaction"
+	    	        "sInfo": "Showing <b>_START_ to _END_</b> Inciendt of _TOTAL_ Incidnets"
 	    	    },
 	    	    "iDisplayLength": 5,
 	    	    "oTableTools": {

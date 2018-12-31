@@ -92,10 +92,8 @@ public class ErrorATMDaoImpl implements ErrorATMDao {
 
 		{
 
-			 
-
 		}
-		if (err.getDetailErrorAtm().equalsIgnoreCase("-1") )
+		if (!err.getDetailErrorAtm().equalsIgnoreCase("-1") )
 
 		{
 
@@ -125,7 +123,7 @@ public class ErrorATMDaoImpl implements ErrorATMDao {
 				 && !err.getFinisingTimeFilterErrorATM().equalsIgnoreCase("") )
 		{
 			 try {
-			            predicates.add(builder.between(root.get("incident_time"),
+			            predicates.add(builder.between(root.get("timeErrorATM"),
 						tools.ConvertStringToTimeTrx(err.getStartingTimeFilterErrorATM()),
 						tools.ConvertStringToTimeTrx(err.getFinisingTimeFilterErrorATM())));
 			 } catch (ParseException e) {

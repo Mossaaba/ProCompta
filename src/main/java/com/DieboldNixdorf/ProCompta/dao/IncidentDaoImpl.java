@@ -96,14 +96,16 @@ public class IncidentDaoImpl implements IncidentDao {
 			 
 
 		}
-		if (incd.getDetailsincidents().equalsIgnoreCase("-1") )
+		if (!incd.getDetailsincidents().equalsIgnoreCase("-1") )
 
 		{
 
 			predicates.add(builder.like(root.get("detailsincidents"), "%" + incd.getDetailsincidents() + "%")); 
 
 		}
-		 if (  !incd.getStartingDateFilterIncident().equalsIgnoreCase("") 
+		
+		
+		if (  !incd.getStartingDateFilterIncident().equalsIgnoreCase("") 
 			   && !incd.getFinishingDateFilterIncident().equalsIgnoreCase("") )
 		{
 			 try {

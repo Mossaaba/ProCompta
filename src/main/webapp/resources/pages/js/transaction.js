@@ -6,7 +6,9 @@
 $('#card-advanceWincor').card();
 $('#card-advance-resultat').card();
 
-$('#basicExample .time').timepicker({
+
+
+$('#transactionTimeStarting').timepicker({
 	'defaultTime' : false,
 	'showDuration' : true,
 	'minuteStep' : 1,
@@ -19,6 +21,20 @@ $('#basicExample .time').timepicker({
 		previous : 'fa fa-chevron-circle-left'
 	}
 });
+$('#transactionTimeFinishing').timepicker({
+	'defaultTime' : false,
+	'showDuration' : true,
+	'minuteStep' : 1,
+	timeFormat : 'hh:mm:ss tt',
+	showSecond : true,
+	icons : {
+		up : "fa fa-chevron-circle-up",
+		down : "fa fa-chevron-circle-down",
+		next : 'fa fa-chevron-circle-right',
+		previous : 'fa fa-chevron-circle-left'
+	}
+});
+
  
 /*********************************
  ********************************* 
@@ -230,7 +246,7 @@ $("#ATM").select2({
 		search : '',
 		hidden : true
 	} ]
-});
+}); 
 
 $("#vendor").select2({
 	dropdownCssClass : "font-montserrat blod text-primary bold fs-12",
@@ -332,3 +348,14 @@ $("#cashStatus").select2({
 });
 
 
+
+$("#clearTransactionForm").click(function() {
+      $(this).closest('form').find("input[type=text], textarea").val("");
+      $("#ATM").val('').trigger('change');
+      $("#vendor").val('').trigger('change');
+      $("#transactionType").val('').trigger('change');
+      $("#transactionError").val('').trigger('change');
+      $("#cardStatus").val('').trigger('change');
+      $("#cashStatus").val('').trigger('change');
+     
+});

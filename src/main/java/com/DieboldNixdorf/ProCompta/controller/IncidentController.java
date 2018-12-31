@@ -53,14 +53,14 @@ public class IncidentController {
 			BindingResult result, Model model, RedirectAttributes redirectAttributes) throws ParseException 
 			{
 		
-		       /*
+		       
 		         System.out.println("ATM            :   "+incident.getIdAtm());
 		         System.out.println("DETAILS        :   "+incident.getDetailsincidents());
 		         System.out.println("STARTING DATE  :   "+incident.getStartingDateFilterIncident());
 		         System.out.println("FINISHING DATE :   "+incident.getFinishingDateFilterIncident());
 		         System.out.println("STARTING TIME  :   "+incident.getStartingTimeFilterIncident());
 		         System.out.println("FINISHING TIME :   "+incident.getFinisingTimeFilterIncident());
-		       */  
+		      
 		
 		           model.addAttribute("Filter","FilterResultat");
 		           model.addAttribute("incidentFilter",incident);
