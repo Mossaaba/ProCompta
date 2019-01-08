@@ -708,7 +708,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 								   amountR =  amountR.replaceAll(",", "");
 							  }
 							      
-								  trx.setTransactionHostAmount(Double.parseDouble(amountR));
+								  trx.setTransactionHostAmount(amountR);
 							  }
 						  
 						     /*==========================================================================*\
@@ -1053,7 +1053,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 															   amountR =  amountR.replaceAll(",", "");
 														  }
 														      
-														  trx_NCR.setTransactionHostAmount(Double.parseDouble(amountR));
+														  trx_NCR.setTransactionHostAmount(amountR);
 														 
 														  
 														  }

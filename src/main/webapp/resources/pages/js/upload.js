@@ -172,6 +172,28 @@
 
 				});
 			});
+			
+			
+			
+			$("#typeFile").on('change', function(e) {  
+
+				var id = $("#typeFile").val();
+				
+				if(id == 2)
+					{
+
+					$("#branchDiv").hide();
+					$("#atmDiv").hide();
+					$("#typeFileDiv").removeClass( "col-md-4" );
+					$("#typeFileDiv").addClass( "col-md-12" );
+
+					
+					}
+                 
+				  
+			});
+			
+			
 
 			var elems = Array.prototype.slice.call(document
 					.querySelectorAll('#AutoUpload'));

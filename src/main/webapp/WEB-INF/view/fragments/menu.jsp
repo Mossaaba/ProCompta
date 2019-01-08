@@ -175,28 +175,35 @@
 			 
 			 
 			 
-			<li>
-			<a href="javascript:;" ><span class="title font-montserrat no-margin text-uppercase">
-			<spring:message code="label.Host"></spring:message></span>
+ 
+            
+               
+            
+           <li>
+			<a href="javascript:;" ><span class="  font-montserrat no-margin text-uppercase fs-12">
+			Reconciliation </span>
 			<span class=" arrow"></span></a>
+			
 			<span class="icon-thumbnail"><i class="pg-layouts2" style="font-size :27px;"></i></span>
 			<ul class="sub-menu">
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="secondary_layout.html"><spring:message code="label.HostFile"></spring:message> </a>
-			<span class="icon-thumbnail" ><i class=" fa fa-file-text-o" style="font-size :27px;"></i></span>
-			</li>        
+			<a href="<spring:url value="/reconciliationTable"/>"   >  Reconcilied </a>
+			<span class="icon-thumbnail" ><i class=" fa fa-check-square-o" style="font-size :27px;"></i></span>
+			</li> 
+			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="secondary_layout.html"><spring:message code="label.Tally"></spring:message></a>
-			<span class="icon-thumbnail" style="font-size :27px;">PT</span>
+			<a  href="<spring:url value="reconciliationJournal"/>"  >  Journal </a>
+			<span class="icon-thumbnail" ><i class=" fa fa-file-text-o" style="font-size :27px;"></i></span>
+			</li>   
+			  
+			<li class="title font-montserrat no-margin text-uppercase">
+			<a href="<spring:url value="/reconciliationHost"/>"  >  Host </a>
+			<span class="icon-thumbnail" ><i class="fa fa-server" style="font-size :27px;"></i></span>
 
 			</li>
 			 
            </ul>
             </li>
-            <li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="/host/list"/>">Recon Report</a>  
-			<span class="icon-thumbnail"><i class="fa fa-chain-broken" style="font-size :25px;"></i></span>
-			</li>
 
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="charts.html">

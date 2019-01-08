@@ -1,4 +1,6 @@
 
+$('#card-advance-resultat').card();
+
 $('#startingTimeFilterErrorATM').timepicker({
 	'defaultTime' : false,
 	'showDuration' : true,

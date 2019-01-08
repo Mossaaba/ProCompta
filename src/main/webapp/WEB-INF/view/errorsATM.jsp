@@ -149,7 +149,7 @@
 																	<label>Start Date</label>
 																	<form:input path="startingDateFilterErrorATM" 
 																		type="text" id="startingDateFilterErrorATM"
-																		class="form-control date" placeholder="Pick a date" />
+																		class="form-control date" placeholder="Pick a date" autocomplete="off"  />
 																</div>
 
 																<div class="input-group-append ">
@@ -168,7 +168,7 @@
 																	<label>Finising Date</label>
 																	<form:input path="finishingDateFilterErrorATM"
 																		type="text" id="finishingDateFilterErrorATM"
-																		class="form-control date" placeholder="Pick a date" />
+																		class="form-control date" placeholder="Pick a date"  autocomplete="off" />
 																</div>
 
 																<div class="input-group-append ">
@@ -209,7 +209,7 @@
 																	<label>Start Time</label>
 																	<form:input path="startingTimeFilterErrorATM"
 																		type="text" class="form-control time" id="startingTimeFilterErrorATM"
-																		placeholder="Pick a date" />
+																		placeholder="Pick a date"  autocomplete="off"  />
 																</div>
 
 																<div class="input-group-append "> 
@@ -226,7 +226,7 @@
 																	<form:input path="finisingTimeFilterErrorATM"
 																	           id="finisingTimeFilterErrorATM"        
 																		type="text" class="form-control time endTime "
-																		placeholder="Pick a date" />
+																		placeholder="Pick a date" autocomplete="off"  />
 																</div>
 
 																<div class="input-group-append ">
@@ -419,7 +419,7 @@
 														<tr class="text-center" >
 															<td class="text-primary font-montserrat v-align-middle" >${errorATM.dateErrorATM}</td>
 															<td class="text-primary font-montserrat v-align-middle" >${errorATM.timeErrorATM}</td>
-															<td class="text-primary font-montserrat v-align-middle" >${errorATM.detailErrorAtm}</td>
+															<td class="text-danger font-montserrat v-align-middle" >${errorATM.detailErrorAtm}</td>
 															</tr>
 													</c:forEach>
 													</tbody>

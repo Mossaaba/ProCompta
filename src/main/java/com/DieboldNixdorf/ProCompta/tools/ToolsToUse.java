@@ -81,6 +81,19 @@ public class ToolsToUse {
 		  
 	  }
 	  
+     public Time ConevretStringToTimeFromTheHostFile(String timeString) throws ParseException {
+		  
+		  SimpleDateFormat format = new SimpleDateFormat("HHmmss");
+		  
+		  java.sql.Time timeValue = new java.sql.Time(format.parse(timeString).getTime());
+		
+		  return timeValue;
+		  
+		  
+	  }
+
+
+	  
 	  public Date ConvertStringHostToDate(String dateString) throws ParseException {
 		  
 		    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");

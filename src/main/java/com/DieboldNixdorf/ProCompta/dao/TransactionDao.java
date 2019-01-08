@@ -14,9 +14,11 @@ public interface TransactionDao {
 	List<String> listinfosTransaction();
 	void saveTrasanction(Transaction transaction);
 	void deleteTransaction(Transaction transaction);
+	void updateTransaction(Transaction transaction);
 	List<String> listATM();
 	List<String> listErreursTransaction();
 	List<Transaction> listTransactionAfterFiltring(Transaction trx);
+	
 	
 	 
 	

@@ -62,8 +62,8 @@
 															  </a>
 															
 															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-															    <a class="dropdown-item" href="#">Log</a>
-															    <a class="dropdown-item" href="#">Journal</a>
+															    <a class="dropdown-item" data-target="#HostFileHistory" data-toggle="modal">Host File</a>
+															    <a class="dropdown-item"  data-target="#JournalHistory" data-toggle="modal" >Journal</a>
 															  
 															  </div>
 															</div>
@@ -140,7 +140,7 @@
 											</div>
 											<div class="row">
 
-												<div class="col-md-4">
+												<div class="col-md-4" id="branchDiv">
 													<div
 														class="form-group form-group-default form-group-default-select2 input-group hvr-grow required">
 														<label class="">Branche </label>
@@ -150,7 +150,7 @@
 															itemValue="idBranch" itemLabel="nomBranch"   />
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-4" id="atmDiv">
 													<div
 														class="form-group form-group-default form-group-default-select2  hvr-grow required" id="divATM">
 														<label >ATM</label>
@@ -160,7 +160,7 @@
 													</div> 
 												</div>
 												
-												<div class="col-md-4">
+												<div class="col-md-4" id="typeFileDiv">
 													<div 
 														class="form-group form-group-default form-group-default-select2  hvr-grow required" id="divTypeFile" >
 														<label class="">Type File </label>
@@ -483,6 +483,125 @@
 
 		</div>
 	</div>
+	
+	
+<div class="modal fade slide-right" id="JournalHistory" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal-dialog ">
+<div class="modal-content-wrapper">
+<div class="modal-content">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+</button>
+<div class="container-xs-height full-height">
+<div class="row-xs-height">
+<div class="modal-body col-xs-height col-middle text-center   ">
+<h5 class="text-primary "> <i class="fa fa-file-text-o" aria-hidden="true"></i> Journal File history</h5>
+<br>
+
+<div class="table-responsive">
+<table class="table table-hover table-condensed table-detailed" id="detailedTable">
+<thead>
+<tr>
+<th style="width:25%">DATE</th>
+<th style="width:25%">ATM</th>
+ 
+</tr>
+</thead>
+<tbody>
+<tr>
+ 
+<td class="v-align-middle semi-bold">DATE</td>
+<td class="v-align-middle">ProCashX</td>
+</tr>
+<tr>
+ 
+<td class="v-align-middle semi-bold">DATE</td>
+<td class="v-align-middle">ProCashX</td>
+</tr>
+<tr>
+ 
+<td class="v-align-middle semi-bold">DATE</td>
+<td class="v-align-middle">ProCashX</td>
+</tr>
+<tr>
+ 
+<td class="v-align-middle semi-bold">DATE</td>
+<td class="v-align-middle">ProCashX</td>
+</tr>
+</tbody>
+</table>
+</div> 
+<button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="modal fade slide-right" id="HostFileHistory" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal-dialog ">
+<div class="modal-content-wrapper">
+<div class="modal-content">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+</button>
+<div class="container-xs-height full-height">
+<div class="row-xs-height">
+<div class="modal-body col-xs-height col-middle text-center   ">
+<h5 class="text-primary ">Host file </h5>
+<br>
+
+<div class="table-responsive">
+<table class="table table-hover table-condensed table-detailed" id="detailedTable">
+<thead>
+<tr>
+<th style="width:25%">DATE</th>
+<th style="width:25%">ATM</th>
+ 
+</tr>
+</thead>
+<tbody>
+<tr>
+ 
+<td class="v-align-middle semi-bold">40,000 USD</td>
+<td class="v-align-middle">April 13, 2014</td>
+</tr>
+<tr>
+ 
+<td class="v-align-middle semi-bold">70,000 USD</td>
+<td class="v-align-middle">April 13, 2014</td>
+</tr>
+<tr>
+ 
+<td class="v-align-middle semi-bold">20,000 USD</td>
+<td class="v-align-middle">April 13, 2014</td>
+</tr>
+<tr>
+ 
+<td class="v-align-middle semi-bold">90,000 USD</td>
+<td class="v-align-middle">April 13, 2014</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+<button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 
 
 	<script
@@ -491,6 +610,47 @@
 		
 		<script type="text/javascript">
 
+		
+		
+		
+		
+		(function($){'use strict';
+		var initBasicTable=function()
+		{
+			var table=$('#basicTable');
+		      var settings={"sDom":"t",
+				"destroy":true,
+				"paging":false,
+				"scrollCollapse":true,
+				"aoColumnDefs":[{'bSortable':false,'aTargets':[0]}],"order":[[1,"desc"]]};
+		table.dataTable(settings);$('#basicTable input[type=checkbox]').click(function()
+				{if($(this).is(':checked')){$(this).closest('tr').addClass('selected');}else{$(this).closest('tr').removeClass('selected');}});}
+		var initStripedTable=function(){var table=$('#stripedTable');var settings={"sDom":"t","destroy":true,"paging":false,"scrollCollapse":true};
+		table.dataTable(settings);}
+		var initDetailedViewTable=function(){var _format=function(d){return '<table class="table table-inline">'+
+		'<tr>'+
+		'<td> Transaction </td>'+
+		'<td><span class="label label-info">nbr Transactions</span></td>'+
+		'</tr>'+
+		'<tr>'+
+		'<td> Incident </td>'+
+		'<td><span class="label label-info">nbr Incidents</span></td>'+
+		'</tr>'+
+		'<tr>'+
+		'<td> Errors </td>'+
+		'<td><span class="label label-info">nbr Errors</span></td>'+
+		'</tr>'+
+		'<tr>'+
+		'<td> Replanishment </td>'+
+		'<td><span class="label label-info">nbr Replinshement</span></td>'+
+		'</tr>'+
+		'</table>';}
+		var table=$('#detailedTable');table.DataTable({"sDom":"ltip","scrollCollapse":true,"paging":true,"bSort":false});$('#detailedTable tbody').on('click','tr',function(){if($(this).hasClass('shown')&&$(this).next().hasClass('row-details')){$(this).removeClass('shown');$(this).next().remove();return;}
+		var tr=$(this).closest('tr');var row=table.DataTable().row(tr);$(this).parents('tbody').find('.shown').removeClass('shown');$(this).parents('tbody').find('.row-details').remove();row.child(_format(row.data())).show();tr.addClass('shown');tr.next().addClass('row-details');});}
+		var initCondensedTable=function(){var table=$('#condensedTable');var settings={"sDom":"t","destroy":true,"paging":false,"scrollCollapse":true};table.dataTable(settings);}
+		initBasicTable();initStripedTable();initDetailedViewTable();initCondensedTable();})(window.jQuery);
+		
+		
 		Dropzone.autoDiscover = false;
 		Dropzone.options.mydropzone = false;
 		$(document)

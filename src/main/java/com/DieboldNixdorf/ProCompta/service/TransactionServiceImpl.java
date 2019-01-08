@@ -65,4 +65,10 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionDao.listTransactionAfterFiltring(trx);
 	}
 
+	@Override
+	public void updateTransaction(Transaction transaction) {
+		transactionDao.updateTransaction(transaction);
+		
+	}
+
 }

@@ -38,10 +38,13 @@ public class FileUploadController {
 
 	@Autowired
 	private FileUploadService uploadService;
+	
 	@Autowired
 	private BranchService branchService;
+	
 	@Autowired
 	private JounalService jounalService;
+	
 	@Autowired
 	private HostFileService hostFileService;
 	
@@ -128,6 +131,9 @@ public class FileUploadController {
 				 String fileNameWithOutExt = FilenameUtils.removeExtension(multipartFile.getOriginalFilename());
 	             
 	             boolean ExisteHostFile = hostFileService.HostFileExiste(fileNameWithOutExt); 
+	           
+	             
+	             
 	             int ExistingHostFile= 0;
 	              
 				 

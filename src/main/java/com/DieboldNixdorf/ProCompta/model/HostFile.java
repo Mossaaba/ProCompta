@@ -1,12 +1,16 @@
 package com.DieboldNixdorf.ProCompta.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,11 +23,25 @@ public class HostFile {
         private Integer idHostFile;	
 	    
 	    @Column(name="name_host_file")
-	    private String NameHostFile;
+	    private String nameHostFile;
 	     
 	    @Column(name="date_uploaded")
 	    private Date DateUplaoded;
 	     
+
+	    @OneToMany(mappedBy = "hostFile", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
+				CascadeType.REFRESH })
+		private List<TransactionHost> transactionsHost;
+	    
+	    
+	    
+		public String getNameHostFile() {
+			return nameHostFile;
+		}
+
+		public void setNameHostFile(String nameHostFile) {
+			this.nameHostFile = nameHostFile;
+		}
 
 		public Integer getIdHostFile() 
 		{
@@ -34,13 +52,7 @@ public class HostFile {
 			this.idHostFile = idHostFile;
 		}
 
-		public String getNameHostFile() {
-			return NameHostFile;
-		}
-
-		public void setNameHostFile(String nameHostFile) {
-			NameHostFile = nameHostFile;
-		}
+		 
 
 		public Date getDateUplaoded() {
 			return DateUplaoded;
@@ -51,7 +63,14 @@ public class HostFile {
 		}
 	    
 	    
-	    
+		public void addTransactionHost(TransactionHost transactionHost) 
+		{
+
+			if (transactionsHost == null) {
+				transactionsHost = new ArrayList<>();
+			}
+			transactionsHost.add(transactionHost);
+		}
 	    
 	    
 	

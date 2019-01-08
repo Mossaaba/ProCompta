@@ -24,8 +24,7 @@
 	href="<spring:url value="/resources/assets/plugins/datatables-responsive/css/datatables.responsive.css"/>"
 	type="text/css" />
 
-<style>
-</style>
+ 
 </head>
 
 
@@ -734,7 +733,7 @@
 
 																	<c:choose>
 																		<c:when
-																			test="${transaction.transactionHostAmount > 0}">
+																			test="${transaction.transactionHostAmount ne '0.00' && !empty transaction.transactionHostAmount}">
 																			<td
 																				class="text-primary font-montserrat v-align-middle details-control">
 																				${transaction.transactionHostAmount}

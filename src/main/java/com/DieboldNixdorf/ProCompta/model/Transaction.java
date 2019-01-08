@@ -70,7 +70,7 @@ public class Transaction  {
 	private Time transactionHostTime;
 	
 	@Column(name = "transaction_host_amount")
-	private Double transactionHostAmount;
+	private String transactionHostAmount;
 	
 	@Column(name = "transaction_host_atm")
 	private String transactionHostATM;
@@ -101,6 +101,9 @@ public class Transaction  {
 	
 	@Column(name="transaction_host_card")
 	private String transactionHostCard;
+	
+	@Column(name="flag_trx_host")
+	private String flagTransactionHost;
 	
 	@Transient
 	private String transactionCardPartOne;  
@@ -139,10 +142,11 @@ public class Transaction  {
 		this.startingTime = startingTime;
 	}
  
-	public Double getTransactionHostAmount() {
+	 
+	public String getTransactionHostAmount() {
 		return transactionHostAmount;
 	}
-	public void setTransactionHostAmount(Double transactionHostAmount) {
+	public void setTransactionHostAmount(String transactionHostAmount) {
 		this.transactionHostAmount = transactionHostAmount;
 	}
 	public String getErrorTransaction() {
@@ -369,6 +373,12 @@ public class Transaction  {
 	}
 	public void setTransactionCashStatus(String transactionCashStatus) {
 		this.transactionCashStatus = transactionCashStatus;
+	}
+	public String getFlagTransactionHost() {
+		return flagTransactionHost;
+	}
+	public void setFlagTransactionHost(String flagTransactionHost) {
+		this.flagTransactionHost = flagTransactionHost;
 	}
  
 	

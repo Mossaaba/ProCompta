@@ -66,7 +66,12 @@ public class TransactionDaoImpl implements TransactionDao {
 		currentSession.saveOrUpdate(transaction);
 
 	}
-
+	@Override
+	public void updateTransaction(Transaction transaction) {
+	 
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.update(transaction);
+	}
 	@Override
 	public void deleteTransaction(Transaction transaction) {
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -276,5 +281,7 @@ public class TransactionDaoImpl implements TransactionDao {
 		List<Transaction> ListTransactionAfterFiltring = requet.getResultList();
 		return ListTransactionAfterFiltring;
 	}
+
+	
 
 }
