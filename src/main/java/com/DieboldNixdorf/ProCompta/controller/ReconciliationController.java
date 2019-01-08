@@ -102,6 +102,12 @@ public class ReconciliationController {
 		TransactionHost trxHost  = transactionHostService.findById(taransactionHostId);
 		return trxHost;
 	}
+	@GetMapping("/getreconciliation-{reconciliationId}")
+	public @ResponseBody Reconciliation getreconciliation(@PathVariable("reconciliationId") int reconciliationId) 
+	{
+		Reconciliation reconciliation  = reconciliationservice.findReconciliationById(reconciliationId);
+		return reconciliation;
+	}
 	
 	
 }
