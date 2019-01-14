@@ -21,7 +21,7 @@ public class HostFile {
 	    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	    @Column(name="id_host_file")
         private Integer idHostFile;	
-	    
+	                  
 	    @Column(name="name_host_file")
 	    private String nameHostFile;
 	     

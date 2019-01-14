@@ -392,7 +392,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 			ToolsToUse toolsProCompta = new ToolsToUse();
 			
 			try {
-				jrn.setDateJournal(toolsProCompta.ConvertStringToDate(JournalName));
+				jrn.setDateJournal((Date)toolsProCompta.ConvertStringToDate(JournalName));
 			} catch (ParseException e2) {
 				e2.printStackTrace();
 			}
@@ -961,7 +961,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 				   newJournalNCRname = MathcerJournalNCR.group(1)+"_"+MathcerJournalNCR.group(2) ; 
 				   
 				   try {
-						jrn.setDateJournal(toolsProCompta.ConvertStringToDate(MathcerJournalNCR.group(2)));
+						jrn.setDateJournal((Date)toolsProCompta.ConvertStringToDate(MathcerJournalNCR.group(2)));
 					} catch (ParseException e2) {
 						e2.printStackTrace();
 					}

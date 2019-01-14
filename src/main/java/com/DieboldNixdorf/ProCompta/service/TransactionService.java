@@ -3,7 +3,7 @@ package com.DieboldNixdorf.ProCompta.service;
 import java.util.List;
 
 import com.DieboldNixdorf.ProCompta.model.Transaction;
-import com.DieboldNixdorf.ProCompta.model.TransactionHost;
+ 
 
 public interface TransactionService {
 

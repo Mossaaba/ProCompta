@@ -1,7 +1,6 @@
 package com.DieboldNixdorf.ProCompta.controller;
 
 import java.text.ParseException;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

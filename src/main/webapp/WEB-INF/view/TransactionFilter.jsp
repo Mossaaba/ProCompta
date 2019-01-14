@@ -131,7 +131,7 @@
 															class="form-group form-group-default form-group-default-select2 ">
 															<label class="">Vendor</label>
 															<form:select path="transactionVendor"
-																cssClass="full-width" data-placeholder="Select Country"
+																cssClass="full-width" data-placeholder="Select a vendor "
 																data-init-plugin="select2" id="vendor">
 																<option value="Diebold-nixdorf">Diebold-nixdorf</option>
 																<option value="NCR">NCR</option>

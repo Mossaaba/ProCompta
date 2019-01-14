@@ -23,5 +23,8 @@ public interface ReconciliationService {
 	List<Transaction> listTransactionJrnNotReconcilied();
 	List<TransactionHost> listTransactionHostNotReconcilied();
 	List<Object[]> listReconciliationsTransactionAndTransactionHost();
+	Reconciliation findReconciliationByTransactionId(int idTransaction);
+	Reconciliation findReconciliationByTransactionHostId(int idTransactionHost);
+	List<Object[]> listReconciliationsTransactionAndTransactionHostFilter(Reconciliation reconciliation);
 
 }

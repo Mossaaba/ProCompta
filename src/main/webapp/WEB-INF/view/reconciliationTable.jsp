@@ -7,6 +7,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+	<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -75,6 +76,13 @@ padding :10px;
 				                               <div class="row">
 
                                                 <div class="col-md-12">
+                                                <div class="pull-left">
+													<div class="input-group transparent">
+													 
+													
+														 <button class="btn btn-primary " id="FilterBtn"><i class="fa fa-filter" aria-hidden="true"></i> Filter </button> 
+												  </div>
+													</div>
 													<div class="pull-right">
 													<div class="input-group transparent">
 													<div class="input-group-prepend">
@@ -83,7 +91,7 @@ padding :10px;
 														</div>
 													
 														<input type="text" id="search-table"
-															class="form-control pull-right fs-12 input-lg" placeholder="transaction journal">
+															class="form-control pull-right fs-12 input-lg " placeholder="Search a transaction">
 															</div>
 													</div>
 													
@@ -105,76 +113,113 @@ padding :10px;
 													 
 													 
 											   </div>
+											   <br>
+											   	   <br>
+													 
+													 <div id="FilterFormDive"> 
+													 <spring:url value="/reconciliationTable" var="formUrlReconciliation" />
+													 
+													<form:form action="${formUrlReconciliation}" method="POST" modelAttribute="reconciliation" id="reconciliationFilterForm">
+													 
+												<div class="row"> 
+													 <div class="col-md-3 form-group-attached">
+													 
+													 <div class="form-group form-group-default input-group col-md-10">
+													                <div class="input-group-append ">
+																	<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+																	</div>
+																	<div class="form-input-group">
+																	<label>Date from</label>
+																	<form:input path="startingDateReconciliation" id="startingDateReconciliation" 
+																	type="text" cssClass="form-control" placeholder="Pick a starting date"  
+																	autocomplete="off"/>
+																	</div>
+																	
+																	</div>
+																	 
+																	
+															 
+															</div>
+
+                                                  <div class="col-md-3 form-group-attached">
+															         
+															         
+															         <div class="form-group form-group-default input-group col-md-10">
+																	<div class="form-input-group">
+																	<label>Date to</label>
+																	<form:input path="finishingDateReconciliation" id="finishingDateReconciliation" 
+																	type="text" cssClass="form-control" placeholder="Pick a finshing date"  
+																	autocomplete="off"/>
+																	</div>
+																	<div class="input-group-append ">
+																	<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+																	</div>
+																	</div>
+															          
+													</div>
+													<div class="col-md-3 form-group-attached">
+                                                                             <div
+																					class="form-group form-group-default form-group-default-select2 required">
+																					<label class=""><i class="fa fa-file"></i> Type of file</label>
+ 
+																					<form:select path="indicatorHostorJrn" 
+																						cssClass="full-width"
+																						data-placeholder="Select Country"
+																						data-init-plugin="select2"  id="indicatorHostorJrn">
+
+																						<option value="0">Only in journal</option>
+																						<option value="1">Only in Host file</option>
+																					</form:select>
+ 
+																				</div>													</div>
+													<div class="col-md-3 form-group-attached">
+															                      <div
+																					class="form-group form-group-default form-group-default-select2 required">
+																					<label class=""> <i class="fa fa-link"></i> Type of reconciliation</label>
+ 
+																					<form:select path="typeReconciliation"
+																						cssClass="full-width"
+																						data-placeholder="Select Country"
+																						data-init-plugin="select2" id="typeReconciliation">
+
+																						<option value="Automatique">Automatique</option>
+																						<option value="Manuel">Manuel</option>
+																					</form:select>
+ 
+																				</div>
+													</div>
 													 
 													 
-												<div class="row">
-												 
-                                                <div class="col-md-12">
-													 
-													 
-													 
-													<div >
-									              <div class="btn-toolbar flex-wrap" role="toolbar">
-										<div class="btn-group sm-m-t-10">
-											<button type="button" class="btn btn-default">
-											<span
-													class="fs-11 font-montserrat text-uppercase">LAST Parse</span>
-												<i class="fa fa-upload"></i>
-											</button>
-											<button type="button" class="btn btn-default ">
-											<span
-													class="fs-11 font-montserrat text-uppercase">LAST DAY</span>
-												<i class="fa fa-history"></i>
-											</button>
-											<button type="button" class="btn btn-default">
-											<span
-													class="fs-11 font-montserrat text-uppercase">LAST WEEK</span>
-												<i class="fa fa-calendar"></i>
-											</button>
-											<button type="button" class="btn btn-default">
-											<span
-													class="fs-11 font-montserrat text-uppercase">LAST MONTH</span>
-												<i class="fa fa-calendar-o"> </i>
-											</button>
-										</div>
-										 
-										 
-									</div>
+											 
+									              
 									<br>
-									<div class="btn-toolbar flex-wrap" role="toolbar">
-										<div class="btn-group sm-m-t-10">
-											<button type="button" class="btn btn-default">
-											<span
-													class="fs-11 font-montserrat text-uppercase">Manuel</span>
-												<i class="fa fa-wrench"></i>
-											</button>
-											<button type="button" class="btn btn-default  ">
-											<span
-													class="fs-11 font-montserrat text-uppercase">WithDrwael</span>
-												<i class="fa fa-money"></i>
-											</button>
-											<button type="button" class="btn btn-default">
-											<span
-													class="fs-11 font-montserrat text-uppercase">Only on Journal</span>
-												<i class="fa fa-file"></i>
-											</button>
-											<button type="button" class="btn btn-default">
-											<span
-													class="fs-11 font-montserrat text-uppercase">Only on Host</span>
-												<i class="fa fa-server"> </i>
-											</button>
-										</div>
-										 
-										 
-									</div>
+									
 
 								</div>
-													 
+									   <br>
+									   	   <br>
+									   	   
+								
+								           <div class="row b-grey no-margin ">
+													<div class="col-md-12 text-center">
+ 
+														<button class="btn btn-sm btn-primary bold" type="submit" id="subFormReconciliation">
+															<i class="fa fa-search fa-2x"></i> SEARCH
+														</button>
+														<button class="btn btn-sm btn-danger bold" id="clearReconciliationForm" >
+															<i class="fa fa-eraser fa-2x"></i> CLEAR
+														</button>
+ 
+													</div>
+												</div>
+												<hr>
+ 
+ 
+ 
+										</form:form>			 
 												 
-													 
-												</div>
+											</div>		 
 												
-												</div>
 												
 
 					<div class="card card-transparent">
@@ -205,45 +250,45 @@ padding :10px;
 										
 										
 										
-										<tr >
+										<tr class="text-center">
 											
-											<th   class=" text-primary  ">
+											<th   class="v-align-middle text-primary  ">
 											<i class="fa fa-calendar-check-o" aria-hidden="true"></i><br>DATE</th>
 											
-											<th   class=" text-primary  ">
+											<th   class="v-align-middle text-primary  ">
 											<i class="fa fa-credit-card-alt" aria-hidden="true"></i><br>CARD</th>
 											
-											<th   class="  text-primary  " >
+											<th   class="v-align-middle  text-primary  " >
 											<i class="fa fa-money" aria-hidden="true"></i><br>AMOUNT</th>
 											
-											<th   class=" text-primary b-r b-dashed ">
+											<th   class="v-align-middle text-primary b-r b-dashed ">
 											<i class="fa fa-sort-numeric-asc" aria-hidden="true"></i><br>AUTH</th>
 											
 											  
 											 
-											<th   class="  text-complete  ">
+											<th   class="v-align-middle  text-complete  ">
 											<i class="fa fa-calendar-check-o" aria-hidden="true"></i><br>DATE</th>
 											
-											<th  class="  text-complete  ">
+											<th  class="v-align-middle  text-complete  ">
 											<i class="fa fa-credit-card-alt" aria-hidden="true"></i><br>CARD</th>
 											
 											<th   class=" text-complete  " >
 											<i class="fa fa-money" aria-hidden="true"></i><br>AMOUNT</th>
 											
-											<th  class="  text-complete  b-r b-dashed ">
+											<th  class="v-align-middle  text-complete  b-r b-dashed ">
 											<i class="fa fa-sort-numeric-asc" aria-hidden="true"></i><br>AUTH</th>
 											
 											 
 											 
-											<th  class="  text-success  ">
+											<th  class="v-align-middle  text-success  ">
 											<i class="fa fa-calendar-check-o" aria-hidden="true"></i><br>DATE</th>
 											
-											<th   class="  text-success  " >
+											<th   class="v-align-middle  text-success  " >
 											<i class="fa fa-wrench" aria-hidden="true"></i> <br> TYPE</th>
 											 
 											  
 											
-											<th   class=" text-success  " >
+											<th   class="v-align-middle text-success  " >
 											<i class="fa fa-search-plus  " aria-hidden="true"></i></th> 
 										    </tr>
 										
@@ -260,44 +305,210 @@ padding :10px;
 																
 										<tr class="">
 											 
-											<td class="    text-danger bold">
-												<p> ${trxPlusTrxHost[1].transactionDateHost } ${trxPlusTrxHost[1].transactionHostTime } </p>
+											<td class="v-align-middle text-danger bold">
+											
+											 <c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[1].transactionDateHost}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa-calendar-check-o fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>      
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[1].transactionDateHost}">
+										   
+                                             <p> ${trxPlusTrxHost[1].transactionDateHost } ${trxPlusTrxHost[1].transactionHostTime } </p>
+										         
+										      </c:when>
+										   </c:choose>
+											
 											</td>
-											<td class="   text-complete bold">
-												<p> ${trxPlusTrxHost[1].cardNumber}  </p>
+											
+											
+											
+											<td class="v-align-middle    text-complete bold">
+											
+											<c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[1].cardNumber}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa-credit-card-alt fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>
+										        
+										         
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[1].cardNumber}">
+										   
+                                            <p> ${trxPlusTrxHost[1].cardNumber}  </p>
+										         
+										      </c:when>
+										      
+										       
+										   </c:choose>
+										   
+										   
+												
 											</td>
 											<td class="v-align-middle  ">
-												<p> ${trxPlusTrxHost[1].transactionHostAmount} </p>
+											
+											<c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[1].transactionHostAmount}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa fa-money fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>
+										        
+										         
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[1].transactionHostAmount}">
+										   
+                                            <p> ${trxPlusTrxHost[1].transactionHostAmount} </p>
+										         
+										      </c:when>
+										      
+										       
+										   </c:choose>
+												
 											</td>
 											<td class="v-align-middle text-primary b-r b-dashed ">
-												<p> ${trxPlusTrxHost[1].UTRNNO} </p>
+											<c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[1].UTRNNO}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa-sort-numeric-asc fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>
+										        
+										         
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[1].UTRNNO}">
+										   
+                                           <p> ${trxPlusTrxHost[1].UTRNNO} </p>
+										         
+										      </c:when>
+										      
+										       
+										   </c:choose>
+												
 											</td>
 											 
 										 
 											<td class="v-align-middle  text-danger bold">
-												<p>  ${trxPlusTrxHost[2].transactionHostDate}  ${trxPlusTrxHost[2].transactionHostTime}</p>
+											
+											 <c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[2].transactionHostDate}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa-calendar-check-o fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>
+										        
+										         
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[2].transactionHostDate}">
+										   
+                                               <p>  ${trxPlusTrxHost[2].transactionHostDate}  ${trxPlusTrxHost[2].transactionHostTime}</p>
+										         
+										      </c:when>
+										      
+										       
+										   </c:choose>
+										   
+										   
+												 
 											</td>
+											
+											
+											
 											<td class="v-align-middle text-complete bold">
-												<p> ${trxPlusTrxHost[2].transactionHostCradNumber}</p>
+											
+											<c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[2].transactionHostCradNumber}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa-credit-card-alt fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>
+										        
+										         
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[2].transactionHostCradNumber}">
+										   
+                                          <p> ${trxPlusTrxHost[2].transactionHostCradNumber}</p>
+										         
+										      </c:when>
+										      
+										       
+										   </c:choose>
+												
 											</td>
 											<td class="v-align-middle  ">
-												<p id="roundAmount"> ${trxPlusTrxHost[2].transactionHostAmount} </p>
+											<c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[2].transactionHostAmount}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa-money fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>
+										        
+										         
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[2].transactionHostAmount}">
+										   
+                                         <p> ${trxPlusTrxHost[2].transactionHostAmount} </p>
+										         
+										      </c:when>
+										      
+										       
+										   </c:choose>
+											
+                                            
+                                              
+                                            
+                                              
+                                              
+												 
 											</td>
 											<td class="v-align-middle text-complete b-r b-dashed ">
-												<p id="roundAuthorization"> ${trxPlusTrxHost[2].transactionHostAuthorization} </p>
+											<c:choose>
+         
+										      <c:when test = "${empty  trxPlusTrxHost[2].transactionHostAuthorization}">
+										         <span class="fa-stack fa-lg">
+												  <i class="fa fa-sort-numeric-asc fa-stack-1x"></i>
+												  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+												 </span>   
+										      </c:when>
+										      
+										      <c:when test = "${!empty trxPlusTrxHost[2].transactionHostAuthorization}">
+										   
+                                            <p id="roundAuthorization"> ${trxPlusTrxHost[2].transactionHostAuthorization} </p>
+										         
+										      </c:when>
+										      
+										       
+										   </c:choose>
+												
 											</td>
 											 
 											 
 											<td class="v-align-middle ">
-												<p> ${trxPlusTrxHost[0].dateReconciliation} </p>
+ 
+										      <c:set var = "dateComeFromServer" value = "${trxPlusTrxHost[0].dateReconciliation}"/>
+                                              <c:set var = "dateToShow" value = "${fn:substring(dateComeFromServer, 0, 10)}" />
+                                               <p class="text-danger"><c:out value = "${dateToShow}" /> ${trxPlusTrxHost[0].timeReconciliation} </p> 
 											</td>
 											<td class="v-align-middle  ">
 												<p> ${trxPlusTrxHost[0].typeReconciliation}</p>
 											</td>
-											
-											 
-											
-											
 											<td class="v-align-middle  ">
 												<p>        <button class="btn btn-success btn-xs" data-toggle="modal"
 																  data-target="#modalFillIn"
@@ -306,19 +517,12 @@ padding :10px;
 																  data-id1="${trxPlusTrxHost[2].idTransactionHost}"  > 
 
 																	<i class="fa fa-info-circle " aria-hidden="true"></i>
-																</button>
-																
+																</button>		
 												</p>
 											</td>
-											 
-											 
-											 
-											 
 										</tr>
 										 
 										 </c:forEach>
-										 
-										 
 									</tbody>
 								</table>
 								<br>
@@ -327,23 +531,14 @@ padding :10px;
 						</div>
 						<br>
 					</div>
-
-
-
-				</div>
-
-
-
-
-				
+				</div>	
 			</div>	
 			<jsp:include page="../view/fragments/footer.jsp"></jsp:include> 
 			</div>
 			
-			</div>
-			
-			   
-			</div>
+		</div>
+												
+												</div>
  
 	<div class="modal  fade slide-up no-margin no-padding" id="modalFillIn" tabindex="-1"
 		role="dialog" aria-hidden="true">
@@ -689,6 +884,130 @@ padding :10px;
 	<script src="<spring:url value="/resources/pages/js/Datepair.js"/>"></script>
  
 	<script type="text/javascript">
+	  
+	
+	$("#clearReconciliationForm").click(function() {
+	      $(this).closest('form').find("input[type=text], textarea").val("");
+	      
+	      $("#typeReconciliation").val('').trigger('change');
+	      $("#indicatorHostorJrn").val('').trigger('change');
+	      
+	      return false;
+	    
+	     
+	})
+	
+	 
+	$('#FilterFormDive').hide();
+	
+	
+	$("#FilterBtn").click(function() {
+		$('#FilterFormDive').toggle();
+	});
+ 
+	
+	
+	
+	
+	
+	
+	var startDate = new Date('01/01/2012');
+	var FromEndDate = new Date();
+	var ToEndDate = new Date();
+	ToEndDate.setDate(ToEndDate.getDate()+365);
+
+	 
+	$('#startingDateReconciliation').datepicker({
+
+	    weekStart: 1,
+	    format : 'yyyy-mm-dd',
+	    startDate: '01/01/2000',
+	    endDate: FromEndDate, 
+	    autoclose: true
+	}).on('changeDate', function(selected)
+			{
+	        startDate = new Date(selected.date.valueOf());
+	        startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+	        $('#finishingDateReconciliation').datepicker('setStartDate', startDate);
+	    });
+
+
+	$('#finishingDateReconciliation').datepicker({
+
+	        weekStart: 1,
+	        format : 'yyyy-mm-dd',
+	        startDate: startDate,
+	        endDate: ToEndDate,
+	        autoclose: true
+	    })
+	    .on('changeDate', function(selected){
+	        FromEndDate = new Date(selected.date.valueOf());
+	        FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
+	        $('#startingDateReconciliation').datepicker('setEndDate', FromEndDate);
+	    });
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$("#typeReconciliation")
+	.select2(
+			{
+				dropdownCssClass : "font-montserrat blod text-primary bold fs-12",
+				allowClear : true,
+				placeholder : {
+					id : "-1",
+					text : "Please select a type of reconciliation",
+					selected : 'selected'
+				},
+				data : [ {
+					id : -1,
+					text : '',
+					selected : 'selected',
+					search : '',
+					hidden : true
+				} ]
+
+			});
+	
+	
+	$("#indicatorHostorJrn")
+	.select2(
+			{
+				dropdownCssClass : "font-montserrat blod text-primary bold fs-12",
+				allowClear : true,
+				placeholder : {
+					id : "-1",
+					text : "Please select type of file",
+					selected : 'selected'
+				},
+				data : [ {
+					id : -1,
+					text : '',
+					selected : 'selected',
+					search : '',
+					hidden : true
+				} ]
+
+			});
+	 
+	
+	
 	
 	
 	
@@ -750,7 +1069,7 @@ padding :10px;
 		         
 				$
 				.ajax({
-					url : '${pageContext.request.contextPath}/gettransaction-'
+					url : '${pageContext.request.contextPath}/gettransactionJrn-'
 							+ idTransactionAjax + '',
 					method : 'GET',
 					contentType : "application/json",

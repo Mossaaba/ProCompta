@@ -1,5 +1,6 @@
 package com.DieboldNixdorf.ProCompta.model;
 
+ 
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "reconciliation")
@@ -41,9 +45,22 @@ public class Reconciliation {
 	
 	@Column(name = "date_reconciliation")
 	private Date dateReconciliation;
+	
+	
+	@Column(name="time_reconciliation")
+	private String timeReconciliation;
 
 	@Column(name = "comment")
+	@ColumnDefault(" ")
 	private String comment;
+	
+	
+	@Transient
+	private String startingDateReconciliation;
+	@Transient
+	private String finishingDateReconciliation;
+	@Transient
+	private String indicatorHostorJrn;
 	
 	
 	
@@ -126,7 +143,49 @@ public class Reconciliation {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
+
+
+	public String getTimeReconciliation() {
+		return timeReconciliation;
+	}
+
+
+	public void setTimeReconciliation(String timeReconciliation) {
+		this.timeReconciliation = timeReconciliation;
+	}
+
+
+	public String getStartingDateReconciliation() {
+		return startingDateReconciliation;
+	}
+
+
+	public void setStartingDateReconciliation(String startingDateReconciliation) {
+		this.startingDateReconciliation = startingDateReconciliation;
+	}
+
+
+	public String getFinishingDateReconciliation() {
+		return finishingDateReconciliation;
+	}
+
+
+	public void setFinishingDateReconciliation(String finishingDateReconciliation) {
+		this.finishingDateReconciliation = finishingDateReconciliation;
+	}
+
+
+	public String getIndicatorHostorJrn() {
+		return indicatorHostorJrn;
+	}
+
+
+	public void setIndicatorHostorJrn(String indicatorHostorJrn) {
+		this.indicatorHostorJrn = indicatorHostorJrn;
+	}
+
+
+ 
 	
 	
 }

@@ -1,7 +1,11 @@
 package com.DieboldNixdorf.ProCompta.dao;
 
+import java.text.SimpleDateFormat;
+ 
 import java.util.Date;
 import java.util.List;
+
+ 
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -11,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.DieboldNixdorf.ProCompta.model.Reconciliation;
-import com.DieboldNixdorf.ProCompta.model.Replenishment;
+
 import com.DieboldNixdorf.ProCompta.model.Transaction;
 import com.DieboldNixdorf.ProCompta.model.TransactionHost;
 
@@ -35,6 +39,7 @@ public class ReconciliationDaoImpl extends AbstractDao<Integer, Reconciliation> 
 		return getByKey(idReconciliation);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Reconciliation> findAllReconciliations() {
 		Criteria crit = createEntityCriteria();
@@ -59,7 +64,7 @@ public class ReconciliationDaoImpl extends AbstractDao<Integer, Reconciliation> 
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		@SuppressWarnings("deprecation")
+		@SuppressWarnings({ "deprecation", "rawtypes" })
 		Query query = currentSession.createSQLQuery(""
 				+ "  select t.idtransaction,th.idtransaction_host, t.card_number,t.utrnno,t.transaction_host_amount,t.transaction_host_atm, "
 				+ "  th.transaction_card_number,th.transaction_authorization,th.transaction_amount,th.transaction_branch_acquire   "
@@ -71,11 +76,13 @@ public class ReconciliationDaoImpl extends AbstractDao<Integer, Reconciliation> 
 				+ "  and SUBSTRING ( th.transaction_card_number ,13 , 4 )=SUBSTRING ( t.card_number ,13 , 4 )  "
 				+ "  where ( flag_trx_host is null  and flag_trx is null    ) ");
 
+		@SuppressWarnings("unchecked")
 		List<Object[]> listTransaction = query.list();
 
 		Reconciliation reconcilaition = new Reconciliation();
 
 		Date dateToday = new Date();
+		String timeNow = new  SimpleDateFormat("HH:mm:SS").format(new Date());
 
 		for (Object[] row : listTransaction) {
 
@@ -89,8 +96,9 @@ public class ReconciliationDaoImpl extends AbstractDao<Integer, Reconciliation> 
 			reconcilaition.setIdTransactionHost(Integer.parseInt(row[1].toString()));
 			reconcilaition.setHostFile((trxHost.getHostFile().getIdHostFile()).toString());
 			reconcilaition.setDateReconciliation(dateToday);
-
 			reconcilaition.setTypeReconciliation("Manuel");
+			reconcilaition.setTimeReconciliation(timeNow);
+			reconcilaition.setComment("Empty");
 
 			trxDao.updateTransaction(trx);
 			trxHostDao.updateTransactionHost(trxHost);
@@ -122,16 +130,104 @@ public class ReconciliationDaoImpl extends AbstractDao<Integer, Reconciliation> 
 	}
 
 	@Override
-	public List<Object[]> listReconciliationsTransactionAndTransactionHost() {
-		Session currentSession = sessionFactory.getCurrentSession();
-		 
+	public List<Object[]> listReconciliationsTransactionAndTransactionHost( ) {
 		 
 		List<Object[]> ReconciliationsTransactionAndTransactionHost;
 	    Session session = sessionFactory.getCurrentSession();
-	    Query<Object[]> query = session.createQuery("from Reconciliation r left JOIN Transaction trx on trx.idtransaction = r.idTransaction"
+	   
+
+		 
+	    
+	    
+	    @SuppressWarnings("unchecked")
+		Query<Object[]> query = session.createQuery(" from Reconciliation r left JOIN Transaction trx on trx.idtransaction = r.idTransaction"
 	    		+ "                                                        left JOIN TransactionHost trxh on trxh.idTransactionHost = r.idTransactionHost ");
-	    ReconciliationsTransactionAndTransactionHost = query.list();
+	   
+		
+		
+		
+		ReconciliationsTransactionAndTransactionHost = query.list();
 	    return ReconciliationsTransactionAndTransactionHost;
+	}
+	 
+	@Override
+	public Reconciliation findReconciliationByTransactionId(int idTransaction) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		@SuppressWarnings("rawtypes")
+		Query theQuery = currentSession.createQuery("from Reconciliation where idTransaction =:theTransactiontId", Reconciliation.class);
+		theQuery.setParameter("theTransactiontId", idTransaction);
+		Reconciliation reconciliation = (Reconciliation) theQuery.getSingleResult();
+		return reconciliation;
+	}
+
+	@Override
+	public Reconciliation findReconciliationByTransactionHostId(int idTransactionHost) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		@SuppressWarnings("rawtypes")
+		Query theQuery = currentSession.createQuery("from Reconciliation where idTransactionHost =:theTransactionHosttId", Reconciliation.class);
+		theQuery.setParameter("theTransactionHosttId", idTransactionHost);
+		Reconciliation reconciliation = (Reconciliation) theQuery.getSingleResult();
+		return reconciliation;
+	}
+
+	@Override
+	public List<Object[]> listReconciliationsTransactionAndTransactionHostFilter(Reconciliation reconciliation) {
+		 
+		
+		List<Object[]> ReconciliationsTransactionAndTransactionHost;
+	    Session session = sessionFactory.getCurrentSession();
+		
+	    StringBuilder sb = new StringBuilder();
+		
+		sb.append( " from Reconciliation r left JOIN Transaction trx on trx.idtransaction = r.idTransaction left "
+				+ " JOIN TransactionHost trxh on trxh.idTransactionHost = r.idTransactionHost  where "); 
+		
+		
+		if (!reconciliation.getStartingDateReconciliation().equalsIgnoreCase("") && !reconciliation.getFinishingDateReconciliation().equalsIgnoreCase("")) 
+		{
+			
+			sb.append(" ( r.dateReconciliation >= '"+ reconciliation.getStartingDateReconciliation() +"' and  r.dateReconciliation  <= '"+reconciliation.getFinishingDateReconciliation()+"' ) and ");
+			
+			
+		}
+		
+		if (!reconciliation.getTypeReconciliation().equalsIgnoreCase("-1"))
+			
+		{
+			
+			sb.append(" ( r.typeReconciliation = '"+reconciliation.getTypeReconciliation()+"' ) and ");
+			
+			
+		}
+		
+		
+        if (!reconciliation.getIndicatorHostorJrn().equalsIgnoreCase("-1"))
+			
+		{
+			if (reconciliation.getIndicatorHostorJrn().equalsIgnoreCase("1"))
+			{
+			sb.append(" ( r.idTransaction  = '0' ) and ");
+			}
+			else 
+			{
+				
+		    sb.append(" ( r.idTransactionHost  = '0' ) and ");
+				
+			}
+			
+			
+		}
+        
+        sb.append(" ( 1=1 ) ");
+        
+        @SuppressWarnings("unchecked")
+		Query<Object[]> query = session.createQuery(sb.toString());
+        ReconciliationsTransactionAndTransactionHost = query.list();
+	    return ReconciliationsTransactionAndTransactionHost;
+        
+        
+		
+		 
 	}
 
 }

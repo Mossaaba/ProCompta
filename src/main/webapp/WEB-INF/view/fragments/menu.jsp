@@ -180,24 +180,31 @@
                
             
            <li>
-			<a href="javascript:;" ><span class="  font-montserrat no-margin text-uppercase fs-12">
+			<a href="javascript:;" ><span class="  font-montserrat no-margin text-uppercase ">
 			Reconciliation </span>
-			<span class=" arrow"></span></a>
+			 </a>
 			
-			<span class="icon-thumbnail"><i class="pg-layouts2" style="font-size :27px;"></i></span>
+			<span class="icon-thumbnail"><i class="fa fa-link" style="font-size :27px;"></i></span>
 			<ul class="sub-menu">
+			
+			 
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="/reconciliationTable"/>"   >  Reconcilied </a>
+			<a href="<spring:url value="pointage"/>" >  Peeforme </a>
+			<span class="icon-thumbnail" ><i class=" fa fa fa-play" style="font-size :27px;"></i></span>
+			</li> 
+			
+			<li class="title font-montserrat no-margin text-uppercase fs-10">
+			<a href="<spring:url value="/reconciliationTable"/>"   > Reconcilied </a>
 			<span class="icon-thumbnail" ><i class=" fa fa-check-square-o" style="font-size :27px;"></i></span>
 			</li> 
 			
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a  href="<spring:url value="reconciliationJournal"/>"  >  Journal </a>
+			<li class="title font-montserrat no-margin text-uppercase fs-10">
+			<a  href="<spring:url value="reconciliationJournal"/>"  > Only in Journal </a>
 			<span class="icon-thumbnail" ><i class=" fa fa-file-text-o" style="font-size :27px;"></i></span>
 			</li>   
 			  
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="/reconciliationHost"/>"  >  Host </a>
+			<li class="title font-montserrat no-margin text-uppercase fs-10">
+			<a href="<spring:url value="/reconciliationHost"/>"  >  Only in Host File </a>
 			<span class="icon-thumbnail" ><i class="fa fa-server" style="font-size :27px;"></i></span>
 
 			</li>

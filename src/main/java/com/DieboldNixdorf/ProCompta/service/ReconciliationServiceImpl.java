@@ -26,28 +26,19 @@ public class ReconciliationServiceImpl implements ReconciliationService {
 		return reconciliationDao.findReconciliationById(idReconciliation);
 	}
 
-	
-	 
 	@Override
 	public List<Reconciliation> findAllReconciliations() {
 		 
 		return reconciliationDao.findAllReconciliations();
 	}
-
-	
-	 
 	@Override
 	public void saveReconciliation(Reconciliation reconciliation) {
 		reconciliationDao.saveReconciliation(reconciliation);
 
 	}
-
-	
- 
 	@Override
 	public void deleteReconciliation(Reconciliation reconciliation) {
 		reconciliationDao.deleteReconciliation(reconciliation);
-
 	}
 
 	@Override
@@ -55,29 +46,40 @@ public class ReconciliationServiceImpl implements ReconciliationService {
 		 
 		return reconciliationDao.listReconciliationsAfterFiltring();
 	}
-
-
-
 	@Override
 	public List<Transaction> listTransactionJrnNotReconcilied() {
 		 
 		return reconciliationDao.listTransactionJrnNotReconcilied();
 	}
-
-
-
+	
 	@Override
 	public List<TransactionHost> listTransactionHostNotReconcilied() {
 		 
 		return reconciliationDao.listTransactionHostNotReconcilied();
 	}
 
-
-
 	@Override
 	public List<Object[]> listReconciliationsTransactionAndTransactionHost() {
 		 
 		return reconciliationDao.listReconciliationsTransactionAndTransactionHost();
+	}
+
+	@Override
+	public Reconciliation findReconciliationByTransactionId(int idTransaction) {
+	 
+		return reconciliationDao.findReconciliationByTransactionId(idTransaction);
+	}
+
+	@Override
+	public Reconciliation findReconciliationByTransactionHostId(int idTransactionHost) {
+		 
+		return reconciliationDao.findReconciliationByTransactionHostId(idTransactionHost);
+	}
+
+	@Override
+	public List<Object[]> listReconciliationsTransactionAndTransactionHostFilter(Reconciliation reconciliation) {
+		 
+		return reconciliationDao.listReconciliationsTransactionAndTransactionHostFilter(reconciliation);
 	}
 
 }

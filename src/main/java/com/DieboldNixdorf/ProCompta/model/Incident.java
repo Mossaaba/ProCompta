@@ -1,7 +1,8 @@
 package com.DieboldNixdorf.ProCompta.model;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
+ 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,8 +37,6 @@ public class Incident {
 
 	@Transient
 	private int idAtm;
-	
-	
 	@Transient  
 	private String startingDateFilterIncident;   
 	@Transient

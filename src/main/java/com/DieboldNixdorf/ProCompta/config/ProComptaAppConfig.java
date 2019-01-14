@@ -5,6 +5,8 @@ import java.beans.PropertyVetoException;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
+
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,6 +32,7 @@ import com.DieboldNixdorf.ProCompta.tools.RoleToUserProfileConverter;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
+ 
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.DieboldNixdorf.ProCompta")

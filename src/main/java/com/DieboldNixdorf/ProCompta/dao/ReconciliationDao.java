@@ -17,5 +17,9 @@ public interface ReconciliationDao {
 	List<Transaction> listTransactionJrnNotReconcilied();
 	List<TransactionHost> listTransactionHostNotReconcilied();
 	List<Object[]> listReconciliationsTransactionAndTransactionHost();
+	List<Object[]> listReconciliationsTransactionAndTransactionHostFilter(Reconciliation reconciliation);
+	Reconciliation findReconciliationByTransactionId(int idTransaction);
+	Reconciliation findReconciliationByTransactionHostId(int idTransactionHost);
+	
 	
 }

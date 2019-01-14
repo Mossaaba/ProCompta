@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -130,7 +129,7 @@ public class HostFileDaoImpl extends AbstractDao<Integer, HostFile> implements H
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		@SuppressWarnings("rawtypes")
-		Query theQuery = currentSession.createQuery("from HostFile where NameHostFile=:theNameOfTheHostFile",
+		Query theQuery = currentSession.createQuery("from HostFile where nameHostFile=:theNameOfTheHostFile",
 				HostFile.class);
 		theQuery.setParameter("theNameOfTheHostFile", NameHostFile);
 		if (theQuery.uniqueResult() != null) {
@@ -193,6 +192,7 @@ public class HostFileDaoImpl extends AbstractDao<Integer, HostFile> implements H
 		String line;
 		
 		
+		@SuppressWarnings("unused")
 		int cpt;
 		
 		try {
@@ -200,15 +200,17 @@ public class HostFileDaoImpl extends AbstractDao<Integer, HostFile> implements H
 			{
 				TransactionHost trxHost = new TransactionHost();
 				try {
-					trxHost.setTransactionHostDate((Date) toolsProCompta.ConvertStringToDate(line.substring(dateTransactionStart, dateTransactionEnd)));
+					trxHost.setTransactionHostDate((java.sql.Date) toolsProCompta.ConvertStringToDate(line.substring(dateTransactionStart, dateTransactionEnd)));
 					trxHost.setTransactionHostTime(toolsProCompta.ConevretStringToTimeFromTheHostFile(line.substring(timeTransactionStart, timeTransactionEnd))) ;
 					
 				    } catch (ParseException e) {
 					 e.printStackTrace();
 				    }
 				 
-					trxHost.setTransactionHostAmount(line.substring(amountTransactionStart,amountTransactionEnd));
-					trxHost.setTransactionHostAuthorization(line.substring(authorisationTransactionStart,authorisationTransactionEnd));
+				  
+				
+					trxHost.setTransactionHostAmount((line.substring(amountTransactionStart,amountTransactionEnd)).replaceAll("^0+", ""));
+					trxHost.setTransactionHostAuthorization((line.substring(authorisationTransactionStart,authorisationTransactionEnd)).replaceAll("^0+", ""));
 					trxHost.setTransactionHostType(Integer.parseInt(line.substring(typeTransactionStart, typeTransactionEnd)));
 				    trxHost.setTransactionBankAcquire(line.substring(bankAcquireBinStart, bankAcquireBinEnd));
 				    trxHost.setTransactionBranchAcquire(line.substring(branchAcquireStart, branchAcquireEnd));
