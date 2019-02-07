@@ -5,7 +5,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
@@ -14,15 +13,15 @@
 <title>ProCompta - DN - Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
 <link rel="apple-touch-icon"
-	href="<spring:url value="/resources/pages/ico/60.png"/>" />
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
 <link rel="apple-touch-icon"  
-    href="<spring:url value="/resources/pages/ico/76.png"/>" />
+    href="<spring:url value="/resources/pages/ico/logo.png"/>" />
 <link rel="apple-touch-icon"  
-	href="<spring:url value="/resources/pages/ico/120.png"/>" />
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
 <link rel="apple-touch-icon"  
-	href="<spring:url value="/resources/pages/ico/152.png"/>" />
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
 <link rel="icon"  
-	href="<spring:url value="/resources/pages/favicon.ico"/>" />
+	href="<spring:url value="/resources/pages/logo.png"/>" />
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
@@ -52,6 +51,8 @@
 <link class="main-stylesheet" rel="stylesheet"
 	href="<spring:url value="/resources/pages/css/themes/corporate.css"/>"
 	type="text/css" />
+	<link rel="stylesheet" type="text/css"
+	href="<spring:url value="/resources/pages/css/hover.css"/>" />
 
 
 </head>
@@ -74,13 +75,41 @@
 				</div>
 
 
-     <div class="login-container bg-white">
-		<div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+                             <div class="login-container bg-white">
+     
+     
+     
+     
+     	                        <div class="row p-l-50 m-l-20 p-r-50 m-r-20 p-t-20 m-t-10 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+								
+								<div class="col-md-12 text-center">
+								
+								<span class="hvr-pulse-grow">
+								
+								<img  src="<spring:url value="/resources/pages/ico/logo.png"/>"  width="50%"  >
+								</span>
+								
+								
+								
+								</div>
+								 
+								
+								</div>
+     
+     
+		                       <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-10   sm-p-l-15 sm-p-r-15 sm-p-t-40">
 		
-					<a href="<spring:url value="/home"/>"  >
-								             <span class="font-montserrat" style="font-size :50px;"> ProCompta</span>  </a>
+				                            	<a class="text-center"  >
+								             <span class="font-montserrat text-primary text-center" style="font-size :50px;"> ProCompta 
+								             
+								            
+								             
+								             </span>  
+								             
+								             
+								             </a>
 				      
-		                  <p class="p-t-35">Sign into your ProCompta account</p>
+		                  <br><br>
 		
 		                    <c:url var="loginUrl" value="/login" />
 		                
@@ -133,7 +162,10 @@
 									</div>
 									
 								<div class="col-md-6 d-flex align-items-center justify-content-end ">
-								<a href="#" class="text-primary small"> Help ? Contact Support</a>
+								<a class="mailto text-primary small " href="mailto:mousab.aidoud@diebldnixdorf.com">Help ? Contact Support</a>
+								
+								
+								 
 								</div>
 								
 								
@@ -142,6 +174,12 @@
 								<button class="btn btn-primary btn-cons m-t-10" type="submit" value="Log in"> <i class="fa fa-sign-in" ></i> Sign in</button>
 												
 								</form:form>
+								
+								
+								 
+							
+								
+								 
 		
 		                
 						 

@@ -1,7 +1,7 @@
 package com.DieboldNixdorf.ProCompta.model;
 
  
-import java.sql.Time;
+ 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="journal")
@@ -34,41 +35,45 @@ public class Journal {
 	    @Column(name="datejournal")
 	    private Date dateJournal;
 	   
-	    @Column(name="datemodifjournal")
-        private Time dateModifJournal;
-	    
-	    
-	    @Column(name="traitementjournal")
-	    private String handledJournal;
-	    
-	    
-	    @Column(name="lignejournal")
-	    private int ligneJournal;
+	    @Column(name="time_upload_journal")
+        private String timeUploadJournal;
 	     
-	    
 	     
 
-	    @ManyToOne( cascade = CascadeType.ALL)
+	    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
+				CascadeType.REFRESH })
 	    @JoinColumn  (name="idAtm") 
 	    private Atm atm;
 	    
 	    
 	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
-				CascadeType.REFRESH })
+				CascadeType.REFRESH , CascadeType.REMOVE } , orphanRemoval = true)
 		private List<Transaction> transactions;
 	    
 	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
-				CascadeType.REFRESH })
+				CascadeType.REFRESH , CascadeType.REMOVE}, orphanRemoval = true)
 		private List<Incident> incidents;
 	    
 	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
-				CascadeType.REFRESH })
+				CascadeType.REFRESH , CascadeType.REMOVE}, orphanRemoval = true)
 		private List<Replenishment> replenishments;
 	    
 	    
 	    @OneToMany(mappedBy = "journal", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
-				CascadeType.REFRESH })
+				CascadeType.REFRESH , CascadeType.REMOVE}, orphanRemoval = true)
 		private List<ErrorATM> errorsATM;
+	    
+	    
+	    
+	    
+	    @Column(name="nbr_transactios")
+	    private int nbrTransactions;
+	    @Column(name="nbr_replenishements")
+	    private int nbrReplenishements;
+	    @Column(name="nbr_incidents")
+	    private int nbrIncidents;
+	    @Column(name="nbr_errors_atm")
+	    private int nbrErrorsATM;
 	    
 	    
 	    
@@ -101,34 +106,17 @@ public class Journal {
 		public void setDateJournal(Date dateJournal) {
 			this.dateJournal = dateJournal;
 		}
+ 
 
-
-		public Time getDateModifJournal() {
-			return dateModifJournal;
+		public String getTimeUploadJournal() {
+			return timeUploadJournal;
 		}
 
-		public void setDateModifJournal(Time dateModifJournal) {
-			this.dateModifJournal = dateModifJournal;
-		}
 
-		public String getHandledJournal() {
-			return handledJournal;
+		public void setTimeUploadJournal(String timeUploadJournal) {
+			this.timeUploadJournal = timeUploadJournal;
 		}
-
-		public void setHandledJournal(String handledJournal) {
-			this.handledJournal = handledJournal;
-		}
-
-		public int getLigneJournal() {
-			return ligneJournal;
-		}
-
-		public void setLigneJournal(int ligneJournal) {
-			this.ligneJournal = ligneJournal;
-		}
-
 		 
-
 		public Atm getAtm() {
 			return atm;
 		}
@@ -137,6 +125,48 @@ public class Journal {
 			this.atm = atm;
 		}
 	
+		
+		
+		public int getNbrTransactions() {
+			return nbrTransactions;
+		}
+
+
+		public void setNbrTransactions(int nbrTransactions) {
+			this.nbrTransactions = nbrTransactions;
+		}
+
+
+		public int getNbrReplenishements() {
+			return nbrReplenishements;
+		}
+
+
+		public void setNbrReplenishements(int nbrReplenishements) {
+			this.nbrReplenishements = nbrReplenishements;
+		}
+
+
+		public int getNbrIncidents() {
+			return nbrIncidents;
+		}
+
+
+		public void setNbrIncidents(int nbrIncidents) {
+			this.nbrIncidents = nbrIncidents;
+		}
+
+
+		public int getNbrErrorsATM() {
+			return nbrErrorsATM;
+		}
+
+
+		public void setNbrErrorsATM(int nbrErrorsATM) {
+			this.nbrErrorsATM = nbrErrorsATM;
+		}
+
+
 		public void addTransaction(Transaction transaction) 
 		{
 

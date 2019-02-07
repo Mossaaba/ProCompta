@@ -105,24 +105,30 @@
 				
 				 
 
-				<div class="sidebar-header">
-				       <span class=""><i class="pg-menu_justify"></i></span>
-				        <a href="<spring:url value="/home"/>"  >
-			             <span class="font-montserrat" style="font-size :20px;">ProCompta</span>
+				    <div class="   sidebar-header">
+				       <span class="fs-20"> <i class="humbnail-wrapper d32 circular inline  ">  
+			           <img class="hvr-pulse-grow" src="<spring:url value="/resources/pages/ico/logo.png"/>"  width="40%"  >  
+			           <a href="<spring:url value="/home"/>"  >
 			            </a>
-                        
-						<div class="sidebar-header-controls">
-						<button type="button" class="btn btn-link d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" data-toggle-pin="sidebar"><i class="fa fs-12"></i>
+			           <i class="">
+						<button type="button" class="btn btn-link " data-toggle-pin="sidebar"><i class="fa  fa-2x"></i>
 						</button>
-						</div>
-				</div>
+						</i>
+			
+			          </i>
+			           
+			          </span>     
+						  
+						  
+				   </div>
+				  
 
 
       <div class="sidebar-menu">
             <ul class="menu-items">
 			
 			<li class="m-t-30 ">
-			<a href="<spring:url value="/dashboard"/>"  >
+			<a href="<spring:url value="/home"/>"  >
 			<span class="title font-montserrat no-margin text-uppercase"><spring:message code="label.Dashboard"></spring:message></span>
 			</a>
 			<span class="bg-success icon-thumbnail"><i class="fa fa-tachometer" style="font-size :27px;"></i></span>
@@ -281,7 +287,7 @@
 			</li>
 			
 			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="#">Initialisation</a>
+			<a href="<spring:url value="/config"/>" >Configuration</a>
 			<span class="icon-thumbnail"><i class="fa fa-cog" style="font-size :25px;"></i></span>
 			</li>	 
 			</ul>

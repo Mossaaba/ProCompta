@@ -1,13 +1,24 @@
 package com.DieboldNixdorf.ProCompta.controller;
 
+ 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+ 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +40,14 @@ import com.DieboldNixdorf.ProCompta.service.BranchService;
 import com.DieboldNixdorf.ProCompta.service.FileUploadService;
 import com.DieboldNixdorf.ProCompta.service.HostFileService;
 import com.DieboldNixdorf.ProCompta.service.JounalService;
+import org.apache.commons.configuration.ConfigurationException;
+ 
 import org.apache.commons.io.FilenameUtils;
 
 
 @CrossOrigin
 @RestController
+ 
 public class FileUploadController {
 
 	@Autowired
@@ -48,23 +62,70 @@ public class FileUploadController {
 	@Autowired
 	private HostFileService hostFileService;
 	
+	@Value("${jrnMin}")
+	String jrnMin;
+	
+	@Value("${jrnHour}")
+	String jrnHour;
+	
+	@Value("${typeUpload}")
+	String typeUpload;
+	
+	@Value("${typeUploadHost}")
+	String typeUploadHost;
+	
+	
+	@Value("${HostMin}")
+	String HostMin;
+	
+	@Value("${HostHour}")
+	String HostHour;
 	
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public ModelAndView downloadFile() {
+	public ModelAndView downloadFile(Model model) {
 		ModelAndView mav = new ModelAndView("fileUpload");
-
-		List<Branch> listBranches = branchService.getAllBranchs();
-		mav.addObject("listBranches", listBranches);
-
-		FileUpload fileUpload = new FileUpload();
-		mav.addObject("fileUpload", fileUpload);
-
-		return mav;
+		
+		 String uplaodTypeR = "";
+		 String uplaodTypeF = ""; 
+		 String reccurent = "";
+		 String fixedTime = "";
+		 String fixeTimeHost = null;
+		 
+		 // To the Form  
+		 model.addAttribute("uplaodTypeR",uplaodTypeR);
+		 model.addAttribute("uplaodTypeF",uplaodTypeF);
+		 model.addAttribute("reccurent",reccurent);
+		 model.addAttribute("fixedTime",fixedTime);
+		 model.addAttribute("fixeTimeHost",fixeTimeHost);
+		 		 
+		 // Show configuration 
+		 model.addAttribute("typeUpload",typeUpload);
+		 model.addAttribute("jrnHour",jrnHour);
+		 model.addAttribute("jrnMin",jrnMin);
+		 
+		 model.addAttribute("typeUploadHost",typeUploadHost);
+		 model.addAttribute("HostHour",HostHour);
+		 model.addAttribute("HostMin",HostMin);
+		 
+		 // Populate the Modal 
+		 List<Branch> listBranches = branchService.getAllBranchs();
+		 mav.addObject("listBranches", listBranches);
+		 
+		 FileUpload fileUpload = new FileUpload();
+		 mav.addObject("fileUpload", fileUpload);
+		 return mav;
 
 	}
+	
+	
+	
+	
+
+
 
 	
+	 
 	
 	//MANUEL UPlOAD 
 	@PostMapping("/upload")
@@ -74,6 +135,11 @@ public class FileUploadController {
 
 		Map<String, MultipartFile> fileMap = request.getFileMap();
 		List<UploadedFile> uploadedFiles = new ArrayList<UploadedFile>();
+		
+		   DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+		  java.util.Date dateToday = new java.util.Date();
+		 
 		
 		
 		/*------------------------------------------------------------------------------------------------*/
@@ -88,25 +154,40 @@ public class FileUploadController {
 
 		{
 			 
-			 String fileNameWithOutExt = FilenameUtils.removeExtension(multipartFile.getOriginalFilename());
-             
+			 String fileNameWithOutExt = FilenameUtils.removeExtension(multipartFile.getOriginalFilename()); 
              boolean ExisteJournal = jounalService.JounralExiste(fileNameWithOutExt); 
              @SuppressWarnings("unused")
-			int ExistingJounral = 0;
+			 int ExistingJounral = 0;
               
 			 
              if (!ExisteJournal) 
              {
-            	@SuppressWarnings("unused")
+            
 				List<String> listeSingleResultParsing= jounalService.ParseJournal(multipartFile, idAtm);  
+            	
+            	String nbrTransaction = listeSingleResultParsing.get(0);
+            	String nbrReplinshement = listeSingleResultParsing.get(1);
+            	String nbrIncidents = listeSingleResultParsing.get(2);
+            	String nbrErrrosATM = listeSingleResultParsing.get(3);
+ 
             	
             	saveFileToLocalDisk(multipartFile);
      			
             	UploadedFile fileInfo = getUploadedFileInfo(multipartFile);
-     			
+            	
+            	fileInfo.setType("Journal");
+            	fileInfo.setName(multipartFile.getOriginalFilename());
+            	fileInfo.setFileDateUploaded(dateToday);
+            	
             	fileInfo = saveFileToDatabase(fileInfo);
-     			
+            	
+            	fileInfo.setNbrTransactions(Integer.parseInt(nbrTransaction));
+            	fileInfo.setNbrReplenishements(Integer.parseInt(nbrReplinshement));
+            	fileInfo.setNbrIncidents(Integer.parseInt(nbrIncidents));
+            	fileInfo.setNbrErrorsATM(Integer.parseInt(nbrErrrosATM));
             	uploadedFiles.add(fileInfo);
+            	
+            	
             	 }
              else 
              {
@@ -144,6 +225,7 @@ public class FileUploadController {
 					List<String> listeSingleResultParsing = hostFileService.ParseHostFile(multipartFile);
 	            	saveFileToLocalDisk(multipartFile);
 	            	UploadedFile fileInfo = getUploadedFileInfo(multipartFile);
+	            	fileInfo.setType("Host File");
 	            	fileInfo = saveFileToDatabase(fileInfo); 
 	            	uploadedFiles.add(fileInfo);
 	                System.out.println("Host File Uplaodeed ");
@@ -202,8 +284,9 @@ public class FileUploadController {
 		UploadedFile fileInfo = new UploadedFile();
 		fileInfo.setName(multipartFile.getOriginalFilename());
 		fileInfo.setSize(multipartFile.getSize());
-		fileInfo.setType(multipartFile.getContentType());
+		
 		fileInfo.setLocation(getDestinationLocation());
+		
 
 		return fileInfo;
 	}
@@ -212,5 +295,9 @@ public class FileUploadController {
 	{
 		return "C:/myProComptaTemp/";
 	}
+	
+	
+	
+	 
 
 }

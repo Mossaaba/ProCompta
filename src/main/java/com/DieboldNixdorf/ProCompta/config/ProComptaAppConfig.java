@@ -17,6 +17,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -32,8 +33,8 @@ import com.DieboldNixdorf.ProCompta.tools.RoleToUserProfileConverter;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
- 
 @EnableWebMvc
+@EnableScheduling
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.DieboldNixdorf.ProCompta")
 @PropertySource({ "classpath:/bdd/DataBase.properties" })

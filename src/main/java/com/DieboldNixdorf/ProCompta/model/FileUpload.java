@@ -26,10 +26,12 @@ public class FileUpload {
 	private String nameFile;
 	
 	@Column(name="date_upload")
-	private Date fileDateUploaded;
+	private java.util.Date fileDateUploaded;
 	
 	@Column(name="type_file")
 	private String typeFile;
+	
+
 
 	 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
@@ -61,11 +63,11 @@ public class FileUpload {
 		this.nameFile = nameFile;
 	}
 
-	public Date getFileDateUploaded() {
+	public java.util.Date getFileDateUploaded() {
 		return fileDateUploaded;
 	}
 
-	public void setFileDateUploaded(Date fileDateUploaded) {
+	public void setFileDateUploaded(java.util.Date fileDateUploaded) {
 		this.fileDateUploaded = fileDateUploaded;
 	}
 
@@ -78,6 +80,8 @@ public class FileUpload {
 	}
 	
 	
+ 
+
 	public FileUpload () {}
 
 	public FileUpload(int idFile, String nameFile, Date fileDateUploaded, String typeFile) {

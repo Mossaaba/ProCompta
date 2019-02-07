@@ -1,4 +1,157 @@
+		$('#TimeUpload').timepicker({
+	'defaultTime' : false,
+ 
+	'minuteStep' : 1,
+	timeFormat : 'HH:mm:ss',
+	showSecond : true,
+	icons : {
+		up : "fa fa-chevron-circle-up",
+		down : "fa fa-chevron-circle-down",
+		next : 'fa fa-chevron-circle-right',
+		previous : 'fa fa-chevron-circle-left'
+	}
+});	
+		
+		
+		
+		
+		
+		$('#TimeUploadHost').timepicker({
+			'defaultTime' : false,
+		 
+			'minuteStep' : 1,
+			timeFormat : 'HH:mm:ss',
+			showSecond : true,
+			icons : {
+				up : "fa fa-chevron-circle-up",
+				down : "fa fa-chevron-circle-down",
+				next : 'fa fa-chevron-circle-right',
+				previous : 'fa fa-chevron-circle-left'
+			}
+		});		
+		
+		
+		$(document).ready(function(){
+		    $('#TimeUpload').timepicker({
+		        timeFormat: 'HH:mm:ss'
+		   
+		    
+		    });
+		});
+		
+		
+		
+		
+		
+		
+		$("#FixedTimeRow").hide();
+		$("#reccurentTimeRow").hide();
+
+		$("#Recurent") // select the radio by its id
+	    .change(function(){ // bind a function to the change event
+	        if( $(this).is(":checked") ){ // check if the radio is checked
+                 
+	        	
+	        	$("#reccurentTimeRow").show();
+				$("#FixedTimeRow").hide();
+				$("#FixedTime").prop('checked', false);
+	        	
+	        	
+	        }
+	    });
+		$("#FixedTime") // select the radio by its id
+	    .change(function(){ // bind a function to the change event
+	        if( $(this).is(":checked") ){ // check if the radio is checked
+                 
+	        	
+	        	$("#FixedTimeRow").show();
+				$("#reccurentTimeRow").hide();
+				$("#Recurent").prop('checked', false);
+	        	
+	        	
+	        }
+	    });
+		
+		$("#divUploadHostFile").hide();
+		$("#divUploadJournal").hide();
+		  
+		
+		
+		
+		
+		
+		
+		$("#FixedTimeRowHost").hide();
+		$("#reccurentTimeRowHost").hide();
+		
+		
+		
+		
+		
+		$("#RecurentHostFile") // select the radio by its id
+	    .change(function(){ // bind a function to the change event
+	        if( $(this).is(":checked") ){ // check if the radio is checked
+                 
+	        	
+	        	$("#reccurentTimeRowHost").show();
+				$("#FixedTimeRowHost").hide();
+				$("#FixedTimeHostFile").prop('checked', false);
+	        	
+	        	
+	        }
+	    });
+		$("#FixedTimeHostFile") // select the radio by its id
+	    .change(function(){ // bind a function to the change event
+	        if( $(this).is(":checked") ){ // check if the radio is checked
+                 
+	        	
+	        	$("#FixedTimeRowHost").show();
+				$("#reccurentTimeRowHost").hide();
+				$("#RecurentHostFile").prop('checked', false);
+	        	
+	        	
+	        }
+	    });
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		$("#journalFileBtnConfig").click(function() {
 			
+			$("#divUploadJournal").toggle({effect: 'slide', duration: 100});
+			$("#divUploadHostFile").hide();
+		});
+		
+      $("#HostFileBtnConfig").click(function() {
+			
+    	  
+    	    $("#divUploadJournal").hide();
+			$("#divUploadHostFile").toggle({effect: 'slide', duration: 100});
+		});
+		    
+		 
 							
 		$(function() {
 			
@@ -6,6 +159,8 @@
 			$("#testConexion").hide();
 			$("#ClearFileDive").hide();
 			$("#startProsessingDive").hide();
+			$("#cardUploadAuto").hide();
+			
 
 			$("#AutoUpload").on("change", function()
 
@@ -14,6 +169,7 @@
                      //Manuel Uoplaod
                      if(!$(this).is(':checked'))
                 	 {
+                    	 
                 	 $("#cardUpload").toggle();
                 	 $('#ManuelUpload').trigger('click');
                 	 $('#ManuelUploadDive').css('visibility','visible');
@@ -22,6 +178,10 @@
                 	 $("#startProsessingDive").hide();
                 	 $("#typeProcessingFile").val('manuel');
                 	 $("#nbrFileDive").show();
+                	 $("#cardUploadAuto").hide();
+                	 $("#branchDiv").show();
+                     $("#atmDiv").show();
+                     $("#typeFileDiv").show();
                 	 
                 	 
                 	 }
@@ -35,7 +195,14 @@
                    	$("#InfoAutomatique").show();
                     $("#testConexion").show();
                     $("#startProsessingDive").show();
-                    $("#nbrFileDive").hide();
+                    $("#nbrFileDive").hide();  
+                    $("#branchDiv").hide();
+                    $("#atmDiv").hide();
+                    $("#typeFileDiv").hide();
+                    $("#operationDive").hide();
+                    $("#cardUploadAuto").show({effect: 'fade', duration: 250});
+                    
+                    
                     
                     $("#typeProcessingFile").val('automatique');
 
@@ -78,7 +245,31 @@
                      
 
 			});
+			$('#load').select2({
+				
+				dropdownCssClass : "font-montserrat blod text-primary bold fs-12",
+				allowClear : true,
+				placeholder : {
+			 
+					id : "-1",
+					text : "  Please select Type of uploading file ",
+					selected : 'selected',
 
+				},
+				
+					data : [ {
+						id : -1,
+						text : '',
+						selected : 'selected',
+						search : '',
+						hidden : true
+					} , 
+					 
+				]
+			});
+			
+			
+			
 			$('#atm').select2({});
 			$('#typeFile').select2({
 				
@@ -112,6 +303,16 @@
 	      	        } 
 
 				]
+			}
+			
+			);
+			
+			
+			$("#load").on('change', function(e) {  
+				
+				$("#divTimer").show();
+				
+				
 			});
 			
 			$("#atm").prop("disabled", true);
@@ -189,12 +390,17 @@
 
 					
 					}
-                 
-				  
+				else 
+				    {
+					
+					$("#branchDiv").show();
+					$("#atmDiv").show();
+					$("#typeFileDiv").removeClass( "col-md-12" );
+					$("#typeFileDiv").addClass( "col-md-4" );
+					
+				    }
 			});
 			
-			
-
 			var elems = Array.prototype.slice.call(document
 					.querySelectorAll('#AutoUpload'));
 

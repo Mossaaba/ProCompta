@@ -1,5 +1,6 @@
 package com.DieboldNixdorf.ProCompta.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -17,11 +18,15 @@ public interface JournalDao {
     List<Journal> findAllByAtmId(int idAtm);
      
     void deleteById(int idjournal);
+    
+    void updateJournal (Journal journal);
 	
-   
     boolean JounralExiste(String journalName);
     
     List<String> ParseJournal(MultipartFile multipartFile , int idAtm );
+    
+    void deleteByDate (String dateJournal);
+    
 
 }
   

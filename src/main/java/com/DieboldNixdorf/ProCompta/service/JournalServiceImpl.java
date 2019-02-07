@@ -1,5 +1,6 @@
 package com.DieboldNixdorf.ProCompta.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,18 @@ public class JournalServiceImpl implements JounalService {
 	public int saveJournal(Journal journal, int idAtm) {
 		 
 		return journalDao.saveJournal(journal, idAtm);
+	}
+
+	@Override
+	public void deleteByDate(String dateJournal) {
+		journalDao.deleteByDate(dateJournal);
+		
+	}
+
+	@Override
+	public void updateJournal(Journal journal) {
+		journalDao.updateJournal(journal);
+		
 	}
 
 }

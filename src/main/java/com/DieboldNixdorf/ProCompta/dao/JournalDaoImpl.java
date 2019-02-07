@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
  
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -264,6 +267,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 	
 	
 	
+	
 
 	@Override
 	public boolean JounralExiste(String journalName) {
@@ -286,7 +290,17 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
  
 	@Override
 	public List<String> ParseJournal(MultipartFile file, int idAtm ) {
-
+		    
+		
+		int nbrTransactionJrnGlob = 0;
+		int nbrReplenishementsJrnGlob = 0;
+		int nbrIncidentsJrnGlob = 0;
+		int nbrErrrosATMJrnGlob = 0;
+		
+		
+		
+		
+		
 		Collection<String> collection = new ArrayList<String>();
 		Collection<String> collectionNCR = new ArrayList<String>();
 		/* ___________________________________________________
@@ -384,9 +398,24 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		
 		{
 			
+			
+			
+			
 			// ------ save the Journal on DataBase and get the id ----- \\
 			Journal jrn = new Journal();
+			int nbrTransactions=0;
+			int nbrReplenishements=0;
+			int nbrIncidents=0;
+			int nbrErrorsATM=0;
+			
+			
+			
+			
 			jrn.setAtm(atm);
+ 
+			String timeNow = new  SimpleDateFormat("HH:mm:SS").format(new java.util.Date());
+			jrn.setTimeUploadJournal(timeNow);
+			
 			String JournalName = FilenameUtils.removeExtension(file.getOriginalFilename());
 			
 			ToolsToUse toolsProCompta = new ToolsToUse();
@@ -397,7 +426,10 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 				e2.printStackTrace();
 			}
 			jrn.setNomJournal(JournalName);
+			
 			@SuppressWarnings("unused")
+			
+			
 			int idjournal = jService.saveJournal(jrn, idAtm);
 			
 	 
@@ -416,6 +448,12 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 			Incident incd = new Incident();
 			ErrorATM ErrATM = new ErrorATM();
 			Replenishment Replsh = new Replenishment();
+			
+			
+			
+			
+			
+			
 			try {
 				while ((line = br.readLine()) != null) 
 				{
@@ -662,6 +700,13 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							  trx.setFinishingTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
 							  
 							  tService.saveTrasanction(trx);
+							 
+								
+								
+								nbrTransactions ++ ; 
+								nbrTransactionJrnGlob = nbrTransactions;
+								 
+								 
 							  trx=new Transaction();
 							  
 						  }
@@ -853,7 +898,11 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							   Replsh.setCassetteRetractAfter(Integer.parseInt(MathcerRepAfter.group(11)));
 							   
 							   
-							   
+							       nbrReplenishements++;
+							       
+							      nbrReplenishementsJrnGlob = nbrReplenishements;
+								
+							       
 							   
 							       rService.saveReplenishment(Replsh);
 							       Replsh = new Replenishment();
@@ -880,6 +929,13 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							   incd.setIncident_time(toolsProCompta.ConevretStringToTime(matcher.group(1)));
 						 
 							   iService.saveIncident(incd);
+							   nbrIncidents++;
+							   
+								 nbrIncidentsJrnGlob = nbrIncidents;
+						
+								
+								
+								
 							   incd = new Incident();
 							   
 						  }
@@ -900,6 +956,10 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							   ErrATM.setDetailErrorAtm(matcher.group(2));
 							   ErrATM.setCodeErrorAtm(matcher.group(3));
 							   eService.saveErrorATM(ErrATM);
+							   
+							   nbrErrorsATM++;
+							   
+								 nbrErrrosATMJrnGlob = nbrErrorsATM;
 							   ErrATM = new ErrorATM();
 								   
 							  }
@@ -913,6 +973,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							   ErrATM.setCodeErrorAtm("none");
 							   eService.saveErrorATM(ErrATM);
 							   ErrATM = new ErrorATM();
+							   nbrErrorsATM++;
+							   nbrErrrosATMJrnGlob = nbrErrorsATM;
 								   
 							  }
 							 
@@ -928,6 +990,20 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			
+			
+			
+			
+			Journal journalInfo = jService.findById(idjournal);
+			
+			journalInfo.setNbrTransactions(nbrTransactions);
+			journalInfo.setNbrReplenishements(nbrReplenishements);
+			journalInfo.setNbrIncidents(nbrIncidents);
+			journalInfo.setNbrErrorsATM(nbrErrorsATM);
+			jService.updateJournal(journalInfo);
+			
+			
+			
 			
 			
 		}
@@ -946,6 +1022,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		
 		{
 			Journal jrn = new Journal();
+			int idjournalNCR = 0;
+			int nbrTransactions=0;
 			jrn.setAtm(atm);
 			String JournalName = FilenameUtils.removeExtension(file.getOriginalFilename());
 			
@@ -966,8 +1044,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 						e2.printStackTrace();
 					}
 				     jrn.setNomJournal(newJournalNCRname);
-					@SuppressWarnings("unused")
-					int idjournal = jService.saveJournal(jrn, idAtm);   
+				 
+					idjournalNCR = jService.saveJournal(jrn, idAtm);   
 			   }
 			   
 			   InputStreamReader isr = null;
@@ -1121,6 +1199,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 																 {
 																  trx_NCR.setErrorTransaction(matcherInfos.group(1));
 																 }
+															  nbrTransactions++;
 														          tService.saveTrasanction(trx_NCR);
 														          trx_NCR=new Transaction();
 														  }
@@ -1137,11 +1216,70 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 						e.printStackTrace();
 					}  
 			
+				
+				Journal journalInfos = jService.findById(idjournalNCR);
+				journalInfos.setNbrTransactions(nbrTransactions);
+				journalInfos.setNbrReplenishements(0);
+				journalInfos.setNbrIncidents(0);
+				journalInfos.setNbrErrorsATM(0);
+				jService.updateJournal(journalInfos);
+				 
 			
 		}
 		
-		return null;
+		String nbr_transactionResultat = String.valueOf(nbrTransactionJrnGlob) ;
+		String nbr_replinshementResultat = String.valueOf(nbrReplenishementsJrnGlob) ;
+		String nbr_incidentResultat = String.valueOf(nbrIncidentsJrnGlob) ;
+		String nbr_errorsATMResultat = String.valueOf(nbrErrrosATMJrnGlob) ;
+		
+		
+		List<String> listStringsInfosOfEachJournal = new LinkedList<String>();
+		listStringsInfosOfEachJournal.add(nbr_transactionResultat);
+		listStringsInfosOfEachJournal.add(nbr_replinshementResultat);
+		listStringsInfosOfEachJournal.add(nbr_incidentResultat);
+		listStringsInfosOfEachJournal.add(nbr_errorsATMResultat);
+		
+		
+		
+		return listStringsInfosOfEachJournal;
 
+	}
+
+	@Override
+	public void deleteByDate(String dateJournal) {
+		
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+		    java.util.Date convertedDate = null;
+			try {
+				convertedDate = (java.util.Date) dateFormat.parse(dateJournal);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+		    
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query theQuery = currentSession.createQuery("from Journal where dateJournal=:thedateOfTheJournal", Journal.class);
+		theQuery.setParameter("thedateOfTheJournal", convertedDate);
+		
+		if (theQuery.uniqueResult() != null) {
+
+			Journal journal =(Journal)  theQuery.getSingleResult();
+			delete(journal);
+		} else {
+			System.out.println("");
+		} 
+		
+		
+		
+		
+	}
+
+	@Override
+	public void updateJournal(Journal journal) {
+		 
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.saveOrUpdate(journal);
 	}
 
 }

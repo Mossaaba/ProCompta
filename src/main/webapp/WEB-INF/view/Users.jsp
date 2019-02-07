@@ -14,6 +14,19 @@
 <html>
 <head>
 
+<title>ProCompta | USERS </title>
+<link rel="apple-touch-icon"
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+    href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="icon"  
+	href="<spring:url value="/resources/pages/logo.png"/>" />
+	
+
 
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/jquery-confirm.min.css"/>" />
@@ -32,7 +45,9 @@
 
 	<div class="page-container ">
 		<jsp:include page="../view/fragments/header.jsp"></jsp:include>
-         
+         <br>
+		<br>
+		<br>
 
 		<div class="page-content-wrapper content-builder active full-height"
 			id="plainContent">

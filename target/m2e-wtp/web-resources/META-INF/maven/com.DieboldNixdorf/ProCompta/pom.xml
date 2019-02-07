@@ -1,29 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.DieboldNixdorf</groupId>
 	<artifactId>ProCompta</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-
 	<name>ProCompta</name>
-	
-
 	<properties>
-		<springframework.version>5.0.2.RELEASE</springframework.version>
-		<springsecurity.version>5.0.0.RELEASE</springsecurity.version>
-		 <postgresql.connector.version>9.4-1200-jdbc41</postgresql.connector.version>
-		 <c3po.version>0.9.5.2</c3po.version>
-		 <hibernate.version>5.2.12.Final</hibernate.version>
-		 <tld.version>1.1.2</tld.version>
-		 <maven.compiler.source>1.8</maven.compiler.source>
-		 <maven.compiler.target>1.8</maven.compiler.target>
-		 <log4j.version>1.2.17</log4j.version>
-		
+	
+		  <springframework.version>5.0.2.RELEASE</springframework.version>
+		  <springsecurity.version>5.0.0.RELEASE</springsecurity.version>
+		  <postgresql.connector.version>9.4-1200-jdbc41</postgresql.connector.version>
+		  <c3po.version>0.9.5.2</c3po.version>
+		  <hibernate.version>5.2.12.Final</hibernate.version>
+		  <tld.version>1.1.2</tld.version>
+		  <maven.compiler.source>1.8</maven.compiler.source>
+		  <maven.compiler.target>1.8</maven.compiler.target>
+		  <log4j.version>1.2.17</log4j.version>
+		  
+		  
 	</properties>
 
 	<dependencies>
+	<!-- Spring MVC support -->
+	    
+	
          <dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -68,9 +69,6 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency> 
-		
-		
-		
        <!-- Postgress Server SQL  -->
          <dependency>
 		    <groupId>org.postgresql</groupId>
@@ -91,8 +89,6 @@
             <artifactId>hibernate-validator</artifactId>
              <version>6.0.12.Final</version>
 		</dependency>
-		
-		
          <!-- Spring security  -->
          
           <!-- Spring security web and spring security config -->
@@ -112,41 +108,52 @@
              <artifactId>spring-security-taglibs</artifactId>
              <version>${springsecurity.version}</version>
          </dependency>
-         
-        
-		 
 		<!-- Servlet, JSP and JSTL support -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>2.3.1</version>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
 		<!-- Apache Commons FileUpload -->
-	<dependency>
-    <groupId>commons-fileupload</groupId>
-    <artifactId>commons-fileupload</artifactId>
-    <version>1.2</version>
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-mock -->
+       <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>5.0.1.RELEASE</version>
+    <scope>runtime</scope>
 </dependency>
 
-		<!-- Common IO -->
+ 
+
+
+				<!-- Common IO -->
 		<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.4</version>
-</dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
+		</dependency>
+		<!-- Common IConfig -->
+		
+		<dependency>
+	    <groupId>commons-configuration</groupId>
+	    <artifactId>commons-configuration</artifactId>
+	    <version>1.10</version>
+        </dependency>
 
 		 
 <dependency>

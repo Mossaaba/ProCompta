@@ -11,6 +11,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<title>ProCompta | CASH BALANCE </title>
+<link rel="apple-touch-icon"
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+    href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="icon"  
+	href="<spring:url value="/resources/pages/logo.png"/>" />
+	
+	
+	
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/jquery-confirm.min.css"/>" />
 <link rel="stylesheet"
@@ -32,7 +47,9 @@
 
 	<div class="page-container ">
 		<jsp:include page="../view/fragments/header.jsp"></jsp:include>
-
+         <br>
+		<br>
+		<br>
 
 		<div class="page-content-wrapper content-builder active full-height"
 			id="plainContent">

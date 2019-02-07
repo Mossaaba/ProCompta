@@ -1,9 +1,28 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
  
 <html>
+
+<head>
+
+ 
+<title>ProCompta - DN | HOME</title>
+<link rel="apple-touch-icon"
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+    href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="apple-touch-icon"  
+	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
+<link rel="icon"  
+	href="<spring:url value="/resources/pages/logo.png"/>" />
+	
+</head>
      
     
     
@@ -14,7 +33,9 @@
          
      <div class="page-container ">
          <jsp:include page="../view/fragments/header.jsp"></jsp:include> 
-
+        <br>
+		<br>
+		<br>
 
 			<div class="page-content-wrapper content-builder active full-height" id="plainContent">
 			
@@ -51,10 +72,6 @@
 			   
 			</div>
          
-    
-   
-    
- 
     </body>
     
     
