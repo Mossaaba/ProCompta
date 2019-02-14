@@ -1,4 +1,6 @@
-		$('#TimeUpload').timepicker({
+ 
+
+$('#TimeUpload').timepicker({
 	'defaultTime' : false,
  
 	'minuteStep' : 1,
@@ -156,7 +158,7 @@
 		$(function() {
 			
 			$("#InfoAutomatique").hide();
-			$("#testConexion").hide();
+			 
 			$("#ClearFileDive").hide();
 			$("#startProsessingDive").hide();
 			$("#cardUploadAuto").hide();
@@ -173,8 +175,7 @@
                 	 $("#cardUpload").toggle();
                 	 $('#ManuelUpload').trigger('click');
                 	 $('#ManuelUploadDive').css('visibility','visible');
-                	 $("#InfoAutomatique").hide();
-                	 $("#testConexion").hide();
+                	 $("#InfoAutomatique").hide(); 
                 	 $("#startProsessingDive").hide();
                 	 $("#typeProcessingFile").val('manuel');
                 	 $("#nbrFileDive").show();
@@ -193,7 +194,6 @@
                    	$('#ManuelUpload').trigger('click');
                    	$('#ManuelUploadDive').css('visibility','hidden')
                    	$("#InfoAutomatique").show();
-                    $("#testConexion").show();
                     $("#startProsessingDive").show();
                     $("#nbrFileDive").hide();  
                     $("#branchDiv").hide();
@@ -201,9 +201,6 @@
                     $("#typeFileDiv").hide();
                     $("#operationDive").hide();
                     $("#cardUploadAuto").show({effect: 'fade', duration: 250});
-                    
-                    
-                    
                     $("#typeProcessingFile").val('automatique');
 
                      }
@@ -346,7 +343,7 @@
 
 				$('#atm').select2({
 					allowClear : true,
-
+					 
 					minimumInputLength : 1,
 					ajax : {
 						url : 'http://localhost:8080/ProCompta/api/atm-' + id,
@@ -357,6 +354,8 @@
 								ad : params.term
 							};
 						},
+						
+						
 						processResults : function(data) {
 							return {
 								results : $.map(data, function(obj) {
@@ -368,9 +367,11 @@
 								})
 							};
 						}
-
 					}
-
+				
+				
+						  
+						 
 				});
 			});
 			

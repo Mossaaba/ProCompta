@@ -1,6 +1,5 @@
 package com.DieboldNixdorf.ProCompta.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;

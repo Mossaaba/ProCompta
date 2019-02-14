@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -165,7 +166,7 @@ public class HostFileDaoImpl extends AbstractDao<Integer, HostFile> implements H
 		}
 		try 
 		{
-         hostFile.setDateUplaoded(toolsProCompta.convertStringToDateFileHost(matcher.group(1)));
+         hostFile.setDateHostFile(toolsProCompta.convertStringToDateFileHost(matcher.group(1)));
 		} catch (ParseException e2)
 		{
 			e2.printStackTrace();
@@ -174,6 +175,12 @@ public class HostFileDaoImpl extends AbstractDao<Integer, HostFile> implements H
 		
 		 
 		hostFile.setNameHostFile(HostFilelName);
+		String timeNow = new  SimpleDateFormat("HH:mm:SS").format(new java.util.Date());
+		hostFile.setTimeUploadHostFile(timeNow);
+		
+		
+		String dateNow = new SimpleDateFormat("YYYY:MM:dd").format(new java.util.Date());
+		hostFile.setDateUplaodHostFile(dateNow);
 
 		@SuppressWarnings("unused")
 		int idhostFile = hostFileService.saveHostFile(hostFile);

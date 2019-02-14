@@ -101,7 +101,7 @@ public class HostFileBatch {
        	        else 
        	        {
        	        	
-       	        	System.out.println("Journal Existe ");
+       	        	System.out.println("Host File Existe ");
        	        	
        	        }
        	    

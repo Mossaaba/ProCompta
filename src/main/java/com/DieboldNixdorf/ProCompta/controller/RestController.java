@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.Branch;
+import com.DieboldNixdorf.ProCompta.model.Journal;
 import com.DieboldNixdorf.ProCompta.model.Transaction;
 import com.DieboldNixdorf.ProCompta.service.AtmService;
 import com.DieboldNixdorf.ProCompta.service.BranchService;
+import com.DieboldNixdorf.ProCompta.service.JounalService;
 import com.DieboldNixdorf.ProCompta.service.TransactionService;
 
 @org.springframework.web.bind.annotation.RestController
@@ -28,6 +30,9 @@ public class RestController {
 	
 	@Autowired 
 	private TransactionService transactionService;
+	
+    @Autowired
+    private JounalService Jservice;
 
 	@GetMapping("/disque")
 	public List<String> listDisque() {

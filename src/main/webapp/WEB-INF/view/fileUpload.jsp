@@ -21,20 +21,14 @@
 <link rel="apple-touch-icon"
 	href="<spring:url value="/resources/pages/ico/logo.png"/>" />
 <link rel="icon" href="<spring:url value="/resources/pages/logo.png"/>" />
-
 </head>
+
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/plugins/dropzone/css/dropzone.css"/>" />
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/assets/jquery-confirm.min.css"/>" />
-
-
 <link rel="stylesheet" type="text/css"
 	href="<spring:url value="/resources/pages/css/hover.css"/>" />
-<style>
-</style>
-
-
 <body class="fixed-header windows desktop pace-done">
 	<jsp:include page="../view/fragments/menu.jsp"></jsp:include>
 	<div class="page-container">
@@ -55,8 +49,7 @@
 										data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
 											<span><i class="fa fa-cloud-upload fa-3x "
 												aria-hidden="true"></i> <spring:message code="label.space"></spring:message></span>
-											<span> </span><span> </span> <span>Uploding Journal
-												files </span>
+											<span> </span><span> </span> <span> <spring:message code="label.uploadingFile"></spring:message>    </span>
 									</a></li>
 								</ul>
 								<br>
@@ -75,7 +68,7 @@
 										<div class="card-header ">
 											<div class="card-title bold text-primary fs-16 ">
 												<i class="fa fa-upload fa-2x" aria-hidden="true"></i>
-												Uplodaing file menu
+												<spring:message code="label.uploadingFile"></spring:message> <spring:message code="label.menu"></spring:message>
 											</div>
 											<div class="card-controls  ">
 												<ul>
@@ -86,15 +79,20 @@
 																href="#" role="button" id="dropdownMenuLink"
 																data-toggle="dropdown" aria-haspopup="true"
 																aria-expanded="false"> <i class="fa fa-history"
-																aria-hidden="true"></i> History
+																aria-hidden="true"></i> <spring:message code="label.history"></spring:message> 
 															</a>
 
 															<div class="dropdown-menu"
 																aria-labelledby="dropdownMenuLink">
-																<a class="dropdown-item" data-target="#HostFileHistory"
-																	data-toggle="modal">Host File</a> <a
-																	class="dropdown-item" data-target="#JournalHistory"
-																	data-toggle="modal">Journal</a>
+																<a class="dropdown-item text-primary " data-target="#HostFileHistory"
+																	data-toggle="modal" >
+																	<label class="text-primary bold "> <i class="fa fa-server" aria-hidden="true"></i>
+																	 <spring:message code="label.hostFile"></spring:message> </label>  </a> <a
+																	class="dropdown-item text-primary bold" data-target="#JournalHistory"
+																	data-toggle="modal"><label class="text-primary bold ">
+																	<i class="fa fa-file-o" aria-hidden="true"></i> <spring:message code="label.journal"></spring:message>
+																	</label>
+																	 </a> 
 
 															</div>
 														</div>
@@ -102,9 +100,7 @@
 													<li><a href="#" class="card-collapse"
 														id="colpaseAreaUplod" data-toggle="collapse"><i
 															class="card-icon card-icon-collapse"></i></a></li>
-													<li><a href="#" class="card-refresh"
-														data-toggle="refresh"><i
-															class="card-icon card-icon-refresh"></i></a></li>
+													 
 													<li><a href="#" class="card-maximize"
 														data-toggle="maximize"><i
 															class="card-icon card-icon-maximize"></i></a></li>
@@ -123,7 +119,7 @@
 															<div
 																class="form-group form-group-default input-group hvr-grow">
 																<div class="form-input-group">
-																	<label class="inline">Automatic&nbsp;&nbsp;</label>
+																	<label class="inline"><spring:message code="label.automatic"></spring:message>&nbsp;&nbsp;</label>
 																</div>
 																<div class="input-group-append h-c-50 ">
 																	<span class="input-group-text transparent"> <input
@@ -138,7 +134,7 @@
 															<div
 																class="form-group form-group-default input-group hvr-grow ">
 																<div class="form-input-group">
-																	<label class="inline">Manuel</label>
+																	<label class="inline"><spring:message code="label.manual"></spring:message></label>
 																</div>
 																<div class="input-group-append h-c-50">
 																	<span class="input-group-text transparent"> <input
@@ -181,7 +177,7 @@
 												<div class="col-md-4" id="branchDiv">
 													<div
 														class="form-group form-group-default form-group-default-select2 input-group hvr-grow required">
-														<label class="">Branche </label>
+														<label class=""><spring:message code="label.branchs"></spring:message> </label>
 														<form:select path="atm.branch.idBranch"
 															cssClass="full-width" id="branch" style="width: 100%;"
 															data-init-plugin="select2" items="${listBranches}"
@@ -192,7 +188,7 @@
 													<div
 														class="form-group form-group-default form-group-default-select2  hvr-grow required"
 														id="divATM">
-														<label>ATM</label>
+														<label><spring:message code="label.atms"></spring:message></label>
 														<form:select path="atm" cssClass="full-width" id="atm"
 															data-placeholder="Select an atm here"
 															cssStyle="width: 100%;" data-init-plugin="select2" />
@@ -203,7 +199,7 @@
 													<div
 														class="form-group form-group-default form-group-default-select2  hvr-grow required"
 														id="divTypeFile">
-														<label class="">Type File </label>
+														<label class=""><spring:message code="label.TypeOfFile"></spring:message> </label>
 														<form:select path="typeFile" cssClass="full-width"
 															id="typeFile" data-placeholder="Select a type of file "
 															cssStyle="width: 100%;" data-init-plugin="select2" />
@@ -224,7 +220,7 @@
 
 														<span
 															class=" center title text-uppercase text-primary  font-montserrat all-caps small bold fs-16">
-															Please drop journal or log file here to be uploaded <br>
+															<spring:message code="label.instructionToUpload"></spring:message> <br>
 															<i class="fa fa-upload  fa-4x hvr-grow-shadow center"
 															aria-hidden="true"></i>
 														</span>
@@ -244,18 +240,18 @@
 
 									<div class="card card-default" id="startProsessingDive">
 										<div class="card-header ">
-											<div class="card-title text-center bold text-primary fs-16 ">Start
-												parsing Files</div>
+											<div class="card-title text-center bold text-primary fs-16 "><spring:message code="label.startParsingFiles"></spring:message>
+											</div>
 										</div>
 										<div class="card-body">
-											<p>please make sure for the branch and the atm selected.</p>
+											<p><spring:message code="label.makeSurForBranchAndAtm"></spring:message>
+											</p>
 
 
 											<button
 												class="btn btn-block btn-primary hvr-grow-shadow btn-rounded"
 												id="sbmtbtn" type="submit">
-												<span class="font-montserrat bold fs-16 m-t-2"> Start
-													parsing files </span> <span class="m-r-20 m-b-2"><i
+												<span class="font-montserrat bold fs-16 m-t-2"><spring:message code="label.start"></spring:message> </span> <span class="m-r-20 m-b-2"><i
 													class="fa fa-play-circle fa-2x " aria-hidden="true"></i> </span>
 											</button>
 										</div>
@@ -265,44 +261,26 @@
 
 									<div class="card card-default" id="ClearFileDive">
 										<div class="card-header ">
-											<div class="card-title text-center bold text-primary fs-16  ">Clear
-												all files</div>
+											<div class="card-title text-center bold text-primary fs-16  "><spring:message code="label.clearAllFiles"></spring:message> 
+											</div>
 										</div>
 										<div class="card-body">
 											<p>
-												Clear all file already uploded . <br>
+												<spring:message code="label.clearAllFilesAdded"></spring:message> <br>
 											</p>
 											<button type="button"
 												class="btn btn-block btn-warning hvr-grow-shadow btn-rounded"
 												id="ClearAllFiles">
 												<span class="pull-right"><i
 													class="fa fa-eraser  fa-2x" aria-hidden="true"></i> </span> <span
-													class="font-montserrat bold fs-16 m-t-2"> Clear All
-													file </span>
+													class="font-montserrat bold fs-16 m-t-2"> <spring:message code="label.clear"></spring:message> </span>
 											</button>
 										</div>
 									</div>
 
 
-
-									<div class="card card-default" id="testConexion">
-										<div class="card-header ">
-											<div class="card-title text-center bold text-primary fs-16  ">Test
-												Connexion</div>
-										</div>
-										<div class="card-body">
-											<p>Please select a barnch and an ATM befor testing the
-												connexion .</p>
-											<button type="button"
-												class="btn btn-block btn-complete hvr-pulse-grow btn-rounded">
-												<span class="pull-right"><i
-													class="fa fa-signal fa-2x" aria-hidden="true"></i> </span> <span
-													class="font-montserrat bold fs-16 m-t-2"> Test
-													Connexion </span>
-											</button>
-
-										</div>
-									</div>
+                                   
+									 
 
 
 								</div>
@@ -321,8 +299,9 @@
 							<div
 								class="col-md-6 text-primary title text-uppercase font-montserrat bold fs-14">
 
-								<i class="fa fa-chevron-right" aria-hidden="true"></i> Choose
-								one type File : <br> <br>
+								<i class="fa fa-chevron-right" aria-hidden="true"></i><spring:message code="label.chooseTypeOfFile"></spring:message>   :  
+								 <a href="<spring:url value="/config"/>" class="bold fs-12 b-b "> 
+								    <i class="fa fa-cogs" aria-hidden="true"></i> <spring:message code="label.changeConfig"></spring:message>  </a> <br> <br>
 
 								<div class="text-white" role="toolbar">
 
@@ -331,12 +310,12 @@
 										<button type="button"
 											class="btn btn-lg btn-primary b-l b-dashed"
 											id="journalFileBtnConfig">
-											<i class="fa fa-file-o" aria-hidden="true"></i> Journal
+											<i class="fa fa-file-o" aria-hidden="true"></i> <spring:message code="label.journal"></spring:message>
 										</button>
 										<button type="button"
 											class="btn btn-lg btn-primary b-l b-dashed "
 											id="HostFileBtnConfig">
-											<i class="fa fa-server" aria-hidden="true"></i> Host file
+											<i class="fa fa-server" aria-hidden="true"></i> <spring:message code="label.hostFile"></spring:message>
 										</button>
 
 									</div>
@@ -373,160 +352,13 @@
 													<div class="card-header ">
 														<div class="card-title text-primary bold">
 															<i class="fa fa-sliders fa-2x" aria-hidden="true"></i>
-															Uplaoding Host file parametters :  
+															<spring:message code="label.UploadinghostFileParam"></spring:message> :  
 														</div>
 													</div>
 													<div class="card-body">
-
-
-														<form:form action="hostFileParam" class="form-horizontal"
-															autocomplete="off">
-															<div class="form-group row">
-
-
-																<div class="col-md-12">
-
-
-
-																	<div class="radio radio-primary">
-
-																		<!------- ---------- --------------------->
-																		<!------- Reccurent  --------------------->
-																		<!------- ---------- --------------------->
-
-																		<c:choose>
-
-																			<c:when test="${typeUploadHost == 'recursive' }">
-
-																				<c:set var="MinutesToShow"
-																					value="${fn:substring(HostMin, 2, 4)}" />
-
-																				<input type="radio" value="recursive"
-																					id="RecurentHostFile" checked="checked">
-
-																				<label for="RecurentHostFile"> recursive (<strong
-																					class="text-primary"><c:out
-																							value="${MinutesToShow}" /> Minutes </strong>)
-																				</label>
-
-																			</c:when>
-
-
-																			<c:otherwise>
-
-																				<input type="radio" value="recursive"
-																					id="RecurentHostFile">
-																				<label for="RecurentHostFile">recursive</label>
-																			</c:otherwise>
-
-
-																		</c:choose>
-
-																		<!------- ---------- --------------------->
-																		<!------- Fixe Time  --------------------->
-																		<!------- ---------- --------------------->
-
-
-																		<c:choose>
-
-																			<c:when test="${typeUploadHost == 'fixedTime' }">
-
-																				<input type="radio" value="fixed"
-																					id="FixedTimeHostFile" checked="checked">
-
-																				<label for="FixedTimeHostFile">Fixed Time
-																					Every day at (<strong class="text-primary"><c:out
-																							value="${HostHour}" />:<c:out value="${HostMin}" /></strong>)
-																				</label>
-																			</c:when>
-
-
-																			<c:otherwise>
-
-																				<input type="radio" value="recursive"
-																					id="FixedTimeHostFile">
-																				<label for="FixedTimeHostFile">Fixed Time</label>
-																			</c:otherwise>
-																		</c:choose>
-																	</div>
-
-
-																</div>
-
-
-															</div>
-
-
-															<div class="form-group row" id="FixedTimeRowHost">
-
-
-																<div class="col-md-12">
-
-																	<div
-																		class="form-group form-group-default input-group  ">
-
-																		<div class="form-input-group">
-																			<label>Time</label> <input name="fixeTimeHost"
-																				id="TimeUploadHost" type="text"
-																				class="form-control time" placeholder="Pick a time"
-																				autocomplete="off" />
-																		</div>
-
-																		<div class="input-group-append ">
-																			<span class="input-group-text"><i
-																				class="fa fa-clock-o"></i></span>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-															<div class="form-group row" id="reccurentTimeRowHost">
-
-																<div class="col-md-6">
-																	<div class="form-group form-group-default input-group">
-																		<div class="form-input-group">
-																			<label>Minutes</label> <input type="number"
-																				class="form-control" name="reccurentTimeHostMin"> 
-																		</div>
-																		<div class="input-group-append ">
-																			<span class="input-group-text">Minutes </span>
-																		</div>
-																	</div>
-																</div>
-																<div class="col-md-6">
-																	<div class="form-group form-group-default input-group">
-																		<div class="form-input-group">
-																			<label>Hours</label> <input type="number"
-																				class="form-control" name="reccurentTimeHostHour">
-																		</div>
-																		<div class="input-group-append ">
-																			<span class="input-group-text">Hours</span>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-
-
-															<br>
-
-															<div class="row">
-																<div class="col-md-12">
-
-
-																<input type="submit" value="Save"
-																	class="btn btn-primary fa fa-close ">
-
-
-																<button class="btn btn-default">
-																	<i class="fa fa-close"></i> Clear
-																</button>
-																</div>
-
-															</div>
-														</form:form>
-
-
+													<span class="bold"> <spring:message code="label.type"></spring:message> : <label class="text-primary bold"> ${typeUploadHost} </label></span><br>
+													<span  class="bold" > <spring:message code="label.time"></spring:message> : <label class="text-primary bold">${HostHour} <spring:message code="label.hour"></spring:message></label> : 
+													<label class="text-primary bold">${HostMin} <spring:message code="label.minutes"></spring:message> </label> </span>
 
 													</div>
 												</div>
@@ -539,131 +371,14 @@
 													<div class="card-header ">
 														<div class="card-title text-primary bold">
 															<i class="fa fa-sliders fa-2x" aria-hidden="true"></i>
-															Uplaoding Journal file parametters
+															<spring:message code="label.UploadingJournalFileParam"></spring:message> 
 														</div>
 													</div>
 													<div class="card-body">
-														<div class="row">
-															<div class="col-md-12">
+													<span class="bold"> <spring:message code="label.type"></spring:message> : <label class="text-primary bold"> ${typeUpload} </label></span><br>
+													<span  class="bold" > <spring:message code="label.time"></spring:message> : <label class="text-primary bold">${jrnHour} <spring:message code="label.hour"></spring:message></label> : 
+													<label class="text-primary bold">${jrnMin} <spring:message code="label.minutes"></spring:message></label> </span>
 
-																<form:form action="journalFileParam" class="form-horizontal"
-																	autocomplete="off">
-
-
-																	<div class="form-group row">
-
-																		<div class="col-md-12 ">
-																			<div class="radio radio-primary">
-																				<c:choose>
-																					<c:when test="${typeUpload == 'recursive' }">
-																						<c:set var="MinutesToShow"
-																							value="${fn:substring(jrnMin, 2, 4)}" />
-																						
-																						<label for="Recurent">Recurent (<strong
-																							class="text-primary"><c:out
-																									value="${MinutesToShow}" /> Minutes</strong>)
-																						</label>
-																					</c:when>
-																					<c:otherwise>
-																						
-																						<label for="Recurent">Recurent</label>
-																					</c:otherwise>
-
-																				</c:choose>
-
-																				<c:choose>
-																					<c:when test="${typeUpload == 'fixedTime' }">
-																						<input type="radio" value="Fixed Time"
-																							name="uplaodTypeF" id="FixedTime"
-																							checked="checked">
-																						<label for="FixedTime">Fixed Time Every
-																							day at (<strong class="text-primary"><c:out
-																									value="${jrnHour}" />:<c:out value="${jrnMin}" /></strong>)
-																						</label>
-																					</c:when>
-																					<c:otherwise>
-																						<input type="radio" value="Fixed Time"
-																							name="uplaodTypeF" id="FixedTime">
-																						<label for="FixedTime">Fixed Time Every
-																							day</label>
-																					</c:otherwise>
-
-																				</c:choose>
-																			</div>
-																		</div>
-																	</div>
-
-
-																	<div class="form-group row" id="FixedTimeRow">
-
-																		<div class="col-md-10">
-																			<div
-																				class="form-group form-group-default input-group  ">
-
-																				<div class="form-input-group">
-																					<label>Time</label> <input name="fixedTime"
-																						id="TimeUpload" type="text"
-																						class="form-control time"
-																						placeholder="Pick a time" autocomplete="off" />
-																				</div>
-
-																				<div class="input-group-append ">
-																					<span class="input-group-text"><i
-																						class="fa fa-clock-o"></i></span>
-																				</div>
-																			</div>
-																		</div>
-
-																	</div>
-
-																	<div class="form-group row" id="reccurentTimeRow">
-
-																		<div class="col-md-6">
-																			<div
-																				class="form-group form-group-default input-group">
-																				<div class="form-input-group">
-																					<label>Minutes</label> <input type="number"
-																						class="form-control" name="reccurentMinute">
-																				</div>
-																				<div class="input-group-append ">
-																					<span class="input-group-text">Minutes </span>
-																				</div>
-																			</div>
-																		</div>
-																		
-																		<div class="col-md-6">
-																	<div class="form-group form-group-default input-group">
-																		<div class="form-input-group">
-																			<label>Hours</label> <input type="number"
-																				class="form-control" name="reccurentHourHostFile">
-																		</div>
-																		<div class="input-group-append ">
-																			<span class="input-group-text">Hours</span>
-																		</div>
-																	</div>
-																</div>
-
-																	</div>
-
-
-
-
-																	<br>
-																	<div class="row">
-																		<div class="col-md-6"></div>
-																		<div class="col-md-6 pull-right">
-
-																			<input type="submit" value="Save"
-																				class="btn btn-primary">
-
-																			<button class="btn btn-default">
-																				<i class="fa fa-close"></i> Clear
-																			</button>
-																		</div>
-																	</div>
-																</form:form>
-															</div>
-														</div>
 													</div>
 												</div>
 
@@ -708,10 +423,9 @@
 						<h5>
 							<span
 								class="text-white title text-uppercase font-montserrat all-caps small bold"><i
-								class="fa fa-info-circle" aria-hidden="true"></i> Parsing Result</span>
+								class="fa fa-info-circle" aria-hidden="true"></i> <spring:message code="label.parsingResult"></spring:message>  </span>
 						</h5>
-						<p class="p-b-10 text-white font-montserrat ">The informations
-							showed bellow are some statistic of parsing result.</p>
+						 
 					</div>
 
 					<div class="modal-body">
@@ -728,7 +442,7 @@
 												<div class="col-md-12 ">
 													<br>
 													<p class="font-montserrat bold text-uppercase ">
-														<i class="fa fa-tasks" aria-hidden="true"></i> Progression
+														<i class="fa fa-tasks" aria-hidden="true"></i> <spring:message code="label.progression"></spring:message>
 													</p>
 													<div class="row">
 														<div class="col-md-8  ">
@@ -761,8 +475,7 @@
 																	<span class="pull-right" id="progressing"> <i
 																		class="fa fa-spinner fa-pulse fa-3x fa-fw text-primary "></i>
 																	</span> <span id="status"
-																		class="font-montserrat bold fs-10 m-t-2"> En
-																		cours </span>
+																		class="font-montserrat bold fs-10 m-t-2"> <spring:message code="label.inProgress"></spring:message>  </span>
 
 																</div>
 															</div>
@@ -791,8 +504,7 @@
 									<div class="card-header ">
 										<div
 											class="card-title titel font-montserrat bold text-uppercase fs-14 ">
-											<i class="fa fa-info-circle" aria-hidden="true"></i> Infos of
-											files parsed
+											<i class="fa fa-info-circle" aria-hidden="true"></i> <spring:message code="label.infosFilesParsed"></spring:message>  
 										</div>
 
 									</div>
@@ -828,7 +540,7 @@
 							<button type="button"
 								class="btn btn-primary btn-lg btn-large btn-block"
 								data-dismiss="modal">
-								<i class="fa fa-close" aria-hidden="true"></i> Close
+								<i class="fa fa-close" aria-hidden="true"></i> <spring:message code="label.close"></spring:message>
 							</button>
 						</div>
 
@@ -855,7 +567,7 @@
 						<h5>
 							<span class="semi-bold text-danger"> <i
 								class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-								Upload File
+								<spring:message code="label.uploadingFile"></spring:message> 
 							</span>
 						</h5>
 
@@ -878,7 +590,7 @@
 							<div class="col-md-4 m-t-10 sm-m-t-10 pull-right">
 								<button type="button"
 									class="btn btn-sm btn-danger btn-block m-t-5"
-									data-dismiss="modal" aria-hidden="true">Close</button>
+									data-dismiss="modal" aria-hidden="true"> <spring:message code="label.close"></spring:message> </button>
 							</div>
 						</div>
 					</div>
@@ -902,8 +614,8 @@
 						<div class="row-xs-height">
 							<div class="modal-body col-xs-height col-middle text-center   ">
 								<h5 class="text-primary ">
-									<i class="fa fa-file-text-o" aria-hidden="true"></i> Journal
-									File history
+									<i class="fa fa-file-text-o" aria-hidden="true"></i><spring:message code="label.journal"></spring:message>  <spring:message code="label.history"></spring:message> 
+									 
 								</h5>
 								<br>
 
@@ -912,37 +624,30 @@
 										id="detailedTable">
 										<thead>
 											<tr>
-												<th style="width: 25%">DATE</th>
-												<th style="width: 25%">ATM</th>
+												<th style="width: 25%"><spring:message code="label.dateAndTime"></spring:message></th>
+												<th style="width: 25%"><spring:message code="label.atmName"></spring:message></th>
 
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-
-												<td class="v-align-middle semi-bold">DATE</td>
-												<td class="v-align-middle">ProCashX</td>
+										
+										<c:forEach var="journal" items="${listJournal}">
+										
+										
+										
+											<tr id="${journal.idjournal}">
+                                                   <c:set var = "dateToShow" value = "${fn:substring(journal.dateJournal, 0, 10)}" />
+												<td class="v-align-middle semi-bold">${dateToShow} ${journal.timeUploadJournal}</td>
+												<td class="v-align-middle">${journal.atm.nameAtm}</td>
 											</tr>
-											<tr>
-
-												<td class="v-align-middle semi-bold">DATE</td>
-												<td class="v-align-middle">ProCashX</td>
-											</tr>
-											<tr>
-
-												<td class="v-align-middle semi-bold">DATE</td>
-												<td class="v-align-middle">ProCashX</td>
-											</tr>
-											<tr>
-
-												<td class="v-align-middle semi-bold">DATE</td>
-												<td class="v-align-middle">ProCashX</td>
-											</tr>
+											 
+										</c:forEach>	 
+											 
 										</tbody>
 									</table>
 								</div>
 								<button type="button" class="btn btn-danger btn-block"
-									data-dismiss="modal">Cancel</button>
+									data-dismiss="modal"><spring:message code="label.close"></spring:message></button>
 							</div>
 						</div>
 					</div>
@@ -966,40 +671,30 @@
 					<div class="container-xs-height full-height">
 						<div class="row-xs-height">
 							<div class="modal-body col-xs-height col-middle text-center   ">
-								<h5 class="text-primary ">Host file</h5>
+								<h5 class="text-primary "><spring:message code="label.hostFile"></spring:message>  <spring:message code="label.history"></spring:message></h5>
 								<br>
 
 								<div class="table-responsive">
-									<table class="table table-hover table-condensed table-detailed"
-										id="detailedTable">
+									<table class="table table-hover table-condensed "
+										id="HostFiledetailedTable">
 										<thead>
 											<tr>
-												<th style="width: 25%">DATE</th>
-												<th style="width: 25%">ATM</th>
+												<th style="width: 25%"><spring:message code="label.dateAndTime"></spring:message></th>
+												<th style="width: 25%"><spring:message code="label.hostFileName"></spring:message></th>
+											 
 
 											</tr>
-										</thead>
+										</thead> 
 										<tbody>
+										<c:forEach var="hostFile" items="${listHostFile}">
 											<tr>
-
-												<td class="v-align-middle semi-bold">40,000 USD</td>
-												<td class="v-align-middle">April 13, 2014</td>
+                                                 <c:set var = "dateHostFileToShow" value = "${fn:substring(hostFile.dateUplaodHostFile, 0, 10)}" />
+                                                 <td class="v-align-middle">${dateHostFileToShow} ${hostFile.timeUploadHostFile}</td>
+												<td class="v-align-middle semi-bold">${hostFile.nameHostFile}</td>
+												
+											 
 											</tr>
-											<tr>
-
-												<td class="v-align-middle semi-bold">70,000 USD</td>
-												<td class="v-align-middle">April 13, 2014</td>
-											</tr>
-											<tr>
-
-												<td class="v-align-middle semi-bold">20,000 USD</td>
-												<td class="v-align-middle">April 13, 2014</td>
-											</tr>
-											<tr>
-
-												<td class="v-align-middle semi-bold">90,000 USD</td>
-												<td class="v-align-middle">April 13, 2014</td>
-											</tr>
+											 </c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -1008,8 +703,8 @@
 
 
 
-								<button type="button" class="btn btn-default btn-block"
-									data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-danger btn-block"
+									data-dismiss="modal"><spring:message code="label.close"></spring:message></button>
 							</div>
 						</div>
 					</div>
@@ -1018,6 +713,10 @@
 		</div>
 	</div>
 
+ 
+	
+	
+
 	<script
 		src="<spring:url value="/resources/assets/plugins/dropzone/dropzone.min.js"/>"></script>
 	<script src="<spring:url value="/resources/pages/js/upload.js"/>"></script>
@@ -1025,7 +724,8 @@
 	<script type="text/javascript">
 		(function($) {
 			'use strict';
-			var initBasicTable = function() {
+			var initBasicTable = function()
+			{
 				var table = $('#basicTable');
 				var settings = {
 					"sDom" : "t",
@@ -1039,7 +739,8 @@
 					"order" : [ [ 1, "desc" ] ]
 				};
 				table.dataTable(settings);
-				$('#basicTable input[type=checkbox]').click(function() {
+				$('#basicTable input[type=checkbox]').click(function() 
+				{
 					if ($(this).is(':checked')) {
 						$(this).closest('tr').addClass('selected');
 					} else {
@@ -1057,26 +758,39 @@
 				};
 				table.dataTable(settings);
 			}
+			
+			
 			var initDetailedViewTable = function() {
-				var _format = function(d) {
+				
+				
+				
+				var _format = function(d) 
+				{
 					return '<table class="table table-inline">'
 							+ '<tr>'
-							+ '<td> Transaction </td>'
-							+ '<td><span class="label label-info">nbr Transactions</span></td>'
+							+ '<td> <spring:message code="label.transaction"></spring:message> </td>'
+							+ '<td><span class="label label-info">'+d.nbrTransactions+'</span></td>'
 							+ '</tr>'
 							+ '<tr>'
-							+ '<td> Incident </td>'
-							+ '<td><span class="label label-info">nbr Incidents</span></td>'
+							+ '<td> <spring:message code="label.incident"></spring:message> </td>'
+							+ '<td><span class="label label-info">'+d.nbrIncidents+'</span></td>'
 							+ '</tr>'
 							+ '<tr>'
-							+ '<td> Errors </td>'
-							+ '<td><span class="label label-info">nbr Errors</span></td>'
+							+ '<td> <spring:message code="label.replanishment"></spring:message> </td>'
+							+ '<td><span class="label label-info">'+d.nbrReplenishements+'</span></td>'
 							+ '</tr>'
 							+ '<tr>'
-							+ '<td> Replanishment </td>'
-							+ '<td><span class="label label-info">nbr Replinshement</span></td>'
+							+ '<td> <spring:message code="label.errorsATM"></spring:message> </td>'
+							+ '<td><span class="label label-info">'+d.nbrErrorsATM+'</span></td>'
 							+ '</tr>' + '</table>';
 				}
+				var table2 = $('#HostFiledetailedTable'); 
+				table2.DataTable({
+					"sDom" : "ltip",
+					"scrollCollapse" : true,
+					"paging" : true,
+					"bSort" : false
+				});
 				var table = $('#detailedTable');
 				table.DataTable({
 					"sDom" : "ltip",
@@ -1088,21 +802,45 @@
 						'click',
 						'tr',
 						function() {
-							if ($(this).hasClass('shown')
-									&& $(this).next().hasClass('row-details')) {
+							if ($(this).hasClass('shown')&& $(this).next().hasClass('row-details')) 
+							{
 								$(this).removeClass('shown');
 								$(this).next().remove();
 								return;
 							}
+							
+							
 							var tr = $(this).closest('tr');
 							var row = table.DataTable().row(tr);
-							$(this).parents('tbody').find('.shown')
-									.removeClass('shown');
-							$(this).parents('tbody').find('.row-details')
-									.remove();
-							row.child(_format(row.data())).show();
-							tr.addClass('shown');
-							tr.next().addClass('row-details');
+							
+							$(this).parents('tbody').find('.shown').removeClass('shown');
+							$(this).parents('tbody').find('.row-details').remove();
+							
+							var idJournal = $(this).closest('tr').attr('id');
+							$
+							.ajax({
+								url : '${pageContext.request.contextPath}/getjournal-'
+										+idJournal+'',
+								method : 'GET',
+								contentType : "application/json",
+								timeout : 600000,
+								success : function(data) 
+								{
+
+									row.child(_format(data)).show();
+									tr.addClass('shown');
+									tr.next().addClass('row-details');
+
+								},
+
+								error : function(xhr, status, error) {
+
+								}
+							});
+							
+							
+							
+							
 						});
 			}
 			var initCondensedTable = function() {
@@ -1121,6 +859,11 @@
 			initCondensedTable();
 		})(window.jQuery);
 
+		
+		
+		
+		
+		
 		Dropzone.autoDiscover = false;
 		Dropzone.options.mydropzone = false;
 		$(document)
@@ -1370,9 +1113,9 @@
 
 													console.log(atmValue);
 													$
-															.confirm({
-																title : 'Encountered an error!',
-																content : 'You should select an ATM , and a type of file',
+															.confirm({ 
+																title : '<spring:message code="label.titleError"></spring:message> !',
+																content : '<spring:message code="label.selectAtmAndTypeFile"></spring:message>',
 																type : 'red',
 																animation : 'left',
 																icon : 'fa fa-exclamation-circle fa-spin',
@@ -1434,39 +1177,46 @@
 															
 															
 														}
+														else if (new String(infoKey).valueOf() == new String('infos').valueOf()) 
+							                            {
+															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-file-code-o' aria-hidden='true'></i> "  +  "<spring:message code='label.infos'></spring:message> " 
+							                                 +" : " +  " </span>" + "<span class='bold fs-16 text-danger'>  "  + infoObject[infoKey] +  " </span>" +" <br> ";
+															
+														}
+														
 														else if (new String(infoKey).valueOf() == new String('name').valueOf()) 
 							                            {
-															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-file-code-o' aria-hidden='true'></i> "  +  "File name " 
+															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-file-code-o' aria-hidden='true'></i> "  +  "<spring:message code='label.fileName'></spring:message> " 
 							                                 +" : " +  " </span>" + "<span class='bold fs-16'>  "  + infoObject[infoKey] +  " </span>" +" <br> ";
 															
 														}
 														else if (new String(infoKey).valueOf() == new String('type').valueOf()) 
 							                            {
-															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-file' aria-hidden='true'></i> "  +  "Type of file " 
+															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-file' aria-hidden='true'></i> "  +  "<spring:message code='label.TypeOfFile'></spring:message> " 
 							                                 +" : " +  " </span>" + "<span class='bold fs-16'>  "  + infoObject[infoKey] +  " </span>" +" <br> ";
 															
 														}
 														else if (new String(infoKey).valueOf() == new String('nbrTransactions').valueOf()) 
 							                            {
-															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-exchange' aria-hidden='true'></i> "  +  "Number of transactions" 
+															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-exchange' aria-hidden='true'></i> "  +  "<spring:message code='label.nbrTransaction'></spring:message>" 
 							                                 +" : " +  " </span>" + "<span class='bold fs-16'>  "  + infoObject[infoKey] +  " </span>" +" <br> ";
 															
 														}
 														else if (new String(infoKey).valueOf() == new String('nbrReplenishements').valueOf()) 
 							                            {
-															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-plus-square' aria-hidden='true'></i> "  +  "Number of replenishement" 
+															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-plus-square' aria-hidden='true'></i> "  +  "<spring:message code='label.nbrReplenishement'></spring:message>"  
 							                                 +" : " +  " </span>" + "<span class='bold fs-16'>  "  + infoObject[infoKey] +  " </span>" +" <br> ";
 															
 														}
 														else if (new String(infoKey).valueOf() == new String('nbrIncidents').valueOf()) 
 							                            {
-															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-flash text-warning' aria-hidden='true'></i> "  +  "  Number of incidents" 
+															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-flash text-warning' aria-hidden='true'></i> "  +  "  <spring:message code='label.nbrIncidents'></spring:message>" 
 							                                 +" : " +  " </span>" + "<span class='bold fs-16'>  "  + infoObject[infoKey] +  " </span>" +" <br> ";
 															
 														}
 														else if (new String(infoKey).valueOf() == new String('nbrErrorsATM').valueOf()) 
 							                            {
-															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-exclamation-triangle text-danger' aria-hidden='true'></i> "  +  "Number of ATM errors :" 
+															responseContent = responseContent + " " +"<span class='font-montserrat   text-primary bold fs-16'> <i class='fa fa-exclamation-triangle text-danger' aria-hidden='true'></i> "  +  "<spring:message code='label.nbrAtmErrors'></spring:message> " 
 							                                 +" : " +  " </span>" + "<span class='bold fs-16'>  "  + infoObject[infoKey] +  " </span>" +" <br> ";
 															
 														}

@@ -1,6 +1,5 @@
 package com.DieboldNixdorf.ProCompta.model;
 
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,6 +43,8 @@ public class UploadedFile {
 	 private int nbrIncidents;
 	 @Transient 
 	 private int nbrErrorsATM;
+	 @Transient
+	 private String infos;
 	 
 	 
 	
@@ -140,6 +141,16 @@ public java.util.Date getFileDateUploaded() {
 
 public void setFileDateUploaded(java.util.Date fileDateUploaded) {
 	this.fileDateUploaded = fileDateUploaded;
+}
+
+
+public String getInfos() {
+	return infos;
+}
+
+
+public void setInfos(String infos) {
+	this.infos = infos;
 }
 
  

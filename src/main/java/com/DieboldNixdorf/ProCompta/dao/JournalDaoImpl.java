@@ -5,19 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
- 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
- 
-
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -28,13 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
- 
 import org.springframework.web.multipart.MultipartFile;
 import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.ErrorATM;
 import com.DieboldNixdorf.ProCompta.model.Incident;
 import com.DieboldNixdorf.ProCompta.model.Journal;
- 
 import com.DieboldNixdorf.ProCompta.model.Replenishment;
 import com.DieboldNixdorf.ProCompta.model.Transaction;
 import com.DieboldNixdorf.ProCompta.service.AtmService;
@@ -43,48 +37,42 @@ import com.DieboldNixdorf.ProCompta.service.IncidentService;
 import com.DieboldNixdorf.ProCompta.service.JounalService;
 import com.DieboldNixdorf.ProCompta.service.ReplenishmentService;
 import com.DieboldNixdorf.ProCompta.service.TransactionService;
-import com.DieboldNixdorf.ProCompta.tools.SwitchStringRegex;
 import com.DieboldNixdorf.ProCompta.tools.ToolsToUse;
-
- 
 
 @Repository
 @PropertySource({ "classpath:/regeX/regeX.properties" })
 public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements JournalDao {
 
-	SwitchStringRegex sw = new SwitchStringRegex();
-	
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	private AtmService atmService;
-	
+
 	@Autowired
 	private JounalService jService;
-	
-	@Autowired 
+
+	@Autowired
 	private TransactionService tService;
-	
-	@Autowired 
+
+	@Autowired
 	private IncidentService iService;
-	
-	@Autowired 
+
+	@Autowired
 	private ReplenishmentService rService;
-	
-	@Autowired 
+
+	@Autowired
 	private ErrorATMService eService;
-	
-	
-/* ___________________________________________________
- *               
- *                T R A N S A C T I O N  
- * ___________________________________________________
- */
+
+	/*
+	 * ___________________________________________________
+	 * 
+	 * T R A N S A C T I O N ___________________________________________________
+	 */
 
 	@Value("${TRANSACTION_START}")
 	String TRANSACTION_START;
- 
+
 	@Value("${CARD_NUMBER}")
 	String CARD_NUMBER;
 
@@ -99,7 +87,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 
 	@Value("${CARD_TAKEN}")
 	String CARD_TAKEN;
-	
+
 	@Value("${CARD_RETAINED}")
 	String CARD_RETAINED;
 
@@ -144,85 +132,78 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 
 	@Value("${TRANSACTION_END}")
 	String TRANSACTION_END;
-	
+
 	@Value("${TYPE_TRANSACTION}")
 	String TYPE_TRANSACTION;
 
-	
-	
-	/* ___________________________________________________
-	 *               
-	 *                H O S T  
+	/*
 	 * ___________________________________________________
+	 * 
+	 * H O S T ___________________________________________________
 	 */
-	
+
 	@Value("${HOST_DATE}")
 	String HOST_DATE;
-	
+
 	@Value("${HOST_BRANCH}")
 	String HOST_BRANCH;
-	
+
 	@Value("${HOST_AMOUNT}")
-	String HOST_AMOUNT;        
-			
+	String HOST_AMOUNT;
+
 	@Value("${HOST_HOUR}")
-	String HOST_HOUR;		
-			
+	String HOST_HOUR;
+
 	@Value("${HOST_CARD}")
 	String HOST_CARD;
-	
+
 	@Value("${HOST_AUTH}")
 	String HOST_AUTH;
-	
+
 	@Value("${HOST_UTRNNO}")
 	String HOST_UTRNNO;
-	
+
 	@Value("${HOST_INFO_TRANSACTION}")
 	String HOST_INFO_TRANSACTION;
-	
-			
-	/* ___________________________________________________
-	 *               
-	 *                I N C I D E N T   
+
+	/*
 	 * ___________________________________________________
-	 */		
+	 * 
+	 * I N C I D E N T ___________________________________________________
+	 */
 
 	@Value("${INCIDENT_ATM}")
 	String INCIDENT_ATM;
-	
-	/* ___________________________________________________
-	 *               
-	 *                R E P L A N I S H E M E N T    
+
+	/*
 	 * ___________________________________________________
-	 */	
-	
+	 * 
+	 * R E P L A N I S H E M E N T
+	 * ___________________________________________________
+	 */
+
 	@Value("${START_REPLENISHMENT}")
 	String START_REPLENISHMENT;
-	
-	
+
 	@Value("${FINISH_REPLENISHMENT}")
 	String FINISH_REPLENISHMENT;
-	
+
 	@Value("${START_REPLENISHMENT_INDICATOR}")
 	String START_REPLENISHMENT_INDICATOR;
-	
-	 
+
 	@Value("${FINISH_REPLENISHMENT_INDICATOR}")
 	String FINISH_REPLENISHMENT_INDICATOR;
-	
-	
-	/* ___________________________________________________
-	 *               
-	 *                E R R O R S    
+
+	/*
 	 * ___________________________________________________
-	 */	
+	 * 
+	 * E R R O R S ___________________________________________________
+	 */
 	@Value("${ERROR_ATM}")
 	String ERROR_ATM;
-	
+
 	@Value("${ERROR_ATM_WITHOUT_CODE}")
 	String ERROR_ATM_WITHOUT_CODE;
-	
-	
 
 	@SuppressWarnings("unchecked")
 	public List<Journal> findAll() {
@@ -234,8 +215,6 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 	public Journal findById(int idjournal) {
 		return getByKey(idjournal);
 	}
-
-	 
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -260,14 +239,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		atm.addJournal(journal);
 		Integer idJournal = (Integer) currentSession.save(journal);
 		return idJournal;
-		
-		
+
 	}
-	
-	
-	
-	
-	
 
 	@Override
 	public boolean JounralExiste(String journalName) {
@@ -286,27 +259,20 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		}
 	}
 
-	
- 
 	@Override
-	public List<String> ParseJournal(MultipartFile file, int idAtm ) {
-		    
-		
+	public List<String> ParseJournal(MultipartFile file, int idAtm) {
+
 		int nbrTransactionJrnGlob = 0;
 		int nbrReplenishementsJrnGlob = 0;
 		int nbrIncidentsJrnGlob = 0;
 		int nbrErrrosATMJrnGlob = 0;
-		
-		
-		
-		
-		
+
 		Collection<String> collection = new ArrayList<String>();
 		Collection<String> collectionNCR = new ArrayList<String>();
-		/* ___________________________________________________
-		 *               
-		 *                T R A N S A C T I O N  
+		/*
 		 * ___________________________________________________
+		 * 
+		 * T R A N S A C T I O N ___________________________________________________
 		 */
 		collection.add(TRANSACTION_START);
 		collection.add(CARD_NUMBER);
@@ -329,10 +295,10 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		collection.add(CARD_RETAINED_BY_HOST);
 		collection.add(CASH_RETRACT_CALLED_IN_ADRS);
 		collection.add(TRANSACTION_END);
-		/* ___________________________________________________
-		 *               
-		 *                H O S T  
+		/*
 		 * ___________________________________________________
+		 * 
+		 * H O S T ___________________________________________________
 		 */
 		collection.add(TYPE_TRANSACTION);
 		collection.add(HOST_UTRNNO);
@@ -342,7 +308,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		collection.add(HOST_AMOUNT);
 		collection.add(HOST_BRANCH);
 		collection.add(HOST_DATE);
-		
+
 		collectionNCR.add(TYPE_TRANSACTION);
 		collectionNCR.add(HOST_UTRNNO);
 		collectionNCR.add(HOST_AUTH);
@@ -353,86 +319,78 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		collectionNCR.add(HOST_DATE);
 		collectionNCR.add(HOST_INFO_TRANSACTION);
 		collectionNCR.add(TYPE_TRANSACTION);
-		
-		
-		/* ___________________________________________________
-		 *               
-		 *                I N C I D E N T   
+
+		/*
 		 * ___________________________________________________
-		 */		
+		 * 
+		 * I N C I D E N T ___________________________________________________
+		 */
 		collection.add(INCIDENT_ATM);
-		
-		/* ___________________________________________________
-		 *               
-		 *                R E P L A N I S H E M E N T    
+
+		/*
 		 * ___________________________________________________
-		 */	
-		
-		
+		 * 
+		 * R E P L A N I S H E M E N T
+		 * ___________________________________________________
+		 */
+
 		collection.add(FINISH_REPLENISHMENT_INDICATOR);
-		
+
 		collection.add(START_REPLENISHMENT_INDICATOR);
-		
-		
-		/* ___________________________________________________
-		 *               
-		 *                E R R O R S    
+
+		/*
 		 * ___________________________________________________
-		 */	
+		 * 
+		 * E R R O R S ___________________________________________________
+		 */
 		collection.add(ERROR_ATM);
 		collection.add(ERROR_ATM_WITHOUT_CODE);
 		@SuppressWarnings("unused")
 		Session currentSession = sessionFactory.getCurrentSession();
 		// ----------- get the RegX according to the ATM -----------\\
 		Atm atm = atmService.findById(idAtm);
-		    
- /*|_________________________________________________________________________________________________|
-  *|_________________________________________________________________________________________________|              
-  *|                                                                                                 |
-  *|                                                                                                 |
-  *|                                    W I N C O R N I X D O R F                                    |
-  *|_________________________________________________________________________________________________|               
-  *|_________________________________________________________________________________________________|
-  */		
+
+		/*
+		 * |_________________________________________________________________________________________________|
+		 * |_________________________________________________________________________________________________|
+		 * | | | | | W I N C O R N I X D O R F |
+		 * |_________________________________________________________________________________________________|
+		 * |_________________________________________________________________________________________________|
+		 */
 		if (atm.getVendor().equalsIgnoreCase("DIEBOLD-NIXDORF"))
-		
+
 		{
-			
-			
-			
-			
+
 			// ------ save the Journal on DataBase and get the id ----- \\
 			Journal jrn = new Journal();
-			int nbrTransactions=0;
-			int nbrReplenishements=0;
-			int nbrIncidents=0;
-			int nbrErrorsATM=0;
-			
-			
-			
-			
+			int nbrTransactions = 0;
+			int nbrReplenishements = 0;
+			int nbrIncidents = 0;
+			int nbrErrorsATM = 0;
+
 			jrn.setAtm(atm);
- 
-			String timeNow = new  SimpleDateFormat("HH:mm:SS").format(new java.util.Date());
+
+			String timeNow = new SimpleDateFormat("HH:mm:SS").format(new java.util.Date());
 			jrn.setTimeUploadJournal(timeNow);
-			
+
+			String dateNow = new SimpleDateFormat("YYYY:MM:dd").format(new java.util.Date());
+			jrn.setDateUplaodJournal(dateNow);
+
 			String JournalName = FilenameUtils.removeExtension(file.getOriginalFilename());
-			
+
 			ToolsToUse toolsProCompta = new ToolsToUse();
-			
+
 			try {
-				jrn.setDateJournal((Date)toolsProCompta.ConvertStringToDate(JournalName));
+				jrn.setDateJournal((Date) toolsProCompta.ConvertStringToDate(JournalName));
 			} catch (ParseException e2) {
 				e2.printStackTrace();
 			}
 			jrn.setNomJournal(JournalName);
-			
+
 			@SuppressWarnings("unused")
-			
-			
+
 			int idjournal = jService.saveJournal(jrn, idAtm);
-			
-	 
+
 			InputStreamReader isr = null;
 			try {
 				isr = new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8);
@@ -440,547 +398,509 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 				e1.printStackTrace();
 			}
 			BufferedReader br = new BufferedReader(isr);
-	      
+
 			String line;
-			
-		    
+
 			Transaction trx = new Transaction();
 			Incident incd = new Incident();
 			ErrorATM ErrATM = new ErrorATM();
 			Replenishment Replsh = new Replenishment();
-			
-			
-			
-			
-			
-			
+
 			try {
-				while ((line = br.readLine()) != null) 
-				{
-				
+				while ((line = br.readLine()) != null) {
+
 					Iterator<String> iterator = collection.iterator();
-					
+
 					trx.setJournal(jrn);
 					incd.setJournal(jrn);
 					ErrATM.setJournal(jrn);
 					Replsh.setJournal(jrn);
 
-					while (iterator.hasNext()) 
-					{
-						  
-					      String Io =iterator.next();
-						  Pattern pattern = Pattern.compile(Io.toString()); 
-						  Matcher matcher = pattern.matcher(line); 
-						
-						
-						  
-						 if (matcher.find()) 
-						 {
-							 
-	/*------------------------------------------------------------------------------------------------------- 
-	|                                          _______________________                                       |
-	|                                                                                                        |
-	|                                           T R A N S A C T I O N                                        |
-	|                                          _______________________                                       |
-	|                                                                                                        |
-	*---------------------------------------------------------------------------------------------------------*/
-							 
-							 
-							 
-							 
-							 /*==========================================================================*\
-							 |                            TRANSACTIO START                               |
-							 \*===========================================================================*/
-							 
-					    
-						  if (Io.toString().equalsIgnoreCase(TRANSACTION_START))
-						  {
-							  try {
-								trx.setStartingDate((Date) toolsProCompta.ConvertStringToDate(JournalName));
-								trx.setFinishingDate((Date) toolsProCompta.ConvertStringToDate(JournalName));
-								trx.setStartingTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
-							   } catch (ParseException e) {
-								e.printStackTrace();
-							   }
-						  }
-						     /*==========================================================================*\
-							 |                            CARD NUMBRR                                    |
-							 \*===========================================================================*/
-						    if (Io.toString().equalsIgnoreCase(CARD_NUMBER))
-						  {
-							  
-							  trx.setCardNumber(matcher.group(1));
-						  }
-						     /*==========================================================================*\
-							 |                            AMOUNT ENTERED                                 |
-							 \*===========================================================================*/
-						    
-						    if (Io.toString().equalsIgnoreCase(AMOUNT_ENTERED))
-						  {
-							  
-							  trx.setAmountEntred(matcher.group(1));
-						  }
-						     /*==========================================================================*\
-							 |                               CASH REQUEST                                |
-							 \*===========================================================================*/
-						   if (Io.toString().equalsIgnoreCase(CASH_REQUEST))
-						  {
-							   trx.setCashRequest(matcher.group(1));
-						  }
-						     /*==========================================================================*\
-							 |                               CASH DISPENSED                              |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(CASH_DISPENSED))
-						  {
-							  
-							  
-							   trx.setCashDispensed(matcher.group(1));
-							   
-							   @SuppressWarnings("rawtypes")
-							   ArrayList ret=  toolsProCompta.ConvertCashDispenseToCassette(matcher.group(1)); 
-							   
-							   for (int i=0;i<ret.size();i++) {
-								   
-								   @SuppressWarnings("rawtypes")
-								ArrayList ll =(ArrayList)ret.get(i);
-								   
-								   if(ll.get(0).toString().equalsIgnoreCase("1"))
-								   {
-									   trx.setCassette1(Integer.parseInt(ll.get(1).toString())  );
-								   }else if(ll.get(0).toString().equalsIgnoreCase("2"))
-								   {
-									   trx.setCassette2(Integer.parseInt(ll.get(1).toString())  );
-								   }else if(ll.get(0).toString().equalsIgnoreCase("3"))
-								   {
-									   trx.setCassette3(Integer.parseInt(ll.get(1).toString())  );
-								   }else if(ll.get(0).toString().equalsIgnoreCase("4"))
-								   {
-									   trx.setCassette4(Integer.parseInt(ll.get(1).toString())  );
-								   } 
-									   
-									   
-							   }
-							   
-							   
-							  
-						  }
-						   
-						     /*==========================================================================*\
-							 |                               CASH PRESENTED                              |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(CASH_PRESENTED))
-						  {
-							  trx.setCashPresented(true); 
-							   
-							 
-						  }
-						   
-						     /*==========================================================================*\
-							 |                                CASH TAKEN                                 |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(CASH_TAKEN))
-						  {
-							  trx.setCashTaken(true);
-							 
-						  }
-						     
-						  
-						    /*==========================================================================*\
-							 |                               TYPE TRANSACTION                           |
-							 \*===========================================================================*/
-						  if (Io.toString().equalsIgnoreCase(TYPE_TRANSACTION))
-						  {
-							  trx.setTransactionType(matcher.group(1));; 
-						  }
-						  
-						
-						     /*==========================================================================*\
-							 |                               CASH  RETRACTED                             |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(CASH_RETRACTED))
-						  {
-							  trx.setErrorTransaction("CASH RETRACTED");
-							 
-						  }
-						   /*==========================================================================*\
-							 |                           COMMUNICATION TRANSACTION ERROR                 |
-							 \*===========================================================================*/
-						   if (Io.toString().equalsIgnoreCase(COMMUNICATION_TRANSACTION_ERROR))
-						  {
-							   
-							   trx.setErrorTransaction(matcher.group(2));
-							   
-						  }
-						     
-						     /*==========================================================================*\
-							 |                           CASH PRESENT TIMER EXPIRED                      |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(CASH_PRESENT_TIMER_EXPIRED))
-						  {
-							  trx.setErrorTransaction("CASH_PRESENT_TIMER_EXPIRED"); 
-						  }
-						   
-						     /*==========================================================================*\
-							 |                           WRONG_PIN_ENTERED                               |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(WRONG_PIN_ENTERED))
-						  {
-							  
-							  trx.setErrorTransaction("WRONG_PIN_ENTERED");
-							  
-						  }
-						     /*==========================================================================*\
-							 |                           CARD EJECT TIMER EXPIRED                        |
-							 \*===========================================================================*/
-						   if (Io.toString().equalsIgnoreCase(CARD_EJECT_TIMER_EXPIRED))
-						  {
-							  
-							  trx.setErrorTransaction("CARD_EJECT_TIMER_EXPIRED");
-							  
-						  }
-						   
-						     /*==========================================================================*\
-							 |                          RETAIN CARD NOT SUPPORTED                        |
-							 \*===========================================================================*/
-						   if (Io.toString().equalsIgnoreCase(RETAIN_CARD_NOT_SUPPORTED))
-						  {
-							  trx.setErrorTransaction("RETAIN_CARD_NOT_SUPPORTED");
-							  
-						  }
-						     /*==========================================================================*\
-							 |                          ERROR DURING CASH RETRACT                        |
-							 \*===========================================================================*/
-						   if (Io.toString().equalsIgnoreCase(ERROR_DURING_CASH_RETRACT))
-						  {
-							  trx.setErrorTransaction("ERROR_DURING_CASH_RETRACT");
-							  
-						  }
-						   
-						     /*==========================================================================*\
-							 |                          CARD RETAINED BY HOST                            |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(CARD_RETAINED_BY_HOST))
-						  {
+					while (iterator.hasNext()) {
 
-							  trx.setErrorTransaction("CARD_RETAINED_BY_HOST");
-						  }
-						     /*==========================================================================*\
-							 |                          CASH RETRACT CALLED IN ADRS                      |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(CASH_RETRACT_CALLED_IN_ADRS))
-						  {
-							  trx.setErrorTransaction("CASH_RETRACT_CALLED_IN_ADRS");
-						  }
-						   
-						     /*==========================================================================*\
-							 |                               CARD TAKEN                                  |
-							 \*===========================================================================*/
-						      
-						   if (Io.toString().equalsIgnoreCase(CARD_TAKEN))
-						  {
+						String Io = iterator.next();
+						Pattern pattern = Pattern.compile(Io.toString());
+						Matcher matcher = pattern.matcher(line);
 
-							  trx.setCardTaken(true);
-						  }
-						      /*==========================================================================*\
-							 |                               TRANSACTION END                                  |
-							 \*===========================================================================*/
-						  
-						   if (Io.toString().equalsIgnoreCase(TRANSACTION_END))
-						  {
-							  
-							  System.out.println(" TRANSACTION_END " );
-							  trx.setFinishingTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
-							  
-							  tService.saveTrasanction(trx);
-							 
-								
-								
-								nbrTransactions ++ ; 
-								nbrTransactionJrnGlob = nbrTransactions;
-								 
-								 
-							  trx=new Transaction();
-							  
-						  }
-	   /*------------------------------------------------------------------------------------------------------- 
-	   |                                       _________________________                                        |
-	   |                                                                                                        |
-	   |                                              H  O  S  T                                                |
-	   |                                       _________________________                                        |
-	   |                                                                                                        |
-	   *---------------------------------------------------------------------------------------------------------*/	
-						     /*==========================================================================*\
-							 |                               HOST   DATE                                 |
-							 \*===========================================================================*/
-						   
-						  if (Io.toString().equalsIgnoreCase(HOST_DATE))
-							  {
-								  
-								  
-								  try {
-									trx.setTransactionDateHost((toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+						if (matcher.find()) {
+
+							/*------------------------------------------------------------------------------------------------------- 
+							|                                          _______________________                                       |
+							|                                                                                                        |
+							|                                           T R A N S A C T I O N                                        |
+							|                                          _______________________                                       |
+							|                                                                                                        |
+							*---------------------------------------------------------------------------------------------------------*/
+
+							/*
+							 * ==========================================================================*\
+							 * | TRANSACTIO START |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(TRANSACTION_START)) {
+								try {
+									trx.setStartingDate((Date) toolsProCompta.ConvertStringToDate(JournalName));
+									trx.setFinishingDate((Date) toolsProCompta.ConvertStringToDate(JournalName));
+									trx.setStartingTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
 								} catch (ParseException e) {
 									e.printStackTrace();
 								}
-							  }
-						     /*==========================================================================*\
-							 |                               HOST BRANCH                                 |
-							 \*===========================================================================*/
-						  
-						  if (Io.toString().equalsIgnoreCase(HOST_BRANCH))
-							  {
-							  trx.setTransactionHostATM(matcher.group(1));
-							  
-							  }
-						  
-						     /*==========================================================================*\
-							 |                               HOST  AMOUNT                                 |
-							 \*===========================================================================*/
-						   
-						  if (Io.toString().equalsIgnoreCase(HOST_AMOUNT))
-							  {
-							  String amountR= matcher.group(1);
-							  if (amountR.contains(",")) 
-							  {
-								   amountR =  amountR.replaceAll(",", "");
-							  }
-							      
-								  trx.setTransactionHostAmount(amountR);
-							  }
-						  
-						     /*==========================================================================*\
-							 |                               HOST    Time                                |
-							 \*===========================================================================*/
-						  
-						  if (Io.toString().equalsIgnoreCase(HOST_HOUR))
-							  {
-								  trx.setTransactionHostTime(toolsProCompta.ConevretStringToTime(matcher.group(1))); 
-							  }
-						     /*==========================================================================*\
-							 |                               HOST    CARD                                |
-							 \*===========================================================================*/
-						  
-						  
-						  if (Io.toString().equalsIgnoreCase(HOST_CARD))
-							  {
-								  
-								  trx.setTransactionHostCard(matcher.group(1));
-							  }
-						  
-						     /*==========================================================================*\
-							 |                               HOST   UTRNNO                               |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(HOST_UTRNNO))
-							  {
-								  trx.setUTRNNO(matcher.group(1));
-							  }
-						     /*==========================================================================*\
-							 |                               HOST   AUTH                                 |
-							 \*===========================================================================*/
-						   
-						   if (Io.toString().equalsIgnoreCase(HOST_AUTH))
-							  {
-								  trx.setTaransaction_AUTH(matcher.group(1));
-							  }
-						   
-	   /*------------------------------------------------------------------------------------------------------- 
-	   |                                       _________________________                                        |
-	   |                                                                                                        |
-	   |                                       R E P L E N I S H M E N T                                        |
-	   |                                       _________________________                                        |
-	   |                                                                                                        |
-	   *---------------------------------------------------------------------------------------------------------*/	
-						    
-						   
-						   if (Io.toString().equalsIgnoreCase(START_REPLENISHMENT_INDICATOR))
-							  {
-							   String newLineBefor = "";
-							   
-							   
-							   
-							   
-							   
-							   
-							   if (line.contains("CASH COUNTERS BEFOR")) 
-							      {
-								   newLineBefor = line;
-										 
-							    	 for (int i = 0; i <= 5; i++) 
-										 {
-							    		 
-							    		     line = br.readLine();
-							    		     newLineBefor = 	newLineBefor + line;
-										}
-										  
-										  
-								  } 
-							   
-							   
-							   
-							   Pattern patternRepBefor = Pattern.compile(START_REPLENISHMENT); 
-							   Matcher MathcerRep = patternRepBefor.matcher(newLineBefor);
-							   
-							   if (MathcerRep.find()) {
-								   
-								   Replsh.setDateReplenishment((Date) toolsProCompta.ConvertStringToDate(JournalName));
-								   Replsh.setTimeReplenishment(toolsProCompta.ConevretStringToTime(MathcerRep.group(1)));
-									   
-								   Replsh.setCassetteOneValueBefor(Integer.parseInt(MathcerRep.group(2)));
-								   Replsh.setCassetteOneBefor(Integer.parseInt(MathcerRep.group(3)));
-								   
-								   Replsh.setCassetteTwoValueBefor(Integer.parseInt(MathcerRep.group(4)));
-								   Replsh.setCassetteTwoBefor(Integer.parseInt(MathcerRep.group(5)));
-								   
-								   Replsh.setCassetteThreeValueBefor(Integer.parseInt(MathcerRep.group(6)));
-								   Replsh.setCassetteThreeBefor(Integer.parseInt(MathcerRep.group(7)));
-								   
-								   Replsh.setCassetteFourValueBefor(Integer.parseInt(MathcerRep.group(8)));
-								   Replsh.setCassetteFourBefor(Integer.parseInt(MathcerRep.group(9)));
-								   
-								   Replsh.setCassetteRejectBefor(Integer.parseInt(MathcerRep.group(10)));
-								   Replsh.setCassetteRetractBefor(Integer.parseInt(MathcerRep.group(11)));
-									    
-								  
-								   
-							   }
-							  
-								   
-							  }
-						   
-						   if (Io.toString().equalsIgnoreCase(FINISH_REPLENISHMENT_INDICATOR))
-							  
-						   {
-							   String newLineAfter = "";
-							   
-							   
-							   
-							   if (line.contains("CASH COUNTERS AFTER")) 
-							      {
-								   newLineAfter = line;
-										 
-							    	 for (int i = 0; i <= 5; i++) 
-										 {
-							    		     line = br.readLine();
-							    		     newLineAfter = 	newLineAfter + line;
-										}
-										  
-										  
-								  } 
-							   
-							   
-							   Pattern patternRepAfter = Pattern.compile(FINISH_REPLENISHMENT); 
-							   Matcher MathcerRepAfter = patternRepAfter.matcher(newLineAfter);
-							   
-							   if (MathcerRepAfter.find()) {
-							   Replsh.setCassetteOneValueAfter(Integer.parseInt(MathcerRepAfter.group(2)));
-							   Replsh.setCassetteOneAfter(Integer.parseInt(MathcerRepAfter.group(3)));
-							   
-							   Replsh.setCassetteTwoValueAfter(Integer.parseInt(MathcerRepAfter.group(4)));
-							   Replsh.setCassetteTwoAfter(Integer.parseInt(MathcerRepAfter.group(5)));
-							   
-							   
-							   Replsh.setCassetteThreeValueAfter(Integer.parseInt(MathcerRepAfter.group(6)));
-							   Replsh.setCassetteThreeAfter(Integer.parseInt(MathcerRepAfter.group(7)));
-							   
-							   Replsh.setCassetteFourValueAfter(Integer.parseInt(MathcerRepAfter.group(8)));
-							   Replsh.setCassetteFourAfter(Integer.parseInt(MathcerRepAfter.group(9)));
-							   
-							   Replsh.setCassetteRejectAfter(Integer.parseInt(MathcerRepAfter.group(10)));
-							   Replsh.setCassetteRetractAfter(Integer.parseInt(MathcerRepAfter.group(11)));
-							   
-							   
-							       nbrReplenishements++;
-							       
-							      nbrReplenishementsJrnGlob = nbrReplenishements;
-								
-							       
-							   
-							       rService.saveReplenishment(Replsh);
-							       Replsh = new Replenishment();
-							   }
-								   
-							  }
-						   
-						 
-	   /*------------------------------------------------------------------------------------------------------- 
-	   |                                          _______________________                                       |
-	   |                                                                                                        |
-	   |                                           I N C I D E N T E S                                          |
-	   |                                          _______________________                                       |
-	   |                                                                                                        |
-	   *---------------------------------------------------------------------------------------------------------*/					   
-						   /*==========================================================================*\
-							 |                           COMMUNICATION TRANSACTION ERROR                 |
-							 \*===========================================================================*/
-						   if (Io.toString().equalsIgnoreCase(INCIDENT_ATM))
-						  {
-							   
-							   incd.setDetailsincidents(matcher.group(2));
-							   incd.setIncident_date((Date) toolsProCompta.ConvertStringToDate(JournalName));
-							   incd.setIncident_time(toolsProCompta.ConevretStringToTime(matcher.group(1)));
-						 
-							   iService.saveIncident(incd);
-							   nbrIncidents++;
-							   
-								 nbrIncidentsJrnGlob = nbrIncidents;
-						
-								
-								
-								
-							   incd = new Incident();
-							   
-						  }
-						  
-	   /*------------------------------------------------------------------------------------------------------- 
-	   |                                          _______________________                                       |
-	   |                                                                                                        |
-	   |                                               E R R O R E                                              |
-	   |                                          _______________________                                       |
-	   |                                                                                                        |
-	   *---------------------------------------------------------------------------------------------------------*/					  
-						   if (Io.toString().equalsIgnoreCase(ERROR_ATM))
-							  {
-								   
-							   
-							   ErrATM.setDateErrorATM((Date) toolsProCompta.ConvertStringToDate(JournalName));
-							   ErrATM.setTimeErrorATM(toolsProCompta.ConevretStringToTime(matcher.group(1)));
-							   ErrATM.setDetailErrorAtm(matcher.group(2));
-							   ErrATM.setCodeErrorAtm(matcher.group(3));
-							   eService.saveErrorATM(ErrATM);
-							   
-							   nbrErrorsATM++;
-							   
-								 nbrErrrosATMJrnGlob = nbrErrorsATM;
-							   ErrATM = new ErrorATM();
-								   
-							  }
-						   if (Io.toString().equalsIgnoreCase(ERROR_ATM_WITHOUT_CODE))
-							  {
-								   
-							   
-							   ErrATM.setDateErrorATM((Date) toolsProCompta.ConvertStringToDate(JournalName));
-							   ErrATM.setTimeErrorATM(toolsProCompta.ConevretStringToTime(matcher.group(1)));
-							   ErrATM.setDetailErrorAtm(matcher.group(2));
-							   ErrATM.setCodeErrorAtm("none");
-							   eService.saveErrorATM(ErrATM);
-							   ErrATM = new ErrorATM();
-							   nbrErrorsATM++;
-							   nbrErrrosATMJrnGlob = nbrErrorsATM;
-								   
-							  }
-							 
-						  
-						 }
-						 
+							}
+							/*
+							 * ==========================================================================*\
+							 * | CARD NUMBRR |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(CARD_NUMBER)) {
+
+								trx.setCardNumber(matcher.group(1));
+							}
+							/*
+							 * ==========================================================================*\
+							 * | AMOUNT ENTERED |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(AMOUNT_ENTERED)) {
+
+								trx.setAmountEntred(matcher.group(1));
+							}
+							/*
+							 * ==========================================================================*\
+							 * | CASH REQUEST |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(CASH_REQUEST)) {
+								trx.setCashRequest(matcher.group(1));
+							}
+							/*
+							 * ==========================================================================*\
+							 * | CASH DISPENSED |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CASH_DISPENSED)) {
+
+								trx.setCashDispensed(matcher.group(1));
+
+								@SuppressWarnings("rawtypes")
+								ArrayList ret = toolsProCompta.ConvertCashDispenseToCassette(matcher.group(1));
+
+								for (int i = 0; i < ret.size(); i++) {
+
+									@SuppressWarnings("rawtypes")
+									ArrayList ll = (ArrayList) ret.get(i);
+
+									if (ll.get(0).toString().equalsIgnoreCase("1")) {
+										trx.setCassette1(Integer.parseInt(ll.get(1).toString()));
+									} else if (ll.get(0).toString().equalsIgnoreCase("2")) {
+										trx.setCassette2(Integer.parseInt(ll.get(1).toString()));
+									} else if (ll.get(0).toString().equalsIgnoreCase("3")) {
+										trx.setCassette3(Integer.parseInt(ll.get(1).toString()));
+									} else if (ll.get(0).toString().equalsIgnoreCase("4")) {
+										trx.setCassette4(Integer.parseInt(ll.get(1).toString()));
+									}
+
+								}
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | CASH PRESENTED |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CASH_PRESENTED)) {
+								trx.setCashPresented(true);
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | CASH TAKEN |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CASH_TAKEN)) {
+								trx.setCashTaken(true);
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | TYPE TRANSACTION |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(TYPE_TRANSACTION)) {
+								trx.setTransactionType(matcher.group(1));
+								;
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | CASH RETRACTED |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CASH_RETRACTED)) {
+								trx.setErrorTransaction("CASH RETRACTED");
+
+							}
+							/*
+							 * ==========================================================================*\
+							 * | COMMUNICATION TRANSACTION ERROR |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(COMMUNICATION_TRANSACTION_ERROR)) {
+
+								trx.setErrorTransaction(matcher.group(2));
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | CASH PRESENT TIMER EXPIRED |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CASH_PRESENT_TIMER_EXPIRED)) {
+								trx.setErrorTransaction("CASH_PRESENT_TIMER_EXPIRED");
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | WRONG_PIN_ENTERED |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(WRONG_PIN_ENTERED)) {
+
+								trx.setErrorTransaction("WRONG_PIN_ENTERED");
+
+							}
+							/*
+							 * ==========================================================================*\
+							 * | CARD EJECT TIMER EXPIRED |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(CARD_EJECT_TIMER_EXPIRED)) {
+
+								trx.setErrorTransaction("CARD_EJECT_TIMER_EXPIRED");
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | RETAIN CARD NOT SUPPORTED |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(RETAIN_CARD_NOT_SUPPORTED)) {
+								trx.setErrorTransaction("RETAIN_CARD_NOT_SUPPORTED");
+
+							}
+							/*
+							 * ==========================================================================*\
+							 * | ERROR DURING CASH RETRACT |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(ERROR_DURING_CASH_RETRACT)) {
+								trx.setErrorTransaction("ERROR_DURING_CASH_RETRACT");
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | CARD RETAINED BY HOST |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CARD_RETAINED_BY_HOST)) {
+
+								trx.setErrorTransaction("CARD_RETAINED_BY_HOST");
+							}
+							/*
+							 * ==========================================================================*\
+							 * | CASH RETRACT CALLED IN ADRS |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CASH_RETRACT_CALLED_IN_ADRS)) {
+								trx.setErrorTransaction("CASH_RETRACT_CALLED_IN_ADRS");
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | CARD TAKEN |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(CARD_TAKEN)) {
+
+								trx.setCardTaken(true);
+							}
+							/*
+							 * ==========================================================================*\
+							 * | TRANSACTION END |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(TRANSACTION_END)) {
+
+								trx.setFinishingTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+
+								tService.saveTrasanction(trx);
+
+								nbrTransactions++;
+								nbrTransactionJrnGlob = nbrTransactions;
+
+								trx = new Transaction();
+
+							}
+							/*------------------------------------------------------------------------------------------------------- 
+							|                                       _________________________                                        |
+							|                                                                                                        |
+							|                                              H  O  S  T                                                |
+							|                                       _________________________                                        |
+							|                                                                                                        |
+							*---------------------------------------------------------------------------------------------------------*/
+							/*
+							 * ==========================================================================*\
+							 * | HOST DATE |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_DATE)) {
+
+								try {
+									trx.setTransactionDateHost(
+											(toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+							}
+							/*
+							 * ==========================================================================*\
+							 * | HOST BRANCH |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_BRANCH)) {
+								trx.setTransactionHostATM(matcher.group(1));
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | HOST AMOUNT |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_AMOUNT)) {
+								String amountR = matcher.group(1);
+								if (amountR.contains(",")) {
+									amountR = amountR.replaceAll(",", "");
+								}
+
+								trx.setTransactionHostAmount(amountR);
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | HOST Time |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_HOUR)) {
+								trx.setTransactionHostTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+							}
+							/*
+							 * ==========================================================================*\
+							 * | HOST CARD |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_CARD)) {
+
+								trx.setTransactionHostCard(matcher.group(1));
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | HOST UTRNNO |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_UTRNNO)) {
+								trx.setUTRNNO(matcher.group(1));
+							}
+							/*
+							 * ==========================================================================*\
+							 * | HOST AUTH |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_AUTH)) {
+								trx.setTaransaction_AUTH(matcher.group(1));
+							}
+
+							/*------------------------------------------------------------------------------------------------------- 
+							|                                       _________________________                                        |
+							|                                                                                                        |
+							|                                       R E P L E N I S H M E N T                                        |
+							|                                       _________________________                                        |
+							|                                                                                                        |
+							*---------------------------------------------------------------------------------------------------------*/
+
+							if (Io.toString().equalsIgnoreCase(START_REPLENISHMENT_INDICATOR)) {
+								String newLineBefor = "";
+
+								if (line.contains("CASH COUNTERS BEFOR")) {
+									newLineBefor = line;
+
+									for (int i = 0; i <= 5; i++) {
+
+										line = br.readLine();
+										newLineBefor = newLineBefor + line;
+									}
+
+								}
+
+								Pattern patternRepBefor = Pattern.compile(START_REPLENISHMENT);
+								Matcher MathcerRep = patternRepBefor.matcher(newLineBefor);
+
+								if (MathcerRep.find()) {
+
+									Replsh.setDateReplenishment((Date) toolsProCompta.ConvertStringToDate(JournalName));
+									Replsh.setTimeReplenishment(
+											toolsProCompta.ConevretStringToTime(MathcerRep.group(1)));
+
+									Replsh.setCassetteOneValueBefor(Integer.parseInt(MathcerRep.group(2)));
+									Replsh.setCassetteOneBefor(Integer.parseInt(MathcerRep.group(3)));
+
+									Replsh.setCassetteTwoValueBefor(Integer.parseInt(MathcerRep.group(4)));
+									Replsh.setCassetteTwoBefor(Integer.parseInt(MathcerRep.group(5)));
+
+									Replsh.setCassetteThreeValueBefor(Integer.parseInt(MathcerRep.group(6)));
+									Replsh.setCassetteThreeBefor(Integer.parseInt(MathcerRep.group(7)));
+
+									Replsh.setCassetteFourValueBefor(Integer.parseInt(MathcerRep.group(8)));
+									Replsh.setCassetteFourBefor(Integer.parseInt(MathcerRep.group(9)));
+
+									Replsh.setCassetteRejectBefor(Integer.parseInt(MathcerRep.group(10)));
+									Replsh.setCassetteRetractBefor(Integer.parseInt(MathcerRep.group(11)));
+
+								}
+
+							}
+
+							if (Io.toString().equalsIgnoreCase(FINISH_REPLENISHMENT_INDICATOR))
+
+							{
+								String newLineAfter = "";
+
+								if (line.contains("CASH COUNTERS AFTER")) {
+									newLineAfter = line;
+
+									for (int i = 0; i <= 5; i++) {
+										line = br.readLine();
+										newLineAfter = newLineAfter + line;
+									}
+
+								}
+
+								Pattern patternRepAfter = Pattern.compile(FINISH_REPLENISHMENT);
+								Matcher MathcerRepAfter = patternRepAfter.matcher(newLineAfter);
+
+								if (MathcerRepAfter.find()) {
+									Replsh.setCassetteOneValueAfter(Integer.parseInt(MathcerRepAfter.group(2)));
+									Replsh.setCassetteOneAfter(Integer.parseInt(MathcerRepAfter.group(3)));
+
+									Replsh.setCassetteTwoValueAfter(Integer.parseInt(MathcerRepAfter.group(4)));
+									Replsh.setCassetteTwoAfter(Integer.parseInt(MathcerRepAfter.group(5)));
+
+									Replsh.setCassetteThreeValueAfter(Integer.parseInt(MathcerRepAfter.group(6)));
+									Replsh.setCassetteThreeAfter(Integer.parseInt(MathcerRepAfter.group(7)));
+
+									Replsh.setCassetteFourValueAfter(Integer.parseInt(MathcerRepAfter.group(8)));
+									Replsh.setCassetteFourAfter(Integer.parseInt(MathcerRepAfter.group(9)));
+
+									Replsh.setCassetteRejectAfter(Integer.parseInt(MathcerRepAfter.group(10)));
+									Replsh.setCassetteRetractAfter(Integer.parseInt(MathcerRepAfter.group(11)));
+
+									nbrReplenishements++;
+
+									nbrReplenishementsJrnGlob = nbrReplenishements;
+
+									rService.saveReplenishment(Replsh);
+									Replsh = new Replenishment();
+								}
+
+							}
+
+							/*------------------------------------------------------------------------------------------------------- 
+							|                                          _______________________                                       |
+							|                                                                                                        |
+							|                                           I N C I D E N T E S                                          |
+							|                                          _______________________                                       |
+							|                                                                                                        |
+							*---------------------------------------------------------------------------------------------------------*/
+							/*
+							 * ==========================================================================*\
+							 * | COMMUNICATION TRANSACTION ERROR |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(INCIDENT_ATM)) {
+
+								incd.setDetailsincidents(matcher.group(2));
+								incd.setIncident_date((Date) toolsProCompta.ConvertStringToDate(JournalName));
+								incd.setIncident_time(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+
+								iService.saveIncident(incd);
+								nbrIncidents++;
+
+								nbrIncidentsJrnGlob = nbrIncidents;
+
+								incd = new Incident();
+
+							}
+
+							/*------------------------------------------------------------------------------------------------------- 
+							|                                          _______________________                                       |
+							|                                                                                                        |
+							|                                               E R R O R E                                              |
+							|                                          _______________________                                       |
+							|                                                                                                        |
+							*---------------------------------------------------------------------------------------------------------*/
+							if (Io.toString().equalsIgnoreCase(ERROR_ATM)) {
+
+								ErrATM.setDateErrorATM((Date) toolsProCompta.ConvertStringToDate(JournalName));
+								ErrATM.setTimeErrorATM(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+								ErrATM.setDetailErrorAtm(matcher.group(2));
+								ErrATM.setCodeErrorAtm(matcher.group(3));
+								eService.saveErrorATM(ErrATM);
+
+								nbrErrorsATM++;
+
+								nbrErrrosATMJrnGlob = nbrErrorsATM;
+								ErrATM = new ErrorATM();
+
+							}
+							if (Io.toString().equalsIgnoreCase(ERROR_ATM_WITHOUT_CODE)) {
+
+								ErrATM.setDateErrorATM((Date) toolsProCompta.ConvertStringToDate(JournalName));
+								ErrATM.setTimeErrorATM(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+								ErrATM.setDetailErrorAtm(matcher.group(2));
+								ErrATM.setCodeErrorAtm("none");
+								eService.saveErrorATM(ErrATM);
+								ErrATM = new ErrorATM();
+								nbrErrorsATM++;
+								nbrErrrosATMJrnGlob = nbrErrorsATM;
+
+							}
+
+						}
 
 					}
 
@@ -990,294 +910,282 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-			
+
 			Journal journalInfo = jService.findById(idjournal);
-			
+
 			journalInfo.setNbrTransactions(nbrTransactions);
 			journalInfo.setNbrReplenishements(nbrReplenishements);
 			journalInfo.setNbrIncidents(nbrIncidents);
 			journalInfo.setNbrErrorsATM(nbrErrorsATM);
 			jService.updateJournal(journalInfo);
-			
-			
-			
-			
-			
+
 		}
-		
- /*|_________________________________________________________________________________________________|
-  *|_________________________________________________________________________________________________|              
-  *|                                                                                                 |
-  *|                                                                                                 |
-  *|                                             N C R                                               |
-  *|_________________________________________________________________________________________________|               
-  *|_________________________________________________________________________________________________|
-  */		
-		
-		else if (atm.getVendor().equalsIgnoreCase("NCR")) 
-		
-		
+
+		/*
+		 * |_________________________________________________________________________________________________|
+		 * |_________________________________________________________________________________________________|
+		 * | | | | | N C R |
+		 * |_________________________________________________________________________________________________|
+		 * |_________________________________________________________________________________________________|
+		 */
+
+		else if (atm.getVendor().equalsIgnoreCase("NCR"))
+
 		{
 			Journal jrn = new Journal();
 			int idjournalNCR = 0;
-			int nbrTransactions=0;
+			int nbrTransactions = 0;
 			jrn.setAtm(atm);
 			String JournalName = FilenameUtils.removeExtension(file.getOriginalFilename());
-			
-			
-			   Pattern patternJournalNCR = Pattern.compile("(NCR\\W\\w+)_([0-2][0-9][0-9][0-9][0-1][0-9][0-3][0-9])\\d+_EJDATA"); 
-			   Matcher MathcerJournalNCR = patternJournalNCR.matcher(JournalName);
-			
-			   ToolsToUse toolsProCompta = new ToolsToUse();
-			   if (MathcerJournalNCR.find()) 
-			   {
-				   
-				   String newJournalNCRname="";
-				   newJournalNCRname = MathcerJournalNCR.group(1)+"_"+MathcerJournalNCR.group(2) ; 
-				   
-				   try {
-						jrn.setDateJournal((Date)toolsProCompta.ConvertStringToDate(MathcerJournalNCR.group(2)));
-					} catch (ParseException e2) {
-						e2.printStackTrace();
-					}
-				     jrn.setNomJournal(newJournalNCRname);
-				 
-					idjournalNCR = jService.saveJournal(jrn, idAtm);   
-			   }
-			   
-			   InputStreamReader isr = null;
-				try {
-					isr = new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				BufferedReader br = new BufferedReader(isr);
-		      
-				String line;
-           
-				Transaction trx_NCR= new Transaction();
-				@SuppressWarnings("unused")
-				Incident incd_NCR = new Incident();
-				@SuppressWarnings("unused")
-				ErrorATM ErrATM_NCR = new ErrorATM();
-				@SuppressWarnings("unused") 
-				Replenishment Replsh_NCR = new Replenishment();
-			
-			
-				try {
-					while ((line = br.readLine()) != null) 
-					{
-					
-						Iterator<String> iterator = collectionNCR.iterator();
-						
-						trx_NCR.setJournal(jrn);
-					  	while (iterator.hasNext()) 
-						{
-							  
-						      String Io =iterator.next();
-							  Pattern pattern = Pattern.compile(Io.toString()); 
-							  Matcher matcher = pattern.matcher(line); 
-							  
-							  
-							  if (matcher.find()) 
-								 {
-								  
-								  /*------------------------------------------------------------------------------------------------------- 
-								   |                                       _________________________                                        |
-								   |                                                                                                        |
-								   |                                              H  O  S  T                                                |
-								   |                                       _________________________                                        |
-								   |                                                                                                        |
-								   *---------------------------------------------------------------------------------------------------------*/	
-													     /*==========================================================================*\
-														 |                               HOST   DATE                                 |
-														 \*===========================================================================*/
-													   
-													     if (Io.toString().equalsIgnoreCase(HOST_DATE))
-														  {
-															  
-															  
-															  try {
-																  trx_NCR.setTransactionDateHost((toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
-																  trx_NCR.setStartingDate((Date)(toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
-																  trx_NCR.setFinishingDate((Date)(toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
-															      } catch (ParseException e) 
-															      {
-																  e.printStackTrace();
-															      }
-														  }
-													     /*==========================================================================*\
-														 |                               HOST BRANCH                                 |
-														 \*===========================================================================*/
-													  
-													  if (Io.toString().equalsIgnoreCase(HOST_BRANCH))
-														  {
-														  trx_NCR.setTransactionHostATM(matcher.group(1));
-														  
-														  }
-													  
-													     /*==========================================================================*\
-														 |                               HOST  AMOUNT                                 |
-														 \*===========================================================================*/
-													   
-													  if (Io.toString().equalsIgnoreCase(HOST_AMOUNT))
-														  {
-														  String amountR= matcher.group(1);
-														  if (amountR.contains(",")) 
-														  {
-															   amountR =  amountR.replaceAll(",", "");
-														  }
-														      
-														  trx_NCR.setTransactionHostAmount(amountR);
-														 
-														  
-														  }
-													  
-													     /*==========================================================================*\
-														 |                               HOST    Time                                |
-														 \*===========================================================================*/
-													  
-													  if (Io.toString().equalsIgnoreCase(HOST_HOUR))
-														  {
-														  try {
-															trx_NCR.setTransactionHostTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
-															trx_NCR.setStartingTime  (toolsProCompta.ConevretStringToTime(matcher.group(1)));
-															trx_NCR.setFinishingTime (toolsProCompta.ConevretStringToTime(matcher.group(1)));
-														} catch (ParseException e) {
-															// TODO Auto-generated catch block
-															e.printStackTrace();
-														} 
-														  }
-													     /*==========================================================================*\
-														 |                               HOST    CARD                                |
-														 \*===========================================================================*/
-													  
-													  
-													  if (Io.toString().equalsIgnoreCase(HOST_CARD))
-														  {
-															  
-														  trx_NCR.setTransactionHostCard(matcher.group(1));
-														  
-														  trx_NCR.setCardNumber(matcher.group(1));
-														  }
-													  
-													     /*==========================================================================*\
-														 |                               HOST   UTRNNO                               |
-														 \*===========================================================================*/
 
-													  
-													   if (Io.toString().equalsIgnoreCase(HOST_UTRNNO))
-														  {
-														   trx_NCR.setUTRNNO(matcher.group(1));
-														  }
-													   /*==========================================================================*\
-														 |                               TYPE TARNSACTION                             |
-														 \*===========================================================================*/
-													     if (Io.toString().equalsIgnoreCase(TYPE_TRANSACTION))
-													     {
-														  trx_NCR.setTransactionType(matcher.group(1));; 
-													     }
-													     
-													     /*==========================================================================*\
-														 |                               HOST   AUTH                                 |
-														 \*===========================================================================*/
-													   
-													   if (Io.toString().equalsIgnoreCase(HOST_AUTH))
-														  {
-														      trx_NCR.setTaransaction_AUTH(matcher.group(1));
-														      line = br.readLine();
-														      Pattern patternInfos = Pattern.compile(HOST_INFO_TRANSACTION); 
-															  Matcher matcherInfos = patternInfos.matcher(line); 
-														     /*==========================================================================*\
-															 |                               HOTS_INFO_TRANSACTION                       |
-															 \*===========================================================================*/
-														   
-															  if (matcherInfos.find()) 
-																 {
-																  trx_NCR.setErrorTransaction(matcherInfos.group(1));
-																 }
-															  nbrTransactions++;
-														          tService.saveTrasanction(trx_NCR);
-														          trx_NCR=new Transaction();
-														  }
-													  
-								  
-								 }
-							  
+			Pattern patternJournalNCR = Pattern
+					.compile("(NCR\\W\\w+)_([0-2][0-9][0-9][0-9][0-1][0-9][0-3][0-9])\\d+_EJDATA");
+			Matcher MathcerJournalNCR = patternJournalNCR.matcher(JournalName);
+
+			ToolsToUse toolsProCompta = new ToolsToUse();
+			if (MathcerJournalNCR.find()) {
+
+				String newJournalNCRname = "";
+				newJournalNCRname = MathcerJournalNCR.group(1) + "_" + MathcerJournalNCR.group(2);
+
+				try {
+					jrn.setDateJournal((Date) toolsProCompta.ConvertStringToDate(MathcerJournalNCR.group(2)));
+				} catch (ParseException e2) {
+					e2.printStackTrace();
+				}
+				jrn.setNomJournal(newJournalNCRname);
+				String timeNow = new SimpleDateFormat("HH:mm:SS").format(new java.util.Date());
+				jrn.setTimeUploadJournal(timeNow);
+
+				String dateNow = new SimpleDateFormat("YYYY:MM:dd").format(new java.util.Date());
+				jrn.setDateUplaodJournal(dateNow);
+
+				idjournalNCR = jService.saveJournal(jrn, idAtm);
+			}
+
+			InputStreamReader isr = null;
+			try {
+				isr = new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			BufferedReader br = new BufferedReader(isr);
+
+			String line;
+
+			Transaction trx_NCR = new Transaction();
+			@SuppressWarnings("unused")
+			Incident incd_NCR = new Incident();
+			@SuppressWarnings("unused")
+			ErrorATM ErrATM_NCR = new ErrorATM();
+			@SuppressWarnings("unused")
+			Replenishment Replsh_NCR = new Replenishment();
+
+			try {
+				while ((line = br.readLine()) != null) {
+
+					Iterator<String> iterator = collectionNCR.iterator();
+
+					trx_NCR.setJournal(jrn);
+					while (iterator.hasNext()) {
+
+						String Io = iterator.next();
+						Pattern pattern = Pattern.compile(Io.toString());
+						Matcher matcher = pattern.matcher(line);
+
+						if (matcher.find()) {
+
+							/*------------------------------------------------------------------------------------------------------- 
+							 |                                       _________________________                                        |
+							 |                                                                                                        |
+							 |                                              H  O  S  T                                                |
+							 |                                       _________________________                                        |
+							 |                                                                                                        |
+							 *---------------------------------------------------------------------------------------------------------*/
+							/*
+							 * ==========================================================================*\
+							 * | HOST DATE |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_DATE)) {
+
+								try {
+									trx_NCR.setTransactionDateHost(
+											(toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+									trx_NCR.setStartingDate(
+											(Date) (toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+									trx_NCR.setFinishingDate(
+											(Date) (toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+							}
+							/*
+							 * ==========================================================================*\
+							 * | HOST BRANCH |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_BRANCH)) {
+								trx_NCR.setTransactionHostATM(matcher.group(1));
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | HOST AMOUNT |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_AMOUNT)) {
+								String amountR = matcher.group(1);
+								if (amountR.contains(",")) {
+									amountR = amountR.replaceAll(",", "");
+								}
+
+								trx_NCR.setTransactionHostAmount(amountR);
+
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | HOST Time |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_HOUR)) {
+								try {
+									trx_NCR.setTransactionHostTime(
+											toolsProCompta.ConevretStringToTime(matcher.group(1)));
+									trx_NCR.setStartingTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+									trx_NCR.setFinishingTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
+								} catch (ParseException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							/*
+							 * ==========================================================================*\
+							 * | HOST CARD |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_CARD)) {
+
+								trx_NCR.setTransactionHostCard(matcher.group(1));
+
+								trx_NCR.setCardNumber(matcher.group(1));
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | HOST UTRNNO |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_UTRNNO)) {
+								trx_NCR.setUTRNNO(matcher.group(1));
+							}
+							/*
+							 * ==========================================================================*\
+							 * | TYPE TARNSACTION |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(TYPE_TRANSACTION)) {
+								trx_NCR.setTransactionType(matcher.group(1));
+								;
+							}
+
+							/*
+							 * ==========================================================================*\
+							 * | HOST AUTH |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_AUTH)) {
+								trx_NCR.setTaransaction_AUTH(matcher.group(1));
+								line = br.readLine();
+								Pattern patternInfos = Pattern.compile(HOST_INFO_TRANSACTION);
+								Matcher matcherInfos = patternInfos.matcher(line);
+								/*
+								 * ==========================================================================*\
+								 * | HOTS_INFO_TRANSACTION |
+								 * \*===========================================================================
+								 */
+
+								if (matcherInfos.find()) {
+									trx_NCR.setErrorTransaction(matcherInfos.group(1));
+								}
+								nbrTransactions++;
+								tService.saveTrasanction(trx_NCR);
+								trx_NCR = new Transaction();
+							}
+
 						}
-						
-					
+
 					}
-					}catch (IOException e) 
-				    {
-						e.printStackTrace();
-					}  
-			
-				
-				Journal journalInfos = jService.findById(idjournalNCR);
-				journalInfos.setNbrTransactions(nbrTransactions);
-				journalInfos.setNbrReplenishements(0);
-				journalInfos.setNbrIncidents(0);
-				journalInfos.setNbrErrorsATM(0);
-				jService.updateJournal(journalInfos);
-				 
-			
+
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			Journal journalInfos = jService.findById(idjournalNCR);
+			journalInfos.setNbrTransactions(nbrTransactions);
+			journalInfos.setNbrReplenishements(0);
+			journalInfos.setNbrIncidents(0);
+			journalInfos.setNbrErrorsATM(0);
+			jService.updateJournal(journalInfos);
+
 		}
-		
-		String nbr_transactionResultat = String.valueOf(nbrTransactionJrnGlob) ;
-		String nbr_replinshementResultat = String.valueOf(nbrReplenishementsJrnGlob) ;
-		String nbr_incidentResultat = String.valueOf(nbrIncidentsJrnGlob) ;
-		String nbr_errorsATMResultat = String.valueOf(nbrErrrosATMJrnGlob) ;
-		
-		
+
+		String nbr_transactionResultat = String.valueOf(nbrTransactionJrnGlob);
+		String nbr_replinshementResultat = String.valueOf(nbrReplenishementsJrnGlob);
+		String nbr_incidentResultat = String.valueOf(nbrIncidentsJrnGlob);
+		String nbr_errorsATMResultat = String.valueOf(nbrErrrosATMJrnGlob);
+
 		List<String> listStringsInfosOfEachJournal = new LinkedList<String>();
 		listStringsInfosOfEachJournal.add(nbr_transactionResultat);
 		listStringsInfosOfEachJournal.add(nbr_replinshementResultat);
 		listStringsInfosOfEachJournal.add(nbr_incidentResultat);
 		listStringsInfosOfEachJournal.add(nbr_errorsATMResultat);
-		
-		
-		
+
 		return listStringsInfosOfEachJournal;
 
 	}
 
 	@Override
 	public void deleteByDate(String dateJournal) {
-		
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-		    java.util.Date convertedDate = null;
-			try {
-				convertedDate = (java.util.Date) dateFormat.parse(dateJournal);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    
-		    
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date convertedDate = null;
+		try {
+			convertedDate = (java.util.Date) dateFormat.parse(dateJournal);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = currentSession.createQuery("from Journal where dateJournal=:thedateOfTheJournal", Journal.class);
+		@SuppressWarnings("rawtypes")
+		Query theQuery = currentSession.createQuery("from Journal where dateJournal=:thedateOfTheJournal",
+				Journal.class);
 		theQuery.setParameter("thedateOfTheJournal", convertedDate);
-		
+
 		if (theQuery.uniqueResult() != null) {
 
-			Journal journal =(Journal)  theQuery.getSingleResult();
+			Journal journal = (Journal) theQuery.getSingleResult();
 			delete(journal);
 		} else {
-			System.out.println("");
-		} 
-		
-		
-		
-		
+
+		}
+
 	}
 
 	@Override
 	public void updateJournal(Journal journal) {
-		 
+
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.saveOrUpdate(journal);
 	}

@@ -1,6 +1,5 @@
 package com.DieboldNixdorf.ProCompta.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,6 @@ public class JournalServiceImpl implements JounalService {
 		return journalDao.findById(idjournal);
 	}
 
-	 
-
 	@Override
 	public List<Journal> findAllByAtmId(int idAtm) {
 
@@ -45,38 +42,34 @@ public class JournalServiceImpl implements JounalService {
 
 	}
 
-	 
-
 	@Override
 	public boolean JounralExiste(String journalName) {
 		return journalDao.JounralExiste(journalName);
-		 
+
 	}
 
 	@Override
-	public List<String> ParseJournal(MultipartFile multipartFile , int idAtm) {
-		 
-		return journalDao.ParseJournal(multipartFile,idAtm);
-	}
+	public List<String> ParseJournal(MultipartFile multipartFile, int idAtm) {
 
-	 
+		return journalDao.ParseJournal(multipartFile, idAtm);
+	}
 
 	@Override
 	public int saveJournal(Journal journal, int idAtm) {
-		 
+
 		return journalDao.saveJournal(journal, idAtm);
 	}
 
 	@Override
 	public void deleteByDate(String dateJournal) {
 		journalDao.deleteByDate(dateJournal);
-		
+
 	}
 
 	@Override
 	public void updateJournal(Journal journal) {
 		journalDao.updateJournal(journal);
-		
+
 	}
 
 }

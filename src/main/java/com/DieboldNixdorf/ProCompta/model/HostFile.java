@@ -25,8 +25,15 @@ public class HostFile {
 	    @Column(name="name_host_file")
 	    private String nameHostFile;
 	     
-	    @Column(name="date_uploaded")
-	    private Date DateUplaoded;
+	    @Column(name="date_host_file")
+	    private Date dateHostFile;
+	    
+	    @Column(name="time_upload_host_file")
+        private String timeUploadHostFile;
+	    
+	    
+	    @Column(name="date_upload_host_file")
+        private String dateUplaodHostFile;
 	     
 
 	    @OneToMany(mappedBy = "hostFile", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
@@ -52,17 +59,30 @@ public class HostFile {
 			this.idHostFile = idHostFile;
 		}
 
-		 
-
-		public Date getDateUplaoded() {
-			return DateUplaoded;
+		public String getDateUplaodHostFile() {
+			return dateUplaodHostFile;
 		}
 
-		public void setDateUplaoded(Date dateUplaoded) {
-			DateUplaoded = dateUplaoded;
+		public void setDateUplaodHostFile(String dateUplaodHostFile) {
+			this.dateUplaodHostFile = dateUplaodHostFile;
 		}
-	    
-	    
+
+		public Date getDateHostFile() {
+			return dateHostFile;
+		}
+
+		public void setDateHostFile(Date dateHostFile) {
+			this.dateHostFile = dateHostFile;
+		}
+
+		public String getTimeUploadHostFile() {
+			return timeUploadHostFile;
+		}
+
+		public void setTimeUploadHostFile(String timeUploadHostFile) {
+			this.timeUploadHostFile = timeUploadHostFile;
+		}
+
 		public void addTransactionHost(TransactionHost transactionHost) 
 		{
 
