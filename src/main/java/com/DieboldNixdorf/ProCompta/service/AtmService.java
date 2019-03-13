@@ -12,7 +12,7 @@ public interface AtmService {
 
 	void save(Atm atm);
 
-	void saveAtm(Atm atm, int idHost, int idBranch);
+	void saveAtm(Atm atm,  int idBranch);
 
 	void deleteById(int idAtm);
 

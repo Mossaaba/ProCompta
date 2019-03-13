@@ -136,12 +136,7 @@
 																		class="fa fa fa-link fa-stack-1x"></i>
 																</span> <spring:message code="label.atmVendor"></spring:message>
 																</td>
-																<td class="v-align-middle text-primary bold fs-14">
-																	<span class="fa-stack fa-lg"> <i
-																		class="fa fa-square-o fa-stack-2x"></i> <i
-																		class="fa fa fa-server fa-stack-1x"></i>
-																</span> <spring:message code="label.atmHost"></spring:message>
-																</td>
+																 
 																<td class="v-align-middle text-primary bold fs-14">
 																	<span class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
@@ -158,40 +153,7 @@
 																</span> <spring:message code="label.atmName"></spring:message>
 
 																</td>
-																<td class="v-align-middle text-primary bold fs-14">
-																	<span class="fa-stack fa-lg"> <i
-																		class="fa fa-square-o fa-stack-2x"></i> <i
-																		class="fa fa fa-wifi fa-stack-1x"></i>
-																</span> <spring:message code="label.atmConnexionType"></spring:message>
 
-																</td>
-																<td class="v-align-middle text-primary bold fs-14">
-																	<span class="fa-stack fa-lg"> <i
-																		class="fa fa-square-o fa-stack-2x"></i> <i
-																		class="fa fa fa-location-arrow fa-stack-1x"></i>
-																</span> <spring:message
-																		code="label.AdresseIpJournalFolderFolder"></spring:message>
-																</td>
-																<td class="v-align-middle text-primary bold fs-14">
-																	<span class="fa-stack fa-lg"> <i
-																		class="fa fa-square-o fa-stack-2x"></i> <i
-																		class="fa fa fa-user-circle fa-stack-1x"></i>
-																</span> <spring:message code="label.windwosUser"></spring:message>
-
-
-																</td>
-																<td class="v-align-middle text-primary bold fs-14">
-																	<span class="fa-stack fa-lg"> <i
-																		class="fa fa-square-o fa-stack-2x"></i> <i
-																		class="fa fa fa fa-key fa-stack-1x"></i>
-																</span> <spring:message code="label.windwosPassword"></spring:message>
-																</td>
-																<td class="v-align-middle text-primary bold fs-14">
-																	<span class="fa-stack fa-lg"> <i
-																		class="fa fa-square-o fa-stack-2x"></i> <i
-																		class="fa fa fa-hdd-o fa-stack-1x"></i>
-																</span> <spring:message code="label.journalDisuqe"></spring:message>
-																</td>
 																<td class="v-align-middle text-primary bold fs-14">
 																	<span class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
@@ -220,15 +182,10 @@
 
 
 																<tr>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.vendor}</td>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.host.nomHost}</td>
+																	<td class="text-primary font-montserrat v-align-middle">${atm.vendor}</td>																	 
 																	<td class="text-primary font-montserrat v-align-middle">${atm.branch.nomBranch}</td>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.nameAtm}</td>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.typeConnexion}</td>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.adressIp}</td>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.userSession}</td>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.passwordSession}</td>
-																	<td class="text-primary font-montserrat v-align-middle">${atm.readingDisuqeLetter}</td>
+																	<td class="text-primary font-montserrat v-align-middle">${atm.nameAtm}</td>	 
+																	 
 																	<td class="text-primary font-montserrat v-align-middle">${atm.repositoryFile}</td>
 
 																	<security:authorize access="hasRole('ADMIN')">
@@ -259,17 +216,15 @@
 														</tbody>
 														<tfoot>
 															<tr>
+															 
+																 
 																<td></td>
 																<td></td>
 																<td></td>
 																<td></td>
 																<td></td>
 																<td></td>
-																<td></td>
-																<td></td>
-																<td></td>
-																<td></td>
-																<td></td>
+																 
 															</tr>
 														</tfoot>
 
@@ -431,33 +386,9 @@
 
 						</div>
 
-						<p class="font-montserrat blod text-primary bold fs-15">
-							<span class="fa-stack fa-lg"> <i
-								class="fa fa-square-o fa-stack-2x"></i> <i
-								class="fa fa fa-server fa-stack-1x"></i>
-							</span>
-							<spring:message code="label.hostConfiguration"></spring:message>
-						</p>
+						 
 
-						<div class="row clearfix">
-
-							<div class="col-sm-12">
-								<div
-									class="form-group form-group-default form-group-default-select2 required">
-									<span class="font-montserrat blod  bold fs-15"> <i
-										class="fa fa-server text-complete m-l-5"></i>
-									</span>
-									<spring:message code="label.atmHost"></spring:message>
-									<form:select path="host.idHost" cssClass="full-width" id="host"
-										data-placeholder="host" cssStyle="width: 100%;"
-										data-init-plugin="select2" items="${hosts}" itemValue="idHost"
-										itemLabel="nomHost" />
-
-								</div>
-							</div>
-
-
-						</div>
+						 
 						<p class="font-montserrat blod text-primary bold fs-15">
 							<span class="fa-stack fa-lg"> <img width="32" height="32"
 								src="<spring:url value="/resources/assets/img/atm.svg"/>">
@@ -530,77 +461,10 @@
 						</div>
 
 
-						<form:input path="typeConnexion" type="hidden" id="typeConnexion"
-							cssClass="form-control" />
+						 
 
-
-						<div class="row clearfix" id="remotDive">
-
-							<div class="col-md-3">
-								<div class="form-group form-group-default input-group">
-									<div class="form-input-group">
-										<label class="inline"><spring:message
-												code="label.RemoteRepositoryFolder"></spring:message></label>
-									</div>
-									<div class="input-group-append h-c-50">
-										<span class="input-group-text transparent"> <input
-											type="checkbox" data-init-plugin="switchery"
-											id="ConnexionRemotHandler" data-size="small" data-color="red" />
-										</span>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="col-md-3">
-								<div class="form-group form-group-default required typehead"
-									id="sample-three">
-									<label><spring:message
-											code="label.RemoteRepositoryDisuqe"></spring:message> <i
-										class="fa fa-hdd-o text-complete m-l-5"></i> </label>
-									<form:input path="readingDisuqeLetter" type="text"
-										cssClass="typeahead form-control" id="readingDisuqeLetter"
-										placeholder="repository" disabled="true" />
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group form-group-default required">
-									<label><spring:message
-											code="label.RemoteRepositoryAdressIp"></spring:message> <i
-										class="fa fa-location-arrow text-complete m-l-5"></i> </label>
-									<form:input path="AdressIp" type="text" cssClass="form-control"
-										id="AdressIp" placeholder="repository" value=""
-										disabled="true" />
-
-								</div>
-
-							</div>
-
-
-						</div>
-						<div class="row clearfix" id="windowsDiv">
-
-							<div class="col-md-6">
-								<div class="form-group form-group-default  ">
-									<label><spring:message code="label.windwosUser"></spring:message>
-										<i class="fa fa-user-circle  text-complete m-l-5"></i> </label>
-									<form:input path="userSession" type="text"
-										cssClass="form-control" placeholder="User Windows Session" />
-								</div>
-							</div>
-
-
-							<div class="col-md-6">
-								<div class="form-group form-group-default  ">
-									<label><spring:message code="label.windwosPassword"></spring:message>
-										<i class="fa fa fa-key text-complete m-l-5"></i> </label>
-									<form:input path="passwordSession" type="password"
-										class="form-control" placeholder="Password Windows Session" />
-								</div>
-							</div>
-
-						</div>
+						 
+					 
 					</div>
 
 					<div class="modal-footer">
@@ -614,7 +478,6 @@
 									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 									<spring:message code="label.update"></spring:message>
 								</button>
-			                                or 
 			                               <button type="button"
 									class="btn btn-cons btn-danger" data-dismiss="modal">
 									<i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -629,7 +492,7 @@
 									<i class="fa fa-plus-circle"></i>
 									<spring:message code="label.addNewATM"></spring:message>
 								</button>
-			                              or 
+			                               
 			                              <button type="button"
 									class="btn btn-cons btn-danger" data-dismiss="modal">
 									<i class="fa fa-times-circle" aria-hidden="true"></i>

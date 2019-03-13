@@ -40,8 +40,8 @@ public class AtmServiceImpl implements AtmService {
 	}
 
 	@Override
-	public void saveAtm(Atm atm, int idHost, int idBranch) {
-		atmDao.saveAtm(atm, idHost, idBranch);
+	public void saveAtm(Atm atm,  int idBranch) {
+		atmDao.saveAtm(atm,  idBranch);
 
 	}
 

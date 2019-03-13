@@ -256,10 +256,7 @@
 			<span class="icon-thumbnail"><i class="fa fa-thumb-tack" style="font-size :25px;"></i></span>
 			</li>
 			
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="/host/list"/>">Host</a>  
-			<span class="icon-thumbnail"><i class="fa fa-server" style="font-size :25px;"></i></span>
-			</li>
+			 
 			
 			
 			
@@ -272,14 +269,7 @@
 			width="30" height="30"
 			src="<spring:url value="/resources/assets/img/atm-white.svg"/>">
 		    </span>
-																
-															 
-			</li>
-			<li class="title font-montserrat no-margin text-uppercase">
-			<a href="<spring:url value="/regeX/list"/>">RegeX</a>  
-			<span class="icon-thumbnail"><i class="fa fa-etsy" style="font-size :25px;"></i></span>
-			</li>
-			
+														
 			
 			<li class="title font-montserrat no-margin text-uppercase">
 			<a href="<spring:url value="/user/list"/>" >Users</a> 

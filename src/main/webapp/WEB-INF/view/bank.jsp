@@ -68,17 +68,26 @@ input[type="file"] {
 
 
 					<div class=" container-fluid  container-fixed-lg m-t-60 ">
+					
+					<div class="row center">
+							<div class="col-md-4"></div>
+							<div class="col-md-4">
+								<ul class="nav nav-tabs nav-tabs-linetriangle  nav-stack-sm"
+									role="tablist" data-init-reponsive-tabs="dropdownfx">
+									<li class="nav-item text-center"><a id="listeAtm"
+										class=" title text-uppercase card-title bold  fs-16  text-primary font-montserrat all-caps small   bold text-center "
+										data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
+											<span><i class="fa fa-building fa-4x"></i> <spring:message code="label.space"></spring:message></span>
+											<span> </span><span> </span> <span> <spring:message
+											code="label.bank"></spring:message>    </span>
+									</a></li>
+								</ul>
+								<br>
+							</div>
+							<div class="col-md-4"></div>
 
-						<ul class="nav nav-tabs nav-tabs-linetriangle   nav-stack-sm"
-							role="tablist" data-init-reponsive-tabs="dropdownfx">
-							<li class="nav-item"><a id="listeAtm"
-								class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold"
-								data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
-									<span><spring:message code="label.space"></spring:message></span><span>
-								</span><span> </span><i class="fa fa-building fa-4x"></i> <span><spring:message
-											code="label.bank"></spring:message></span>
-							</a></li>
-						</ul>
+						</div>
+ 
 
 						<br>
 						<div class="row bg-white">

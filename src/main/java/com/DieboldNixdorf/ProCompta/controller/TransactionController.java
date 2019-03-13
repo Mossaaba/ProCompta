@@ -70,15 +70,7 @@ public class TransactionController {
 		
 		
 		System.out.println("Starting date : " + transaction.getStartingDate());
-		System.out.println("Starting date : " + transaction.getStartingTime());
-		System.out.println("Starting date : " + transaction.getFinishingDate());
-		System.out.println("Starting date : " + transaction.getFinishingTime());
-		System.out.println("Part two  : " + transaction.getTransactionCardPartOne());
-		System.out.println("Part One  : " + transaction.getTransactionCardPartTwo());
-		System.out.println("Transaction Type   : " + transaction.getTransactionType());
-		System.out.println(" tarnsction hots amount mIn " + transaction.getTransactionHostAmounttMin());
-		System.out.println(" tarnsction hots amount mIn " + transaction.getTransactionHostAmountMax());
-		System.out.println(" tarnsction hots amount mIn " + transaction.getTaransaction_AUTH());
+ 
 		
 		
 		populateDefaultModel(model);
@@ -99,6 +91,7 @@ public class TransactionController {
 
 		List<String> listATM = transactionService.listATM();
 		model.addAttribute("listATM", listATM);
+		
 		List<String> errorsTransaction = transactionService.listErreursTransaction();
 		model.addAttribute("errorsTransaction", errorsTransaction);
 

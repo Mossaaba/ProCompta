@@ -104,6 +104,9 @@ public class Transaction  {
 	
 	@Column(name="flag_trx_host")
 	private String flagTransactionHost;
+
+	@Column(name="vendor")
+	private String vendor;
 	
 	@Transient
 	private String transactionCardPartOne;  
@@ -379,6 +382,12 @@ public class Transaction  {
 	}
 	public void setFlagTransactionHost(String flagTransactionHost) {
 		this.flagTransactionHost = flagTransactionHost;
+	}
+	public String getVendor() {
+		return vendor;
+	}
+	public void setVendor(String vendor) {
+		this.vendor = vendor;
 	}
  
 	

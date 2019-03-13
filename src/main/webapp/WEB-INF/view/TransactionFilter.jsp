@@ -5,8 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -64,18 +63,31 @@
 
 
 				<div class="content">
+				
+				<div class="row center text-center">
+							 <div class="col-md-4"></div>
+							<div class="col-md-4 text-center">
+								<ul class="nav nav-tabs nav-tabs-linetriangle  nav-stack-sm"
+									role="tablist" data-init-reponsive-tabs="dropdownfx">
+									<li class="nav-item text-center"><a id="listeAtm"
+										class=" title text-uppercase card-title bold  fs-16  text-primary font-montserrat all-caps small   bold text-center "
+										data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
+											<span> <i class="fa fa-exchange fa-4x"></i> <spring:message code="label.space"></spring:message></span>
+											   
+								        <span >Transaction    </span>
+									</a>
+									
+									</li>
+								</ul>
+								 
+							</div>
+							
+							 
 
-					<ul class="nav nav-tabs nav-tabs-linetriangle   nav-stack-sm"
-						role="tablist" data-init-reponsive-tabs="dropdownfx">
-						<li class="nav-item"><a id="listeAtm"
-							class=" title text-uppercase text-primary font-montserrat all-caps small no-margin bold"
-							data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
-								<span> <spring:message code="label.space"></spring:message>
-							</span><span> </span><span> </span><i class="fa fa-exchange fa-4x"></i>
-								<span>Transaction</span>
+						</div>
+				
 
-						</a></li>
-					</ul>
+					 
 					<br>
 					<!-- -------------------------------------------------------- -->
 					<!-- -------------------------------------------------------- -->
@@ -635,7 +647,8 @@
 
 													<br>
 													<br>
-													<button class="btn btn-sm btn-primary "
+													<button class="btn btn-sm btn-primary " data-toggle="tooltip" data-placement="bottom" 
+													title="Search transaction with a new filter " data-animation="true"
 														onclick="window.location.href='<spring:url value="/transaction"/>'">
 														<i class="fa fa-filter fa-2x"></i> New Filter
 													</button>
@@ -743,7 +756,33 @@
 																<tr class="text-center"
 																	id="${transaction.idtransaction}">
 																	<td class="text-primary font-montserrat v-align-middle">
-																		VENDOR</td>
+																		   
+																		
+																		 
+														              <c:if test = "${transaction.vendor eq 'Diebold Nixdorf'}">
+														            
+														            
+														            <span class="thumbnail-wrapper d50   inline" >
+														             
+														             
+														             
+														            <img src="<spring:url value="/resources/pages/img/vendor/dn.png"/>"
+														             alt="" data-src="<spring:url value="/resources/pages/img/vendor/dn.png"/>" 
+														              width="50" height="50">
+														            </span>
+														            
+														             </c:if>
+														             
+														             <c:if test = "${transaction.vendor eq 'NCR'}">
+														             <span class="thumbnail-wrapper d50 inline" >
+														            <img src="<spring:url value="/resources/pages/img/vendor/ncr.png"/>"
+														             alt="" data-src="<spring:url value="/resources/pages/img/vendor/ncr.png"/>" 
+														              width="30" height="30">
+														            </span>     
+														             </c:if>
+														             
+														             	
+																		 </td>
 																	<td class="text-primary font-montserrat v-align-middle">${transaction.transactionHostATM}</td>
 																	<td class="text-primary font-montserrat v-align-middle">${transaction.transactionDateHost}</td>
 																	<td class="text-primary font-montserrat v-align-middle">${transaction.transactionHostCard}</td>
@@ -755,7 +794,8 @@
 																			<td
 																				class="text-primary font-montserrat v-align-middle details-control">
 																				${transaction.transactionHostAmount}
-																				<button class="btn btn-primary btn-xs" id="rowChild">
+													 							<button class="btn btn-primary btn-xs" id="rowChild"  data-toggle="tooltip" data-placement="bottom" 
+													                                                                                 title="see cassette distribution " data-animation="true" >
 
 																					<i class="fa fa-caret-down" aria-hidden="true"
 																						id="down"></i>
@@ -775,14 +815,14 @@
 																	<td class="text-primary font-montserrat v-align-middle">${transaction.taransaction_AUTH}</td>
 																	<td class="text-primary font-montserrat v-align-middle">
 																		<div class="btn-group">
-																			<button type="button" class="btn btn-primary"
+																			<button type="button" class="btn btn-primary" title="Transaction detail" data-animation="true" 
 																				data-id="${transaction.idtransaction}"
 																				data-toggle="modal"
 																				data-target="#modalDetailsTransaction">
 																				<i class="fa fa-eye" aria-hidden="true"></i>
 																			</button>
 																			<button type="button" data-toggle="modal" data-id="${transaction.idtransaction}"
-																			 data-target="#modalHostInfos"
+																			 data-target="#modalHostInfos" title="Response Host detail" data-animation="true"
 																			 class="btn btn-primary">
 																				<i class="fa fa-server" aria-hidden="true"></i>
 																			</button>
@@ -1176,7 +1216,7 @@
 	<script src="<spring:url value="/resources/pages/js/transaction.js"/>"></script>
 
 	<script type="text/javascript">
-	
+	 
 
 	/**********************************************************************************************************
 	 **********************************************************************************************************

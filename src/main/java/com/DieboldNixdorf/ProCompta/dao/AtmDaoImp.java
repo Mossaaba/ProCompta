@@ -10,16 +10,22 @@ import org.springframework.stereotype.Repository;
 
 import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.Branch;
-import com.DieboldNixdorf.ProCompta.model.Host;
+ 
+import com.DieboldNixdorf.ProCompta.model.Journal;
+import com.DieboldNixdorf.ProCompta.service.JounalService;
 
 @Repository("atmDao")
 public class AtmDaoImp implements AtmDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	JounalService jrnService;
 
 	@Override
-	public List<Atm> listAtms() {
+	public List<Atm> listAtms() 
+	{
 
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Atm> theQuery = currentSession.createQuery("from Atm", Atm.class);
@@ -45,20 +51,31 @@ public class AtmDaoImp implements AtmDao {
 	}
 
 	@Override
-	public void saveAtm(Atm atm, int idHost, int idBranch) {
+	public void saveAtm(Atm atm, int idBranch) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 		Branch branchTemp = currentSession.get(Branch.class, idBranch);
-		Host hostTemp = currentSession.get(Host.class, idHost);
+ 
 		branchTemp.addAtm(atm);
-		hostTemp.addAtm(atm);
+	 
 		currentSession.saveOrUpdate(atm);
 	}
 
 	@Override
-	public void deleteById(int idAtm) {
+	public void deleteById(int idAtm) 
+	{
 
 		Session currentSession = sessionFactory.getCurrentSession();
+		
+		
+		List<Journal> jrn = jrnService.findAllByAtmId(idAtm);
+		
+		for (Journal jRn:jrn) {
+			
+			currentSession.delete(jRn);	
+			
+		}
+
 		@SuppressWarnings("rawtypes")
 		Query theQuery = currentSession.createQuery("delete from Atm where idatm=:theAtmId");
 		theQuery.setParameter("theAtmId", idAtm);
@@ -67,9 +84,10 @@ public class AtmDaoImp implements AtmDao {
 	}
 
 	@Override
-	public List<Atm> listAtmsByBranch(int idBranch) {
+	public List<Atm> listAtmsByBranch(int idBranch) 
+	{
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Atm> theQuery = currentSession.createQuery("from Atm where idbranch=:theBrancheId ", Atm.class);
+		Query<Atm> theQuery = currentSession.createQuery("from Atm where idbranch=:theBrancheId ", Atm.class);	 
 		theQuery.setParameter("theBrancheId", idBranch);
 		List<Atm> listAtms = theQuery.getResultList();
 		return listAtms;

@@ -22,10 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.DieboldNixdorf.ProCompta.model.Atm;
 import com.DieboldNixdorf.ProCompta.model.Branch;
-import com.DieboldNixdorf.ProCompta.model.Host;
+ 
 import com.DieboldNixdorf.ProCompta.service.AtmService;
 import com.DieboldNixdorf.ProCompta.service.BranchService;
-import com.DieboldNixdorf.ProCompta.service.HostService;
+ 
 import com.DieboldNixdorf.ProCompta.validator.AtmFormValidator;
 
 @Controller
@@ -37,9 +37,6 @@ public class AtmController {
 
 	@Autowired
 	BranchService branchService;
-
-	@Autowired
-	HostService hostService;
 
 	@Autowired
 	MessageSource messageSource;
@@ -55,8 +52,13 @@ public class AtmController {
 	@GetMapping("/list")
 	public String listAtm(Model theModel) {
 		populateDefaultModel(theModel);
+		
+		
 		List<Atm> listAtms = atmService.listAtms();
 		theModel.addAttribute("listAtms", listAtms);
+		
+		
+		
 		Atm atm = new Atm();
 		theModel.addAttribute("atm", atm);
 		return "atm";
@@ -72,9 +74,9 @@ public class AtmController {
 		}
 
 		else {
-			Host hostHandler = atm.getHost();
+			 
 			Branch branchHandler = atm.getBranch();
-			atmService.saveAtm(atm, hostHandler.getIdHost(), branchHandler.getIdBranch());
+			atmService.saveAtm(atm,  branchHandler.getIdBranch());
 
 			redirectAttrs.addFlashAttribute("msgTraitment", "ADD A NEW ATM : ");
 			redirectAttrs.addFlashAttribute("theATM", atm.getNameAtm());
@@ -104,9 +106,9 @@ public class AtmController {
 	@PostMapping("/edit-atm-{idAtm}")
 	public String editAtmforSavig(ModelMap model, @ModelAttribute("atm") Atm atm) {
 
-		Host hostHandler = atm.getHost();
+		 
 		Branch branchHandler = atm.getBranch();
-		atmService.saveAtm(atm, hostHandler.getIdHost(), branchHandler.getIdBranch());
+		atmService.saveAtm(atm,   branchHandler.getIdBranch());
 
 		return "redirect:/Atm/list";
 	}
@@ -127,14 +129,12 @@ public class AtmController {
 
 	private void populateDefaultModel(Model model) {
 
-		List<String> ListVendors = new LinkedList<>(Arrays.asList(new String[] { "", "NCR", "DIEBOLD-NIXDORF"}));
+		List<String> ListVendors = new LinkedList<>(Arrays.asList(new String[] {"NCR","DIEBOLD-NIXDORF"}));
 		model.addAttribute("ListVendors", ListVendors);
 
 		List<Branch> branches = branchService.getAllBranchs();
 		model.addAttribute("branches", branches);
-
-		List<Host> hosts = hostService.findAllHosts();
-		model.addAttribute("hosts", hosts);
+		 
 
 	}
 

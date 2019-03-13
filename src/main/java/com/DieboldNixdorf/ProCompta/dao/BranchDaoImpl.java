@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.DieboldNixdorf.ProCompta.model.Bank;
 import com.DieboldNixdorf.ProCompta.model.Branch;
+import com.DieboldNixdorf.ProCompta.service.BankService;
 
 @Repository("branchDao")
 public class BranchDaoImpl implements BranchDao {
@@ -20,6 +21,9 @@ public class BranchDaoImpl implements BranchDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired 
+	BankService banSevice;
 
 	@Override
 	public Branch findById(int idBranch) {
@@ -44,11 +48,18 @@ public class BranchDaoImpl implements BranchDao {
 	@Override
 	public void saveBranch(Branch branch) {
 
-		int theId = 35;
+
+
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Bank bankTemp = currentSession.get(Bank.class, theId);
-		bankTemp.add(branch);
+		List<Bank> bankTemp = banSevice.getAllBanks();
+		
+			for (Bank bank :bankTemp )	
+			 {
+				
+				bank.add(branch);
+				
+			 } 
 
 		currentSession.saveOrUpdate(branch);
 
