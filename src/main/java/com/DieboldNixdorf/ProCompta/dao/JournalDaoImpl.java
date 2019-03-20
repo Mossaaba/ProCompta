@@ -67,7 +67,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 	/*
 	 * ___________________________________________________
 	 * 
-	 * T R A N S A C T I O N ___________________________________________________
+	 * T R A N S A C T I O N    DN
+	 * ___________________________________________________
 	 */
 
 	@Value("${TRANSACTION_START}")
@@ -136,55 +137,58 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 	@Value("${TYPE_TRANSACTION}")
 	String TYPE_TRANSACTION;
 
-	@Value("${ERROR_TRANSACTION}")
-	String ERROR_TRANSACTION;
-	
-	@Value("${AID_NOT_SELECTED}")
-	String AID_NOT_SELECTED;
-	
-	
+ 
 	
 	/*
 	 * ___________________________________________________
 	 * 
-	 * H O S T ___________________________________________________
+	 * H O S T         
+	 * ___________________________________________________
 	 */
+	@Value("${HOST_INFO_HEADER}")
+	String HOST_INFO_HEADER;
+	
 
 	@Value("${HOST_DATE}")
 	String HOST_DATE;
 
-	@Value("${HOST_BRANCH}")
-	String HOST_BRANCH;
+	@Value("${HOST_ATM}")
+	String HOST_ATM;
 
-	@Value("${HOST_AMOUNT}")
+	@Value("${HOST_AMOUNT}")    
 	String HOST_AMOUNT;
 
-	@Value("${HOST_HOUR}")
-	String HOST_HOUR;
+	@Value("${HOST_TIME}")
+	String HOST_TIME;
 
-	@Value("${HOST_CARD}")
-	String HOST_CARD;
-
+	@Value("${HOST_CARD_NUMBER}")
+	String HOST_CARD_NUMBER;
+	
 	@Value("${HOST_AUTH}")
 	String HOST_AUTH;
 	
 	@Value("${HOST_ENREG}")
 	String HOST_ENREG;
 	
-
-	@Value("${HOST_UTRNNO}")
-	String HOST_UTRNNO;
+	@Value("${HOST_UTRNOO}")
+	String HOST_UTRNOO;
 
 	@Value("${HOST_INFO_TRANSACTION}")
 	String HOST_INFO_TRANSACTION;
 
-	@Value("${HOST_MESSAGE}")
-	String HOST_MESSAGE;
+	@Value("${HOST_RC_ERROR_TRANSACTION}")
+	String HOST_RC_ERROR_TRANSACTION;
+	
+	@Value("${HOST_TYPE_TRANSACTION}")
+	String HOST_TYPE_TRANSACTION;
+	
+	
 	
 	/*
 	 * ___________________________________________________
 	 * 
-	 * I N C I D E N T ___________________________________________________
+	 * I N C I D E N T          DN
+	 * ___________________________________________________
 	 */
 
 	@Value("${INCIDENT_ATM}")
@@ -193,7 +197,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 	/*
 	 * ___________________________________________________
 	 * 
-	 * R E P L A N I S H E M E N T
+	 * R E P L A N I S H E M E N T       DN
 	 * ___________________________________________________
 	 */
 
@@ -212,13 +216,19 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 	/*
 	 * ___________________________________________________
 	 * 
-	 * E R R O R S ___________________________________________________
+	 * E R R O R S   DN
+	 * ___________________________________________________
 	 */
 	@Value("${ERROR_ATM}")
 	String ERROR_ATM;
 
 	@Value("${ERROR_ATM_WITHOUT_CODE}")
 	String ERROR_ATM_WITHOUT_CODE;
+	
+	
+	
+	
+	
 
 	@SuppressWarnings("unchecked")
 	public List<Journal> findAll() {
@@ -287,7 +297,8 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		/*
 		 * ___________________________________________________
 		 * 
-		 * T R A N S A C T I O N ___________________________________________________
+		 * T R A N S A C T I O N   DN 
+		 * ___________________________________________________
 		 */
 		collection.add(TRANSACTION_START);
 		collection.add(CARD_NUMBER);
@@ -309,36 +320,43 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		collection.add(ERROR_DURING_CASH_RETRACT);
 		collection.add(CARD_RETAINED_BY_HOST);
 		collection.add(CASH_RETRACT_CALLED_IN_ADRS);
-		collection.add(ERROR_TRANSACTION);
-		collection.add(AID_NOT_SELECTED);
 		collection.add(TRANSACTION_END);
 		/*
 		 * ___________________________________________________
 		 * 
-		 * H O S T ___________________________________________________
+		 * H O S T       DN
+		 *
+		 * ___________________________________________________
 		 */
-		collection.add(TYPE_TRANSACTION);
-		collection.add(HOST_UTRNNO);
-		collection.add(HOST_AUTH);
-		collection.add(HOST_CARD);
-		collection.add(HOST_HOUR);
-		collection.add(HOST_AMOUNT);
-		collection.add(HOST_BRANCH);
-		collection.add(HOST_DATE);
-		collection.add(HOST_INFO_TRANSACTION);
-		collection.add(HOST_ENREG);
-		collection.add(HOST_MESSAGE);
+
 		
+		
+		collection.add(HOST_DATE);
+		collection.add(HOST_ATM);
+		collection.add(HOST_AMOUNT);
+		collection.add(HOST_TIME);
+		collection.add(HOST_CARD_NUMBER);
+		collection.add(HOST_AUTH);
+		collection.add(HOST_ENREG);
+		collection.add(HOST_UTRNOO);
+		collection.add(HOST_INFO_TRANSACTION);
+		collection.add(HOST_RC_ERROR_TRANSACTION);
+		collection.add(HOST_TYPE_TRANSACTION);
+		collection.add(HOST_INFO_HEADER);
+		/*
+		 * ___________________________________________________
+		 * 
+		 * H O S T       NCR
+		 *
+		 * ___________________________________________________
+		 */
 
 		collectionNCR.add(TYPE_TRANSACTION);
-		collectionNCR.add(HOST_UTRNNO);
-	 
-		
+		collectionNCR.add(HOST_UTRNOO);
 		collectionNCR.add(HOST_AUTH);
-		collectionNCR.add(HOST_CARD);
-		collectionNCR.add(HOST_HOUR);
+		collectionNCR.add(HOST_CARD_NUMBER);
+		collectionNCR.add(HOST_TIME);
 		collectionNCR.add(HOST_AMOUNT);
-		collectionNCR.add(HOST_BRANCH);
 		collectionNCR.add(HOST_DATE);
 		collectionNCR.add(HOST_INFO_TRANSACTION);
 		collectionNCR.add(TYPE_TRANSACTION);
@@ -346,14 +364,15 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		/*
 		 * ___________________________________________________
 		 * 
-		 * I N C I D E N T ___________________________________________________
+		 * I N C I D E N T      DN
+		 * ___________________________________________________
 		 */
 		collection.add(INCIDENT_ATM);
 
 		/*
 		 * ___________________________________________________
 		 * 
-		 * R E P L A N I S H E M E N T
+		 * R E P L A N I S H E M E N T       DN
 		 * ___________________________________________________
 		 */
 
@@ -364,10 +383,16 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		/*
 		 * ___________________________________________________
 		 * 
-		 * E R R O R S ___________________________________________________
+		 * E R R O R S                    DN
+		 *  ___________________________________________________
 		 */
 		collection.add(ERROR_ATM);
 		collection.add(ERROR_ATM_WITHOUT_CODE);
+		
+		
+		
+		
+		
 		@SuppressWarnings("unused")
 		Session currentSession = sessionFactory.getCurrentSession();
 		// ----------- get the RegX according to the ATM -----------\\
@@ -376,7 +401,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 		/*
 		 * |_________________________________________________________________________________________________|
 		 * |_________________________________________________________________________________________________|
-		 * | | | | | W I N C O R N I X D O R F |
+		 * |                         | | | | D I E B O L D  N I X D O R F |
 		 * |_________________________________________________________________________________________________|
 		 * |_________________________________________________________________________________________________|
 		 */
@@ -535,10 +560,11 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 * \*===========================================================================
 							 */
 							
-							if (Io.toString().equalsIgnoreCase(ERROR_TRANSACTION)) {
-								trx.setInfosTransaction("TRANSACTION REPLY NEXT 134 FUNCTION 5000 ");
+							if (Io.toString().equalsIgnoreCase(HOST_RC_ERROR_TRANSACTION)) {
+								trx.setErrorTransaction(matcher.group("HOSTRCERRORTRANSACTION"));
 							}
 							
+							 
 							/*
 							 * ==========================================================================*\
 							 * | CASH PRESENTED |
@@ -580,18 +606,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							if (Io.toString().equalsIgnoreCase(CASH_RETRACTED)) {
 								trx.setErrorTransaction("CASH RETRACTED");
 							}
-							/*
-							 * ==========================================================================*\
-							 * | AID NOT SELECTED  |
-							 * \*===========================================================================
-							 */
-							
-							if (Io.toString().equalsIgnoreCase(AID_NOT_SELECTED)) {
-								
-								trx.setInfosTransaction("**** AID NOT SELECTED ****");
-								trx.setErrorTransaction("**** AID NOT SELECTED ****");
-							}
-							
+							 
 							/*
 							 * ==========================================================================*\
 							 * | COMMUNICATION TRANSACTION ERROR |
@@ -709,45 +724,34 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							|                                       _________________________                                        |
 							|                                                                                                        |
 							*---------------------------------------------------------------------------------------------------------*/
+							
+							 
+							
 							/*
 							 * ==========================================================================*\
 							 * | HOST DATE |
-							 * \*===========================================================================
+							 * \*========================================================================
 							 */
 
-							if (Io.toString().equalsIgnoreCase(HOST_DATE)) {
+							if (Io.toString().equalsIgnoreCase(HOST_DATE)) 
+							{
 
 								try {
 									trx.setTransactionDateHost(
-											(toolsProCompta.ConvertStringHostToDate(matcher.group(1))));
+											(toolsProCompta.ConvertStringHostToDate(matcher.group("DateHost"))));
 								} catch (ParseException e) {
 									e.printStackTrace();
 								}
 							}
 							/*
 							 * ==========================================================================*\
-							 * | HOST BRANCH |
+							 * | HOST ATM |
 							 * \*===========================================================================
 							 */
 
-							if (Io.toString().equalsIgnoreCase(HOST_BRANCH)) {
-								trx.setTransactionHostATM(matcher.group(1));
+							if (Io.toString().equalsIgnoreCase(HOST_ATM)) {
+								trx.setTransactionHostATM(matcher.group("ATM"));
 
-							}
-
-							/*
-							 * ==========================================================================*\
-							 * | HOST AMOUNT |
-							 * \*===========================================================================
-							 */
-
-							if (Io.toString().equalsIgnoreCase(HOST_AMOUNT)) {
-								String amountR = matcher.group(1);
-								if (amountR.contains(",")) {
-									amountR = amountR.replaceAll(",", "");
-								}
-
-								trx.setTransactionHostAmount(amountR);
 							}
 
 							/*
@@ -755,19 +759,48 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 * | HOST Time |
 							 * \*===========================================================================
 							 */
+							if (Io.toString().equalsIgnoreCase(HOST_TIME)) {
+								trx.setTransactionHostTime(toolsProCompta.convertStringToTimeHost(matcher.group("TimeHost")));
 
-							if (Io.toString().equalsIgnoreCase(HOST_HOUR)) {
-								trx.setTransactionHostTime(toolsProCompta.ConevretStringToTime(matcher.group(1)));
 							}
+
+							
+							/*
+							 * ==========================================================================*\
+							 * | TYPE TRANSACTION |
+							 * \*===========================================================================
+							 */
+							if (Io.toString().equalsIgnoreCase(HOST_TYPE_TRANSACTION)) {
+								trx.setTransactionType(matcher.group("TypeTransaction"));
+
+							}
+							
+							/*
+							 * ==========================================================================*\
+							 * | HOST AMOUNT |
+							 * \*===========================================================================
+							 */
+
+							if (Io.toString().equalsIgnoreCase(HOST_AMOUNT)) {
+								String amountR = matcher.group("AmountHost");
+								if (amountR.contains(",")) {
+									amountR = amountR.replaceAll(",", "");
+								}
+
+								trx.setTransactionHostAmount(amountR);
+							}
+							
+							
+						 
 							/*
 							 * ==========================================================================*\
 							 * | HOST CARD |
 							 * \*===========================================================================
 							 */
 
-							if (Io.toString().equalsIgnoreCase(HOST_CARD)) {
-
+							if (Io.toString().equalsIgnoreCase(HOST_CARD_NUMBER)) {
 								trx.setTransactionHostCard(matcher.group(1));
+
 							}
 
 							/*
@@ -775,68 +808,10 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 * | HOST UTRNNO |
 							 * \*===========================================================================
 							 */
+							if (Io.toString().equalsIgnoreCase(HOST_UTRNOO)) {
+								trx.setUTRNNO(matcher.group("HOSTUTRNOO"));
 
-							if (Io.toString().equalsIgnoreCase(HOST_UTRNNO)) {
-								trx.setUTRNNO(matcher.group(1));
 							}
-							/*
-							 * ==========================================================================*\
-							 * | HOST ENREG |
-							 * \*===========================================================================
-							 */
-							if (Io.toString().equalsIgnoreCase(HOST_ENREG)) {								
-								trx.setTaransaction_AUTH(matcher.group(1)); 
-							}
-							
-							/*
-							 * ==========================================================================*\
-							 * | HOST UTRNNO |
-							 * \*===========================================================================
-							 */
-						 
-							if (Io.toString().equalsIgnoreCase(HOST_INFO_TRANSACTION)) 
-							{
-								String newLineBefor = line;
-								for (int i = 0; i <= 6; i++)
-								{
-
-									line = br.readLine();
-									newLineBefor = newLineBefor + line;
-									
-									
-									
-								}
-								
-								
-								Pattern patternInfosHost = Pattern.compile(HOST_MESSAGE);
-								Matcher matcherinfosHost = patternInfosHost.matcher(newLineBefor);
-
-								if (matcherinfosHost.find())
-									
-								{
-								    trx.setTransactionHostTime(toolsProCompta.convertStringToTimeHost(matcherinfosHost.group("time")));
-									trx.setTransactionHostATM(matcherinfosHost.group(4));
-									trx.setTransactionHostCard(matcherinfosHost.group(5));
-									trx.setTaransaction_AUTH(matcherinfosHost.group("login"));
-									 
-									if (newLineBefor.contains("RECORD NO"))
-									{
-										
-										trx.setErrorTransaction(matcherinfosHost.group("Error"));
-									}
-									if (newLineBefor.contains("MONTANT RETRAIT")) {
-										
-										trx.setTransactionType("WITHDRAWAL");
-										trx.setTransactionHostAmount(matcherinfosHost.group("AmountHost"));
-									}
-									trx.setInfosTransaction(newLineBefor);
-									
-								}
-								
-								
-								
-							}
-							
 							 
 							/*
 							 * ==========================================================================*\
@@ -845,7 +820,18 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 */
 
 							if (Io.toString().equalsIgnoreCase(HOST_AUTH)) {
-								trx.setTaransaction_AUTH(matcher.group(1));
+								trx.setTaransaction_AUTH(matcher.group("HOSTAUTH"));
+
+							}
+							/*
+							 * ==========================================================================*\
+							 * | Error Transaction|
+							 * \*===========================================================================
+							 */
+							 
+							if (Io.toString().equalsIgnoreCase(HOST_RC_ERROR_TRANSACTION)) {
+								trx.setErrorTransaction(matcher.group("HOSTRCERRORTRANSACTION"));
+
 							}
 
 							/*------------------------------------------------------------------------------------------------------- 
@@ -1131,7 +1117,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 * \*===========================================================================
 							 */
 
-							if (Io.toString().equalsIgnoreCase(HOST_BRANCH)) {
+							if (Io.toString().equalsIgnoreCase(HOST_ATM)) {
 								trx_NCR.setTransactionHostATM(matcher.group(1));
 
 							}
@@ -1158,7 +1144,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 * \*===========================================================================
 							 */
 
-							if (Io.toString().equalsIgnoreCase(HOST_HOUR)) {
+							if (Io.toString().equalsIgnoreCase(HOST_TIME)) {
 								try {
 									trx_NCR.setTransactionHostTime(
 											toolsProCompta.ConevretStringToTime(matcher.group(1)));
@@ -1175,7 +1161,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 * \*===========================================================================
 							 */
 
-							if (Io.toString().equalsIgnoreCase(HOST_CARD)) {
+							if (Io.toString().equalsIgnoreCase(HOST_CARD_NUMBER)) {
 
 								trx_NCR.setTransactionHostCard(matcher.group(1));
 
@@ -1188,7 +1174,7 @@ public class JournalDaoImpl extends AbstractDao<Integer, Journal> implements Jou
 							 * \*===========================================================================
 							 */
 
-							if (Io.toString().equalsIgnoreCase(HOST_UTRNNO)) {
+							if (Io.toString().equalsIgnoreCase(HOST_UTRNOO)) {
 								trx_NCR.setUTRNNO(matcher.group(1));
 							}
 							/*

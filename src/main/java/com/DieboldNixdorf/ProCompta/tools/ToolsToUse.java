@@ -158,7 +158,7 @@ public class ToolsToUse {
 	  
 	  public Time convertStringToTimeHost (String Timestring) throws ParseException {
 		  
-          SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+          SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 		  
 		  java.sql.Time hostTime = new java.sql.Time(format.parse(Timestring).getTime());
 		

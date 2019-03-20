@@ -74,7 +74,7 @@
 										data-toggle="tab" href="#tab1" data-target="#tab1" role="tab">
 											<span> <i class="fa fa-exchange fa-4x"></i> <spring:message code="label.space"></spring:message></span>
 											   
-								        <span >Transaction    </span>
+								        <span > <spring:message code="label.transaction"></spring:message>    </span>
 									</a>
 									
 									</li>
@@ -108,8 +108,8 @@
 
 												<h5>
 													<span class="semi-bold text-primary"> <i
-														class="fa fa-filter fa-2x"></i> Transaction
-													</span> Filter
+														class="fa fa-filter fa-2x"></i><spring:message code="label.transaction"></spring:message>   
+													</span> <spring:message code="label.filter"></spring:message>
 												</h5>
 											</div>
 											<div class="card-controls">
@@ -159,7 +159,7 @@
 
 														<div
 															class="form-group form-group-default form-group-default-select2 ">
-															<label class="">Vendor</label>
+															<label class=""><spring:message code="label.vendor"></spring:message></label>
 															<form:select path="transactionVendor"
 																cssClass="full-width" data-placeholder="Select a vendor "
 																data-init-plugin="select2" id="vendor">
@@ -174,7 +174,7 @@
 
 														<div
 															class="form-group form-group-default form-group-default-select2 ">
-															<label class="">ATM</label>
+															<label class=""><spring:message code="label.atm"></spring:message></label>
 															<form:select path="transactionHostATM"
 																cssClass="full-width" data-placeholder="Select an ATM"
 																data-init-plugin="select2" id="ATM" items="${listATM}" />
@@ -203,7 +203,7 @@
 																	<div class="form-input-group input-sm" >
 																		<form:input path="transactionDateStarting" type="text"
 																			class="form-control date"
-																			placeholder="starting date" autocomplete="off" id="transactionDateStarting"/>
+																			placeholder="Please select a start date" autocomplete="off" id="transactionDateStarting"/>
 																	</div>
 
 
@@ -216,9 +216,9 @@
 																			class="fa fa-clock-o"></i></span>
 																	</div>
 																	<div class="form-input-group input-sm">
-																		<form:input path="transactionTimeStarting" type="text"
+																		<form:input path="transactionTimeStarting" type="text" 
 																			id="transactionTimeStarting" class="form-control time start "
-																			placeholder="Starting Time" autocomplete="off" />
+																			placeholder="Please select a start time" autocomplete="off" />
 																	</div>
 
 
@@ -237,7 +237,7 @@
 																	<div class="form-input-group input-sm required">
 																		<form:input path="transactionDateFinishing"
 																			type="text" class="form-control date"
-																			placeholder="Finising Date" autocomplete="off"  id="transactionDateFinishing"/>
+																			placeholder="Please select a finish date" autocomplete="off"  id="transactionDateFinishing"/>
 																	</div>
 																	<div class="input-group-append ">
 																		<span class="input-group-text"><i
@@ -251,9 +251,9 @@
 
 																	<div class="form-input-group input-sm">
 
-																		<form:input path="transactionTimeFinishing"
+																		<form:input path="transactionTimeFinishing"  
 																			type="text" class="form-control time endTime " id="transactionTimeFinishing"
-																			placeholder="Finising Time" autocomplete="off" />
+																			placeholder=" Please select a finish time" autocomplete="off" />
 																	</div>
 																	<div class="input-group-append ">
 																		<span class="input-group-text"><i
@@ -285,7 +285,7 @@
 														<div class="form-group form-group-default   ">
 
 															<label class="">&nbsp; <i
-																class="fa fa-credit-card-alt"></i> &nbsp; Card Number
+																class="fa fa-credit-card-alt"></i> &nbsp; <spring:message code="label.cardNumber"></spring:message> 
 																&nbsp;
 															</label>
 
@@ -339,7 +339,7 @@
 													<div class="col-md-3">
 
 														<diV class="form-group form-group-default form-group-default-select2  ">
-															<label class="">Type Transaction</label> <br>
+															<label class=""><spring:message code="label.TransactionType"></spring:message></label> <br>
 															<form:select path="transactionType" cssClass="full-width"
 																data-placeholder="Select Country"
 																data-init-plugin="select2" id="transactionType">
@@ -361,11 +361,11 @@
 													<div class="col-md-2">
 														<div class="form-group form-group-default input-group">
 															<div class="input-group-append ">
-																<span class="input-group-text">DZD </span>
+																<span class="input-group-text">DZD</span>
 															</div>
 
 															<div class="form-input-group">
-																<label>Amount Min</label> <br>
+																<label><spring:message code="label.AmountMin"></spring:message></label> <br>
 																<form:input path="transactionHostAmounttMin"
 																	type="number" id="montantMin"
 																	onkeypress="return isNumberKey(event)"
@@ -381,7 +381,7 @@
 
 														<div class="form-group form-group-default input-group">
 															<div class="form-input-group">
-																<label>Amount Max</label> <br>
+																<label><spring:message code="label.AmountMax"></spring:message></label> <br>
 																<form:input path="transactionHostAmountMax"
 																	type="number" id="montantMax"
 																	onkeypress="return isNumberKey(event)"
@@ -395,7 +395,7 @@
 
 													<div class="col-md-2">
 														<div class="form-group form-group-default ">
-															<label><i class="fa fa-sort-numeric-asc"></i>&nbsp;Authorisation
+															<label><i class="fa fa-sort-numeric-asc"></i>&nbsp;<spring:message code="label.Auth"></spring:message>
 															</label> <br>
 															<form:input path="taransaction_AUTH" type="text"
 																class="form-control" maxlength="8"
@@ -421,8 +421,8 @@
 																		<div class="card-title">
 																			<h5>
 																				<span class="semi-bold  "> <i
-																					class="fa fa-info-circle fa-2x"></i> Only for
-																				</span> DIEBOLD NIXDORF MACHINE
+																					class="fa fa-info-circle fa-2x"></i> <spring:message code="label.onlyfor"></spring:message>
+																				</span> <spring:message code="label.DieboldNixdorfMachine"></spring:message>
 																			</h5>
 
 																		</div>
@@ -448,7 +448,7 @@
 
 																				<div
 																					class="form-group form-group-default form-group-default-select2 required">
-																					<label class="">Cash taken</label>
+																					<label class=""><spring:message code="label.CashTaken"></spring:message></label>
 																					<form:select path="transactionCardStatus"
 																						cssClass="full-width"
 																						data-placeholder="Select Country"
@@ -465,7 +465,7 @@
 
 																				<div
 																					class="form-group form-group-default form-group-default-select2 required">
-																					<label class="">Card Taken</label>
+																					<label class=""><spring:message code="label.CardTaken"></spring:message></label>
  
 																					<form:select path="transactionCashStatus"
 																						cssClass="full-width"
@@ -482,7 +482,7 @@
 
 																				<div
 																					class="form-group form-group-default form-group-default-select2 required">
-																					<label class="">Error transaction</label>
+																					<label class=""><spring:message code="label.errorTransaction"></spring:message></label>
 																					<form:select path="errorTransaction"
 																						class="full-width"
 																						data-placeholder="Select Country"
@@ -508,10 +508,10 @@
 													<div class="col-md-12 text-center">
  
 														<button class="btn btn-primary bold" type="submit" id="subFormTransaction">
-															<i class="fa fa-search fa-3x"></i> SEARCH
+															<i class="fa fa-search fa-3x"></i> <spring:message code="label.search"></spring:message>
 														</button>
 														<button class="btn btn-danger bold" id="clearTransactionForm" >
-															<i class="fa fa-eraser fa-3x"></i> CLEAR
+															<i class="fa fa-eraser fa-3x"></i> <spring:message code="label.clear"></spring:message>
 														</button>
  
 													</div>
@@ -540,15 +540,14 @@
 
 												<h5>
 													<span class="semi-bold text-primary bold"> <i
-														class="fa fa-exchange fa-2x m-b-5"></i> Transaction
-														Resultat
+														class="fa fa-exchange fa-2x m-b-5"></i> <spring:message code="label.TransactionResult"></spring:message>  
 													</span>
 												</h5>
 												<br>
 												<c:if test="${!empty Filter }">
 													<span
 														class="   p-t-5 m-l-5 p-b-5 inline fs-12 text-primary bold">
-														<i class="fa fa-filter fa-2x"></i> Filter :
+														<i class="fa fa-filter fa-2x"></i> <spring:message code="label.filter"></spring:message> :
 													</span>
 
 
@@ -558,19 +557,19 @@
 														test="${transactionFilter.transactionHostATM ne '-1' }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															ATM : ${transactionFilter.transactionHostATM}</span>
+															<spring:message code="label.atm"></spring:message>  : ${transactionFilter.transactionHostATM}</span>
 													</c:if>
 													<c:if
 														test="${!empty transactionFilter.transactionDateStarting  }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															DATE START : ${transactionFilter.transactionDateStarting}</span>
+															<spring:message code="label.startingDate"></spring:message> : ${transactionFilter.transactionDateStarting}</span>
 													</c:if>
 													<c:if
 														test="${!empty transactionFilter.transactionDateFinishing  }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															DATE FINISH :
+															<spring:message code="label.finishingDate"></spring:message> :
 															${transactionFilter.transactionDateFinishing}</span>
 													</c:if>
 
@@ -578,7 +577,7 @@
 														test="${!empty transactionFilter.transactionTimeStarting  }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															TIME START : ${transactionFilter.transactionTimeStarting}
+															<spring:message code="label.startingTime"></spring:message> : ${transactionFilter.transactionTimeStarting}
 														</span>
 													</c:if>
 
@@ -586,7 +585,7 @@
 														test="${!empty transactionFilter.transactionTimeFinishing  }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															TIME FINISH :
+															<spring:message code="label.finishingTime"></spring:message> :
 															${transactionFilter.transactionTimeFinishing} </span>
 													</c:if>
 
@@ -594,7 +593,7 @@
 														test="${!empty transactionFilter.transactionCardPartOne }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															CARD NUMBER
+															<spring:message code="label.cardNumber"></spring:message>
 															:${transactionFilter.transactionCardPartOne}******${transactionFilter.transactionCardPartTwo}
 														</span>
 													</c:if>
@@ -604,7 +603,7 @@
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
 
-															AMOUNT Min :
+															<spring:message code="label.AmountMin"></spring:message> :
 															${transactionFilter.transactionHostAmounttMin} </span>
 													</c:if>
 													<c:if
@@ -612,36 +611,36 @@
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
 
-															AMOUNT Max :
+															<spring:message code="label.AmountMax"></spring:message> :
 															${transactionFilter.transactionHostAmountMax} </span>
 													</c:if>
 													<c:if
 														test="${transactionFilter.transactionType  ne '-1'  }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															TYPE TRANSACTION :${transactionFilter.transactionType}</span>
+															<spring:message code="label.TransactionType"></spring:message> :${transactionFilter.transactionType}</span>
 													</c:if>
 													<c:if test="${!empty transactionFilter.taransaction_AUTH }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															AUTHORISATION : ${transactionFilter.taransaction_AUTH}</span>
+															<spring:message code="label.Auth"></spring:message> : ${transactionFilter.taransaction_AUTH}</span>
 													</c:if>
 													<c:if
 														test="${transactionFilter.transactionCardStatus ne '-1' }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															CARD STATUS :${transactionFilter.transactionCardStatus}</span>
+															<spring:message code="label.CardTaken"></spring:message> :${transactionFilter.transactionCardStatus}</span>
 													</c:if>
 													<c:if
 														test="${transactionFilter.transactionCashStatus ne '-1' }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															CASH STATUS : :${transactionFilter.transactionCashStatus}</span>
+															<spring:message code="label.CashTaken"></spring:message> : :${transactionFilter.transactionCashStatus}</span>
 													</c:if>
 													<c:if test="${transactionFilter.errorTransaction ne '-1' }">
 														<span
 															class=" label label-info p-t-5 m-l-5 p-b-5 inline fs-12">
-															ERROR TRANSACTION :${transactionFilter.errorTransaction}
+															<spring:message code="label.errorTransaction"></spring:message> :${transactionFilter.errorTransaction}
 														</span>
 													</c:if>
 
@@ -650,7 +649,7 @@
 													<button class="btn btn-sm btn-primary " data-toggle="tooltip" data-placement="bottom" 
 													title="Search transaction with a new filter " data-animation="true"
 														onclick="window.location.href='<spring:url value="/transaction"/>'">
-														<i class="fa fa-filter fa-2x"></i> New Filter
+														<i class="fa fa-filter fa-2x"></i> <spring:message code="label.newFilter"></spring:message>
 													</button>
 
 												</c:if>
@@ -708,45 +707,45 @@
 																	<span class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
 																		class="fa fa fa-link fa-stack-1x"></i>
-																</span><br> Vendor
+																</span><br> <spring:message code="label.vendor"></spring:message>
 																</th>
 																<th class="v-align-middle text-primary bold fs-12"><span
 																	class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <img
 																		width="25" height="22"
 																		src="<spring:url value="/resources/assets/img/atm.svg"/>">
-																</span> <br> ATM</th>
+																</span> <br> <spring:message code="label.atm"></spring:message></th>
 																<th class="v-align-middle text-primary bold fs-12"><span
 																	class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
 																		class="fa fa-calendar fa-stack-1x"></i>
-																</span> <br> Date</th>
+																</span> <br> <spring:message code="label.date"></spring:message></th>
 																<th class="v-align-middle text-primary bold fs-12"><span
 																	class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
 																		class="fa fa-credit-card-alt fa-stack-1x"></i>
-																</span> <br> Card</th>
+																</span> <br> <spring:message code="label.cardNumber"></spring:message></th>
 																<th class="v-align-middle text-primary bold fs-12"><span
 																	class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
 																		class="fa fa-exchange fa-stack-1x"></i>
-																</span> <br> Type</th>
+																</span> <br> <spring:message code="label.TransactionType"></spring:message></th>
 																<th class="v-align-middle text-primary bold fs-12"><span
 																	class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
 																		class="fa fa-money fa-stack-1x"></i>
-																</span> <br> Amount</th>
+																</span> <br> <spring:message code="label.amount"></spring:message></th>
 																<th class="v-align-middle text-primary bold fs-12"><span
 																	class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
 																		class="fa fa-sort-numeric-asc fa-stack-1x"></i>
-																</span> <br> Authorisation</th>
+																</span> <br> <spring:message code="label.Auth"></spring:message></th>
 
 																<th class="v-align-middle text-primary bold fs-12"><span
 																	class="fa-stack fa-lg"> <i
 																		class="fa fa-square-o fa-stack-2x"></i> <i
 																		class="fa fa-eye fa-stack-1x"></i>
-																</span> <br> Details</th>
+																</span> <br> <spring:message code="label.details"></spring:message></th>
 
 															</tr>
 														</thead>
@@ -790,7 +789,7 @@
 
 																	<c:choose>
 																		<c:when
-																			test="${transaction.transactionHostAmount ne '0.00' && !empty transaction.transactionHostAmount}">
+																			test="${transaction.transactionHostAmount ne '0.00' && !empty transaction.transactionHostAmount && transaction.cashTaken ne 'false' }">
 																			<td
 																				class="text-primary font-montserrat v-align-middle details-control">
 																				${transaction.transactionHostAmount}
@@ -846,7 +845,7 @@
 														<div>
 															<h5
 																class="font-montserrat all-caps small no-margin hint-text bold">
-																<i class='fa fa-exchange' aria-hidden='true'></i> Transaction
+																<i class='fa fa-exchange' aria-hidden='true'></i> <spring:message code="label.transaction"></spring:message>
 															</h5>
 															<p class="no-margin text-primary bold fs-16">${countTransaction}</p>
 														</div>
@@ -856,7 +855,7 @@
 														<div>
 															<h5
 																class="font-montserrat all-caps small no-margin hint-text bold">
-																<i class='fa fa-money' aria-hidden='true'></i> AMOUNT
+																<i class='fa fa-money' aria-hidden='true'></i> <spring:message code="label.totalAmount"></spring:message>
 															</h5>
 															<p class="no-margin text-primary bold fs-16">${TotalAmount}</p>
 														</div>
@@ -869,7 +868,7 @@
 																<span class="fa-stack fa-lg"> <i
 																	class="fa fa-credit-card-alt fa-stack-1x"></i> <i
 																	class="fa fa-ban fa-stack-2x text-danger"></i>
-																</span> CARD CAPTURED
+																</span> <spring:message code="label.CardCaptured"></spring:message>
 															</h5>
 															<p class="no-margin text-primary bold fs-16 ">0</p>
 														</div>
@@ -882,7 +881,7 @@
 																<span class="fa-stack fa-lg"> <i
 																	class="fa fa-money fa-stack-1x"></i> <i
 																	class="fa fa-ban fa-stack-2x text-danger"></i>
-																</span> Number RETRACT
+																</span> <spring:message code="label.numberCashRetract"></spring:message>
 															</h5>
 															<p class="no-margin text-primary bold fs-16 ">0</p>
 														</div>
@@ -895,17 +894,18 @@
 																<span class="fa-stack fa-lg"> <i
 																	class="fa fa-money fa-stack-1x"></i> <i
 																	class="fa fa-ban fa-stack-2x text-danger"></i>
-																</span> CASH RETRACTED
+																</span> <spring:message code="label.totalCashRetract"></spring:message>
 															</h5>
 															<p class="no-margin text-primary bold fs-16 ">0</p>
 														</div>
 													</div>
 
 
-													<div class="col-md-2 text-right bg-primary padding-10">
+													<div class="col-md-2 text-left bg-primary padding-10">
 														<h5
-															class="font-montserrat all-caps small no-margin hint-text text-white bold">Resume</h5>
-														<h4 class="no-margin text-white">22-01-2018</h4>
+															class="font-montserrat all-caps small no-margin hint-text text-white bold"><spring:message code="label.resume"></spring:message></h5>
+														<h5 class="no-margin text-white"><spring:message code="label.startingDate"></spring:message> : ${transactionFilter.transactionDateStarting}</h5>
+														<h5 class="no-margin text-white"><spring:message code="label.finishingDate"></spring:message> : ${transactionFilter.transactionDateFinishing}</h5>
 													</div>
 
 												</div>
@@ -962,32 +962,25 @@
 							<i class="pg-close fs-14"></i>
 						</button>
 						<h5 class="text-primary ">
-							<i class="fa fa-server" aria-hidden="true"></i> HOST <span class="semi-bold">DETAILS</span>
+							<i class="fa fa-server" aria-hidden="true"></i> <spring:message code="label.host"></spring:message> <span class="semi-bold"><spring:message code="label.details"></spring:message></span>
 						</h5>
 
 					</div>
 					<div class="modal-body">
 						<form role="form">
 							<div class="form-group-attached">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group form-group-default">
-											<label> <i class="fa fa-server" aria-hidden="true"></i> Host Name</label> <input type="email"
-												class="form-control text-info bold fs-15" disabled="disabled" id="hostNameModal">
-										</div>
-									</div>
-								</div>
+								 
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group form-group-default">
 											<label><i class="fa fa-calendar-o"
-												aria-hidden="true"></i> HOST DATE</label> <input type="text"
+												aria-hidden="true"></i> <spring:message code="label.host"></spring:message> <spring:message code="label.finishingDate"></spring:message></label> <input type="text"
 												class="form-control text-info bold fs-15" disabled="disabled" id="hostDateModal"> 
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group form-group-default">
-											<label><i class="fa fa-clock-o" aria-hidden="true"></i> HOST TIME</label> <input type="text"
+											<label><i class="fa fa-clock-o" aria-hidden="true"></i> <spring:message code="label.host"></spring:message> <spring:message code="label.startingTime"></spring:message></label> <input type="text"
 												class="form-control text-info bold fs-15" disabled="disabled" id="hostTimeModal">
 										</div>
 									</div>
@@ -995,19 +988,19 @@
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
-											<label> <i class="fa fa-money" aria-hidden="true"></i> AMOUNT</label>
+											<label> <i class="fa fa-money" aria-hidden="true"></i> <spring:message code="label.amount"></spring:message></label>
 											 <input type="text" class="form-control text-info bold fs-15" disabled="disabled" id="hostAmountModal">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
-											<label><i class="fa fa-microchip" aria-hidden="true"></i> ATM</label>
+											<label><i class="fa fa-microchip" aria-hidden="true"></i> <spring:message code="label.atm"></spring:message></label>
 											 <input type="text" class="form-control text-info bold fs-15" disabled="disabled" id="hostAtmModal">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
-											<label><i class="fa fa-exchange" aria-hidden="true"></i> TYPE </label> <input type="text"
+											<label><i class="fa fa-exchange" aria-hidden="true"></i> <spring:message code="label.TransactionType"></spring:message> </label> <input type="text"
 												class="form-control text-info bold fs-15" disabled="disabled" id="hostTypeTransactionModal">
 										</div>
 									</div>
@@ -1016,14 +1009,14 @@
 									<div class="col-md-6">
 										<div class="form-group form-group-default">
 											<label><i class="fa fa-info-circle"
-												aria-hidden="true"></i> Infos</label> 
+												aria-hidden="true"></i> <spring:message code="label.infosTransaction"></spring:message></label> 
 												<input type="text" class="form-control text-info bold fs-15" disabled="disabled" id="hostInfosModal">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group form-group-default">
 											<label><i class="fa fa-exclamation-triangle"
-												aria-hidden="true"></i> Error </label>
+												aria-hidden="true"></i> <spring:message code="label.errorTransaction"></spring:message> </label>
 												 <input type="text" class="form-control text-info bold fs-15" disabled="disabled" id="hostErrorModal">
 										</div>
 									</div>
@@ -1054,8 +1047,8 @@
 							<i class="pg-close fs-14"></i>
 						</button>
 						<h5 class="text-primary">
-							<i class='fa fa-exchange' aria-hidden='true'></i> Transaction <span
-								class="semi-bold text-primary">Details</span>
+							<i class='fa fa-exchange' aria-hidden='true'></i> <spring:message code="label.transaction"></spring:message> <span
+								class="semi-bold text-primary"><spring:message code="label.details"></spring:message></span>
 						</h5>
 
 					</div>
@@ -1066,9 +1059,9 @@
 								<div class="row">
 
 									<div class="col-md-6">
-										<div class="form-group form-group-default">
+										<div class="form-group form-group-default"> 
 											<label><i class="fa fa-calendar-o" aria-hidden="true"></i>
-												Starting Date and Time</label> <input type="text"
+												<spring:message code="label.startingDateAndTime"></spring:message></label> <input type="text"
 												class="form-control text-primary fs-16 bold text-center"
 												disabled="disabled" id="startingDateAndTimeModal">
 										</div>
@@ -1076,7 +1069,7 @@
 									<div class="col-md-6">
 										<div class="form-group form-group-default">
 											<label> <i class="fa fa-calendar-o"
-												aria-hidden="true"></i> Finishing date and time
+												aria-hidden="true"></i> <spring:message code="label.finishingDateAndTime"></spring:message>
 											</label> <input type="text"
 												class="form-control text-primary fs-16 bold text-center"
 												disabled="disabled" id="finishingDateAndTimeModal">
@@ -1085,54 +1078,64 @@
 								</div>
 								<div class="row">
 
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div class="form-group form-group-default">
-											<label><i class="fa fa fa-link "></i>Vendor</label> <input
-												type="text" class="form-control text-primary fs-16 bold"
+											<label><i class="fa fa fa-link "></i><spring:message code="label.vendor"></spring:message></label> <input
+												type="text" class="form-control text-primary fs-12 bold"
 												disabled="disabled" id="vendorModal">
 										</div>
 									</div>
 
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
-											<label><i class="fa fa-thumb-tack"></i> Branch</label> <input
-												type="text" class="form-control text-primary fs-16 bold"
+											<label><i class="fa fa-thumb-tack"></i> <spring:message code="label.branch"></spring:message></label> <input
+												type="text" class="form-control text-primary fs-12 bold"
 												disabled="disabled" id="branchModal">
 										</div>
 									</div>
 
-									<div class="col-md-5">
+									<div class="col-md-4">
 										<div class="form-group form-group-default">
 											<label><i class="fa fa-microchip" aria-hidden="true"></i>
-												ATM</label> <input type="text"
-												class="form-control text-primary fs-16 bold"
+												<spring:message code="label.atm"></spring:message></label> <input type="text"
+												class="form-control text-primary fs-12 bold"
 												disabled="disabled" id="atmModal">
 										</div>
 									</div>
 
 								</div>
 								<div class="row">
-									<div class="col-md-8">
+									<div class="col-md-6">
 										<div class="form-group form-group-default">
-											<label><i class="fa fa-credit-card-alt "></i> Card
-												Number</label> <input type="text"
+											<label><i class="fa fa-credit-card-alt "></i> 
+											<spring:message code="label.cardNumber"></spring:message>
+											</label> <input type="text"
 												class="form-control text-primary fs-16 bold"
 												disabled="disabled" id="cardNumberModal">
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-3">
 										<div class="form-group form-group-default">
 											<label><i class="fa fa-info" aria-hidden="true"></i>
-												Card status</label> <input type="text"
+												<spring:message code="label.CardTaken"></spring:message> </label> <input type="text"
 												class="form-control text-primary fs-16 bold"
 												disabled="disabled" id="cardStatusModal">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group form-group-default">
+											<label> <i class="fa fa-hand-lizard-o"
+												aria-hidden="true"></i> <spring:message code="label.CashTaken"></spring:message>
+											</label> <input type="text"
+												class="form-control text-primary fs-16 bold"
+												disabled="disabled" id="cashTakenModal">
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
-											<label><i class="fa fa-money "></i> Amount</label> <input
+											<label><i class="fa fa-money "></i> <spring:message code="label.amount"></spring:message></label> <input
 												type="text" class="form-control text-primary fs-16 bold"
 												disabled="disabled" id="amountModal">
 										</div>
@@ -1140,45 +1143,38 @@
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
 											<label><i class="fa fa-info" aria-hidden="true"></i>
-												Cash presented</label> <input type="text"
+												<spring:message code="label.cashPresented"></spring:message></label> <input type="text"
 												class="form-control text-primary fs-16 bold"
 												disabled="disabled" id="cashPresentedModal">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
-											<label> <i class="fa fa-hand-lizard-o"
-												aria-hidden="true"></i> Cash Taken
-											</label> <input type="text"
-												class="form-control text-primary fs-16 bold"
-												disabled="disabled" id="cashTakenModal">
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group form-group-default">
 											<label><i class="fa fa-info-circle"
-												aria-hidden="true"></i> Infos </label> <input type="text"
+												aria-hidden="true"></i> <spring:message code="label.infosTransaction"></spring:message> </label> <input type="text"
 												class="form-control text-primary fs-16 bold"
 												disabled="disabled" id="infosModal">
 										</div>
 									</div>
+									
+								</div>
+
+								<div class="row">
+									
 									<div class="col-md-4">
 										<div class="form-group form-group-default">
 											<label> <i class="fa fa-exchange" aria-hidden="true"></i>
-												Type
+												<spring:message code="label.TransactionType"></spring:message>
 											</label> <input type="text"
 												class="form-control text-primary fs-16 bold"
 												disabled="disabled" id="typeTransactionModal">
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-8">
 										<div class="form-group form-group-default">
 											<label><i class="fa fa-exclamation-triangle"
-												aria-hidden="true"></i> Error </label> <input type="text"
-												class="form-control text-primary fs-16 bold"
+												aria-hidden="true"></i> <spring:message code="label.errorTransaction"></spring:message> </label> <input type="text"
+												class="form-control text-danger fs-12 bold"
 												disabled="disabled" id="errorTransactionModal">
 										</div>
 									</div>
@@ -1534,7 +1530,7 @@
 															FinishDate
 																	+ '   '
 																	+ data.finishingTime);
-											$('#vendorModal').val();
+											$('#vendorModal').val(data.vendor);
 											$('#branchModal').val();
 											$('#atmModal').val(
 													data.transactionHostATM);
